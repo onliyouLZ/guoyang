@@ -4,6 +4,8 @@ import Router from 'vue-router'
 /**
  * 页面
  */
+
+import SystemHome from '../page/SystemHome'
 import Login from '../page/login'
 import oneMap from '../page/oneMap'
 import business from '../page/business'
@@ -29,23 +31,29 @@ export default new Router({
     },
     {
       path: '/home',
-      component: Home
-    },
-    {
-      path: '/oneMap',
-      component: oneMap
-    },
-    {
-      path: '/business',
-      component: business
-    },
-    {
-      path: '/essential',
-      component: essential
-    },
-    {
-      path: '/system',
-      component: system
+      component: Home,
+      children:[
+        {
+          path: '/SystemHome',
+          component: SystemHome
+        },
+        {
+          path: '/oneMap',
+          component: oneMap
+        },
+        {
+          path: '/business',
+          component: business
+        },
+        {
+          path: '/essential',
+          component: essential
+        },
+        {
+          path: '/system',
+          component: system
+        },
+      ]
     },
     {
       path: '/login',

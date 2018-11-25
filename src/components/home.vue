@@ -1,6 +1,9 @@
 <template>
   <div class="wrapper">
     <v-nav></v-nav>
+    <div>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 

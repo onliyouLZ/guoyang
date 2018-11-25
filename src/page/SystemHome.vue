@@ -1,12 +1,12 @@
 <template>
-  <div class="oneMap">
-    22222222
-  </div>
+    <div class="home">
+
+    </div>
 </template>
 
 <script>
     export default {
-        name: "one-map"
+        name: "SystemHome"
     }
 </script>
 

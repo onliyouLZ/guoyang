@@ -57,7 +57,7 @@
         message:1,
         items:[
           {
-            index: 'home',
+            index: 'SystemHome',
             title: '首页'
           },
           {
