@@ -46,7 +46,7 @@
           if (valid) {
             localStorage.setItem('ms_username',this.ruleForm.username);
             if(this.ruleForm.username=="admin"){
-              this.$router.push('/home');
+              this.$router.push('/SystemHome');
             }
           } else {
             console.log('error submit!!');

@@ -92,12 +92,16 @@
       // 获取用户名
        username(){
          let username=localStorage.getItem('ms_username');
+
          return username ? username :this.name
        },
       onRoutes(){
         // this.indexClass=this.$route.path.replace('/', '');
         return this.$route.path.replace('/','');
       }
+    },
+    mounted(){
+
     }
   }
 </script>
@@ -125,7 +129,7 @@
     padding-right: 50px;
   .header-menu {
     float: left;
-    height: 60px;
+    height: 59px;
   li {
     height: 60px;
     line-height: 60px;
@@ -177,4 +181,5 @@
   .el-dropdown-menu__item{
     text-align: center;
   }
+
 </style>

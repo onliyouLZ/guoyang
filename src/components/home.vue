@@ -1,10 +1,11 @@
 <template>
-  <div class="wrapper">
+  <el-container>
     <v-nav></v-nav>
-    <div>
+    <el-main>
       <router-view></router-view>
-    </div>
-  </div>
+    </el-main>
+    <el-footer></el-footer>
+  </el-container>
 </template>
 
 <script>
@@ -18,5 +19,7 @@
 </script>
 
 <style scoped>
-
+  .el-main{
+    padding: 0;
+  }
 </style>
