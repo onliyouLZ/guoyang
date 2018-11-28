@@ -41,11 +41,12 @@
     },
     methods: {
       submitForm(formName) {
-        console.log(formName);
         this.$refs[formName].validate((valid) => {
           if (valid) {
             localStorage.setItem('ms_username',this.ruleForm.username);
             if(this.ruleForm.username=="admin"){
+              const weather=document.getElementById("tp-weather-widget");
+              weather.style.display="block";
               this.$router.push('/SystemHome');
             }
           } else {
@@ -54,7 +55,12 @@
           }
         });
       }
+    },
+    mounted(){
+      const weather=document.getElementById("tp-weather-widget");
+      weather.style.display="none";
     }
+
   }
 </script>
 

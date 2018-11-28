@@ -84,6 +84,8 @@
       handleCommand(command) {
         if(command == 'loginout'){
           localStorage.removeItem('ms_username');
+          const weather=document.getElementById("tp-weather-widget");
+          weather.style.display="none";
           this.$router.push('/login');
         }
       },
@@ -180,6 +182,11 @@
   }
   .el-dropdown-menu__item{
     text-align: center;
+  }
+  .is-active{
+    color: white!important;
+    background-color:#efbb0d!important;
+    border-bottom: #efbb0d!important;
   }
 
 </style>

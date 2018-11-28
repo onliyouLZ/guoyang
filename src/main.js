@@ -4,13 +4,18 @@ import Vue from 'vue'
 import App from './App'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import axios from 'axios'
 
 import router from './router'
+import $ from 'jquery'
 
 
 Vue.config.productionTip = false;
 // Vue.use(ElementUI);
 Vue.use(ElementUI, { size: 'small' });
+
+
+Vue.prototype.$http = axios;
 
 
 //使用钩子函数对路由进行权限跳转

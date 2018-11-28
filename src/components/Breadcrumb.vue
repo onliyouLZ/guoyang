@@ -29,7 +29,8 @@
   .breadcrumb{
     width: 100%;
     height: 25px;
-    background-color: rgb(255, 208, 75);
+    background-color: #ffff99;
+    border-top: #efbb0d 2px solid;
     i{
       margin-left: 5px;
       float: left;

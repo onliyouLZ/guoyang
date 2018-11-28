@@ -1,0 +1,85 @@
+{
+  "duty":{
+    "tenantid": "2018-11-28_1",
+    "date": "2018-11-28",
+    "weekOfYear": 48,
+    "dayOfWeek": 3,
+    "month": 10,
+    "groupId": 1,
+    "groupName": "江夏区",
+    "tm": [
+      {
+        "date": "2018-11-28",
+        "dutyType": "1",
+        "dutyBgtm": "2018-11-28 07:59:59",
+        "dutyEdtm": "2018-11-28 18:29:59",
+        "dutyDateGroupType": "2018-11-28_1_1",
+        "dutyTypeName": "白班",
+        "leaders": [
+          {
+            "id": 58,
+            "realName": "马天",
+            "userName": "matian",
+            "userTel": null,
+            "userMobilePhone": "456",
+            "groupId": 1,
+            "groupName": "江夏区",
+            "userDepart": "水库科科长",
+            "dutyPersonTypeName": "值班领导",
+            "dutyPersonType": "1"
+          }
+        ],
+        "persons": [
+          {
+            "id": 58,
+            "realName": "柯启勇",
+            "userName": "matian",
+            "userTel": null,
+            "userMobilePhone": "456",
+            "groupId": 1,
+            "groupName": "江夏区",
+            "userDepart": "水库科科长",
+            "dutyPersonTypeName": "值班领导",
+            "dutyPersonType": "1"
+          }
+        ]
+      },
+      {
+        "date": "2018-11-28",
+        "dutyType": "2",
+        "dutyBgtm": "2018-11-28 18:29:59",
+        "dutyEdtm": "2018-11-29 07:59:59",
+        "dutyDateGroupType": "2018-11-28_1_2",
+        "dutyTypeName": "夜班",
+        "leaders": [
+          {
+            "id": 58,
+            "realName": "马天",
+            "userName": "matian",
+            "userTel": null,
+            "userMobilePhone": "456",
+            "groupId": 1,
+            "groupName": "江夏区",
+            "userDepart": "水库科科长",
+            "dutyPersonTypeName": "值班领导",
+            "dutyPersonType": "1"
+          }
+        ],
+        "persons": [
+          {
+            "id": 58,
+            "realName": "张昂扬",
+            "userName": "matian",
+            "userTel": null,
+            "userMobilePhone": "456",
+            "groupId": 1,
+            "groupName": "江夏区",
+            "userDepart": "水库科科长",
+            "dutyPersonTypeName": "值班领导",
+            "dutyPersonType": "1"
+          }
+        ]
+      }
+    ]
+  }
+}
