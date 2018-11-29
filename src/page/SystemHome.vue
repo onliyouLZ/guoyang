@@ -30,7 +30,7 @@
                 </div>
               </div>
               <div>
-                <div id="electric_prod_chart" style="width: 100%;height:250px;padding: 5px"></div>
+                <div id="electric_prod_chart" style="width: 100%;height:250px;"></div>
               </div>
             </el-col>
             <el-col :span="16" style="padding: 5px">
@@ -42,15 +42,12 @@
                 </div>
               </div>
               <div>
-                <swiper :options="swiperOption" ref="mySwiper">
-                  <swiper-slide style="width: 300px;height: 100px">I'm Slide 1</swiper-slide>
-                  <swiper-slide style="width: 300px;height: 100px">I'm Slide 2</swiper-slide>
-                  <swiper-slide style="width: 300px;height: 100px">I'm Slide 3</swiper-slide>
-                  <div class="swiper-pagination"  slot="pagination"></div>
+                <swiper :options="swiperOption">
+                  <swiper-slide v-for="(slide, index) in swiperSlides" :key="index"><div :id="'current_prod_chart'+index" style="width: 100%;height:250px;"></div></swiper-slide>
                   <div class="swiper-button-prev" slot="button-prev"></div>
                   <div class="swiper-button-next" slot="button-next"></div>
                 </swiper>
-                <div id="current_prod_chart" style="width: 100%;height:250px;"></div>
+
               </div>
             </el-col>
           </el-card>
@@ -64,15 +61,12 @@
 <script>
     import Breadcrumb from '../components/Breadcrumb'
     import echarts from 'echarts'
-    import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
     // import {baseUrl} from  '../config'
     export default {
         name: "SystemHome",
         components:{
           Breadcrumb:Breadcrumb,
-          swiper,
-          swiperSlide
         },
         data(){
             return{
@@ -81,17 +75,22 @@
                 {name:"首页",path:"/SystemHome"},
               ],
               dutyData:[],
-              swiperOption: {//以下配置不懂的，可以去swiper官网看api，链接http://www.swiper.com.cn/api/
-                // notNextTick是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，<br>　　　　　　　　假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
-                notNextTick: true,
-                // swiper configs 所有的配置同swiper官方api配置
-                autoplay: 3000,
-                direction : 'horizontal',
-              }
+              swiperOption: {
+                // effect:"fade",
+                slidesPerView: 5,
+                navigation: {
+                  nextEl: '.swiper-button-next',
+                  prevEl: '.swiper-button-prev',
+                },
+              },
+              swiperSlides: [1, 2, 3, 4, 5,6,7]
             }
         },
         created(){
-            this.$http.get('http://localhost:8080/api/duty').then((res)=>{
+          /**
+           * 处理人员信息
+           */
+          this.$http.get('http://localhost:8080/api/duty').then((res)=>{
               const data=res.data.data;
               var arr=[];
               $.each(data.tm,function(v,item){
@@ -117,14 +116,14 @@
                 arr.push(obj)
               });
               this.dutyData=arr
-            })
+            });
         },
         computed: {
-          swiper() {
-            return this.$refs.mySwiper.swiper
-          }
         },
         methods: {
+          /**
+           * 初始化图表
+           */
           init_charts() {
             // 基于准备好的dom，初始化echarts实例
             let electric_prod_chart = echarts.init(document.getElementById('electric_prod_chart'));
@@ -200,63 +199,72 @@
             // 绘制图表
             electric_prod_chart.setOption(electric_prod_chart_option);
 
+
             // 基于准备好的dom，初始化echarts实例
-            let current_prod_chart = echarts.init(document.getElementById('current_prod_chart'));
-            // 设置option
-            let electric_current_chart_option = {
-              title: {
-                text:"金水闸",
-                left: 'center',
-                textStyle: {
-                  fontWeight: 'normal',
-                  fontSize: '16',
-                  padding: '20px',
-                  color: '#666',
-                  fontWeight: '777'
-                }
-              },
-              series: [{
-                type: 'liquidFill',
-                radius: '60%',
-                color:["red"],
-                center: ['50%', '60%', '50%', '50%'], //上左下右 分别显示
-
-                backgroundStyle: {
-                  color: '#ffffff',
-                  borderColor: "red"
-                },
-                data: [{
-                  name:"金水闸",
-                  value: 50
-                }],
-                direction: 'left',
-                outline: {
-                  show: false
-                },
-                label: {
-                  normal: {
-                    formatter: function (param) {
-                      return param.name
-                    },
-                    textStyle: {
-                      fontSize: '12',
-                      fontWeight: "normal",
-                      color: '#ffffff'
-                    },
-                    padding: [20, 0, 0, 0]
+            $.each(this.swiperSlides,(index,item)=>{
+              let current_prod_chart = echarts.init(document.getElementById('current_prod_chart'+index));
+              // 设置option
+              let electric_current_chart_option = {
+                title: {
+                  text:"金水闸",
+                  left: 'center',
+                  textStyle: {
+                    fontWeight: 'normal',
+                    fontSize: '16',
+                    padding: '20px',
+                    color: '#666',
                   }
-                }
-                // waveAnimation: false,
-              }]
-            };
-            // 绘制图表
-            // current_prod_chart.setOption(electric_current_chart_option);
+                },
+                series: [{
+                  type: 'liquidFill',
+                  radius: '40%',
+                  color:["red"],
+                  // center: ['50%', '60%', '50%', '50%'], //上左下右 分别显示
 
-
+                  backgroundStyle: {
+                    color: '#ffffff',
+                    borderColor: "red"
+                  },
+                  data: [{
+                    name:"金水闸",
+                    value:"0.5"
+                  }],
+                  itemStyle: {
+                    shadowBlur: 0
+                  },
+                  direction: 'left',
+                  outline: {
+                    show: false
+                  },
+                  label: {
+                    normal: {
+                      formatter: function (param) {
+                        return param.name
+                      },
+                      textStyle: {
+                        fontSize: '12',
+                        fontWeight: "normal",
+                        color: '#ffffff'
+                      },
+                      padding: [20, 0, 0, 0]
+                    }
+                  }
+                  // waveAnimation: false,
+                }]
+              };
+              // 绘制图表
+              current_prod_chart.setOption(electric_current_chart_option);
+            })
           },
+
         },
         mounted(){
-          this.init_charts()
+          this.init_charts();
+          // setInterval(() => {
+          //   if (this.swiperSlides.length < 10) {
+          //     this.swiperSlides.push(this.swiperSlides.length + 1)
+          //   }
+          // }, 100)
         }
 
     }
