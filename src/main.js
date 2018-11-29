@@ -5,6 +5,11 @@ import App from './App'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import axios from 'axios'
+import echarts from 'echarts';
+import liquidfill from 'echarts-liquidfill' //水滴图
+import 'swiper/dist/css/swiper.css'
+
+import VueAwesomeSwiper from 'vue-awesome-swiper'
 
 import router from './router'
 import $ from 'jquery'
@@ -13,9 +18,11 @@ import $ from 'jquery'
 Vue.config.productionTip = false;
 // Vue.use(ElementUI);
 Vue.use(ElementUI, { size: 'small' });
+Vue.use(VueAwesomeSwiper);
 
 
 Vue.prototype.$http = axios;
+Vue.prototype.$echarts = echarts;
 
 
 //使用钩子函数对路由进行权限跳转
