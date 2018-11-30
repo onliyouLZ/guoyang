@@ -20,46 +20,66 @@
       </el-row>
       <el-row :gutter="10" class="mgb10">
         <el-col :span="24">
-          <el-card shadow="hover" class="" :body-style="{padding:'5px'}">
+          <!--<el-card shadow="hover" class="" :body-style="{padding:'5px'}">-->
             <el-col :span="8" style="padding: 5px">
-              <div class="center-main-title">
-                <div class="title-stick bg-blue">
+              <el-card class="box-card">
+                <div class="center-main-title">
+                  <div class="title-stick">
+                  </div>
+                  <div class="title-name">
+                    <i class="fa fa-bar-chart"></i>&nbsp;&nbsp;湖泊站超警统计
+                  </div>
                 </div>
-                <div class="title-name mgl10">
-                  湖泊站超警统计
-                </div>
-              </div>
-              <div>
                 <div id="electric_prod_chart" style="width: 100%;height:250px;"></div>
-              </div>
-            </el-col>
+              </el-card>
+            </el-col >
             <el-col :span="16" style="padding: 5px">
-              <div class="center-main-title">
-                <div class="title-stick bg-blue">
+              <el-card class="box-card">
+                <div class="center-main-title">
+                  <div class="title-stick bg-blue">
+                  </div>
+                  <div class="title-name mgl10">
+                    重要站点水情形势
+                  </div>
                 </div>
-                <div class="title-name mgl10">
-                  重要站点水情形势
-                </div>
-              </div>
-              <div>
-                <swiper :options="swiperOption">
-                  <swiper-slide v-for="(slide, index) in swiperSlides" :key="index"><div :id="'current_prod_chart'+index" style="width: 100%;height:250px;"></div></swiper-slide>
-                  <div class="swiper-button-prev" slot="button-prev"></div>
-                  <div class="swiper-button-next" slot="button-next"></div>
-                </swiper>
+                <div>
+                  <swiper :options="swiperOption">
+                    <swiper-slide
+                      v-for="(slide, index) in swiperSlides1"
+                      :key="index"
+                      style="box-sizing: border-box" >
+                      <div
+                          :id="'current_prod_chart'+index"
+                          style="width:100%;height:150px"
+                          @click="openDliog(slide)">
+                      </div>
+                      <div style="width:100%;height: 100px;text-align: center">
+                        <div><i class="iconfont  icon-shuiwei" style="font-size: 20px;"></i>&nbsp;<span class="fz14">{{slide.value}}m</span></div>
+                        <div><span class="fz14">2018-09-15 09:00:00</span></div>
+                        <div><span class="fz14">超设防:0.5m</span></div>
+                      </div>
+                    </swiper-slide>
+                    <div class="swiper-button-prev" slot="button-prev"></div>
+                    <div class="swiper-button-next" slot="button-next"></div>
+                  </swiper>
 
-              </div>
+                </div>
+              </el-card>
+
             </el-col>
-          </el-card>
+          <!--</el-card>-->
         </el-col>
       </el-row>
     </div>
+    <home-Dliog :swiperData="swiperData" :show.sync="show" ref="child"></home-Dliog>
   </el-row>
+
 
 </template>
 
 <script>
     import Breadcrumb from '../components/Breadcrumb'
+    import homeDliog  from '../dilog/homedliog/homedliog'
     import echarts from 'echarts'
 
     // import {baseUrl} from  '../config'
@@ -67,6 +87,7 @@
         name: "SystemHome",
         components:{
           Breadcrumb:Breadcrumb,
+          homeDliog:homeDliog
         },
         data(){
             return{
@@ -76,14 +97,27 @@
               ],
               dutyData:[],
               swiperOption: {
-                // effect:"fade",
-                slidesPerView: 5,
+                allowTouchMove:false,//禁止拖动
+                // spaceBetween:20,//slider 之间的间隔
+                centerInsufficientSlides:true, //当slides的总数小于slidesPerView时，slides居中。
+                noSwiping : true,
+                noSwipingClass : 'stop-swiping',
+                slidesPerView: 5,//设置容器中slider的个数
                 navigation: {
-                  nextEl: '.swiper-button-next',
-                  prevEl: '.swiper-button-prev',
-                },
+                  nextEl: '.swiper-button-next',//下一页
+                  prevEl: '.swiper-button-prev',//上一页
+                }
               },
-              swiperSlides: [1, 2, 3, 4, 5,6,7]
+              swiperSlides1: [
+                {name:"金水闸(闸上)",value:19},
+                {name:"金水闸(闸下)",value:22},
+                {name:"梁子湖",value:29},
+                {name:"汤逊湖",value:40},
+                {name:"斧头湖",value:10},
+                {name:"鲁湖",value:60},
+              ],
+              show:false,
+              swiperData:{}
             }
         },
         created(){
@@ -135,7 +169,8 @@
               },
               legend: {
                 orient: 'vertical',
-                x: 'left',
+                x: 'right',
+                top:'center',
                 data:['超保证水位3个','超警戒水位2个','超设防水位9个','未超警16个']
               },
               series: [
@@ -143,7 +178,7 @@
                   type: 'pie',
                   radius: ['50%', '75%'],
                   avoidLabelOverlap: false,
-                  // center: ['50%', '50%'],
+                  center: ['40%', '50%'],
                   itemStyle: {
                     normal: {
                       //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
@@ -201,36 +236,60 @@
 
 
             // 基于准备好的dom，初始化echarts实例
-            $.each(this.swiperSlides,(index,item)=>{
+            $.each(this.swiperSlides1,(index,item)=>{
+              let names = "未超警", values = 0.45,colors = ["#0796EF"];
+              if(item.value>=80){
+                names = "未超警";
+                values = 0.45;
+                colors = ["#0796EF"];
+              }else if(item.value>=60){
+                names = "超保证";
+                values = 0.9;
+                colors = ["#FF561E"];
+              }else if(item.value>=22){
+                names = "超警戒";
+                values = 0.7;
+                colors = ["#0796EF"];
+              }else{
+                names = "超设防";
+                values = 0.55;
+                colors = ["#FF561E"];
+              }
               let current_prod_chart = echarts.init(document.getElementById('current_prod_chart'+index));
               // 设置option
               let electric_current_chart_option = {
+                amplitude: '8%',
+                waveLength: '80%',
                 title: {
-                  text:"金水闸",
+                  text:item.name,
+                  top:"20",
                   left: 'center',
                   textStyle: {
                     fontWeight: 'normal',
                     fontSize: '16',
-                    padding: '20px',
                     color: '#666',
                   }
                 },
-                series: [{
+                series: [
+                  {
                   type: 'liquidFill',
+                  silent: true,
                   radius: '40%',
                   color:["red"],
-                  // center: ['50%', '60%', '50%', '50%'], //上左下右 分别显示
-
+                  center: ['50%', '65%', '50%', '50%'], //上左下右 分别显示
                   backgroundStyle: {
+                    borderWidth: 2,
                     color: '#ffffff',
-                    borderColor: "red"
+                    borderColor: colors
                   },
                   data: [{
-                    name:"金水闸",
-                    value:"0.5"
+                    name:names,
+                    value:values
                   }],
                   itemStyle: {
-                    shadowBlur: 0
+                    opacity: 0.95,
+                    shadowBlur: 0,
+                    color: colors,
                   },
                   direction: 'left',
                   outline: {
@@ -247,24 +306,28 @@
                         color: '#ffffff'
                       },
                       padding: [20, 0, 0, 0]
+                    },
+                    emphasis: {
+                        "show": true
                     }
-                  }
-                  // waveAnimation: false,
+
+                  },
                 }]
               };
               // 绘制图表
               current_prod_chart.setOption(electric_current_chart_option);
             })
           },
-
+          openDliog(slide){
+            this.swiperData=slide;
+            this.show = !this.show
+          }
         },
         mounted(){
           this.init_charts();
-          // setInterval(() => {
-          //   if (this.swiperSlides.length < 10) {
-          //     this.swiperSlides.push(this.swiperSlides.length + 1)
-          //   }
-          // }, 100)
+        },
+        watch:{
+
         }
 
     }
@@ -272,22 +335,21 @@
 
 <style lang="less" scoped>
   .container{
-    width: 1380px;
+    width: calc(100vw - 500px);
     margin:25px auto 0 auto;
     border: none;
     border-radius:0;
-    /*background: red;*/
     padding: 10px!important;
   }
   .panel_tip{
     min-height: 50px;
     line-height: 50px;
     background-color: #f5f4ba;
-    /*padding-left: 10px;*/
   }
   .center-main-title {
     height: 30px;
     .title-name {
+      color: #3b9de0;
       font-weight: bold;
       display: inline-block;
       line-height: 30px;
