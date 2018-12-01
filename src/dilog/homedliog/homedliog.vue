@@ -7,7 +7,41 @@
     @close="childClose">
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="水位过程线" name="first">
-        <div id="electric_prod_char" style="width: 100%;height:250px;"></div>
+        <div style="float: left">
+          <div id="electric_prod_char" style="width:700px;height:250px;"></div>
+        </div>
+        <div style="float:right">
+          <el-button
+            plain
+            @click="open12=tableShow = !tableShow">
+            使用 HTML 片段
+          </el-button>
+          <transition name="fade">
+            <div v-if="tableShow">
+              <el-table
+                :data="tableData"
+                border
+                style="width: 100%">
+                <el-table-column
+                  prop="date"
+                  label="日期"
+                  width="180">
+                </el-table-column>
+                <el-table-column
+                  prop="name"
+                  label="姓名"
+                  width="180">
+                </el-table-column>
+                <el-table-column
+                  prop="address"
+                  label="地址">
+                </el-table-column>
+              </el-table>
+            </div>
+          </transition>
+
+        </div>
+
       </el-tab-pane>
       <el-tab-pane label="基本信息" name="second">水位:{{swiperData.value}}m</el-tab-pane>
       <el-tab-pane label="历史同时期对比" name="third">水位:{{swiperData.value}}m</el-tab-pane>
@@ -26,7 +60,26 @@
         data(){
           return{
             visible:this.show,
-            activeName: 'first'
+            activeName: 'first',
+            tableData: [
+              {
+              date: '2016-05-02',
+              name: '王小虎',
+              address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+              date: '2016-05-04',
+              name: '王小虎',
+              address: '上海市普陀区金沙江路 1517 弄'
+            }, {
+              date: '2016-05-01',
+              name: '王小虎',
+              address: '上海市普陀区金沙江路 1519 弄'
+            }, {
+              date: '2016-05-03',
+              name: '王小虎',
+              address: '上海市普陀区金沙江路 1516 弄'
+            }],
+            tableShow:false
           }
         },
         props:{
@@ -43,109 +96,84 @@
 
         },
         methods:{
+          /**
+           * 关闭弹窗事件
+           */
           childClose(){
             this.visible=false;
             this.$emit('update:show',false);
           },
+          /**
+           * tab切换事件
+           */
           handleClick(tab, event){
 
           },
-          openeds(){
-            console.log(1);
-          }
-
+          /**
+           * 初始化图表需要异步执行
+           */
+          init(){
+            let electric_prod_chart = $('#electric_prod_char');
+            if(electric_prod_chart[0]){
+              let electric_prod_chart =  echarts.init(document.getElementById('electric_prod_char'));
+              // electric_prod_chart.resize({
+              //   width:electric_prod_chart.getWidth()+'px',
+              //   height:electric_prod_chart.getHeight()+'px',
+              //   silent:false
+              // });
+              // 基于准备好的dom，初始化echarts实例
+              // 设置option
+              let electric_prod_chart_option = {
+                xAxis: {
+                  type: 'category',
+                  data: ['2012', '2013', '2014', '2015', '2016', '2017', '2018']
+                },
+                yAxis: {
+                  type: 'value'
+                },
+                series: [{
+                  data: [25, 40, 80, 20, 40, 66, 55],
+                  type: 'line',
+                  smooth: true
+                }]
+              };
+              // 绘制图表
+              electric_prod_chart.setOption(electric_prod_chart_option);
+            }
+          },
+          /**
+           * 销毁图表实例下次进入重新渲染
+           */
+          dispose(){
+            let electric_prod_chart =  echarts.init(document.getElementById('electric_prod_char'));
+            electric_prod_chart.dispose()
+          },
         },
         mounted(){
+
 
         },
         watch:{
           show(){
             this.visible=this.show;
-            let electric_prod_chart = echarts.init(document.getElementById('electric_prod_char'));
-            electric_prod_chart.resize({
-              width:electric_prod_chart.getWidth()+'px',
-              height:electric_prod_chart.getHeight()+'px',
-              silent:false
-            });
-            // 基于准备好的dom，初始化echarts实例
-            // let electric_prod_chart = echarts.init(document.getElementById('electric_prod_chart'));
-            // 设置option
-            let electric_prod_chart_option = {
-              tooltip: {
-                trigger: 'item',
-                formatter: "{b}"
-              },
-              legend: {
-                orient: 'vertical',
-                x: 'right',
-                top:'center',
-                data:['超保证水位3个','超警戒水位2个','超设防水位9个','未超警16个']
-              },
-              series: [
-                {
-                  type: 'pie',
-                  radius: ['50%', '75%'],
-                  avoidLabelOverlap: false,
-                  center: ['40%', '50%'],
-                  itemStyle: {
-                    normal: {
-                      //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-                      color: function (params) {
-                        //我这边就两个柱子，大体就两个柱子颜色渐变，所以数组只有两个值，多个颜色就多个值
-                        var colorList = [
-                          ['#FE7B18', '#FF561E', '#FF431E'],
+            if(this.show==true){
+              setTimeout(()=>{
+                this.init();
+              },0);
+            }else{
+              this.dispose()
+            }
 
-                          ['#FF9B01', '#FF8A01', '#FF8000'],
-
-                          ['#FFF87C', '#FFED51', '#FFDD12'],
-
-                          ['#13A2F2', '#0796EF', '#0192EF']
-
-                        ];
-                        return new echarts.graphic.LinearGradient(0, 1, 0, 0,
-                          [
-                            {offset: 0, color: colorList[params.dataIndex][0]},
-                            {offset: 0.5, color: colorList[params.dataIndex][1]},
-                            {offset: 1, color: colorList[params.dataIndex][2]}
-                          ]);
-                      },
-                      barBorderRadius: 5  //柱状角成椭圆形
-                    }
-                  },
-                  label: {
-                    normal: {
-                      show: false,
-                      position: 'center'
-                    },
-                    emphasis: {
-                      show: true,
-                      textStyle: {
-                        fontSize: '14',
-                        fontWeight: 'bold'
-                      }
-                    }
-                  },
-                  labelLine: {
-                    normal: {
-                      show: false
-                    }
-                  },
-                  data:[
-                    {value:3, name:'超保证水位3个'},
-                    {value:2, name:'超警戒水位2个'},
-                    {value:9, name:'超设防水位9个'},
-                    {value:16, name:'未超警16个'},
-                  ]
-                }
-              ]
-            };
-            // 绘制图表
-            electric_prod_chart.setOption(electric_prod_chart_option);
           }
         }
     }
 </script>
 
 <style scoped>
-
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
 </style>

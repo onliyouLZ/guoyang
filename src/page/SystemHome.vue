@@ -159,7 +159,7 @@
            * 初始化图表
            */
           init_charts() {
-            // 基于准备好的dom，初始化echarts实例
+            // 饼状图初始化
             let electric_prod_chart = echarts.init(document.getElementById('electric_prod_chart'));
             // 设置option
             let electric_prod_chart_option = {
@@ -235,7 +235,7 @@
             electric_prod_chart.setOption(electric_prod_chart_option);
 
 
-            // 基于准备好的dom，初始化echarts实例
+            // 水滴初始化
             $.each(this.swiperSlides1,(index,item)=>{
               let names = "未超警", values = 0.45,colors = ["#0796EF"];
               if(item.value>=80){
@@ -318,6 +318,10 @@
               current_prod_chart.setOption(electric_current_chart_option);
             })
           },
+          /**
+           * 打开弹窗
+           * @param slide
+           */
           openDliog(slide){
             this.swiperData=slide;
             this.show = !this.show
