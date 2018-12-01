@@ -4,7 +4,7 @@
     <div class="header-logo">
       <i class="el-icon-menu"></i>
     </div>
-    <div class="header-name">涡阳防汛抗旱系统</div>
+    <div class="header-name">admin后台模板</div>
     <div class="header-right">
       <el-menu
         :default-active="onRoutes"

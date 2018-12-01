@@ -294,8 +294,3 @@ td.listName div{
 }
 
 
-input::-webkit-input-placeholder{
-  color: #97a8be!important;
-}
-
-
