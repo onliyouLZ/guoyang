@@ -1,0 +1,366 @@
+<template>
+  <el-row>
+    <el-col :span="24">
+      <Breadcrumb :menu="menuArray"></Breadcrumb>
+    </el-col>
+    <div class="container">
+      <el-row class="panel_tip mgb10">
+        <el-col :span="2" style="text-align: center">
+         <i class="fa fa-user-o"></i>&nbsp;&nbsp;<span style="font-weight: 700">今日值班:</span>
+        </el-col>
+        <el-col :span="22">
+          <span>
+            <template >
+              <template v-for="item in dutyData">
+                  <span style="font-weight: 700">{{item.dutyType}}</span>：{{item.people}}
+              </template>
+            </template>
+          </span>
+        </el-col>
+      </el-row>
+      <el-row :gutter="10" class="mgb10">
+        <el-col :span="24">
+          <!--<el-card shadow="hover" class="" :body-style="{padding:'5px'}">-->
+            <el-col :span="8" style="padding: 5px">
+              <el-card class="box-card">
+                <div class="center-main-title">
+                  <div class="title-stick">
+                  </div>
+                  <div class="title-name">
+                    <i class="fa fa-bar-chart"></i>&nbsp;&nbsp;湖泊站超警统计
+                  </div>
+                </div>
+                <div id="electric_prod_chart" style="width: 100%;height:250px;"></div>
+              </el-card>
+            </el-col >
+            <el-col :span="16" style="padding: 5px">
+              <el-card class="box-card">
+                <div class="center-main-title">
+                  <div class="title-stick bg-blue">
+                  </div>
+                  <div class="title-name mgl10">
+                    重要站点水情形势
+                  </div>
+                </div>
+                <div>
+                  <swiper :options="swiperOption">
+                    <swiper-slide
+                      v-for="(slide, index) in swiperSlides1"
+                      :key="index"
+                      style="box-sizing: border-box" >
+                      <div
+                          :id="'current_prod_chart'+index"
+                          style="width:100%;height:150px"
+                          @click="openDliog(slide)">
+                      </div>
+                      <div style="width:100%;height: 100px;text-align: center">
+                        <div><i class="iconfont  icon-shuiwei" style="font-size: 20px;"></i>&nbsp;<span class="fz14">{{slide.value}}m</span></div>
+                        <div><span class="fz14">2018-09-15 09:00:00</span></div>
+                        <div><span class="fz14">超设防:0.5m</span></div>
+                      </div>
+                    </swiper-slide>
+                    <div class="swiper-button-prev" slot="button-prev"></div>
+                    <div class="swiper-button-next" slot="button-next"></div>
+                  </swiper>
+
+                </div>
+              </el-card>
+
+            </el-col>
+          <!--</el-card>-->
+        </el-col>
+      </el-row>
+    </div>
+    <home-Dliog :swiperData="swiperData" :show.sync="show" ref="child"></home-Dliog>
+  </el-row>
+
+
+</template>
+
+<script>
+    import Breadcrumb from '../components/Breadcrumb'
+    import homeDliog  from '../dilog/homedliog/homedliog'
+    import echarts from 'echarts'
+
+    // import {baseUrl} from  '../config'
+    export default {
+        name: "SystemHome",
+        components:{
+          Breadcrumb:Breadcrumb,
+          homeDliog:homeDliog
+        },
+        data(){
+            return{
+              menuArray:[
+                {name:"首页",path:""},
+                {name:"首页",path:"/SystemHome"},
+              ],
+              dutyData:[],
+              swiperOption: {
+                allowTouchMove:false,//禁止拖动
+                // spaceBetween:20,//slider 之间的间隔
+                centerInsufficientSlides:true, //当slides的总数小于slidesPerView时，slides居中。
+                noSwiping : true,
+                noSwipingClass : 'stop-swiping',
+                slidesPerView: 5,//设置容器中slider的个数
+                navigation: {
+                  nextEl: '.swiper-button-next',//下一页
+                  prevEl: '.swiper-button-prev',//上一页
+                }
+              },
+              swiperSlides1: [
+                {name:"金水闸(闸上)",value:19},
+                {name:"金水闸(闸下)",value:22},
+                {name:"梁子湖",value:29},
+                {name:"汤逊湖",value:40},
+                {name:"斧头湖",value:10},
+                {name:"鲁湖",value:60},
+              ],
+              show:false,
+              swiperData:{}
+            }
+        },
+        created(){
+          /**
+           * 处理人员信息
+           */
+          this.$http.get('http://localhost:8080/api/duty').then((res)=>{
+              const data=res.data.data;
+              var arr=[];
+              $.each(data.tm,function(v,item){
+                let peoples="";
+                var obj={
+                  dutyType:"",
+                  people:""
+                };
+                obj.dutyType=item.dutyTypeName;
+                if(item.leaders.length>0){
+                  $.each(item.leaders,function(s,people){
+                    peoples+=people.realName+"("+people.userMobilePhone+")"+"，";
+                  })
+                }
+                if(item.persons.length>0){
+                  $.each(item.persons,function(s,people){
+                    peoples+=people.realName+"("+people.userMobilePhone+")"+"，";
+                    obj.people=peoples
+                  })
+                }
+                peoples=peoples.substr(0, peoples.length - 1);
+                obj.people=peoples;
+                arr.push(obj)
+              });
+              this.dutyData=arr
+            });
+        },
+        computed: {
+        },
+        methods: {
+          /**
+           * 初始化图表
+           */
+          init_charts() {
+            // 饼状图初始化
+            let electric_prod_chart = echarts.init(document.getElementById('electric_prod_chart'));
+            // 设置option
+            let electric_prod_chart_option = {
+              tooltip: {
+                trigger: 'item',
+                formatter: "{b}"
+              },
+              legend: {
+                orient: 'vertical',
+                x: 'right',
+                top:'center',
+                data:['超保证水位3个','超警戒水位2个','超设防水位9个','未超警16个']
+              },
+              series: [
+                {
+                  type: 'pie',
+                  radius: ['50%', '75%'],
+                  avoidLabelOverlap: false,
+                  center: ['40%', '50%'],
+                  itemStyle: {
+                    normal: {
+                      //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
+                      color: function (params) {
+                        //我这边就两个柱子，大体就两个柱子颜色渐变，所以数组只有两个值，多个颜色就多个值
+                        var colorList = [
+                          ['#FE7B18', '#FF561E', '#FF431E'],
+
+                          ['#FF9B01', '#FF8A01', '#FF8000'],
+
+                          ['#FFF87C', '#FFED51', '#FFDD12'],
+
+                          ['#13A2F2', '#0796EF', '#0192EF']
+
+                        ];
+                        return new echarts.graphic.LinearGradient(0, 1, 0, 0,
+                          [
+                            {offset: 0, color: colorList[params.dataIndex][0]},
+                            {offset: 0.5, color: colorList[params.dataIndex][1]},
+                            {offset: 1, color: colorList[params.dataIndex][2]}
+                          ]);
+                      },
+                      barBorderRadius: 5  //柱状角成椭圆形
+                    }
+                  },
+                  label: {
+                    normal: {
+                      show: false,
+                      position: 'center'
+                    },
+                    emphasis: {
+                      show: true,
+                      textStyle: {
+                        fontSize: '14',
+                        fontWeight: 'bold'
+                      }
+                    }
+                  },
+                  labelLine: {
+                    normal: {
+                      show: false
+                    }
+                  },
+                  data:[
+                    {value:3, name:'超保证水位3个'},
+                    {value:2, name:'超警戒水位2个'},
+                    {value:9, name:'超设防水位9个'},
+                    {value:16, name:'未超警16个'},
+                  ]
+                }
+              ]
+            };
+            // 绘制图表
+            electric_prod_chart.setOption(electric_prod_chart_option);
+
+
+            // 水滴初始化
+            $.each(this.swiperSlides1,(index,item)=>{
+              let names = "未超警", values = 0.45,colors = ["#0796EF"];
+              if(item.value>=80){
+                names = "未超警";
+                values = 0.45;
+                colors = ["#0796EF"];
+              }else if(item.value>=60){
+                names = "超保证";
+                values = 0.9;
+                colors = ["#FF561E"];
+              }else if(item.value>=22){
+                names = "超警戒";
+                values = 0.7;
+                colors = ["#0796EF"];
+              }else{
+                names = "超设防";
+                values = 0.55;
+                colors = ["#FF561E"];
+              }
+              let current_prod_chart = echarts.init(document.getElementById('current_prod_chart'+index));
+              // 设置option
+              let electric_current_chart_option = {
+                amplitude: '8%',
+                waveLength: '80%',
+                title: {
+                  text:item.name,
+                  top:"20",
+                  left: 'center',
+                  textStyle: {
+                    fontWeight: 'normal',
+                    fontSize: '16',
+                    color: '#666',
+                  }
+                },
+                series: [
+                  {
+                  type: 'liquidFill',
+                  silent: true,
+                  radius: '40%',
+                  color:["red"],
+                  center: ['50%', '65%', '50%', '50%'], //上左下右 分别显示
+                  backgroundStyle: {
+                    borderWidth: 2,
+                    color: '#ffffff',
+                    borderColor: colors
+                  },
+                  data: [{
+                    name:names,
+                    value:values
+                  }],
+                  itemStyle: {
+                    opacity: 0.95,
+                    shadowBlur: 0,
+                    color: colors,
+                  },
+                  direction: 'left',
+                  outline: {
+                    show: false
+                  },
+                  label: {
+                    normal: {
+                      formatter: function (param) {
+                        return param.name
+                      },
+                      textStyle: {
+                        fontSize: '12',
+                        fontWeight: "normal",
+                        color: '#ffffff'
+                      },
+                      padding: [20, 0, 0, 0]
+                    },
+                    emphasis: {
+                        "show": true
+                    }
+
+                  },
+                }]
+              };
+              // 绘制图表
+              current_prod_chart.setOption(electric_current_chart_option);
+            })
+          },
+          /**
+           * 打开弹窗
+           * @param slide
+           */
+          openDliog(slide){
+            this.swiperData=slide;
+            this.show = !this.show
+          }
+        },
+        mounted(){
+          this.init_charts();
+        },
+        watch:{
+
+        }
+
+    }
+</script>
+
+<style lang="less" scoped>
+  .container{
+    width: calc(100vw - 500px);
+    margin:25px auto 0 auto;
+    border: none;
+    border-radius:0;
+    padding: 10px!important;
+  }
+  .panel_tip{
+    min-height: 50px;
+    line-height: 50px;
+    background-color: #f5f4ba;
+  }
+  .center-main-title {
+    height: 30px;
+    .title-name {
+      color: #3b9de0;
+      font-weight: bold;
+      display: inline-block;
+      line-height: 30px;
+    }
+    div {
+      float: left;
+    }
+  }
+
+</style>

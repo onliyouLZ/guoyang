@@ -53,43 +53,7 @@
       </el-tab-pane>
       <el-tab-pane name="second" lazy>
         <span slot="label"><i class="fa fa-calendar-o"></i>&nbsp;基本信息</span>
-        <table class="table">
-          <tr>
-            <td width="30%" class="u-list-title">测站编码</td>
-            <td width="20%"><span>61716010</span></td>
-            <td width="30%" class="u-list-title">测站岸别</td>
-            <td width="20%"><span >高</span></td>
-
-          </tr>
-          <tr>
-            <td class="u-list-title">测站名称</td>
-            <td width="20%"><span>{{swiperData.name}}</span></td>
-
-
-            <td class="u-list-title">闸上设防水位(m)</td>
-            <td width="20%"><span>{{swiperData.value}}</span></td>
-          </tr>
-          <tr>
-
-            <td width="30%" class="u-list-title">闸下设防水位(m)</td>
-            <td width="20%"><span>{{swiperData.value}}</span></td>
-            <td class="u-list-title">基面名称</td>
-            <td width="20%"><span>冻结基面</span></td>
-          </tr>
-          <tr>
-            <td class="u-list-title">流域名称</td>
-            <td width="20%"><span>长江</span></td>
-            <td class="u-list-title">河流名称</td>
-            <td width="20%"><span>金水</span></td>
-          </tr>
-          <tr>
-            <td class="u-list-title">行政区划码</td>
-            <td width="20%"><span>420115</span></td>
-            <td class="u-list-title">信息管理单位</td>
-            <td width="20%"><span></span></td>
-          </tr>
-        </table>
-      </el-tab-pane>
+        水位:{{swiperData.value}}m</el-tab-pane>
       <el-tab-pane  name="third" lazy>
         <span slot="label"><i class="fa fa-calendar-o"></i>&nbsp;历史同时期对比</span>
         水位:{{swiperData.value}}m</el-tab-pane>
