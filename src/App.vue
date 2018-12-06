@@ -13,6 +13,7 @@ export default {
 
 <style lang="less">
 @import "../static/css/main.less";
+@import "../static/css/public.less";
 @import "../static/css/color-dark.css";     /*深色主题*/
 /*@import "../static/css/theme-green/color-green.css";   浅绿色主题*/
 </style>

@@ -1,6 +1,8 @@
 <template>
   <el-container>
-    <v-nav></v-nav>
+    <div class="header-nav">
+      <v-nav></v-nav>
+    </div>
     <el-main>
       <router-view></router-view>
     </el-main>
@@ -21,5 +23,13 @@
 <style scoped>
   .el-main{
     padding: 0;
+  }
+  .header-nav{
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+  }
+  .el-main[data-v-957c9522]{
+    margin-top: 60px;
   }
 </style>
