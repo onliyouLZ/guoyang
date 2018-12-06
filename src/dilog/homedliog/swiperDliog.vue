@@ -14,38 +14,36 @@
       </div>
       <!--前一页-->
       <div  class="fl">
-        <span @click="slideNext">
+        <span @click="slidePrev">
           <i class="fa fa-backward"></i>
         </span>
       </div>
       <!--自动播放-->
-      <div  class="fl" @click="autoplay">
-        <span>
-          <i class="fa fa-play"></i>
+      <div  class="fl">
+        <span  @click="autoplay">
+          <i :class="faPlay" class="fa"></i>
         </span>
       </div>
       <!--下一页-->
       <div  class="fl">
-        <span>
+        <span @click="slideNext">
           <i class="fa fa-forward"></i>
         </span>
       </div>
       <!--最后一页-->
       <div  class="fl">
-        <span>
+        <span @click="lastPage">
           <i class="fa fa-fast-forward"></i>
         </span>
       </div>
     </div>
-    <swiper :options="swiperOption" ref="mySwiper">
+    <swiper @ready="stopPlayer" :options="swiperOption" ref="mySwiper">
         <!-- slides -->
-        <swiper-slide>I'm Slide 1</swiper-slide>
-        <swiper-slide>I'm Slide 2</swiper-slide>
-        <swiper-slide>I'm Slide 3</swiper-slide>
-        <swiper-slide>I'm Slide 4</swiper-slide>
-        <swiper-slide>I'm Slide 5</swiper-slide>
-        <swiper-slide>I'm Slide 6</swiper-slide>
-        <swiper-slide>I'm Slide 7</swiper-slide>
+      <template v-for="item in images">
+        <swiper-slide  data-swiper-autoplay="800">
+            <img :src="item.src" style="width: 100%;height: 100%" alt="">
+        </swiper-slide>
+      </template>
         <!-- Optional controls -->
       </swiper>
     <!--<span slot="footer" class="dialog-footer">-->
@@ -57,15 +55,30 @@
 
 <script>
   import echarts from 'echarts'
-  // import Swiper from 'swiper'
   export default {
     name: "swiperDliog",
     data() {
       return {
         visible: this.swiperShow,
         swiperOption:{
-          autoplay:true
-        }
+          autoplay:false,
+          speed:100,
+          effect:"fade",
+        },
+        faPlay:"fa-play",
+        images:[
+          {src:"../../../static/leida/1.jpg"},
+          {src:"../../../static/leida/2.jpg"},
+          {src:"../../../static/leida/3.jpg"},
+          {src:"../../../static/leida/4.jpg"},
+          {src:"../../../static/leida/5.jpg"},
+          {src:"../../../static/leida/6.jpg"},
+          {src:"../../../static/leida/7.jpg"},
+          {src:"../../../static/leida/7.jpg"},
+          {src:"../../../static/leida/8.jpg"},
+          {src:"../../../static/leida/10.jpg"},
+          {src:"../../../static/leida/11.jpg"},
+        ]
       }
     },
     props:{
@@ -89,16 +102,33 @@
       childClose(){
         this.visible=false;
         this.$emit('update:swiperShow',false);
+        this.swiper.autoplay.stop();
+        this.faPlay="fa-play";
+        this.swiper.slideTo(0,0,false);
       },
       firstPage(){
         this.swiper.slideTo(0,0,false)
       },
+      slidePrev(){
+        this.swiper.slidePrev(0,false)
+      },
+      autoplay(){
+        if(this.faPlay==="fa-play"){
+          this.swiper.autoplay.start();
+          this.faPlay="fa-stop"
+        }else{
+          this.swiper.autoplay.stop();
+          this.faPlay="fa-play"
+        }
+      },
       slideNext(){
         this.swiper.slideNext(0,false)
       },
-      autoplay(){
-        this.swiper.autoplay.stop()
-        console.log(this.swiperOption.autoplay);
+      lastPage(){
+        this.swiper.slideTo(this.images.length-1,0,false)
+      },
+      stopPlayer(){
+        this.swiper.autoplay.stop();
       }
 
     },

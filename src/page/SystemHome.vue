@@ -264,8 +264,7 @@
                   <i class="fa fa-bar-chart"></i>&nbsp;&nbsp;年降雨分布
                 </div>
               </div>
-              <div style="min-height: 250px" class="njyfb" @click="openDliog">
-              </div>
+              <div style="min-height: 250px" class="njyfb" @click="openDliog"></div>
             </el-card>
           </el-col >
           <el-col :span="12" style="padding: 5px">
@@ -277,94 +276,36 @@
                   无雨日
                 </div>
               </div>
-              <div>
-                <el-table
-                  :data="tableData1"
-                  border
-                  max-height="250"
-                  size="mini"
-                  cell-class-name="table-body"
-                  header-cell-class-name="table-header">
-                  <el-table-column
-                    prop="STNM"
-                    min-width="150"
-                    align="center"
-                    label="站点名称">
-                  </el-table-column>
-                  <el-table-column
-                    prop="TM"
-                    min-width="150"
-                    align="center"
-                    label="检测时间">
-                  </el-table-column>
-                  <el-table-column
-                    prop="xzqh"
-                    min-width="150"
-                    align="center"
-                    label="行政区划(m)">
-                  </el-table-column>
-                  <el-table-column
-                    prop="number1"
-                    min-width="150"
-                    align="center"
-                    label="10cm">
-                  </el-table-column>
-                  <el-table-column
-                    prop="number2"
-                    min-width="150"
-                    align="center"
-                    label="20cm">
-                  </el-table-column>
-                  <el-table-column
-                    prop="number3"
-                    min-width="150"
-                    align="center"
-                    label="40cm">
-                  </el-table-column>
-                  <el-table-column
-                    prop="czpj"
-                    min-width="150"
-                    align="center"
-                    label="垂直平均">
-                  </el-table-column>
-                  <el-table-column
-                    prop="trxdsd"
-                    min-width="150"
-                    align="center"
-                    label="土壤相对湿度">
-                  </el-table-column>
-                  <el-table-column
-                    prop="ghdj"
-                    min-width="150"
-                    align="center"
-                    label="干旱等级">
-                  </el-table-column>
-                </el-table>
-
-                <!--水滴-->
-                <!--<swiper :options="swiperOption">-->
-                <!--<swiper-slide-->
-                <!--v-for="(slide, index) in swiperSlides1"-->
-                <!--:key="index"-->
-                <!--style="box-sizing: border-box" >-->
-                <!--<div-->
-                <!--:id="'current_prod_chart'+index"-->
-                <!--style="width:100%;height:150px"-->
-                <!--@click="openDliog(slide)">-->
-                <!--</div>-->
-                <!--<div style="width:100%;height: 100px;text-align: center">-->
-                <!--<div><i class="iconfont  icon-shuiwei" style="font-size: 20px;"></i>&nbsp;<span class="fz14">{{slide.value}}m</span></div>-->
-                <!--<div><span class="fz14">2018-09-15 09:00:00</span></div>-->
-                <!--<div><span class="fz14">超设防:0.5m</span></div>-->
-                <!--</div>-->
-                <!--</swiper-slide>-->
-                <!--<div class="swiper-button-prev" slot="button-prev"></div>-->
-                <!--<div class="swiper-button-next" slot="button-next"></div>-->
-                <!--</swiper>-->
-
-              </div>
+              <div style="min-height: 250px" class="njyfb" @click="openDliog"></div>
             </el-card>
-
+          </el-col>
+          <!--</el-card>-->
+        </el-col>
+        <el-col :span="24">
+          <!--<el-card shadow="hover" class="" :body-style="{padding:'5px'}">-->
+          <el-col :span="12" style="padding: 5px">
+            <el-card class="box-card">
+              <div class="center-main-title">
+                <div class="title-stick">
+                </div>
+                <div class="title-name">
+                  <i class="fa fa-bar-chart"></i>&nbsp;&nbsp;年降雨分布
+                </div>
+              </div>
+              <div style="min-height: 250px" class="njyfb" @click="openDliog"></div>
+            </el-card>
+          </el-col >
+          <el-col :span="12" style="padding: 5px">
+            <el-card class="box-card">
+              <div class="center-main-title">
+                <div class="title-stick bg-blue">
+                </div>
+                <div class="title-name mgl10">
+                  无雨日
+                </div>
+              </div>
+              <div style="min-height: 250px" class="njyfb" @click="openDliog"></div>
+            </el-card>
           </el-col>
           <!--</el-card>-->
         </el-col>
@@ -403,8 +344,6 @@
                   {STNM:"燕小庙闸",TM:"2018-10-11 11:11:11",RZ:"5.23",gksw:"0.5",sfsw:"25",jjsw:"27.3",bzsw:"29.7",csfsw:"-19.77",cjjsw:"-22.07",cbzsw:"24.47"},
                   {STNM:"包河闸",TM:"2018-10-11 11:11:11",RZ:"5.23",gksw:"0.5",sfsw:"25",jjsw:"27.3",bzsw:"29.7",csfsw:"-19.77",cjjsw:"-22.07",cbzsw:"24.47"},
                   {STNM:"武家河闸",TM:"2018-10-11 11:11:11",RZ:"5.23",gksw:"0.5",sfsw:"25",jjsw:"27.3",bzsw:"29.7",csfsw:"-19.77",cjjsw:"-22.07",cbzsw:"24.47"},
-                  {STNM:"曹市闸",TM:"2018-10-11 11:11:11",RZ:"5.23",gksw:"0.5",sfsw:"25",jjsw:"27.3",bzsw:"29.7",csfsw:"-19.77",cjjsw:"-22.07",cbzsw:"24.47"},
-
               ],
               tableData1:[
                   {STNM:"西阳镇墒情站",TM:"2018-10-11 11:11:11",xzqh:"西阳镇",number1:"55%",number2:"63%",number3:"75%",czpj:"63%",trxdsd:"65%",ghdj:"无干旱"},
@@ -412,7 +351,6 @@
                   {STNM:"楚店镇墒情站",TM:"2018-10-11 11:11:11",xzqh:"西阳镇",number1:"55%",number2:"63%",number3:"75%",czpj:"63%",trxdsd:"65%",ghdj:"无干旱"},
                   {STNM:"高公镇墒情站",TM:"2018-10-11 11:11:11",xzqh:"西阳镇",number1:"55%",number2:"63%",number3:"75%",czpj:"63%",trxdsd:"65%",ghdj:"无干旱"},
                   {STNM:"高炉镇墒情站",TM:"2018-10-11 11:11:11",xzqh:"西阳镇",number1:"55%",number2:"63%",number3:"75%",czpj:"63%",trxdsd:"65%",ghdj:"无干旱"},
-                  {STNM:"曹市镇墒情站",TM:"2018-10-11 11:11:11",xzqh:"西阳镇",number1:"55%",number2:"63%",number3:"75%",czpj:"63%",trxdsd:"65%",ghdj:"无干旱"},
               ],
               dutyData:[],
               swiperOption: {
@@ -631,93 +569,9 @@
                 name:"墒情站超警统计",
               }
             });
-
-            // 水滴初始化
-            // $.each(this.swiperSlides1,(index,item)=>{
-            //   let names = "未超警", values = 0.45,colors = ["#0796EF"];
-            //   if(item.value>=80){
-            //     names = "未超警";
-            //     values = 0.45;
-            //     colors = ["#0796EF"];
-            //   }else if(item.value>=60){
-            //     names = "超保证";
-            //     values = 0.9;
-            //     colors = ["#FF561E"];
-            //   }else if(item.value>=22){
-            //     names = "超警戒";
-            //     values = 0.7;
-            //     colors = ["#0796EF"];
-            //   }else{
-            //     names = "超设防";
-            //     values = 0.55;
-            //     colors = ["#FF561E"];
-            //   }
-            //   let current_prod_chart = echarts.init(document.getElementById('current_prod_chart'+index));
-            //   // 设置option
-            //   let electric_current_chart_option = {
-            //     amplitude: '8%',
-            //     waveLength: '80%',
-            //     title: {
-            //       text:item.name,
-            //       top:"20",
-            //       left: 'center',
-            //       textStyle: {
-            //         fontWeight: 'normal',
-            //         fontSize: '16',
-            //         color: '#666',
-            //       }
-            //     },
-            //     series: [
-            //       {
-            //       type: 'liquidFill',
-            //       silent: true,
-            //       radius: '40%',
-            //       color:["red"],
-            //       center: ['50%', '65%', '50%', '50%'], //上左下右 分别显示
-            //       backgroundStyle: {
-            //         borderWidth: 2,
-            //         color: '#ffffff',
-            //         borderColor: colors
-            //       },
-            //       data: [{
-            //         name:names,
-            //         value:values
-            //       }],
-            //       itemStyle: {
-            //         opacity: 0.95,
-            //         shadowBlur: 0,
-            //         color: colors,
-            //       },
-            //       direction: 'left',
-            //       outline: {
-            //         show: false
-            //       },
-            //       label: {
-            //         normal: {
-            //           formatter: function (param) {
-            //             return param.name
-            //           },
-            //           textStyle: {
-            //             fontSize: '12',
-            //             fontWeight: "normal",
-            //             color: '#ffffff'
-            //           },
-            //           padding: [20, 0, 0, 0]
-            //         },
-            //         emphasis: {
-            //             "show": true
-            //         }
-            //
-            //       },
-            //     }]
-            //   };
-            //   // 绘制图表
-            //   current_prod_chart.setOption(electric_current_chart_option);
-            // })
           },
           /**
            * 打开弹窗
-           * @param
            */
           openDliog(){
             console.log(1);
@@ -762,6 +616,7 @@
   .njyfb{
     background: url("../assets/ldhb.jpg")  no-repeat;
     background-size:cover;
+    cursor: pointer;
   }
 
 </style>
