@@ -61,7 +61,9 @@
       return {
         visible: this.swiperShow,
         swiperOption:{
-          autoplay:false,
+          autoplay:{
+
+          },
           speed:100,
           effect:"fade",
         },

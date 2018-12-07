@@ -17,7 +17,9 @@ const portfinder = require('portfinder')
 const express=require('express');
 const app=express();
 const dataJson=require('../src/sdk/package.json');
+const bjxJson=require('../src/sdk/XZQFW.json');
 const duty=dataJson.duty;
+const bjx=bjxJson;
 const apiRouters=express.Router();
 app.use('/api',apiRouters);
 
@@ -65,6 +67,15 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         res.json({
           errno:0,
           data:duty
+        })
+      }),
+      /**
+       * 边界线
+       */
+      app.get('/api/bjx',(req,res)=>{
+        res.json({
+          errno:0,
+          data:bjx
         })
       })
     }
