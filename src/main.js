@@ -8,12 +8,7 @@ import axios from 'axios'
 import echarts from 'echarts';
 import liquidfill from 'echarts-liquidfill' //水滴图
 import 'swiper/dist/css/swiper.css'
-import ol from 'openlayers'
-
-
-
-
-
+// import ol from 'openlayers'
 
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 
@@ -30,7 +25,7 @@ Vue.use(VueAwesomeSwiper);
 
 Vue.prototype.$http = axios;
 Vue.prototype.$echarts = echarts;
-Vue.prototype.$ol=ol;
+// Vue.prototype.$ol=ol;
 
 
 

@@ -24,7 +24,6 @@
       },
       methods:{
           initMap(){
-            let ol = this.$ol;
             let l2 = new ol.layer.Tile({
               visible: true,
               source: new ol.source.XYZ({
@@ -37,8 +36,6 @@
                 url: "http://t2.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}"// 注记
               })
             });
-            //
-            //
             this.map=new ol.Map({
               target: 'map',
               layers: [normalLayer,l2],
@@ -54,15 +51,13 @@
                 // zoomFactor:2.9,
               })
             });
-
           }
       },
       created(){
-          let ol=this.$ol;
           this.$http.get('http://localhost:8080/api/bjx').then((res)=>{
             const data=res.data.data;
             const shape=data.result.shape;
-            const jsons=data.result.json
+            const jsons=data.result.json;
             //创建一个点
             var feature  = new ol.Feature({
               geometry: new ol.geom.Point([114.32, 30.30])
@@ -97,10 +92,6 @@
             });
             //将绘制层添加到地图容器中
             this.map.addLayer(vector);
-            console.log(this.map.getLayers("map"));
-            this.map.getLayers().forEach(function (layer, i) {
-              console.log(layer);
-            });
 
           })
       },
