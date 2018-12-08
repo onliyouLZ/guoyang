@@ -13,11 +13,11 @@ let mapFunc = {
      * @return {Array}
      */
     convertObjectToArray(object, sortKey, isAsc) {
-        var result = [];
+        let result = [];
         if (!object) {
             return result;
         }
-        for (var pro in object) {
+        for (let pro in object) {
             if (object.hasOwnProperty(pro)) {
                 if ($.isArray(object[pro])) {
                     result = result.concat(object[pro]);
@@ -31,7 +31,7 @@ let mapFunc = {
             if (isAsc === undefined) {
                 isAsc = true;
             }
-            var _sort = 0;
+            let _sort = 0;
             if (isAsc) {
                 result.sort(function (a, b) {
                     if (!a[sortKey] && !b[sortKey]) {
@@ -69,9 +69,9 @@ let mapFunc = {
      * @returns {{}}
      */
     convertArrayToObject(arr, key) {
-        var result = {};
-        var keyValue;
-        for (var i = 0, len = arr.length; i < len; i++) {
+        let result = {};
+        let keyValue;
+        for (let i = 0, len = arr.length; i < len; i++) {
             keyValue = arr[i][key];
             if (keyValue !== undefined) {
                 result[keyValue] = arr[i];
@@ -81,16 +81,16 @@ let mapFunc = {
     },
     //渲染等值面
     renderContour(option) {
-        let _this = this
-        var geojson = {
+        let _this = this;
+        let geojson = {
             "type": "FeatureCollection",
             "totalFeatures": option.features.length,
             "features": []
         };
 
-        for (var i = 0; i < option.features.length; i++) {
-            var cfeature = option.features[i];
-            var feature = {
+        for (let i = 0; i < option.features.length; i++) {
+            let cfeature = option.features[i];
+            let feature = {
                 "type": "Feature",
                 "geometry_name": "geom",
                 "geometry": {
@@ -106,18 +106,18 @@ let mapFunc = {
         }
 
         console.log(geojson);
-        var vectorSource = new ol.source.Vector({
+        let vectorSource = new ol.source.Vector({
             features: (new ol.format.GeoJSON()).readFeatures(geojson)
         });
 
 
         // 十六进制颜色值的正则表达式
-        var reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
+        let reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
         String.prototype.colorRgb = function () {
-            var sColor = this.toLowerCase();
+          let sColor = this.toLowerCase();
             if (sColor && reg.test(sColor)) {
                 if (sColor.length === 4) {
-                    var sColorNew = "#";
+                    let sColorNew = "#";
                     for (let i = 1; i < 4; i += 1) {
                         sColorNew += sColor.slice(i, i + 1).concat(sColor.slice(i, i + 1));
                     }
@@ -135,10 +135,10 @@ let mapFunc = {
             }
         };
 
-        var styleFunc = function (feature) {
+        let styleFunc = function (feature) {
             console.log(feature)
-            var color = feature.get('color');
-            // var colors = {//最开始的数据
+            let color = feature.get('color');
+            // let colors = {//最开始的数据
             //  "0": "255,255,255,0",
             //  "10": "168,240,140,255",
             //  "25": "56, 168, 0, 255",
@@ -148,9 +148,9 @@ let mapFunc = {
             //  "400": "118, 0, 0, 255"
             //  };
 
-            var colorsSelect2 = _this.convertObjectToArray(option.color);
+            let colorsSelect2 = _this.convertObjectToArray(option.color);
             console.log(colorsSelect2,option.color);
-            var colors = {};
+            let colors = {};
             if (colorsSelect2.length) {
                 colors["0"] = colorsSelect2[0].colorRgb();
                 colors["30"] = colorsSelect2[1].colorRgb();
@@ -182,8 +182,29 @@ let mapFunc = {
         option.layer.setOpacity(0.5);
         console.log(option.layer.getStyle())
     },
-
-}
+    /**
+     * 根据图层名获取图层
+     * @param map
+     * @param name
+     * @returns {*}
+     */
+    getLayerName(map,name){
+      if(typeof (map) !== "object"){
+        console.error('未传入地图对象');
+        return
+      }
+      let maps=map.getLayers();
+      let TileLayer=null;
+      maps.forEach(function (layers, i) {
+        let layer=layers.values_.name;
+        if(layer === name){
+          TileLayer=layers;
+          return false
+        }
+      });
+      return TileLayer
+    }
+};
 
 export const mapFuncs = mapFunc;
 
