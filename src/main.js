@@ -9,6 +9,7 @@ import echarts from 'echarts';
 import liquidfill from 'echarts-liquidfill' //水滴图
 import 'swiper/dist/css/swiper.css'
 import 'openlayers/dist/ol.css'
+import './utils/echartsResizeHelper'
 // import ol from 'openlayers'
 
 import VueAwesomeSwiper from 'vue-awesome-swiper'

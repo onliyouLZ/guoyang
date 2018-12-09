@@ -30,7 +30,7 @@
                     <i class="fa fa-bar-chart"></i>&nbsp;&nbsp;河道水位报警统计
                   </div>
                 </div>
-                <div id="electric_prod_chart" style="width: 100%;height:250px;"></div>
+                <div id="electric_prod_chart" style="width: 100%;height:250px;" v-on-echart-resize></div>
               </el-card>
             </el-col >
             <el-col :span="16" style="padding: 5px">
@@ -150,7 +150,7 @@
                   <i class="fa fa-bar-chart"></i>&nbsp;&nbsp;墒情报警统计
                 </div>
               </div>
-              <div id="electric_prod_chart1" style="width: 100%;height:250px;"></div>
+              <div id="electric_prod_chart1" style="width: 100%;height:250px;" v-on-echart-resize></div>
             </el-card>
           </el-col >
           <el-col :span="16" style="padding: 5px">

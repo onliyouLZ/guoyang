@@ -2,10 +2,60 @@
   <div class="oneMap">
     <Breadcrumb :menu="menuArray"></Breadcrumb>
     <div id="map"></div>
-    <div class="mapBtn" style="float: left; position: absolute; top: 100px;left:20px; z-index: 2000;">
+    <div class="mapBtn" style="float: left; position: absolute; top: 120px;left:175px; z-index: 2000;">
       <ul style="list-style: none">
         <li v-for="(item,index) in tabName"  @click="switchMap(index,item)" :class="{'active':active === index}">{{item.name}}</li>
       </ul>
+    </div>
+    <div class="leftCheckbox">
+        <div class="checkboxCard">
+          <ul>
+            <li>
+              <i class="fa fa-user-o"></i>
+              <input type="checkbox">预警监视
+            </li>
+            <li>
+              <i class="fa fa-user-o"></i>
+              <input type="checkbox">水情信息
+            </li>
+            <li>
+              <i class="fa fa-user-o"></i>
+              <input type="checkbox">降水信息
+            </li>
+            <li>
+              <i class="fa fa-user-o"></i>
+              <input type="checkbox">灾情险情
+            </li>
+          </ul>
+        </div>
+        <div class="btn-display" @click="leftHide(flag)">
+          {{flagName}}
+        </div>
+    </div>
+    <div class="rightCard">
+      <div class="rightCheckbox">
+        <ul>
+          <li>
+            <i class="fa fa-user-o"></i>
+            <input type="checkbox">预警监视
+          </li>
+          <li>
+            <i class="fa fa-user-o"></i>
+            <input type="checkbox">水情信息
+          </li>
+          <li>
+            <i class="fa fa-user-o"></i>
+            <input type="checkbox">降水信息
+          </li>
+          <li>
+            <i class="fa fa-user-o"></i>
+            <input type="checkbox">灾情险情
+          </li>
+        </ul>
+      </div>
+      <div class="right-btn-display" @click="rightHide(flag)">
+        {{flagName}}
+      </div>
     </div>
     <div id="mouse-position" style="float: left; position: absolute; bottom: 5px; width: 350px; height: 20px; z-index: 2000;"></div>
   </div>
@@ -14,7 +64,6 @@
 <script>
     import Breadcrumb from '../components/Breadcrumb'
     import {mapFuncs} from '../utils/mapUtils'
-
     export default {
         name: "one-map",
         components:{
@@ -32,6 +81,9 @@
             {name:"影像"},
           ],
           active:0,
+          flag:0,
+          flag1:0,
+          flagName:"显示",
         }
       },
       methods:{
@@ -96,6 +148,32 @@
               mapFuncs.getLayerName(this.map,'TDTyg').setVisible(false);
             }else{
               mapFuncs.getLayerName(this.map,'TDTyg').setVisible(true);
+            }
+          },
+          leftHide(){
+            if(this.flag===0){
+              $('.checkboxCard').animate({left: -112}, "fast");
+              $('.btn-display').animate({left: 0}, "fast");
+              this.flag=1;
+              this.flagName="隐藏"
+            }else{
+              $('.checkboxCard').animate({left: 0}, "fast");
+              $('.btn-display').animate({left: 112}, "fast");
+              this.flag=0;
+              this.flagName="显示"
+            }
+          },
+          rightHide(){
+            if(this.flag1===0){
+              $('.rightCheckbox').animate({right: -112}, "fast");
+              $('.right-btn-display').animate({right: 0}, "fast");
+              this.flag1=1;
+              this.flagName="隐藏"
+            }else{
+              $('.rightCheckbox').animate({right:0}, "fast");
+              $('.right-btn-display').animate({right: 112}, "fast");
+              this.flag1=0;
+              this.flagName="显示"
             }
           }
       },
@@ -168,12 +246,10 @@
     position: relative;
     background-color: rgb(238, 238, 238);
     overflow: hidden;
-    /*min-width: 1px;*/
-    /*min-height: 1px;*/
-    left: 0px;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
     width: auto;
     height: calc(100vh - 87px);
   }
@@ -198,6 +274,94 @@
     }
     .active{
       color: #2d8cf0;
+    }
+  }
+  .leftCheckbox{
+    z-index: 999;
+    position: absolute;
+    top: 120px;
+    left:0;
+    height: 145px;
+    .checkboxCard{
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      padding: 5px;
+      border: 1px solid #ddd;
+      box-shadow:1px 4px 10px 2px #aaa ;
+      li{
+        list-style: none;
+        width: 100px;
+        line-height: 35px;
+        font-size: 14px;
+        i{
+          font-size: 13px;
+          margin-right: 5px;
+        }
+        input{
+          margin-right: 5px;
+          vertical-align: middle;
+        }
+      }
+    }
+    .btn-display{
+      width: 20px;
+      height: 55px;
+      background-color: #3DAAEF;
+      position: absolute;
+      color: white;
+      line-height: 26px;
+      top: 50%;
+      transform: translate(0,-50%);
+      right: -133px;
+      cursor: pointer;
+      text-align: center;
+      font-size: 12px;;
+    }
+  }
+  .rightCard{
+    z-index: 999;
+    position: absolute;
+    top: 120px;
+    right:0;
+    height: 145px;
+    .rightCheckbox{
+      height: 100%;
+      position: absolute;
+      right: 0;
+      top: 0;
+      padding: 5px;
+      border: 1px solid #ddd;
+      box-shadow:1px 4px 10px 2px #aaa ;
+      li{
+        list-style: none;
+        width: 100px;
+        line-height: 35px;
+        font-size: 14px;
+        i{
+          font-size: 13px;
+          margin-right: 5px;
+        }
+        input{
+          margin-right: 5px;
+          vertical-align: middle;
+        }
+      }
+    }
+    .right-btn-display{
+      width: 20px;
+      height: 55px;
+      background-color: #3DAAEF;
+      position: absolute;
+      color: white;
+      line-height: 26px;
+      /*top: 50%;*/
+      /*transform: translate(0,-50%);*/
+      right: 112px;
+      cursor: pointer;
+      text-align: center;
+      font-size: 12px;;
     }
   }
 </style>
