@@ -59,7 +59,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
        */
       app.get('/api/duty',(req,res)=>{
         res.json({
-          errno:0,
+          error:0,
           data:duty
         })
       }),
@@ -68,7 +68,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
        */
       app.get('/api/bjx',(req,res)=>{
         res.json({
-          errno:0,
+          error:0,
           data:bjx
         })
       }),
