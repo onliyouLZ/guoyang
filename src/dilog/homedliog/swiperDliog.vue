@@ -149,7 +149,7 @@
   }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   .el-dialog__wrapper{
     .el-dialog{
       width: 60%!important;

@@ -10,7 +10,7 @@
         :default-active="onRoutes"
         class="header-menu"
         mode="horizontal"
-        background-color="#242f42"
+        background-color="#0a95ef"
         text-color="#fff"
         router
         active-text-color="#ffd04b">
@@ -115,6 +115,7 @@
     height: 60px;
     font-size: 22px;
     color: #fff;
+    background-color: #0a95ef;
   }
   .header-logo{
     float: left;
@@ -127,16 +128,17 @@
     line-height: 60px;
   }
   .header-right{
-    float: right;
-    padding-right: 50px;
-  .header-menu {
-    float: left;
-    height: 59px;
-  li {
-    height: 60px;
-    line-height: 60px;
-  }
-  }
+      float: right;
+      padding-right: 50px;
+    .header-menu {
+      float: left;
+      height: 59px;
+      background-color: #0a95ef!important;
+      li {
+        height: 60px;
+        line-height: 60px;
+      }
+    }
   }
   .header-user-con{
     display: flex;

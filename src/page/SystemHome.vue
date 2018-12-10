@@ -574,7 +574,6 @@
            * 打开弹窗
            */
           openDliog(){
-            console.log(1);
             this.swiperShow = !this.swiperShow
           }
         },

@@ -10,21 +10,9 @@
     <div class="leftCheckbox">
         <div class="checkboxCard">
           <ul>
-            <li>
+            <li  v-for="(item ,index) in checkboxCard">
               <i class="fa fa-user-o"></i>
-              <input type="checkbox">预警监视
-            </li>
-            <li>
-              <i class="fa fa-user-o"></i>
-              <input type="checkbox">水情信息
-            </li>
-            <li>
-              <i class="fa fa-user-o"></i>
-              <input type="checkbox">降水信息
-            </li>
-            <li>
-              <i class="fa fa-user-o"></i>
-              <input type="checkbox">灾情险情
+              <input type="checkbox" :checked="item.checked"   @click="checkFun(index)">{{item.name}}
             </li>
           </ul>
         </div>
@@ -34,26 +22,55 @@
     </div>
     <div class="rightCard">
       <div class="rightCheckbox">
-        <ul>
-          <li>
-            <i class="fa fa-user-o"></i>
-            <input type="checkbox">预警监视
-          </li>
-          <li>
-            <i class="fa fa-user-o"></i>
-            <input type="checkbox">水情信息
-          </li>
-          <li>
-            <i class="fa fa-user-o"></i>
-            <input type="checkbox">降水信息
-          </li>
-          <li>
-            <i class="fa fa-user-o"></i>
-            <input type="checkbox">灾情险情
-          </li>
-        </ul>
+        <div class="tabTitle">
+          <swiper :options="swiperOption">
+            <swiper-slide
+              style="box-sizing: border-box"
+              v-for="(item,index) in rightTitles">
+              <div
+                class="titleBar "
+                @click="titleBar(index,item)"
+                :class="{'titleActive':titleActive === index}">{{item.name}}</div>
+            </swiper-slide>
+          <div class="swiper-button-prev" slot="button-prev"></div>
+          <div class="swiper-button-next" slot="button-next"></div>
+          </swiper>
+        </div>
+        <div class="tabContent">
+          <el-collapse v-model="activeName">
+            <el-collapse-item title="湖泊信息" name="1">
+              <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
+              <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+            </el-collapse-item>
+            <el-collapse-item title="水库信息" name="2">
+              <div>控制反馈：通过界面样式和交互动效让用户可以清晰的感知自己的操作；</div>
+              <div>页面反馈：操作后，通过页面元素的变化清晰地展现当前状态。</div>
+            </el-collapse-item>
+            <el-collapse-item title="涵闸水位" name="3">
+              <div>简化流程：设计简洁直观的操作流程；</div>
+              <div>清晰明确：语言表达清晰且表意明确，让用户快速理解进而作出决策；</div>
+              <div>帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。</div>
+            </el-collapse-item>
+            <el-collapse-item title="雨情信息" name="4">
+              <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
+              <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
+            </el-collapse-item>
+            <el-collapse-item title="渍水点水情" name="5">
+              <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
+              <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
+            </el-collapse-item>
+            <el-collapse-item title="河道信息" name="6">
+              <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
+              <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
+            </el-collapse-item>
+            <el-collapse-item title="灾情险情" name="7">
+              <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
+              <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
+            </el-collapse-item>
+          </el-collapse>
+        </div>
       </div>
-      <div class="right-btn-display" @click="rightHide(flag)">
+      <div class="right-btn-display" @click="rightHide(flag)" style="display: none">
         {{flagName}}
       </div>
     </div>
@@ -80,10 +97,32 @@
             {name:"矢量"},
             {name:"影像"},
           ],
+          checkboxCard:[
+            {name:"预警监视",checked:true},
+            {name:"水情信息",checked:true},
+            {name:"降水信息",checked:true},
+            {name:"视频监视",checked:false},
+          ],
+          rightTitles:[],
           active:0,
+          titleActive:0,
           flag:0,
           flag1:0,
           flagName:"显示",
+          windowHeight:$(window).height(),
+          swiperOption: {
+            allowTouchMove:false,//禁止拖动
+            // spaceBetween:20,//slider 之间的间隔
+            centerInsufficientSlides:false, //当slides的总数小于slidesPerView时，slides居中。
+            noSwiping : true,
+            noSwipingClass : 'stop-swiping',
+            slidesPerView: 3,//设置容器中slider的个数
+            navigation: {
+              nextEl: '.swiper-button-next',//下一页
+              prevEl: '.swiper-button-prev',//上一页
+            }
+          },
+          activeName: '1'
         }
       },
       methods:{
@@ -120,13 +159,14 @@
               layers: [normalLayer,l2,TileLayer],
               view: new ol.View({
                 projection: 'EPSG:4326',
-                center: [114.32, 30.22],
+                // center: [114.32, 30.22],
+                center: [116.27, 33.57],
                 //最大显示级数
                 maxZoom: 28,
                 //最小显示级数
                 minZoom: 1,
                 //当前显示级数
-                zoom: 11.2,
+                zoom: 11,
               }),
               controls:[
                 new ol.control.MousePosition({
@@ -142,6 +182,16 @@
               ]
             });
           },
+          //初始化右边title
+          rightTitle(){
+            let arr=[];
+            $.each(this.checkboxCard,function (v,item) {
+              if(item.checked){
+                arr.push({name:item.name})
+              }
+            });
+            this.rightTitles=arr
+          },
           switchMap(index,item){
             this.active=index;
             if(item.name==="矢量"){
@@ -149,6 +199,9 @@
             }else{
               mapFuncs.getLayerName(this.map,'TDTyg').setVisible(true);
             }
+          },
+          titleBar(index,item){
+            this.titleActive=index;
           },
           leftHide(){
             if(this.flag===0){
@@ -175,13 +228,30 @@
               this.flag1=0;
               this.flagName="显示"
             }
-          }
+          },
+          checkFun(index){
+            let arr=this.rightTitles;
+            $.each(this.checkboxCard,function (v,item) {
+                if(v===index){
+                  item.checked=event.target.checked;
+                  if(item.checked){
+                    arr.push({name:item.name});
+                  }else{
+                    arr.splice(jQuery.inArray(item,arr),1);
+                  }
+                }
+            });
+          },
+
       },
       created(){
         //边界线处理
         this.$http.get('http://localhost:8080/api/bjx').then((res)=>{
+
           let shape=res.data.data.result.shape;
+
           let mapJson=res.data.data.result.json;
+
           //处理数据的方式
           let format = new ol.format.WKT();
           //处理数据
@@ -207,7 +277,7 @@
           //遮罩
           newFeature1.setStyle(new ol.style.Style({
             fill: new ol.style.Fill({
-              color: 'rgba(255,255,255,1)'
+              color: 'rgba(255,255,255,0.5)'
             })
           }));
           //边界线2
@@ -231,11 +301,14 @@
 
 
 
-        })
+        });
+
+
       },
       mounted(){
-          this.initMap()
-      }
+          this.initMap();
+          this.rightTitle();
+      },
     }
 </script>
 
@@ -290,6 +363,7 @@
       padding: 5px;
       border: 1px solid #ddd;
       box-shadow:1px 4px 10px 2px #aaa ;
+      background-color: white;
       li{
         list-style: none;
         width: 100px;
@@ -325,28 +399,31 @@
     position: absolute;
     top: 120px;
     right:0;
-    height: 145px;
+    height:calc(100vh - 130px);
+    width: 340px;
+    border: 5px solid #3DAAEF;
+    background-color: white;
     .rightCheckbox{
       height: 100%;
-      position: absolute;
-      right: 0;
-      top: 0;
-      padding: 5px;
-      border: 1px solid #ddd;
-      box-shadow:1px 4px 10px 2px #aaa ;
-      li{
-        list-style: none;
-        width: 100px;
-        line-height: 35px;
-        font-size: 14px;
-        i{
-          font-size: 13px;
-          margin-right: 5px;
+      .tabTitle{
+        height: 30px;
+        padding: 5px;
+        .titleBar{
+          border: 1px solid #ddd;
+          line-height: 30px;
+          text-align: center;
+          cursor: pointer;
+          background-color: rgb(118, 126, 132);
+          color: white;
+          font-size: 14px;
         }
-        input{
-          margin-right: 5px;
-          vertical-align: middle;
+        .titleActive{
+          background-color:rgb(61, 170, 239);
         }
+      }
+      .tabContent{
+        overflow: auto;
+        height:calc(100vh - 167px);
       }
     }
     .right-btn-display{
