@@ -26,11 +26,12 @@
           <swiper :options="swiperOption">
             <swiper-slide
               style="box-sizing: border-box"
-              v-for="(item,index) in rightTitles">
+              v-for="(item,index) in rightTitles"
+              :key="index">
               <div
                 class="titleBar "
                 @click="titleBar(index,item)"
-                :class="{'titleActive':titleActive === index}">{{item.name}}</div>
+                :class="{'titleActive':titleActive === index}">{{item}}</div>
             </swiper-slide>
           <div class="swiper-button-prev" slot="button-prev"></div>
           <div class="swiper-button-next" slot="button-next"></div>
@@ -38,41 +39,63 @@
         </div>
         <div class="tabContent">
           <el-collapse v-model="activeName">
-            <el-collapse-item title="湖泊信息" name="1">
+            <el-collapse-item name="1">
+              <template slot="title">
+                <i class="fa fa-user-o" style="margin: 0 10px"></i>湖泊信息
+              </template>
               <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
               <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
             </el-collapse-item>
-            <el-collapse-item title="水库信息" name="2">
+            <el-collapse-item  name="2">
+              <template slot="title">
+                <i class="fa fa-user-o" style="margin: 0 10px"></i>水库信息
+              </template>
               <div>控制反馈：通过界面样式和交互动效让用户可以清晰的感知自己的操作；</div>
               <div>页面反馈：操作后，通过页面元素的变化清晰地展现当前状态。</div>
             </el-collapse-item>
-            <el-collapse-item title="涵闸水位" name="3">
+            <el-collapse-item  name="3">
+              <template slot="title">
+                <i class="fa fa-user-o" style="margin: 0 10px"></i>涵闸水位
+              </template>
               <div>简化流程：设计简洁直观的操作流程；</div>
               <div>清晰明确：语言表达清晰且表意明确，让用户快速理解进而作出决策；</div>
               <div>帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。</div>
             </el-collapse-item>
-            <el-collapse-item title="雨情信息" name="4">
+            <el-collapse-item  name="4">
+              <template slot="title">
+                <i class="fa fa-user-o" style="margin: 0 10px"></i>雨情信息
+              </template>
               <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
               <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
             </el-collapse-item>
-            <el-collapse-item title="渍水点水情" name="5">
+            <el-collapse-item  name="5">
+              <template slot="title">
+                <i class="fa fa-user-o" style="margin: 0 10px"></i>渍水点水情
+              </template>
               <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
               <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
             </el-collapse-item>
-            <el-collapse-item title="河道信息" name="6">
+            <el-collapse-item  name="6">
+              <template slot="title">
+                <i class="fa fa-user-o" style="margin: 0 10px"></i>河道信息
+              </template>
               <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
               <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
             </el-collapse-item>
-            <el-collapse-item title="灾情险情" name="7">
+            <el-collapse-item name="7">
+              <template slot="title">
+                <i class="fa fa-user-o" style="margin: 0 10px"></i>灾情险情
+              </template>
               <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
               <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
             </el-collapse-item>
           </el-collapse>
         </div>
       </div>
-      <div class="right-btn-display" @click="rightHide(flag)" style="display: none">
-        {{flagName}}
-      </div>
+
+    </div>
+    <div class="right-btn-display" @click="rightHide(flag)" >
+      {{flagName1}}
     </div>
     <div id="mouse-position" style="float: left; position: absolute; bottom: 5px; width: 350px; height: 20px; z-index: 2000;"></div>
   </div>
@@ -108,7 +131,8 @@
           titleActive:0,
           flag:0,
           flag1:0,
-          flagName:"显示",
+          flagName:"隐藏",
+          flagName1:"隐藏",
           windowHeight:$(window).height(),
           swiperOption: {
             allowTouchMove:false,//禁止拖动
@@ -187,11 +211,12 @@
             let arr=[];
             $.each(this.checkboxCard,function (v,item) {
               if(item.checked){
-                arr.push({name:item.name})
+                arr.push(item.name)
               }
             });
             this.rightTitles=arr
           },
+          //矢量，影像切换
           switchMap(index,item){
             this.active=index;
             if(item.name==="矢量"){
@@ -200,54 +225,61 @@
               mapFuncs.getLayerName(this.map,'TDTyg').setVisible(true);
             }
           },
-          titleBar(index,item){
-            this.titleActive=index;
-          },
+          //左隐藏
           leftHide(){
             if(this.flag===0){
               $('.checkboxCard').animate({left: -112}, "fast");
               $('.btn-display').animate({left: 0}, "fast");
               this.flag=1;
-              this.flagName="隐藏"
+              this.flagName="显示"
             }else{
               $('.checkboxCard').animate({left: 0}, "fast");
               $('.btn-display').animate({left: 112}, "fast");
               this.flag=0;
-              this.flagName="显示"
+              this.flagName="隐藏"
             }
           },
+          //右隐藏
           rightHide(){
             if(this.flag1===0){
-              $('.rightCheckbox').animate({right: -112}, "fast");
+              $('.rightCard').animate({right: -350}, "fast");
               $('.right-btn-display').animate({right: 0}, "fast");
               this.flag1=1;
-              this.flagName="隐藏"
+              this.flagName1="显示"
             }else{
-              $('.rightCheckbox').animate({right:0}, "fast");
-              $('.right-btn-display').animate({right: 112}, "fast");
+              $('.rightCard').animate({right:0}, "fast");
+              $('.right-btn-display').animate({right: 350}, "fast");
               this.flag1=0;
-              this.flagName="显示"
+              this.flagName1="隐藏"
             }
           },
+          //左check联动
           checkFun(index){
+            let that=this;
             let arr=this.rightTitles;
             $.each(this.checkboxCard,function (v,item) {
                 if(v===index){
                   item.checked=event.target.checked;
                   if(item.checked){
-                    arr.push({name:item.name});
+                    arr.unshift(item.name);
+                    that.titleBar(0);
                   }else{
-                    arr.splice(jQuery.inArray(item,arr),1);
+                    arr.splice(jQuery.inArray(item.name,arr),1);
+                    that.titleBar(0);
                   }
                 }
             });
+          },
+          //右tab切换
+          titleBar(index,item){
+            this.titleActive=index;
           },
 
       },
       created(){
         //边界线处理
+        // const that=this;
         this.$http.get('http://localhost:8080/api/bjx').then((res)=>{
-
           let shape=res.data.data.result.shape;
 
           let mapJson=res.data.data.result.json;
@@ -309,6 +341,9 @@
           this.initMap();
           this.rightTitle();
       },
+      computed:{
+
+      }
     }
 </script>
 
@@ -349,6 +384,7 @@
       color: #2d8cf0;
     }
   }
+  /*左面板*/
   .leftCheckbox{
     z-index: 999;
     position: absolute;
@@ -394,6 +430,7 @@
       font-size: 12px;;
     }
   }
+  /*右面板*/
   .rightCard{
     z-index: 999;
     position: absolute;
@@ -426,19 +463,20 @@
         height:calc(100vh - 167px);
       }
     }
-    .right-btn-display{
-      width: 20px;
-      height: 55px;
-      background-color: #3DAAEF;
-      position: absolute;
-      color: white;
-      line-height: 26px;
-      /*top: 50%;*/
-      /*transform: translate(0,-50%);*/
-      right: 112px;
-      cursor: pointer;
-      text-align: center;
-      font-size: 12px;;
-    }
+  }
+  /*右按键*/
+  .right-btn-display{
+    width: 20px;
+    height: 55px;
+    background-color: #3DAAEF;
+    position: absolute;
+    color: white;
+    line-height: 26px;
+    top:120px;
+    /*transform: translate(0,-50%);*/
+    right: 345px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 12px;;
   }
 </style>

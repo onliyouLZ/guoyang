@@ -7,6 +7,7 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+const openInEditor =  require('launch-editor-middleware')
 
 
 
@@ -62,15 +63,16 @@ const devWebpackConfig = merge(baseWebpackConfig, {
           data:duty
         })
       }),
-        /**
-         * 边界线
-         */
-        app.get('/api/bjx',(req,res)=>{
-          res.json({
-            errno:0,
-            data:bjx
-          })
+      /**
+       * 边界线
+       */
+      app.get('/api/bjx',(req,res)=>{
+        res.json({
+          errno:0,
+          data:bjx
         })
+      }),
+      app.use(' / __ open-in-editor ',openInEditor())
     }
   },
   plugins: [
