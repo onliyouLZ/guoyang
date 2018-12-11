@@ -54,6 +54,7 @@
                       prop="STNM"
                       min-width="150"
                       align="center"
+                      fixed
                       label="站点名称">
                     </el-table-column>
                     <el-table-column
@@ -111,28 +112,6 @@
                       label="超保证水位(万m³)">
                     </el-table-column>
                   </el-table>
-
-                  <!--水滴-->
-                  <!--<swiper :options="swiperOption">-->
-                    <!--<swiper-slide-->
-                      <!--v-for="(slide, index) in swiperSlides1"-->
-                      <!--:key="index"-->
-                      <!--style="box-sizing: border-box" >-->
-                      <!--<div-->
-                          <!--:id="'current_prod_chart'+index"-->
-                          <!--style="width:100%;height:150px"-->
-                          <!--@click="openDliog(slide)">-->
-                      <!--</div>-->
-                      <!--<div style="width:100%;height: 100px;text-align: center">-->
-                        <!--<div><i class="iconfont  icon-shuiwei" style="font-size: 20px;"></i>&nbsp;<span class="fz14">{{slide.value}}m</span></div>-->
-                        <!--<div><span class="fz14">2018-09-15 09:00:00</span></div>-->
-                        <!--<div><span class="fz14">超设防:0.5m</span></div>-->
-                      <!--</div>-->
-                    <!--</swiper-slide>-->
-                    <!--<div class="swiper-button-prev" slot="button-prev"></div>-->
-                    <!--<div class="swiper-button-next" slot="button-next"></div>-->
-                  <!--</swiper>-->
-
                 </div>
               </el-card>
 
@@ -164,90 +143,70 @@
               </div>
               <div>
                 <el-table
-                  :data="tableData1"
-                  border
-                  max-height="250"
-                  size="mini"
-                  cell-class-name="table-body"
-                  header-cell-class-name="table-header">
-                  <el-table-column
-                    prop="STNM"
-                    min-width="150"
-                    align="center"
-                    label="站点名称">
-                  </el-table-column>
-                  <el-table-column
-                    prop="TM"
-                    min-width="150"
-                    align="center"
-                    label="检测时间">
-                  </el-table-column>
-                  <el-table-column
-                    prop="xzqh"
-                    min-width="150"
-                    align="center"
-                    label="行政区划(m)">
-                  </el-table-column>
-                  <el-table-column
-                    prop="number1"
-                    min-width="150"
-                    align="center"
-                    label="10cm">
-                  </el-table-column>
-                  <el-table-column
-                    prop="number2"
-                    min-width="150"
-                    align="center"
-                    label="20cm">
-                  </el-table-column>
-                  <el-table-column
-                    prop="number3"
-                    min-width="150"
-                    align="center"
-                    label="40cm">
-                  </el-table-column>
-                  <el-table-column
-                    prop="czpj"
-                    min-width="150"
-                    align="center"
-                    label="垂直平均">
-                  </el-table-column>
-                  <el-table-column
-                    prop="trxdsd"
-                    min-width="150"
-                    align="center"
-                    label="土壤相对湿度">
-                  </el-table-column>
-                  <el-table-column
-                    prop="ghdj"
-                    min-width="150"
-                    align="center"
-                    label="干旱等级">
-                  </el-table-column>
-                </el-table>
-
-                <!--水滴-->
-                <!--<swiper :options="swiperOption">-->
-                <!--<swiper-slide-->
-                <!--v-for="(slide, index) in swiperSlides1"-->
-                <!--:key="index"-->
-                <!--style="box-sizing: border-box" >-->
-                <!--<div-->
-                <!--:id="'current_prod_chart'+index"-->
-                <!--style="width:100%;height:150px"-->
-                <!--@click="openDliog(slide)">-->
-                <!--</div>-->
-                <!--<div style="width:100%;height: 100px;text-align: center">-->
-                <!--<div><i class="iconfont  icon-shuiwei" style="font-size: 20px;"></i>&nbsp;<span class="fz14">{{slide.value}}m</span></div>-->
-                <!--<div><span class="fz14">2018-09-15 09:00:00</span></div>-->
-                <!--<div><span class="fz14">超设防:0.5m</span></div>-->
-                <!--</div>-->
-                <!--</swiper-slide>-->
-                <!--<div class="swiper-button-prev" slot="button-prev"></div>-->
-                <!--<div class="swiper-button-next" slot="button-next"></div>-->
-                <!--</swiper>-->
-
+              :data="tableData1"
+              border
+              size="mini"
+              height="250"
+              cell-class-name="table-body"
+              header-cell-class-name="table-header">
+              <el-table-column
+                prop="STNM"
+                min-width="150"
+                align="center"
+                fixed
+                label="站点名称">
+              </el-table-column>
+              <el-table-column
+                prop="TM"
+                min-width="150"
+                align="center"
+                label="检测时间">
+              </el-table-column>
+              <el-table-column
+                prop="xzqh"
+                min-width="150"
+                align="center"
+                label="行政区划(m)">
+              </el-table-column>
+              <el-table-column
+                prop="number1"
+                min-width="150"
+                align="center"
+                label="10cm">
+              </el-table-column>
+              <el-table-column
+                prop="number2"
+                min-width="150"
+                align="center"
+                label="20cm">
+              </el-table-column>
+              <el-table-column
+                prop="number3"
+                min-width="150"
+                align="center"
+                label="40cm">
+              </el-table-column>
+              <el-table-column
+                prop="czpj"
+                min-width="150"
+                align="center"
+                label="垂直平均">
+              </el-table-column>
+              <el-table-column
+                prop="trxdsd"
+                min-width="150"
+                align="center"
+                label="土壤相对湿度">
+              </el-table-column>
+              <el-table-column
+                prop="ghdj"
+                min-width="150"
+                align="center"
+                label="干旱等级">
+              </el-table-column>
+            </el-table>
               </div>
+
             </el-card>
 
           </el-col>
@@ -344,6 +303,8 @@
                   {STNM:"燕小庙闸",TM:"2018-10-11 11:11:11",RZ:"5.23",gksw:"0.5",sfsw:"25",jjsw:"27.3",bzsw:"29.7",csfsw:"-19.77",cjjsw:"-22.07",cbzsw:"24.47"},
                   {STNM:"包河闸",TM:"2018-10-11 11:11:11",RZ:"5.23",gksw:"0.5",sfsw:"25",jjsw:"27.3",bzsw:"29.7",csfsw:"-19.77",cjjsw:"-22.07",cbzsw:"24.47"},
                   {STNM:"武家河闸",TM:"2018-10-11 11:11:11",RZ:"5.23",gksw:"0.5",sfsw:"25",jjsw:"27.3",bzsw:"29.7",csfsw:"-19.77",cjjsw:"-22.07",cbzsw:"24.47"},
+                  {STNM:"武家河闸",TM:"2018-10-11 11:11:11",RZ:"5.23",gksw:"0.5",sfsw:"25",jjsw:"27.3",bzsw:"29.7",csfsw:"-19.77",cjjsw:"-22.07",cbzsw:"24.47"},
+                  {STNM:"武家河闸",TM:"2018-10-11 11:11:11",RZ:"5.23",gksw:"0.5",sfsw:"25",jjsw:"27.3",bzsw:"29.7",csfsw:"-19.77",cjjsw:"-22.07",cbzsw:"24.47"},
               ],
               tableData1:[
                   {STNM:"西阳镇墒情站",TM:"2018-10-11 11:11:11",xzqh:"西阳镇",number1:"55%",number2:"63%",number3:"75%",czpj:"63%",trxdsd:"65%",ghdj:"无干旱"},
@@ -351,20 +312,10 @@
                   {STNM:"楚店镇墒情站",TM:"2018-10-11 11:11:11",xzqh:"西阳镇",number1:"55%",number2:"63%",number3:"75%",czpj:"63%",trxdsd:"65%",ghdj:"无干旱"},
                   {STNM:"高公镇墒情站",TM:"2018-10-11 11:11:11",xzqh:"西阳镇",number1:"55%",number2:"63%",number3:"75%",czpj:"63%",trxdsd:"65%",ghdj:"无干旱"},
                   {STNM:"高炉镇墒情站",TM:"2018-10-11 11:11:11",xzqh:"西阳镇",number1:"55%",number2:"63%",number3:"75%",czpj:"63%",trxdsd:"65%",ghdj:"无干旱"},
+                  {STNM:"高炉镇墒情站",TM:"2018-10-11 11:11:11",xzqh:"西阳镇",number1:"55%",number2:"63%",number3:"75%",czpj:"63%",trxdsd:"65%",ghdj:"无干旱"},
+                  {STNM:"高炉镇墒情站",TM:"2018-10-11 11:11:11",xzqh:"西阳镇",number1:"55%",number2:"63%",number3:"75%",czpj:"63%",trxdsd:"65%",ghdj:"无干旱"},
               ],
               dutyData:[],
-              swiperOption: {
-                allowTouchMove:false,//禁止拖动
-                // spaceBetween:20,//slider 之间的间隔
-                centerInsufficientSlides:true, //当slides的总数小于slidesPerView时，slides居中。
-                noSwiping : true,
-                noSwipingClass : 'stop-swiping',
-                slidesPerView: 5,//设置容器中slider的个数
-                navigation: {
-                  nextEl: '.swiper-button-next',//下一页
-                  prevEl: '.swiper-button-prev',//上一页
-                }
-              },
               show:false,
               swiperShow:false,
               swiperData:{}

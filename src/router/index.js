@@ -21,6 +21,7 @@ import Home from '../components/home'
 
 
 
+
 Vue.use(Router);
 
 export default new Router({
@@ -39,7 +40,7 @@ export default new Router({
         },
         {
           path: '/oneMap',
-          component: oneMap
+          component: oneMap,
         },
         {
           path: '/business',
