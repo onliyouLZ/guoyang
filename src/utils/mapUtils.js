@@ -104,8 +104,6 @@ let mapFunc = {
             };
             geojson.features.push(feature);
         }
-
-        console.log(geojson);
         let vectorSource = new ol.source.Vector({
             features: (new ol.format.GeoJSON()).readFeatures(geojson)
         });
@@ -203,6 +201,23 @@ let mapFunc = {
         }
       });
       return TileLayer
+    },
+    /**
+     * 水库根据保证水位更换图标
+     * @param itemValue
+     * @returns {string}
+     */
+    getColor(itemValue) {
+      let picSrc;
+      if (itemValue > 0){
+        picSrc = "../../static/legend/水库站红.png";
+      }
+      else if(itemValue===""){
+        picSrc = "../../static/legend/水库站.png";
+      }else {
+        picSrc = "../../static/legend/水库站.png";
+      }
+      return picSrc;
     }
 };
 

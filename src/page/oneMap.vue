@@ -12,7 +12,7 @@
           <ul>
             <li  v-for="(item ,index) in checkboxCard">
               <i class="fa fa-user-o"></i>
-              <input type="checkbox" :checked="item.checked"   @click="checkFun(index)">{{item.name}}
+              <input type="checkbox" :checked="item.checked"   @click="checkFun(index,item)">{{item.name}}
             </li>
           </ul>
         </div>
@@ -157,8 +157,8 @@
               layers: [normalLayer,l2,TileLayer],
               view: new ol.View({
                 projection: 'EPSG:4326',
-                // center: [114.32, 30.22],
-                center: [116.27, 33.57],
+                center: [114.32, 30.22],
+                // center: [116.27, 33.57],
                 //最大显示级数
                 maxZoom: 28,
                 //最小显示级数
@@ -231,6 +231,9 @@
           checkFun(index){
             let that=this;
             let arr=this.rightTitles;
+            /**
+             * 控制右侧面板title
+             */
             $.each(this.checkboxCard,function (v,item) {
                 if(v===index){
                   item.checked=event.target.checked;
@@ -243,6 +246,16 @@
                   }
                 }
             });
+            /**
+             * 控制图层隐藏显示
+             */
+            if(index===0){
+             if(event.target.checked){
+               mapFuncs.getLayerName(this.map,'sk').setVisible(true)
+             }else{
+               mapFuncs.getLayerName(this.map,'sk').setVisible(false)
+             }
+            }
           },
           //右tab切换
           titleBar(index,item){
@@ -259,7 +272,7 @@
       },
       created(){
         //边界线处理
-        this.$http.get('http://localhost:8080/api/bjx').then((res)=>{
+        this.$http.get('http://localhost:8080/api/bjx1').then((res)=>{
           let shape=res.data.data.result.shape;
 
           let mapJson=res.data.data.result.json;
@@ -314,10 +327,61 @@
 
 
         });
+        //水库json
+        this.$http.get('http://localhost:8080/api/rsver').then((res)=>{
+          let data=res.data.data.result;
+          if(data.length>0){
+
+            let arr=[];
+            //创建一个点
+            $.each(data,(v,item)=>{
+              let LGTD=item.LGTD;
+              let LTTD=item.LTTD;
+              let point=new ol.Feature({
+                geometry: new ol.geom.Point([LGTD, LTTD])
+              });
+              //设置点的样式信息
+              point.setStyle(new ol.style.Style({
+                //形状
+                image: new ol.style.Icon(({
+                  // anchorOrigin: 'top-right',
+                  // anchorXUnits: 'fraction',
+                  // anchorYUnits: 'pixels',
+                  // offsetOrigin: 'top-right',
+                  // offset:[0,10],
+                  //图标缩放比例
+                  // scale:0.5,
+                  //透明度
+                  size:[15,15],
+                  //图标的url
+                  src:mapFuncs.getColor(item.OFSLTDZ)
+                }))
+              }));
+              arr.push(point)
+            });
+            //实例化一个矢量图层Vector作为绘制层
+            let source = new ol.source.Vector({
+              features: arr
+            });
+            //创建一个图层
+            let vector = new ol.layer.Vector({
+              name:"sk",
+              TileName : "水库",
+              source: source
+            });
+            //将绘制层添加到地图容器中
+            this.map.addLayer(vector);
+          }else{
+            console.error('暂无水库数据');
+          }
+
+
+
+        });
       },
       mounted(){
-          this.initMap();
-          this.rightTitle();
+        this.initMap();
+        this.rightTitle();
       },
       computed:{
 

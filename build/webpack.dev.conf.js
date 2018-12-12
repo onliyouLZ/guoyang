@@ -19,8 +19,12 @@ const express=require('express');
 const app=express();
 const dataJson=require('../src/sdk/package.json');
 const bjxJson=require('../src/sdk/XZQFW.json');
+const bjxJson1=require('../src/sdk/XZQFW1.json');
+const rsverJson=require('../src/sdk/rsver.json');
 const duty=dataJson.duty;
 const bjx=bjxJson;
+const bjx1=bjxJson1;
+const rsver=rsverJson;
 const apiRouters=express.Router();
 app.use('/api',apiRouters);
 
@@ -70,6 +74,21 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         res.json({
           error:0,
           data:bjx
+        })
+      }),
+      app.get('/api/bjx1',(req,res)=>{
+        res.json({
+          error:0,
+          data:bjx1
+        })
+      }),
+      /**
+       * 水库json
+       */
+      app.get('/api/rsver',(req,res)=>{
+        res.json({
+          error:0,
+          data:rsver
         })
       }),
       app.use(' / __ open-in-editor ',openInEditor())
