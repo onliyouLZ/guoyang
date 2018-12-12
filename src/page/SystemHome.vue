@@ -531,10 +531,6 @@
         mounted(){
           this.init_charts();
         },
-        watch:{
-
-        }
-
     }
 </script>
 
@@ -571,11 +567,5 @@
 
 </style>
 <style>
-  .table-header{
-    font-size: 13px;
-    color: #5e9dce;
-    /*text-align: center!important;*/
-    border-color: #ddd!important;
-    background: linear-gradient(to top, #dbdada 0%,#E5E5E5 10%, #efeeee 100%,#ffffff)
-  }
+
 </style>

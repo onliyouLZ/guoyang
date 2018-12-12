@@ -13,3 +13,92 @@
     border: 1px solid #D3D3D3;
   }
 }
+
+.el-dialog__wrapper{
+  .el-dialog{
+    width: 60%!important;
+    position: absolute;
+    margin-top: 0!important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 5px;
+    .el-dialog__header{
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+      background-color: #00A0E9;
+      padding: 5px 10px;
+      .el-dialog__headerbtn{
+        top: 10px;
+        .el-dialog__close{
+          color: #404040;
+        }
+        .el-dialog__close:hover{
+          color: #ccc;
+          background: transparent;
+        }
+      }
+    };
+    .el-dialog__body{
+      /*padding-top: 10px;*/
+      padding: 0!important;
+      .el-tabs__nav-scroll{
+        background-color: #C8E7FC;
+        .el-tabs__item{
+          padding: 0 20px!important;
+        }
+        .el-tabs__item.is-active{
+          background-color: #326C93;
+          color: white;
+        }
+        .el-tabs__active-bar{
+          display: none;
+        }
+      }
+      .el-tabs__content{
+        height: 500px;
+      }
+    }
+  }
+}
+
+/**card**/
+.el-card__body{
+  padding: 10px!important;
+}
+
+/**
+  折叠面板
+   */
+.el-collapse-item__header{
+  height: 25px;
+  background-color: #A4D0EF;
+}
+.is-active{
+  color:#1E88E5 ;
+}
+.el-collapse-item__header:hover{
+  color: #1E88E5;
+}
+.el-collapse-item__content{
+  padding-bottom: 0!important;
+  .cardHeader{
+    padding-left: 10px;
+    line-height: 32px;
+    span{
+      color: red;
+    }
+  }
+}
+
+
+/**tableHeader**/
+.table-header{
+  font-size: 13px;
+  color: #5e9dce;
+  /*text-align: center!important;*/
+  border-color: #ddd!important;
+  background: linear-gradient(to top, #dbdada 0%,#E5E5E5 10%, #efeeee 100%,#ffffff)
+}
+
+

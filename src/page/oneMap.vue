@@ -40,9 +40,10 @@
           </swiper>
         </div>
         <div class="tabContent">
-          <keep-alive>
-            <component v-bind:is="showComponent"></component>
-          </keep-alive>
+          <!--<keep-alive>-->
+            <!--接收子组件传递过来的方法及数据@show=v-on:show-->
+            <component v-bind:is="showComponent" @show="showFormChild"></component>
+          <!--</keep-alive>-->
         </div>
       </div>
 
@@ -51,6 +52,7 @@
       {{flagName1}}
     </div>
     <div id="mouse-position" style="float: left; position: absolute; bottom: 5px; width: 350px; height: 20px; z-index: 2000;"></div>
+    <lakes :lakesData.sync="lakesData"  :lakesShow.sync="lakesShow" ref="child"></lakes>
   </div>
 </template>
 
@@ -58,12 +60,17 @@
     import Breadcrumb from '../components/Breadcrumb'
     import {mapFuncs} from '../utils/mapUtils'
     /**
-     * 弹窗组件
+     * 右侧模板组件
      */
-    import warning from '../dilog/oneMapdliog/warning'
-    import Hydrologic from '../dilog/oneMapdliog/Hydrologic'
-    import Precipitation from '../dilog/oneMapdliog/Precipitation'
-    import videoSurveillance from '../dilog/oneMapdliog/videoSurveillance'
+    import warning from '../components/warning'
+    import Hydrologic from '../components/Hydrologic'
+    import Precipitation from '../components/Precipitation'
+    import videoSurveillance from '../components/videoSurveillance'
+
+    /**
+     * 弹窗
+     */
+    import lakes from '../dilog/oneMapdliog/warning/lakes'
     export default {
         name: "one-map",
         components:{
@@ -71,7 +78,8 @@
           warning:warning,
           Hydrologic:Hydrologic,
           Precipitation:Precipitation,
-          videoSurveillance:videoSurveillance
+          videoSurveillance:videoSurveillance,
+          lakes:lakes
         },
       data(){
         return{
@@ -110,7 +118,9 @@
               prevEl: '.swiper-button-prev',//上一页
             }
           },
-          showComponent:"warning"
+          showComponent:"warning",
+          lakesShow:false,
+          lakesData:{}
         }
       },
       methods:{
@@ -237,8 +247,14 @@
           //右tab切换
           titleBar(index,item){
             this.titleActive=index;
-           this.showComponent=item.component;
+            this.showComponent=item.component;
           },
+
+          //子组件控制弹窗
+          showFormChild(data){
+            this.lakesShow = data.show;
+            this.lakesData=data.data;
+          }
 
       },
       created(){

@@ -54,7 +54,6 @@
 </template>
 
 <script>
-  import echarts from 'echarts'
   export default {
     name: "swiperDliog",
     data() {
@@ -150,40 +149,6 @@
 </script>
 
 <style lang="less" scoped>
-  .el-dialog__wrapper{
-    .el-dialog{
-      width: 60%!important;
-      position: absolute;
-      margin-top: 0!important;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%,-50%);
-      border-radius: 5px;
-      .el-dialog__header{
-        border-top-right-radius: 5px;
-        border-top-left-radius: 5px;
-        background-color: #00A0E9;
-        padding: 5px 10px;
-        .el-dialog__headerbtn{
-          top: 10px;
-          .el-dialog__close{
-            color: #404040;
-          }
-          .el-dialog__close:hover{
-            color: #ccc;
-            background: transparent;
-          }
-        }
-      };
-      .el-dialog__body{
-        /*padding-top: 10px;*/
-        padding: 0!important;
-        .el-tabs__nav-scroll{
-          background-color: #C8E7FC;
-        }
-      }
-    }
-  }
   .player{
     width: 100%;
     height: 44px;
@@ -201,5 +166,4 @@
     width: 100%;
     height: 550px;
   }
-
 </style>
