@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    :title="lakesData.stnm"
+    :title="lakesData.STNM"
     :lakesShow="lakesShow"
     :visible.sync="visible"
     width="50%"
@@ -77,7 +77,7 @@
           </tr>
           <tr>
             <td class="u-list-title">测站名称</td>
-            <td><span>{{lakesData.stnm}}</span></td>
+            <td><span>{{lakesData.STNM}}</span></td>
             <td class="u-list-title">测站类型</td>
             <td><span>堰闸水文站</span></td>
             <td class="u-list-title">报汛等级</td>
@@ -433,9 +433,9 @@
         lakesShow(){
           this.visible=this.lakesShow;
           if(this.lakesShow===false){
-            this.dispose()
+              this.dispose()
           }
-         }
+        }
       }
     }
 </script>

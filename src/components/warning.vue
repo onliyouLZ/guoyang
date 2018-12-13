@@ -28,7 +28,7 @@
                   width="20">
                 </el-table-column>
                 <el-table-column
-                  prop="stnm"
+                  prop="STNM"
                   label="湖泊名称"
                   align="center"
                   width="80">
@@ -83,7 +83,7 @@
                   width="20">
                 </el-table-column>
                 <el-table-column
-                  prop="stnm"
+                  prop="STNM"
                   label="湖泊名称"
                   align="center"
                   width="80">
@@ -138,7 +138,7 @@
                   width="20">
                 </el-table-column>
                 <el-table-column
-                  prop="stnm"
+                  prop="STNM"
                   label="湖泊名称"
                   align="center"
                   width="80">
@@ -181,55 +181,45 @@
         </template>
         <div>
           <div class="cardHeader">
-            <label>超保证水位:<span>3</span>个</label>
+            <label>超保证水位:<span>{{childData.length}}</span>个</label>
           </div>
           <el-scrollbar
             style="height: 100%"
             tag="table">
             <div style="max-height: 200px">
               <el-table
-                :data="tableData"
+                :data="childData"
                 stripe
                 size="mini"
                 height="150"
                 style="width: 100%;font-size: 12px"
                 header-cell-class-name="table-dliog-header"
                 cell-class-name="table-dliog-body"
-                @row-dblclick="rsverDbClick">
+                @row-dblclick="rsverDbClick"
+                @cell-mouse-enter="rsverHover">
                 <el-table-column
                   label=" "
                   type="index"
-                  width="20">
+                  width="40">
                 </el-table-column>
                 <el-table-column
-                  prop="stnm"
+                  prop="STNM"
                   label="湖泊名称"
                   align="center"
-                  width="80">
+                  width="120">
                 </el-table-column>
                 <el-table-column
-                  prop="rz"
+                  prop="RZ"
                   label="水位"
                   align="center"
-                  width="80">
+                  width="60">
                 </el-table-column>
                 <el-table-column
-                  prop="date"
+                  prop="TM"
                   label="时间"
                   align="center"
-                  min-width="160">
-                </el-table-column>
-                <el-table-column
-                  prop="bz"
-                  label="保证水位"
-                  align="center"
-                  width="80">
-                </el-table-column>
-                <el-table-column
-                  prop="cbz"
-                  label="超保证水位"
-                  align="center"
-                  width="100">
+                  :formatter="tmFormatter"
+                  width="180">
                 </el-table-column>
               </el-table>
             </div>
@@ -241,55 +231,56 @@
 </template>
 
 <script>
+    import {Time} from "../utils/utils";
     export default {
         name: "warning",
         data(){
           return{
-            activeName: '1',
+            activeName: '2',
             tableData: [
               {
-                stnm: '道士湖',
+                STNM: '道士湖',
                 rz: '18.97',
                 date: '2018-11-11 15:00:00',
                 bz:"18.65",
                 cbz:"0.32"
               },
               {
-                stnm: '道士湖',
+                STNM: '道士湖',
                 rz: '18.97',
                 date: '2018-11-11 15:00:00',
                 bz:"18.65",
                 cbz:"0.32"
               },
               {
-                stnm: '道士湖',
+                STNM: '道士湖',
                 rz: '18.97',
                 date: '2018-11-11 15:00:00',
                 bz:"18.65",
                 cbz:"0.32"
               },{
-                stnm: '道士湖',
+                STNM: '道士湖',
                 rz: '18.97',
                 date: '2018-11-11 15:00:00',
                 bz:"18.65",
                 cbz:"0.32"
               },
               {
-                stnm: '道士湖',
+                STNM: '道士湖',
                 rz: '18.97',
                 date: '2018-11-11 15:00:00',
                 bz:"18.65",
                 cbz:"0.32"
               },
               {
-                stnm: '道士湖',
+                STNM: '道士湖',
                 rz: '18.97',
                 date: '2018-11-11 15:00:00',
                 bz:"18.65",
                 cbz:"0.32"
               },
               {
-                stnm: '道士湖',
+                STNM: '道士湖',
                 rz: '18.97',
                 date: '2018-11-11 15:00:00',
                 bz:"18.65",
@@ -304,17 +295,33 @@
             type:Boolean,
             default:false
           },
+          childData:{
+            type:Array,
+            default:[]
+          }
         },
         methods:{
           lakeDbClick(row, event, column){
             /**
              * 向父组件传递一个方法
              */
-            this.$emit('show',{show:true,data:row})
+            this.$emit('show',{show:true,data:row});
+            $('.stationInfo').css({visibility:'hidden'});
+
           },
           rsverDbClick(row, event, column){
+
             this.$emit('show',{show:true,data:row})
+          },
+          tmFormatter(row, column, cellValue, index){
+            return Time.getNowSecond(cellValue)
+          },
+          rsverHover(row, column, cellValue, index){
+            console.log(1);
           }
+        },
+        created(){
+
         }
     }
 </script>

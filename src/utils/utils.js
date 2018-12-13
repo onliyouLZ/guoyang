@@ -38,14 +38,13 @@ let time = {
     //格式为 yyyy-mm-dd hh-mm-ss
     getNowSecond(tm) {
         let date = new Date(tm);
-
         let Y = date.getFullYear() + '-';
         let M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
         let D = date.getDate() + ' ';
         let h = date.getHours() + ':';
         let m = (date.getMinutes()+1 < 10 ? '0'+(date.getMinutes()+1) : date.getMinutes());
-        let s = ':' + date.getSeconds();
-
+        console.log(date.getSeconds());
+        let s =":"+("" + (date.getSeconds() + 100)).substr(1);
         return Y+M+D+h+m+s
     },
     getOwnMin(tm){

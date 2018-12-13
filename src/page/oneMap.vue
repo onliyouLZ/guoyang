@@ -1,7 +1,9 @@
 <template>
   <div class="oneMap">
+
     <Breadcrumb :menu="menuArray"></Breadcrumb>
     <div id="map"></div>
+    <div class="stationInfo"></div>
     <div class="mapBtn" style="float: left; position: absolute; top: 120px;left:175px; z-index: 2000;">
       <ul style="list-style: none">
         <li v-for="(item,index) in tabName"  @click="switchMap(index,item)" :class="{'active':active === index}">{{item.name}}</li>
@@ -42,7 +44,7 @@
         <div class="tabContent">
           <!--<keep-alive>-->
             <!--接收子组件传递过来的方法及数据@show=v-on:show-->
-            <component v-bind:is="showComponent" @show="showFormChild"></component>
+            <component v-bind:is="showComponent" @show="showFormChild" :childData="childData"></component>
           <!--</keep-alive>-->
         </div>
       </div>
@@ -71,6 +73,9 @@
      * 弹窗
      */
     import lakes from '../dilog/oneMapdliog/warning/lakes'
+
+    //标注站点
+    const BZ =['sk'];
     export default {
         name: "one-map",
         components:{
@@ -120,7 +125,8 @@
           },
           showComponent:"warning",
           lakesShow:false,
-          lakesData:{}
+          lakesData:{},
+          childData:[]
         }
       },
       methods:{
@@ -160,7 +166,7 @@
                 center: [114.32, 30.22],
                 // center: [116.27, 33.57],
                 //最大显示级数
-                maxZoom: 28,
+                maxZoom: 18,
                 //最小显示级数
                 minZoom: 1,
                 //当前显示级数
@@ -262,11 +268,19 @@
             this.titleActive=index;
             this.showComponent=item.component;
           },
-
           //子组件控制弹窗
           showFormChild(data){
             this.lakesShow = data.show;
             this.lakesData=data.data;
+          },
+          //地图上鼠标浮动显示窗口内容创建
+          addFeatrueInfo(info){
+              if(info){
+                let content ="";
+                content += '<div>';
+                content += '<p>'+info.STNM+'</p></div>';
+                return content
+              }
           }
 
       },
@@ -330,32 +344,49 @@
         //水库json
         this.$http.get('http://localhost:8080/api/rsver').then((res)=>{
           let data=res.data.data.result;
-          if(data.length>0){
 
+          if(data.length>0){
+            this.childData=data;
             let arr=[];
             //创建一个点
             $.each(data,(v,item)=>{
               let LGTD=item.LGTD;
               let LTTD=item.LTTD;
               let point=new ol.Feature({
+                data:item,
                 geometry: new ol.geom.Point([LGTD, LTTD])
               });
               //设置点的样式信息
               point.setStyle(new ol.style.Style({
                 //形状
-                image: new ol.style.Icon(({
+                image: new ol.style.Icon({
+                  // anchor:[1,1],
                   // anchorOrigin: 'top-right',
                   // anchorXUnits: 'fraction',
                   // anchorYUnits: 'pixels',
                   // offsetOrigin: 'top-right',
-                  // offset:[0,10],
+                  // offset:[1,0],
                   //图标缩放比例
-                  // scale:0.5,
+                  // scale:1,
                   //透明度
                   size:[15,15],
                   //图标的url
                   src:mapFuncs.getColor(item.OFSLTDZ)
-                }))
+                }),
+                text: new ol.style.Text({
+                  //位置
+                  textAlign: 'center',
+                  //基准线
+                  textBaseline: 'middle',
+                  //文字样式
+                  font: 'normal 14px 微软雅黑',
+                  offsetY:15,
+                  //文本内容
+                  text:"",
+                  //文本填充样式（即文字颜色）
+                  fill: new ol.style.Fill({ color: '#aa3300' }),
+                  stroke: new ol.style.Stroke({ color: '#ffcc33', width: 2 })
+                })
               }));
               arr.push(point)
             });
@@ -374,14 +405,74 @@
           }else{
             console.error('暂无水库数据');
           }
-
-
-
         });
       },
       mounted(){
+        const that=this;
         this.initMap();
         this.rightTitle();
+        /**
+         * 地图缩放控制
+         */
+        this.map.getView().on('change:resolution',()=>{
+          let level =  this.map.getView().getZoom();
+          $.each(BZ,(v,item)=>{
+            let labelLayer =mapFuncs.getLayerName(this.map,item);
+            if (!labelLayer) return;
+            labelLayer.getSource().getFeatures().forEach(function (items, i) {
+              if(level>=12 && level <=13){
+                items.getStyle().getText().setText(items.get("data").STNM);
+              }else if(level <=11){
+                items.getStyle().getText().setText("");
+              }
+            })
+          })
+        });
+        /**
+         * 地图移动事件控制
+         */
+        this.map.on('pointermove', function (evt) {
+          let _this=this;
+          let pixel = _this.getEventPixel(evt.originalEvent);
+          let hit = evt.map.hasFeatureAtPixel(pixel);
+          //改变小手
+          evt.map.getTargetElement().style.cursor = hit ? 'pointer' : '';
+          //获取图层
+          let feature = _this.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {return feature;});
+          if(feature){
+            //获取数据
+            let data=feature.get('data');
+            if(data){
+              //坐标
+              let pixels = _this.getPixelFromCoordinate([data.LGTD, data.LTTD]);
+              let left = pixels[0]+5 + 'px';
+              let top = pixels[1]+70 + 'px';
+              $(".stationInfo").css({top: top, left: left,visibility: "visible"});
+              let content=that.addFeatrueInfo(data);
+              $(".stationInfo").html(content);
+            }else{
+              $(".stationInfo").css('visibility', 'hidden');
+            }
+          }else{
+            $(".stationInfo").css('visibility', 'hidden');
+          }
+        });
+
+        /**
+         * 地图点击事件控制
+         */
+        this.map.on('click', function (evt) {
+          let _this=this;
+          let feature = _this.forEachFeatureAtPixel(evt.pixel, function (feature, layer) { return feature; });
+          if(feature){
+            //获取数据
+            let data=feature.get('data');
+            if(data){
+              that.lakesShow=true;
+              that.lakesData=data;
+            }
+          }
+        })
       },
       computed:{
 
@@ -397,7 +488,7 @@
     background-color: rgb(238, 238, 238);
     overflow: hidden;
     left: 0;
-    top: 0;
+    top:  0;
     right: 0;
     bottom: 0;
     width: auto;
