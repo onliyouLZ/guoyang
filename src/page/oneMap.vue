@@ -44,7 +44,11 @@
         <div class="tabContent">
           <!--<keep-alive>-->
             <!--接收子组件传递过来的方法及数据@show=v-on:show-->
-            <component v-bind:is="showComponent" @show="showFormChild" :childData="childData"></component>
+            <component
+              :is="showComponent"
+              @show="showFormChild"
+              @move="moves"
+              :childData="childData"></component>
           <!--</keep-alive>-->
         </div>
       </div>
@@ -126,7 +130,8 @@
           showComponent:"warning",
           lakesShow:false,
           lakesData:{},
-          childData:[]
+          childData:[],
+          moveData:{}
         }
       },
       methods:{
@@ -272,6 +277,20 @@
           showFormChild(data){
             this.lakesShow = data.show;
             this.lakesData=data.data;
+          },
+          moves(data){
+            if(data){
+              // let pixels = this.map.getPixelFromCoordinate([data.LGTD, data.LTTD]);
+              // // console.log(pixels);
+              // let left = pixels[0] + 'px';
+              // let top = pixels[1] + 'px';
+              // $(".stationInfo").css({top: top, left: left,visibility: "visible"});
+              // let content=this.addFeatrueInfo(data);
+              // $(".stationInfo").html(content);
+              this.map.getView().setCenter([data.LGTD, data.LTTD]);
+            }
+
+            // console.log();
           },
           //地图上鼠标浮动显示窗口内容创建
           addFeatrueInfo(info){
@@ -432,30 +451,32 @@
          * 地图移动事件控制
          */
         this.map.on('pointermove', function (evt) {
+
           let _this=this;
           let pixel = _this.getEventPixel(evt.originalEvent);
           let hit = evt.map.hasFeatureAtPixel(pixel);
-          //改变小手
-          evt.map.getTargetElement().style.cursor = hit ? 'pointer' : '';
-          //获取图层
-          let feature = _this.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {return feature;});
-          if(feature){
-            //获取数据
+          if(hit){
+            evt.map.getTargetElement().style.cursor = hit ? 'pointer' : '';
+            //获取图层
+            let feature = _this.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {return feature;});
             let data=feature.get('data');
             if(data){
               //坐标
+              // that.moveData=data;
               let pixels = _this.getPixelFromCoordinate([data.LGTD, data.LTTD]);
-              let left = pixels[0]+5 + 'px';
-              let top = pixels[1]+70 + 'px';
+              let left = pixels[0] + 'px';
+              let top = pixels[1] + 'px';
               $(".stationInfo").css({top: top, left: left,visibility: "visible"});
               let content=that.addFeatrueInfo(data);
               $(".stationInfo").html(content);
             }else{
               $(".stationInfo").css('visibility', 'hidden');
             }
+            // that.moveData=feature
           }else{
             $(".stationInfo").css('visibility', 'hidden');
           }
+
         });
 
         /**
@@ -472,27 +493,75 @@
               that.lakesData=data;
             }
           }
-        })
+        });
       },
       computed:{
 
+      },
+      watch:{
+        moveData(feature){
+          if(feature) {
+
+          }
+          //   if(feature){
+          //     //获取数据
+          //     let data=feature.get('data');
+          //     if(data){
+          //       //坐标
+          //       that.moveData=data;
+          //       // let pixels = _this.getPixelFromCoordinate([data.LGTD, data.LTTD]);
+          //       // let left = pixels[0]+5 + 'px';
+          //       // let top = pixels[1]+70 + 'px';
+          //       // $(".stationInfo").css({top: top, left: left,visibility: "visible"});
+          //       // let content=that.addFeatrueInfo(data);
+          //       // $(".stationInfo").html(content);
+          //     }else{
+          //       // $(".stationInfo").css('visibility', 'hidden');
+          //     }
+          //   }else{
+          //     $(".stationInfo").css('visibility', 'hidden');
+          //   }
+          //   //坐标
+          //   let pixels = this.map.getPixelFromCoordinate([data.LGTD, data.LTTD]);
+          //   let left = pixels[0]+5 + 'px';
+          //   let top = pixels[1]+70 + 'px';
+          //   $(".stationInfo").css({top: top, left: left,visibility: "visible"});
+          //   let content=this.addFeatrueInfo(data);
+          //   $(".stationInfo").html(content);
+          // }else{
+          //   $(".stationInfo").css('visibility', 'hidden');
+          // }
+        }
       }
     }
 </script>
 
 <style lang="less" scoped>
-  #map{
+  .oneMap{
     padding: 0;
     margin: 0;
     position: relative;
-    background-color: rgb(238, 238, 238);
+    background-color: #eeeeee;
     overflow: hidden;
     left: 0;
-    top:  0;
+    top: 0;
     right: 0;
     bottom: 0;
     width: auto;
-    height: calc(100vh - 87px);
+    height: calc(100vh - 60px);
+  }
+  #map{
+    /*padding: 0;*/
+    /*margin: 0;*/
+    /*position: relative;*/
+    /*background-color: rgb(238, 238, 238);*/
+    /*overflow: hidden;*/
+    /*left: 0;*/
+    /*top:  0;*/
+    /*right: 0;*/
+    /*bottom: 0;*/
+    /*width: auto;*/
+    /*height: calc(100vh - 87px);*/
   }
   .mapBtn{
     width: 100px;

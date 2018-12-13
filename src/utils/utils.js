@@ -43,7 +43,6 @@ let time = {
         let D = date.getDate() + ' ';
         let h = date.getHours() + ':';
         let m = (date.getMinutes()+1 < 10 ? '0'+(date.getMinutes()+1) : date.getMinutes());
-        console.log(date.getSeconds());
         let s =":"+("" + (date.getSeconds() + 100)).substr(1);
         return Y+M+D+h+m+s
     },

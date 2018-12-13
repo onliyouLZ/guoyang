@@ -171,9 +171,6 @@
             </div>
           </el-scrollbar>
         </div>
-
-
-
       </el-collapse-item>
       <el-collapse-item  name="2">
         <template slot="title">
@@ -196,7 +193,8 @@
                 header-cell-class-name="table-dliog-header"
                 cell-class-name="table-dliog-body"
                 @row-dblclick="rsverDbClick"
-                @cell-mouse-enter="rsverHover">
+                @cell-mouse-enter="rsverHover"
+                @cell-mouse-leave="leaveHover" >
                 <el-table-column
                   label=" "
                   type="index"
@@ -317,7 +315,10 @@
             return Time.getNowSecond(cellValue)
           },
           rsverHover(row, column, cellValue, index){
-            console.log(1);
+            this.$emit('move',row)
+          },
+          leaveHover(row, column, cellValue, index){
+            this.$emit('move',"")
           }
         },
         created(){

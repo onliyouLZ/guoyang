@@ -21,6 +21,9 @@
 </script>
 
 <style scoped>
+  .el-container{
+    height: 100%;
+  }
   .el-main{
     padding: 0;
   }
