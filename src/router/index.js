@@ -8,10 +8,13 @@ import Router from 'vue-router'
 import SystemHome from '../page/SystemHome'
 import Login from '../page/login'
 import oneMap from '../page/oneMap'
+import waterMonitoring from '../page/waterMonitoring'
 import business from '../page/business'
 import essential from '../page/essential'
 import system from '../page/system'
 import error404 from '../page/404'
+
+import realTimeRain from '../page/threeMenu/RealTimeRain'
 
 
 /**
@@ -33,26 +36,45 @@ export default new Router({
     {
       path: '/home',
       component: Home,
+      redirect:'/SystemHome',
       children:[
         {
           path: '/SystemHome',
-          component: SystemHome
+          component: SystemHome,
+          name:"首页"
         },
         {
           path: '/oneMap',
           component: oneMap,
+          name:"一张图"
+        },
+        {
+          path: '/waterMonitoring',
+          component: waterMonitoring,
+          name:"水情监视预警",
+          redirect:'/realTimeRain',
+          children:[
+            {
+              path: '/realTimeRain',
+              component: realTimeRain,
+              name:"水雨情实时监控",
+            }
+          ]
         },
         {
           path: '/business',
-          component: business
+          component: business,
+          name:"业务管理"
         },
         {
           path: '/essential',
-          component: essential
+          component: essential,
+          name:"基础数据管理"
         },
         {
           path: '/system',
-          component: system
+          component: system,
+          name:"系统管理"
         },
       ]
     },

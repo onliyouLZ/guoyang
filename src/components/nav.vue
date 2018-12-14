@@ -13,12 +13,13 @@
         background-color="#0a95ef"
         text-color="#fff"
         router
-        active-text-color="#ffd04b">
+        active-text-color="#ffd04b"
+        :select="selectClick">
         <template v-for="item in items">
           <template>
-            <el-menu-item :index="item.index" :key="item.index">
+            <el-menu-item :index="item.path" :key="item.path">
               <!--<i :class="item.icon"></i>-->
-              <span slot="title">{{ item.title }}</span>
+              <span slot="title">{{ item.name }}</span>
             </el-menu-item>
           </template>
         </template>
@@ -27,7 +28,7 @@
          <!--消息中心-->
         <div class="btn-bell">
         <el-tooltip effect="dark" :content="message?`有${message}条未读消息`:`消息中心`" placement="bottom">
-        <router-link to="/tabs">
+        <router-link to="/login">
           <i class="el-icon-bell"></i>
         </router-link>
         </el-tooltip>
@@ -37,9 +38,9 @@
         <div class="user-avator"><img src="static/img/img.jpg"></div>
         <!-- 用户名下拉菜单 -->
         <el-dropdown class="user-name" trigger="hover" @command="handleCommand">
-                    <span class="el-dropdown-link">
-                        {{username}} <i class="el-icon-caret-bottom"></i>
-                    </span>
+            <span class="el-dropdown-link">
+                {{username}} <i class="el-icon-caret-bottom"></i>
+            </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="loginout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
@@ -55,28 +56,7 @@
       return {
         name:"",
         message:1,
-        items:[
-          {
-            index: 'SystemHome',
-            title: '首页'
-          },
-          {
-            index: 'oneMap',
-            title: '一张图'
-          },
-          {
-            index: 'business',
-            title: '业务管理'
-          },
-          {
-            index: 'essential',
-            title: '基础数据管理'
-          },
-          {
-            index: 'system',
-            title: '系统管理'
-          }
-        ]
+        items:[]
       };
     },
     methods: {
@@ -99,11 +79,15 @@
        },
       onRoutes(){
         // this.indexClass=this.$route.path.replace('/', '');
-        return this.$route.path.replace('/','');
+        return this.$route.path.replace('#','');
+      },
+      selectClick(index,indexPath){
+        console.log(index);
+        // console.log(indexPath);
       }
     },
     mounted(){
-
+      this.items=this.$router.options.routes[1].children;
     }
   }
 </script>

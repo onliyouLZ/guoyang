@@ -1,10 +1,36 @@
 <template>
   <div class="oneMap">
-
     <Breadcrumb :menu="menuArray"></Breadcrumb>
-    <div id="map"></div>
-    <div class="stationInfo"></div>
-    <div class="mapBtn" style="float: left; position: absolute; top: 120px;left:175px; z-index: 2000;">
+    <div id="map">
+      <!--<div class="css_animation"></div>-->
+      <div class="stationInfo">
+        <div class="arrow" ></div>
+        <p class="p_rsvr_bg">道士湖</p>
+        <div class="div_bg">
+          <div class="div_top">
+            <div class="div_t_l">
+              <span style="font-size: 12px;">实时水位:</span>
+              <span>45.57</span><sub>m</sub>
+            </div>
+            <div class="div_t_r">
+              <p>设防水位:18.00m</p>
+              <p>警戒水位:37.86m</p>
+              <p>保证水位:37.86m</p>
+            </div>
+          </div>
+          <div class="div_lend"></div>
+          <div class="div_bottom">
+            <p>类型: 小一</p>
+            <p>溢洪: <span>0.8</span>(<span>10<sup style="font-size: 10px;">6</sup></span>m<sup>3</sup>)</p>
+            <p>水系: 长江流域</p>
+            <p class="psvr">地址: 武汉市 江夏区 xxxxx街道...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="mapBtn" style="float: left; position: absolute; top: 70px;left:175px; z-index: 2000;">
       <ul style="list-style: none">
         <li v-for="(item,index) in tabName"  @click="switchMap(index,item)" :class="{'active':active === index}">{{item.name}}</li>
       </ul>
@@ -90,450 +116,481 @@
           videoSurveillance:videoSurveillance,
           lakes:lakes
         },
-      data(){
-        return{
-          menuArray:[
-            {name:"一张图",path:""},
-            {name:"一张图",path:"/oneMap"},
-          ],
-          map:{},
-          tabName:[
-            {name:"矢量"},
-            {name:"影像"},
-          ],
-          checkboxCard:[
-            {name:"预警监视",checked:true,component: 'warning'},
-            {name:"水情信息",checked:true,component: 'Hydrologic'},
-            {name:"降水信息",checked:true,component: 'Precipitation'},
-            {name:"视频监视",checked:false,component: 'videoSurveillance'},
-          ],
-          rightTitles:[],
-          active:0,
-          titleActive:0,
-          flag:0,
-          flag1:0,
-          flagName:"隐藏",
-          flagName1:"隐藏",
-          windowHeight:$(window).height(),
-          swiperOption: {
-            allowTouchMove:false,//禁止拖动
-            // spaceBetween:20,//slider 之间的间隔
-            centerInsufficientSlides:false, //当slides的总数小于slidesPerView时，slides居中。
-            noSwiping : true,
-            noSwipingClass : 'stop-swiping',
-            slidesPerView: 3,//设置容器中slider的个数
-            navigation: {
-              nextEl: '.swiper-button-next',//下一页
-              prevEl: '.swiper-button-prev',//上一页
-            }
-          },
-          showComponent:"warning",
-          lakesShow:false,
-          lakesData:{},
-          childData:[],
-          moveData:{}
-        }
-      },
-      methods:{
-          //初始化地图(添加底图和标注)
-          initMap(){
-            //底图
-            let normalLayer=new ol.layer.Tile({
-              visible: true,
-              source: new ol.source.XYZ({
-                url: "http://t2.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}"// 底图
-              })
-            });
-            //注记图
-            let l2 = new ol.layer.Tile({
-              visible: true,
-              name:"TDTzj",
-              TileName : "天地图注记",
-              source: new ol.source.XYZ({
-                url: "http://t2.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}"// 注记
-              })
-            });
-            //影像图
-            let TileLayer = new ol.layer.Tile({
-              visible:false,
-              name:"TDTyg",
-              TileName : "卫星遥感图",
-              source: new ol.source.XYZ({
-                url: "http://t4.tianditu.com/DataServer?T=img_w&x={x}&y={y}&l={z}"
-              })
-            });
-            //初始化地图
-            this.map=new ol.Map({
-              target: 'map',
-              layers: [normalLayer,l2,TileLayer],
-              view: new ol.View({
-                projection: 'EPSG:4326',
-                center: [114.32, 30.22],
-                // center: [116.27, 33.57],
-                //最大显示级数
-                maxZoom: 18,
-                //最小显示级数
-                minZoom: 1,
-                //当前显示级数
-                zoom: 11,
-              }),
-              controls:[
-                new ol.control.MousePosition({
-                  //显示鼠标位置信息的目标容器
-                  target: document.getElementById('mouse-position'),
-                  //坐标格式
-                  coordinateFormat: ol.coordinate.createStringXY(2),
-                  //地图投影坐标系
-                  projection: 'EPSG:4326',
-                  //未定义坐标的标记
-                  undefinedHTML: '&nbsp;'
-                })
-              ]
-            });
-          },
-          //初始化右边title
-          rightTitle(){
-            let arr=[];
-            $.each(this.checkboxCard,function (v,item) {
-              if(item.checked){
-                arr.push(item)
+        data(){
+          return{
+            menuArray:[
+              {name:"一张图",path:""},
+              {name:"一张图",path:"/oneMap"},
+            ],
+            map:{},
+            point_overlay:{},
+            tabName:[
+              {name:"矢量"},
+              {name:"影像"},
+            ],
+            checkboxCard:[
+              {name:"预警监视",checked:true,component: 'warning'},
+              {name:"水情信息",checked:true,component: 'Hydrologic'},
+              {name:"降水信息",checked:true,component: 'Precipitation'},
+              {name:"视频监视",checked:false,component: 'videoSurveillance'},
+            ],
+            rightTitles:[],
+            active:0,
+            titleActive:0,
+            flag:0,
+            flag1:0,
+            flagName:"隐藏",
+            flagName1:"隐藏",
+            windowHeight:$(window).height(),
+            swiperOption: {
+              allowTouchMove:false,//禁止拖动
+              // spaceBetween:20,//slider 之间的间隔
+              centerInsufficientSlides:false, //当slides的总数小于slidesPerView时，slides居中。
+              noSwiping : true,
+              noSwipingClass : 'stop-swiping',
+              slidesPerView: 3,//设置容器中slider的个数
+              navigation: {
+                nextEl: '.swiper-button-next',//下一页
+                prevEl: '.swiper-button-prev',//上一页
               }
-            });
-            this.rightTitles=arr
-          },
-          //矢量，影像切换
-          switchMap(index,item){
-            this.active=index;
-            if(item.name==="矢量"){
-              mapFuncs.getLayerName(this.map,'TDTyg').setVisible(false);
-            }else{
-              mapFuncs.getLayerName(this.map,'TDTyg').setVisible(true);
-            }
-          },
-          //左隐藏
-          leftHide(){
-            if(this.flag===0){
-              $('.checkboxCard').animate({left: -112}, "fast");
-              $('.btn-display').animate({left: 0}, "fast");
-              this.flag=1;
-              this.flagName="显示"
-            }else{
-              $('.checkboxCard').animate({left: 0}, "fast");
-              $('.btn-display').animate({left: 112}, "fast");
-              this.flag=0;
-              this.flagName="隐藏"
-            }
-          },
-          //右隐藏
-          rightHide(){
-            if(this.flag1===0){
-              $('.rightCard').animate({right: -350}, "fast");
-              $('.right-btn-display').animate({right: 0}, "fast");
-              this.flag1=1;
-              this.flagName1="显示"
-            }else{
-              $('.rightCard').animate({right:0}, "fast");
-              $('.right-btn-display').animate({right: 350}, "fast");
-              this.flag1=0;
-              this.flagName1="隐藏"
-            }
-          },
-          //左check联动
-          checkFun(index){
-            let that=this;
-            let arr=this.rightTitles;
-            /**
-             * 控制右侧面板title
-             */
-            $.each(this.checkboxCard,function (v,item) {
-                if(v===index){
-                  item.checked=event.target.checked;
-                  if(item.checked){
-                    arr.unshift(item);
-                    that.titleBar(0,item);
-                  }else{
-                    arr.splice(jQuery.inArray(item,arr),1);
-                    that.titleBar(0,arr[0]);
-                  }
-                }
-            });
-            /**
-             * 控制图层隐藏显示
-             */
-            if(index===0){
-             if(event.target.checked){
-               mapFuncs.getLayerName(this.map,'sk').setVisible(true)
-             }else{
-               mapFuncs.getLayerName(this.map,'sk').setVisible(false)
-             }
-            }
-          },
-          //右tab切换
-          titleBar(index,item){
-            this.titleActive=index;
-            this.showComponent=item.component;
-          },
-          //子组件控制弹窗
-          showFormChild(data){
-            this.lakesShow = data.show;
-            this.lakesData=data.data;
-          },
-          moves(data){
-            if(data){
-              // let pixels = this.map.getPixelFromCoordinate([data.LGTD, data.LTTD]);
-              // // console.log(pixels);
-              // let left = pixels[0] + 'px';
-              // let top = pixels[1] + 'px';
-              // $(".stationInfo").css({top: top, left: left,visibility: "visible"});
-              // let content=this.addFeatrueInfo(data);
-              // $(".stationInfo").html(content);
-              this.map.getView().setCenter([data.LGTD, data.LTTD]);
-            }
-
-            // console.log();
-          },
-          //地图上鼠标浮动显示窗口内容创建
-          addFeatrueInfo(info){
-              if(info){
-                let content ="";
-                content += '<div>';
-                content += '<p>'+info.STNM+'</p></div>';
-                return content
-              }
+            },
+            showComponent:"warning",
+            lakesShow:false,
+            lakesData:{},
+            childData:[],
+            moveData:{}
           }
-
-      },
-      created(){
-        //边界线处理
-        this.$http.get('http://localhost:8080/api/bjx1').then((res)=>{
-          let shape=res.data.data.result.shape;
-
-          let mapJson=res.data.data.result.json;
-
-          //处理数据的方式
-          let format = new ol.format.WKT();
-          //处理数据
-          let newFeature = format.readFeature(shape, {
-            dataProjection: 'EPSG:4326',
-            featureProjection: 'EPSG:4326'
-          });
-          let newFeature1 = format.readFeature(mapJson, {
-            dataProjection: 'EPSG:4326',
-            featureProjection: 'EPSG:4326'
-          });
-          let newFeature2 = format.readFeature(shape, {
-            dataProjection: 'EPSG:4326',
-            featureProjection: 'EPSG:4326'
-          });
-          //边界线1
-          newFeature.setStyle(new ol.style.Style({
-            stroke: new ol.style.Stroke({
-              color: "#03956b",
-              width: 3
-            })
-          }));
-          //遮罩
-          newFeature1.setStyle(new ol.style.Style({
-            fill: new ol.style.Fill({
-              color: 'rgba(255,255,255,0.5)'
-            })
-          }));
-          //边界线2
-          newFeature2.setStyle(new ol.style.Style({
-            stroke: new ol.style.Stroke({
-              color: "#94ffe0",
-              width: 2
-            })
-          }));
-
-          //实例化一个矢量图层Vector作为绘制层
-          let source = new ol.source.Vector({
-            features: [newFeature1,newFeature,newFeature2]
-          });
-          //创建一个图层
-          let vector = new ol.layer.Vector({
-            source: source
-          });
-          //添加图层
-          this.map.addLayer(vector)
-
-
-
-        });
-        //水库json
-        this.$http.get('http://localhost:8080/api/rsver').then((res)=>{
-          let data=res.data.data.result;
-
-          if(data.length>0){
-            this.childData=data;
-            let arr=[];
-            //创建一个点
-            $.each(data,(v,item)=>{
-              let LGTD=item.LGTD;
-              let LTTD=item.LTTD;
-              let point=new ol.Feature({
-                data:item,
-                geometry: new ol.geom.Point([LGTD, LTTD])
-              });
-              //设置点的样式信息
-              point.setStyle(new ol.style.Style({
-                //形状
-                image: new ol.style.Icon({
-                  // anchor:[1,1],
-                  // anchorOrigin: 'top-right',
-                  // anchorXUnits: 'fraction',
-                  // anchorYUnits: 'pixels',
-                  // offsetOrigin: 'top-right',
-                  // offset:[1,0],
-                  //图标缩放比例
-                  // scale:1,
-                  //透明度
-                  size:[15,15],
-                  //图标的url
-                  src:mapFuncs.getColor(item.OFSLTDZ)
-                }),
-                text: new ol.style.Text({
-                  //位置
-                  textAlign: 'center',
-                  //基准线
-                  textBaseline: 'middle',
-                  //文字样式
-                  font: 'normal 14px 微软雅黑',
-                  offsetY:15,
-                  //文本内容
-                  text:"",
-                  //文本填充样式（即文字颜色）
-                  fill: new ol.style.Fill({ color: '#aa3300' }),
-                  stroke: new ol.style.Stroke({ color: '#ffcc33', width: 2 })
+        },
+        methods:{
+            //初始化地图(添加底图和标注)
+            initMap(){
+              //底图
+              let normalLayer=new ol.layer.Tile({
+                visible: true,
+                source: new ol.source.XYZ({
+                  url: "http://t2.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}"// 底图
                 })
-              }));
-              arr.push(point)
+              });
+              //注记图
+              let l2 = new ol.layer.Tile({
+                visible: true,
+                name:"TDTzj",
+                TileName : "天地图注记",
+                source: new ol.source.XYZ({
+                  url: "http://t2.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}"// 注记
+                })
+              });
+              //影像图
+              let TileLayer = new ol.layer.Tile({
+                visible:false,
+                name:"TDTyg",
+                TileName : "卫星遥感图",
+                source: new ol.source.XYZ({
+                  url: "http://t4.tianditu.com/DataServer?T=img_w&x={x}&y={y}&l={z}"
+                })
+              });
+              //初始化地图
+              this.map=new ol.Map({
+                target: 'map',
+                layers: [normalLayer,l2,TileLayer],
+                view: new ol.View({
+                  projection: 'EPSG:4326',
+                  center: [114.32, 30.22],
+                  // center: [116.27, 33.57],
+                  //最大显示级数
+                  maxZoom: 18,
+                  //最小显示级数
+                  minZoom: 1,
+                  //当前显示级数
+                  zoom: 11,
+                }),
+                controls:[
+                  new ol.control.MousePosition({
+                    //显示鼠标位置信息的目标容器
+                    target: document.getElementById('mouse-position'),
+                    //坐标格式
+                    coordinateFormat: ol.coordinate.createStringXY(2),
+                    //地图投影坐标系
+                    projection: 'EPSG:4326',
+                    //未定义坐标的标记
+                    undefinedHTML: '&nbsp;'
+                  })
+                ]
+              });
+            },
+            //初始化右边title
+            rightTitle(){
+              let arr=[];
+              $.each(this.checkboxCard,function (v,item) {
+                if(item.checked){
+                  arr.push(item)
+                }
+              });
+              this.rightTitles=arr
+            },
+            //矢量，影像切换
+            switchMap(index,item){
+              this.active=index;
+              if(item.name==="矢量"){
+                mapFuncs.getLayerName(this.map,'TDTyg').setVisible(false);
+              }else{
+                mapFuncs.getLayerName(this.map,'TDTyg').setVisible(true);
+              }
+            },
+            //左隐藏
+            leftHide(){
+              if(this.flag===0){
+                $('.checkboxCard').animate({left: -112}, "fast");
+                $('.btn-display').animate({left: 0}, "fast");
+                this.flag=1;
+                this.flagName="显示"
+              }else{
+                $('.checkboxCard').animate({left: 0}, "fast");
+                $('.btn-display').animate({left: 112}, "fast");
+                this.flag=0;
+                this.flagName="隐藏"
+              }
+            },
+            //右隐藏
+            rightHide(){
+              if(this.flag1===0){
+                $('.rightCard').animate({right: -350}, "fast");
+                $('.right-btn-display').animate({right: 0}, "fast");
+                this.flag1=1;
+                this.flagName1="显示"
+              }else{
+                $('.rightCard').animate({right:0}, "fast");
+                $('.right-btn-display').animate({right: 350}, "fast");
+                this.flag1=0;
+                this.flagName1="隐藏"
+              }
+            },
+            //左check联动
+            checkFun(index){
+              let that=this;
+              let arr=this.rightTitles;
+              /**
+               * 控制右侧面板title
+               */
+              $.each(this.checkboxCard,function (v,item) {
+                  if(v===index){
+                    item.checked=event.target.checked;
+                    if(item.checked){
+                      arr.unshift(item);
+                      that.titleBar(0,item);
+                    }else{
+                      arr.splice(jQuery.inArray(item,arr),1);
+                      that.titleBar(0,arr[0]);
+                    }
+                  }
+              });
+              /**
+               * 控制图层隐藏显示
+               */
+              if(index===0){
+               if(event.target.checked){
+                 mapFuncs.getLayerName(this.map,'sk').setVisible(true)
+               }else{
+                 mapFuncs.getLayerName(this.map,'sk').setVisible(false)
+               }
+              }
+            },
+            //右tab切换
+            titleBar(index,item){
+              this.titleActive=index;
+              this.showComponent=item.component;
+            },
+            //子组件控制弹窗
+            showFormChild(data){
+              this.lakesShow = data.show;
+              this.lakesData=data.data;
+            },
+            moves(data){
+                if(data){
+                    //重新设置地图中心点
+                    this.map.getView().setCenter([data.LGTD, data.LTTD]);
+                    //异步操作避免地图在移动过程中去寻找定位点
+                    setTimeout(()=>{
+                      let point_overlay;
+                      let point_div = document.createElement('div');
+                      point_div.className="css_animation";
+                      point_overlay = new ol.Overlay({
+                        element: point_div,
+                        positioning: 'center-center'
+                      });
+                      this.map.addOverlay(point_overlay);
+                      point_overlay.setPosition([data.LGTD, data.LTTD]);
+                      let pixel = this.map.getPixelFromCoordinate([data.LGTD, data.LTTD]);
+                      let left = pixel[0]+12 + 'px';
+                      let top = pixel[1]+16 + 'px';
+                      $(".stationInfo").css({top: top, left: left,visibility: "visible"});
+                      let content=this.addFeatrueInfo(data);
+                      // $(".stationInfo").html(content);
+                    },0)
+                }else{
+                    //同理异步操作
+                    setTimeout(()=>{
+                      $(".stationInfo").css({visibility: "hidden"});
+                      $(".ol-overlaycontainer-stopevent").empty();
+                    },0)
+                }
+            },
+            //地图上鼠标浮动显示窗口内容创建
+            addFeatrueInfo(info){
+                if(info){
+                  let content ="";
+                  content += '<div>';
+                  content += '<p>'+info.STNM+'</p></div>';
+                  return content
+                }
+            }
+        },
+        created(){
+          //边界线处理
+          this.$http.get('http://localhost:8080/api/bjx1').then((res)=>{
+            let shape=res.data.data.result.shape;
+
+            let mapJson=res.data.data.result.json;
+
+            //处理数据的方式
+            let format = new ol.format.WKT();
+            //处理数据
+            let newFeature = format.readFeature(shape, {
+              dataProjection: 'EPSG:4326',
+              featureProjection: 'EPSG:4326'
             });
+            let newFeature1 = format.readFeature(mapJson, {
+              dataProjection: 'EPSG:4326',
+              featureProjection: 'EPSG:4326'
+            });
+            let newFeature2 = format.readFeature(shape, {
+              dataProjection: 'EPSG:4326',
+              featureProjection: 'EPSG:4326'
+            });
+            //边界线1
+            newFeature.setStyle(new ol.style.Style({
+              stroke: new ol.style.Stroke({
+                color: "#03956b",
+                width: 3
+              })
+            }));
+            //遮罩
+            newFeature1.setStyle(new ol.style.Style({
+              fill: new ol.style.Fill({
+                color: 'rgba(255,255,255,0.5)'
+              })
+            }));
+            //边界线2
+            newFeature2.setStyle(new ol.style.Style({
+              stroke: new ol.style.Stroke({
+                color: "#94ffe0",
+                width: 2
+              })
+            }));
+
             //实例化一个矢量图层Vector作为绘制层
             let source = new ol.source.Vector({
-              features: arr
+              features: [newFeature1,newFeature,newFeature2]
             });
             //创建一个图层
             let vector = new ol.layer.Vector({
-              name:"sk",
-              TileName : "水库",
               source: source
             });
-            //将绘制层添加到地图容器中
-            this.map.addLayer(vector);
-          }else{
-            console.error('暂无水库数据');
-          }
-        });
-      },
-      mounted(){
-        const that=this;
-        this.initMap();
-        this.rightTitle();
-        /**
-         * 地图缩放控制
-         */
-        this.map.getView().on('change:resolution',()=>{
-          let level =  this.map.getView().getZoom();
-          $.each(BZ,(v,item)=>{
-            let labelLayer =mapFuncs.getLayerName(this.map,item);
-            if (!labelLayer) return;
-            labelLayer.getSource().getFeatures().forEach(function (items, i) {
-              if(level>=12 && level <=13){
-                items.getStyle().getText().setText(items.get("data").STNM);
-              }else if(level <=11){
-                items.getStyle().getText().setText("");
-              }
-            })
-          })
-        });
-        /**
-         * 地图移动事件控制
-         */
-        this.map.on('pointermove', function (evt) {
+            //添加图层
+            this.map.addLayer(vector)
 
-          let _this=this;
-          let pixel = _this.getEventPixel(evt.originalEvent);
-          let hit = evt.map.hasFeatureAtPixel(pixel);
-          if(hit){
-            evt.map.getTargetElement().style.cursor = hit ? 'pointer' : '';
-            //获取图层
-            let feature = _this.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {return feature;});
-            let data=feature.get('data');
-            if(data){
-              //坐标
-              // that.moveData=data;
-              let pixels = _this.getPixelFromCoordinate([data.LGTD, data.LTTD]);
-              let left = pixels[0] + 'px';
-              let top = pixels[1] + 'px';
-              $(".stationInfo").css({top: top, left: left,visibility: "visible"});
-              let content=that.addFeatrueInfo(data);
-              $(".stationInfo").html(content);
+
+
+          });
+          //水库json
+          this.$http.get('http://localhost:8080/api/rsver').then((res)=>{
+            let data=res.data.data.result;
+            if(data.length>0){
+              this.childData=data;
+              let arr=[];
+              //创建一个点
+              $.each(data,(v,item)=>{
+                let LGTD=item.LGTD;
+                let LTTD=item.LTTD;
+                let point=new ol.Feature({
+                  data:item,
+                  geometry: new ol.geom.Point([LGTD, LTTD])
+                });
+                //设置点的样式信息
+                point.setStyle(new ol.style.Style({
+                  //形状
+                  image: new ol.style.Icon({
+                    // anchor:[1,1],
+                    // anchorOrigin: 'top-right',
+                    // anchorXUnits: 'fraction',
+                    // anchorYUnits: 'pixels',
+                    // offsetOrigin: 'top-right',
+                    // offset:[1,0],
+                    //图标缩放比例
+                    // scale:1,
+                    //透明度
+                    size:[15,15],
+                    //图标的url
+                    src:mapFuncs.getColor(item.OFSLTDZ)
+                  }),
+                  text: new ol.style.Text({
+                    //位置
+                    textAlign: 'center',
+                    //基准线
+                    textBaseline: 'middle',
+                    //文字样式
+                    font: 'normal 14px 微软雅黑',
+                    offsetY:15,
+                    //文本内容
+                    text:"",
+                    //文本填充样式（即文字颜色）
+                    fill: new ol.style.Fill({ color: '#aa3300' }),
+                    stroke: new ol.style.Stroke({ color: '#ffcc33', width: 2 })
+                  })
+                }));
+
+                arr.push(point)
+              });
+
+              //实例化一个矢量图层Vector作为绘制层
+              let source = new ol.source.Vector({
+                features: arr
+              });
+
+
+              //创建一个图层
+              let vector = new ol.layer.Vector({
+                name:"sk",
+                TileName : "水库",
+                source: source
+              });
+              //将绘制层添加到地图容器中
+              this.map.addLayer(vector);
+
             }else{
+              console.error('暂无水库数据');
+            }
+          });
+
+        },
+        mounted(){
+          const that=this;
+          this.initMap();
+          this.rightTitle();
+          /**
+           * 地图缩放控制
+           */
+          this.map.getView().on('change:resolution',()=>{
+            let level =  this.map.getView().getZoom();
+            $.each(BZ,(v,item)=>{
+              let labelLayer =mapFuncs.getLayerName(this.map,item);
+              if (!labelLayer) return;
+              labelLayer.getSource().getFeatures().forEach(function (items, i) {
+                if(level>=12 && level <=13){
+                  items.getStyle().getText().setText(items.get("data").STNM);
+                }else if(level <=11){
+                  items.getStyle().getText().setText("");
+                }
+              })
+            })
+          });
+          /**
+           * 地图移动事件控制
+           */
+          this.map.on('pointermove', function (evt) {
+            let _this=this;
+            let pixel = _this.getEventPixel(evt.originalEvent);
+            let hit = evt.map.hasFeatureAtPixel(pixel);
+            if(hit){
+              let point_overlay;
+              let point_div = document.createElement('div');
+              point_div.className="css_animation";
+              point_overlay = new ol.Overlay({
+                element: point_div,
+                positioning: 'center-center'
+              });
+              that.map.addOverlay(point_overlay);
+              evt.map.getTargetElement().style.cursor = hit ? 'pointer' : '';
+              //获取图层
+              let feature = _this.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {return feature;});
+              let data=feature.get('data');
+              if(data){
+                //坐标
+                let pixel = _this.getPixelFromCoordinate([data.LGTD, data.LTTD]);
+                point_overlay.setPosition([data.LGTD, data.LTTD]);
+                let left = pixel[0]+12 + 'px';
+                let top = pixel[1]+16 + 'px';
+                $(".stationInfo").css({top: top, left: left,visibility: "visible"});
+                let content=that.addFeatrueInfo(data);
+                // $(".stationInfo").html(content);
+              }else{
+                $(".ol-overlaycontainer-stopevent").empty();
+                $(".stationInfo").css('visibility', 'hidden');
+              }
+              // that.moveData=feature
+            }else{
+              $(".ol-overlaycontainer-stopevent").empty();
               $(".stationInfo").css('visibility', 'hidden');
             }
-            // that.moveData=feature
-          }else{
-            $(".stationInfo").css('visibility', 'hidden');
-          }
 
-        });
+          });
 
-        /**
-         * 地图点击事件控制
-         */
-        this.map.on('click', function (evt) {
-          let _this=this;
-          let feature = _this.forEachFeatureAtPixel(evt.pixel, function (feature, layer) { return feature; });
-          if(feature){
-            //获取数据
-            let data=feature.get('data');
-            if(data){
-              that.lakesShow=true;
-              that.lakesData=data;
+          /**
+           * 地图点击事件控制
+           */
+          this.map.on('click', function (evt) {
+            let _this=this;
+            let feature = _this.forEachFeatureAtPixel(evt.pixel, function (feature, layer) { return feature; });
+            if(feature){
+              //获取数据
+              let data=feature.get('data');
+              if(data){
+                that.lakesShow=true;
+                that.lakesData=data;
+              }
             }
-          }
-        });
-      },
-      computed:{
+          });
+        },
+        computed:{
 
-      },
-      watch:{
-        moveData(feature){
-          if(feature) {
+        },
+        watch:{
+          moveData(feature){
+            if(feature) {
 
+            }
+            //   if(feature){
+            //     //获取数据
+            //     let data=feature.get('data');
+            //     if(data){
+            //       //坐标
+            //       that.moveData=data;
+            //       // let pixels = _this.getPixelFromCoordinate([data.LGTD, data.LTTD]);
+            //       // let left = pixels[0]+5 + 'px';
+            //       // let top = pixels[1]+70 + 'px';
+            //       // $(".stationInfo").css({top: top, left: left,visibility: "visible"});
+            //       // let content=that.addFeatrueInfo(data);
+            //       // $(".stationInfo").html(content);
+            //     }else{
+            //       // $(".stationInfo").css('visibility', 'hidden');
+            //     }
+            //   }else{
+            //     $(".stationInfo").css('visibility', 'hidden');
+            //   }
+            //   //坐标
+            //   let pixels = this.map.getPixelFromCoordinate([data.LGTD, data.LTTD]);
+            //   let left = pixels[0]+5 + 'px';
+            //   let top = pixels[1]+70 + 'px';
+            //   $(".stationInfo").css({top: top, left: left,visibility: "visible"});
+            //   let content=this.addFeatrueInfo(data);
+            //   $(".stationInfo").html(content);
+            // }else{
+            //   $(".stationInfo").css('visibility', 'hidden');
+            // }
           }
-          //   if(feature){
-          //     //获取数据
-          //     let data=feature.get('data');
-          //     if(data){
-          //       //坐标
-          //       that.moveData=data;
-          //       // let pixels = _this.getPixelFromCoordinate([data.LGTD, data.LTTD]);
-          //       // let left = pixels[0]+5 + 'px';
-          //       // let top = pixels[1]+70 + 'px';
-          //       // $(".stationInfo").css({top: top, left: left,visibility: "visible"});
-          //       // let content=that.addFeatrueInfo(data);
-          //       // $(".stationInfo").html(content);
-          //     }else{
-          //       // $(".stationInfo").css('visibility', 'hidden');
-          //     }
-          //   }else{
-          //     $(".stationInfo").css('visibility', 'hidden');
-          //   }
-          //   //坐标
-          //   let pixels = this.map.getPixelFromCoordinate([data.LGTD, data.LTTD]);
-          //   let left = pixels[0]+5 + 'px';
-          //   let top = pixels[1]+70 + 'px';
-          //   $(".stationInfo").css({top: top, left: left,visibility: "visible"});
-          //   let content=this.addFeatrueInfo(data);
-          //   $(".stationInfo").html(content);
-          // }else{
-          //   $(".stationInfo").css('visibility', 'hidden');
-          // }
         }
-      }
     }
+
 </script>
 
 <style lang="less" scoped>
@@ -550,19 +607,7 @@
     width: auto;
     height: calc(100vh - 60px);
   }
-  #map{
-    /*padding: 0;*/
-    /*margin: 0;*/
-    /*position: relative;*/
-    /*background-color: rgb(238, 238, 238);*/
-    /*overflow: hidden;*/
-    /*left: 0;*/
-    /*top:  0;*/
-    /*right: 0;*/
-    /*bottom: 0;*/
-    /*width: auto;*/
-    /*height: calc(100vh - 87px);*/
-  }
+
   .mapBtn{
     width: 100px;
     background-color: #FDFDFC;
@@ -590,7 +635,7 @@
   .leftCheckbox{
     z-index: 999;
     position: absolute;
-    top: 120px;
+    top: 70px;
     left:0;
     height: 145px;
     .checkboxCard{
@@ -636,9 +681,9 @@
   .rightCard{
     z-index: 999;
     position: absolute;
-    top: 120px;
+    top: 70px;
     right:0;
-    height:calc(100vh - 130px);
+    height:calc(100vh - 140px);
     width: 340px;
     border: 5px solid #3DAAEF;
     background-color: white;
@@ -662,7 +707,7 @@
       }
       .tabContent{
         overflow: auto;
-        height:calc(100vh - 167px);
+        height:calc(100vh - 180px);
       }
     }
   }
@@ -674,7 +719,7 @@
     position: absolute;
     color: white;
     line-height: 26px;
-    top:120px;
+    top:70px;
     /*transform: translate(0,-50%);*/
     right: 345px;
     cursor: pointer;

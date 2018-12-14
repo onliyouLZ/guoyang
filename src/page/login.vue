@@ -44,10 +44,11 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             localStorage.setItem('ms_username',this.ruleForm.username);
-            if(this.ruleForm.username=="admin"){
-              const weather=document.getElementById("tp-weather-widget");
+            if(this.ruleForm.username==="admin"){
+              let weather=document.getElementById("tp-weather-widget");
               weather.style.display="block";
-              this.$router.push('/SystemHome');
+              console.log(this.$router);
+              this.$router.push('/home');
             }
           } else {
             console.log('error submit!!');
@@ -57,7 +58,7 @@
       }
     },
     mounted(){
-      const weather=document.getElementById("tp-weather-widget");
+      let weather=document.getElementById("tp-weather-widget");
       weather.style.display="none";
     }
 

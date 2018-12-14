@@ -305,12 +305,12 @@
              */
             this.$emit('show',{show:true,data:row});
             $('.stationInfo').css({visibility:'hidden'});
-
           },
           rsverDbClick(row, event, column){
-
-            this.$emit('show',{show:true,data:row})
+            this.$emit('show',{show:true,data:row});
+            $('.stationInfo').css({visibility:'hidden'});
           },
+          //重定义时间
           tmFormatter(row, column, cellValue, index){
             return Time.getNowSecond(cellValue)
           },
@@ -318,7 +318,7 @@
             this.$emit('move',row)
           },
           leaveHover(row, column, cellValue, index){
-            this.$emit('move',"")
+            this.$emit('move',"");
           }
         },
         created(){
