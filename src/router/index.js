@@ -15,6 +15,8 @@ import system from '../page/system'
 import error404 from '../page/404'
 
 import realTimeRain from '../page/threeMenu/RealTimeRain'
+import rainwater from '../page/threeMenu/Rainwater'
+import rainwaterWarning from '../page/threeMenu/RainwaterWarning'
 
 
 /**
@@ -58,6 +60,16 @@ export default new Router({
               path: '/realTimeRain',
               component: realTimeRain,
               name:"水雨情实时监控",
+            },
+            {
+              path: '/rainwater',
+              component: rainwater,
+              name:"雨水情分析",
+            },
+            {
+              path: '/rainwaterWarning',
+              component: rainwaterWarning,
+              name:"雨水情预警",
             }
           ]
         },
@@ -86,5 +98,5 @@ export default new Router({
       path: '*',
       component: error404
     }
-  ]
+  ],
 })

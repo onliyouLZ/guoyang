@@ -325,7 +325,7 @@
           /**
            * 处理人员信息
            */
-          this.$http.get('http://localhost:8080/api/duty').then((res)=>{
+          this.$http.get('/api/duty').then((res)=>{
               const data=res.data.data;
               var arr=[];
               $.each(data.tm,function(v,item){

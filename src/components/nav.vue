@@ -13,8 +13,7 @@
         background-color="#0a95ef"
         text-color="#fff"
         router
-        active-text-color="#ffd04b"
-        :select="selectClick">
+        active-text-color="#ffd04b">
         <template v-for="item in items">
           <template>
             <el-menu-item :index="item.path" :key="item.path">
@@ -62,7 +61,7 @@
     methods: {
       // 用户名下拉菜单选择事件
       handleCommand(command) {
-        if(command == 'loginout'){
+        if(command === 'loginout'){
           localStorage.removeItem('ms_username');
           const weather=document.getElementById("tp-weather-widget");
           weather.style.display="none";
@@ -78,12 +77,21 @@
          return username ? username :this.name
        },
       onRoutes(){
-        // this.indexClass=this.$route.path.replace('/', '');
-        return this.$route.path.replace('#','');
-      },
-      selectClick(index,indexPath){
-        console.log(index);
-        // console.log(indexPath);
+
+        let routerPath=this.$route.path.replace('#','');
+        let active;
+        $.each(this.items,(v,item)=>{
+          if(routerPath===item.path){
+            active=item.path;
+            return false
+          }else if(item.path==="/waterMonitoring"){
+            active=item.path
+          }else if(item.path==="/home"){
+            active=item.path
+          }
+        });
+        return active
+        // return this.$route.path.replace('#','');
       }
     },
     mounted(){
