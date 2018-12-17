@@ -83,7 +83,6 @@
       },
       selectClick(index,indexPath){
         console.log(index);
-        // console.log(indexPath);
       }
     },
     mounted(){
