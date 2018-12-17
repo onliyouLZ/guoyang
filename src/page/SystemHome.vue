@@ -212,6 +212,9 @@
           </el-col>
           <!--</el-card>-->
         </el-col>
+
+
+        <!--轮播图-->
         <el-col :span="24">
           <!--<el-card shadow="hover" class="" :body-style="{padding:'5px'}">-->
           <el-col :span="12" style="padding: 5px">
@@ -223,7 +226,7 @@
                   <i class="fa fa-bar-chart"></i>&nbsp;&nbsp;年降雨分布
                 </div>
               </div>
-              <div style="min-height: 250px" class="njyfb" @click="openDliog"></div>
+              <div style="min-height: 250px" class="ldhb" @click="openDliog"></div>
             </el-card>
           </el-col >
           <el-col :span="12" style="padding: 5px">
@@ -235,7 +238,7 @@
                   无雨日
                 </div>
               </div>
-              <div style="min-height: 250px" class="njyfb" @click="openDliog"></div>
+              <div style="min-height: 250px" class="wxyt" @click="openDliog"></div>
             </el-card>
           </el-col>
           <!--</el-card>-->
@@ -248,10 +251,10 @@
                 <div class="title-stick">
                 </div>
                 <div class="title-name">
-                  <i class="fa fa-bar-chart"></i>&nbsp;&nbsp;年降雨分布
+                  <i class="fa fa-bar-chart"></i>&nbsp;&nbsp;雷达回波
                 </div>
               </div>
-              <div style="min-height: 250px" class="njyfb" @click="openDliog"></div>
+              <div style="min-height: 250px" class="ldhb" @click="openDliog(1)"></div>
             </el-card>
           </el-col >
           <el-col :span="12" style="padding: 5px">
@@ -260,10 +263,10 @@
                 <div class="title-stick bg-blue">
                 </div>
                 <div class="title-name mgl10">
-                  无雨日
+                  卫星云图
                 </div>
               </div>
-              <div style="min-height: 250px" class="njyfb" @click="openDliog"></div>
+              <div style="min-height: 250px" class="wxyt" @click="openDliog(2)"></div>
             </el-card>
           </el-col>
           <!--</el-card>-->
@@ -271,10 +274,8 @@
       </el-row>
     </div>
     <home-Dliog :swiperData="swiperData" :show.sync="show" ref="child"></home-Dliog>
-    <swiper-dliog :swiperShow.sync="swiperShow" ref="child"></swiper-dliog>
+    <swiper-dliog :swiperImage="swiperImage" :swiperShow.sync="swiperShow" ref="child"></swiper-dliog>
   </el-row>
-
-
 </template>
 
 <script>
@@ -283,13 +284,13 @@
     import swiperDliog  from '../dilog/homedliog/swiperDliog'
     import echarts from 'echarts'
 
-    // import {baseUrl} from  '../config'
+    import {baseUrl,fileServer} from  '../utils/utils'
     export default {
         name: "SystemHome",
         components:{
           Breadcrumb:Breadcrumb,
           homeDliog:homeDliog,
-          swiperDliog:swiperDliog
+          swiperDliog:swiperDliog,
         },
         data(){
             return{
@@ -318,14 +319,15 @@
               dutyData:[],
               show:false,
               swiperShow:false,
-              swiperData:{}
+              swiperData:{},
+              swiperImage:{}
             }
         },
         created(){
           /**
            * 处理人员信息
            */
-          this.$http.get('http://localhost:8080/api/duty').then((res)=>{
+          this.$http.get('/api/duty').then((res)=>{
               const data=res.data.data;
               var arr=[];
               $.each(data.tm,function(v,item){
@@ -352,6 +354,8 @@
               });
               this.dutyData=arr
             });
+
+
         },
         computed: {
         },
@@ -524,8 +528,29 @@
           /**
            * 打开弹窗
            */
-          openDliog(){
-            this.swiperShow = !this.swiperShow
+          openDliog(type){
+            if(type===1){
+              let parms={
+                type:2
+              };
+              this.$http.post(baseUrl+'api/weather-images/v0.1/ht/img/list',parms).then((res)=>{
+                if(res.status===200){
+                  let data=res.data.result.urls;
+                  let arr=[];
+                  $.each(data[0],(v,item)=>{
+                    arr.push({"src":fileServer+'images/weather/'+item})
+                  });
+                  this.swiperImage={
+                    name:"雷达回波",
+                    data:arr
+                  };
+                  this.swiperShow = !this.swiperShow
+                }else{
+                  console.error("请求失败")
+                }
+              })
+            }
+
           }
         },
         mounted(){
@@ -559,8 +584,13 @@
       float: left;
     }
   }
-  .njyfb{
+  .ldhb{
     background: url("../assets/ldhb.jpg")  no-repeat;
+    background-size:cover;
+    cursor: pointer;
+  }
+  .wxyt{
+    background: url("../assets/wxyt.jpg")  no-repeat;
     background-size:cover;
     cursor: pointer;
   }

@@ -13,8 +13,7 @@
         background-color="#0a95ef"
         text-color="#fff"
         router
-        active-text-color="#ffd04b"
-        :select="selectClick">
+        active-text-color="#ffd04b">
         <template v-for="item in items">
           <template>
             <el-menu-item :index="item.path" :key="item.path">
@@ -25,16 +24,16 @@
         </template>
       </el-menu>
       <div class="header-user-con">
-         <!--消息中心-->
+        <!--消息中心-->
         <div class="btn-bell">
-        <el-tooltip effect="dark" :content="message?`有${message}条未读消息`:`消息中心`" placement="bottom">
-        <router-link to="/login">
-          <i class="el-icon-bell"></i>
-        </router-link>
-        </el-tooltip>
-        <span class="btn-bell-badge" v-if="message"></span>
+          <el-tooltip effect="dark" :content="message?`有${message}条未读消息`:`消息中心`" placement="bottom">
+            <router-link to="/login">
+              <i class="el-icon-bell"></i>
+            </router-link>
+          </el-tooltip>
+          <span class="btn-bell-badge" v-if="message"></span>
         </div>
-         <!--用户头像-->
+        <!--用户头像-->
         <div class="user-avator"><img src="static/img/img.jpg"></div>
         <!-- 用户名下拉菜单 -->
         <el-dropdown class="user-name" trigger="hover" @command="handleCommand">
@@ -62,7 +61,7 @@
     methods: {
       // 用户名下拉菜单选择事件
       handleCommand(command) {
-        if(command == 'loginout'){
+        if(command === 'loginout'){
           localStorage.removeItem('ms_username');
           const weather=document.getElementById("tp-weather-widget");
           weather.style.display="none";
@@ -72,17 +71,27 @@
     },
     computed:{
       // 获取用户名
-       username(){
-         let username=localStorage.getItem('ms_username');
+      username(){
+        let username=localStorage.getItem('ms_username');
 
-         return username ? username :this.name
-       },
-      onRoutes(){
-        // this.indexClass=this.$route.path.replace('/', '');
-        return this.$route.path.replace('#','');
+        return username ? username :this.name
       },
-      selectClick(index,indexPath){
-        console.log(index);
+      onRoutes(){
+
+        let routerPath=this.$route.path.replace('#','');
+        let active;
+        $.each(this.items,(v,item)=>{
+          if(routerPath===item.path){
+            active=item.path;
+            return false
+          }else if(item.path==="/waterMonitoring"){
+            active=item.path
+          }else if(item.path==="/home"){
+            active=item.path
+          }
+        });
+        return active
+        // return this.$route.path.replace('#','');
       }
     },
     mounted(){
@@ -111,8 +120,8 @@
     line-height: 60px;
   }
   .header-right{
-      float: right;
-      padding-right: 50px;
+    float: right;
+    padding-right: 50px;
     .header-menu {
       float: left;
       height: 59px;

@@ -309,6 +309,7 @@
                 if(data){
                     //重新设置地图中心点
                     this.map.getView().setCenter([data.LGTD, data.LTTD]);
+                    this.map.getView().setZoom(13);
                     //异步操作避免地图在移动过程中去寻找定位点
                     setTimeout(()=>{
                       let point_overlay;
@@ -347,7 +348,7 @@
         },
         created(){
           //边界线处理
-          this.$http.get('http://localhost:8080/api/bjx1').then((res)=>{
+          this.$http.get('/api/bjx1').then((res)=>{
             let shape=res.data.data.result.shape;
 
             let mapJson=res.data.data.result.json;
@@ -403,7 +404,7 @@
 
           });
           //水库json
-          this.$http.get('http://localhost:8080/api/rsver').then((res)=>{
+          this.$http.get('/api/rsver').then((res)=>{
             let data=res.data.data.result;
             if(data.length>0){
               this.childData=data;

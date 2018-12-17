@@ -318,7 +318,8 @@ export const pickerOptions = [
 
 export const Time = time;
 export const Formatter = FormatterData;
-export const baseUrl = 'http://118.26.140.163:8963/nxhzz_2017/api/'; //服务地址
+export const baseUrl = 'http://gyfxkhapi.matian.ml:8008/api-fxkh/'; //服务地址
+export const fileServer = 'http://gyfxkhapi.matian.ml:8008/files/'; //服务地址
 export const uploadUrl = 'http://118.26.140.163:8963/fss/api/file/uploadFile.do'; //文件上传地址
 export const downLoadUrl = 'http://118.26.140.163:8963/fss/api/file/download/'; //文件预览地址
 

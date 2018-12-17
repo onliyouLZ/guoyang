@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    title="年降雨分布"
+    :title="swiperImage.name"
     :swiperShow="swiperShow"
     :visible.sync="visible"
     width="50%"
@@ -67,19 +67,7 @@
           effect:"fade",
         },
         faPlay:"fa-play",
-        images:[
-          {src:"../../../static/leida/1.jpg"},
-          {src:"../../../static/leida/2.jpg"},
-          {src:"../../../static/leida/3.jpg"},
-          {src:"../../../static/leida/4.jpg"},
-          {src:"../../../static/leida/5.jpg"},
-          {src:"../../../static/leida/6.jpg"},
-          {src:"../../../static/leida/7.jpg"},
-          {src:"../../../static/leida/7.jpg"},
-          {src:"../../../static/leida/8.jpg"},
-          {src:"../../../static/leida/10.jpg"},
-          {src:"../../../static/leida/11.jpg"},
-        ]
+        images:this.swiperImage.data
       }
     },
     props:{
@@ -87,9 +75,13 @@
         type:Boolean,
         default:false
       },
+      swiperImage:{
+        type:Object,
+        default:{}
+      },
     },
     created(){
-
+      // this.images=this.swiperImage.data;
     },
     computed: {
       swiper() {
@@ -103,6 +95,7 @@
       childClose(){
         this.visible=false;
         this.$emit('update:swiperShow',false);
+        // this.swiperImage={};
         this.swiper.autoplay.stop();
         this.faPlay="fa-play";
         this.swiper.slideTo(0,0,false);
@@ -134,7 +127,6 @@
 
     },
     mounted(){
-
 
     },
     watch:{
