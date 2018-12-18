@@ -1,18 +1,19 @@
+<!--水雨情实时监控-->
 <template>
     <div id="real-time-rain"
          v-loading="loading"
          element-loading-text="加载中">
       <el-card class="box-card" >
         <div slot="header" class="clearfix">
-          <label>行政区:</label>
-          <el-select v-model="value" placeholder="请选择">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
+          <!--<label>行政区:</label>-->
+          <!--<el-select v-model="value" placeholder="请选择">-->
+            <!--<el-option-->
+              <!--v-for="item in options"-->
+              <!--:key="item.value"-->
+              <!--:label="item.label"-->
+              <!--:value="item.value">-->
+            <!--</el-option>-->
+          <!--</el-select>-->
           <label>时间:</label>
           <el-date-picker
             v-model="value6"
@@ -36,40 +37,26 @@
               @row-click="rowClick"
               ref="multipleTable"
               @selection-change="handleSelectionChange"
+              :span-method="objectSpanMethod"
               header-cell-class-name="table-header-public">
               <el-table-column
                 type="selection"
                 width="40">
               </el-table-column>
               <el-table-column
-                prop="date"
-                label="日期"
-                align="center"
-                width="180">
-              </el-table-column>
-              <el-table-column
-                prop="name"
-                label="姓名"
-                align="center"
-                width="180">
-              </el-table-column>
-              <el-table-column
-                prop="address"
-                align="center"
-                label="地址">
-              </el-table-column>
-              <el-table-column
-                label="操作"
+                prop="adnm"
+                label="市(县)"
                 align="center">
-                <template slot-scope="scope">
-                  <el-button
-                    size="mini"
-                    @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                  <el-button
-                    size="mini"
-                    type="danger"
-                    @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                </template>
+              </el-table-column>
+              <el-table-column
+                prop="stnm"
+                label="站名"
+                align="center">
+              </el-table-column>
+              <el-table-column
+                prop="drp"
+                align="center"
+                label="累积雨量">
               </el-table-column>
             </el-table>
           </div>
@@ -84,37 +71,16 @@
             layout="total, sizes, prev, pager, next, jumper"
             :total="total">
           </el-pagination>
-          <div class="choice"><span>当前页选中:{{multipleSelection.length>0 ? multipleSelection.length+"条" : ""}}</span></div>
+          <div class="choice" v-if="multipleSelection.length>0"><span>当前页选中:{{multipleSelection.length>0 ? multipleSelection.length+"条" : ""}}</span></div>
         </div>
       </el-card>
 
 
-      <el-dialog title="编辑" :visible.sync="dialogTableVisible">
-        <el-form
-          :model="numberValidateForm"
-          ref="numberValidateForm"
-          label-width="100px"
-          class="demo-ruleForm">
-          <el-form-item
-            label="年龄"
-            prop="age"
-            :rules="[
-              { required: true, message: '年龄不能为空'},
-              { type: 'number', message: '年龄必须为数字值'}]">
-            <el-input type="age" v-model.number="numberValidateForm.age" autocomplete="off"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="submitForm('numberValidateForm')">提交</el-button>
-            <el-button @click="resetForm('numberValidateForm')">重置</el-button>
-          </el-form-item>
-        </el-form>
-      </el-dialog>
+
     </div>
 </template>
 
 <script>
-    // import FileSaver from 'file-saver'
-    // import XLSX from 'xlsx'
     export default {
         name: "real-time-rain",
         data(){
@@ -124,18 +90,13 @@
             tableData: [ ],
             currentPage4: 1,
             options: [
-              {
-              value: '1',
-              label: '涡阳县'
-            }],
+              {value: '1',label: '涡阳县'}
+            ],
             value: '',
             value6: '',
             multipleSelection:[],
             loading: true,
-            numberValidateForm: {
-              age: ''
-            },
-            dialogTableVisible:false
+            typeNum:[]
           }
         },
         created(){
@@ -143,105 +104,108 @@
             this.loading=false;
             this.tableData=[
               {
-                date: '2016-05-02',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄'
-              }, {
-                date: '2016-05-04',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1517 弄'
-              }, {
-                date: '2016-05-01',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1519 弄'
-              }, {
-                date: '2016-05-03',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1516 弄'
-              },{
-                date: '2016-05-02',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄'
-              }, {
-                date: '2016-05-04',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1517 弄'
-              }, {
-                date: '2016-05-01',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1519 弄'
-              }, {
-                date: '2016-05-03',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1516 弄'
-              },{
-                date: '2016-05-02',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄'
-              }, {
-                date: '2016-05-04',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1517 弄'
-              }, {
-                date: '2016-05-01',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1519 弄'
-              }, {
-                date: '2016-05-03',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1516 弄'
+                "drp": 3.5,
+                "stcd": "180103",
+                "hnnm": "涡河",
+                "__index": 6,
+                "rvnm": "涡河",
+                "stnm": "朱楼闸",
+                "lgtd": 108.67225,
+                "adcd": "341621",
+                "lttd": 30.321528,
+                "sttp": "PP",
+                "bsnm": "长江",
+                "adnm": "涡阳县"
               },
               {
-                date: '2016-05-02',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄'
-              }, {
-                date: '2016-05-04',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1517 弄'
-              }, {
-                date: '2016-05-01',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1519 弄'
-              }, {
-                date: '2016-05-03',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1516 弄'
-              },{
-                date: '2016-05-02',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄'
-              }, {
-                date: '2016-05-04',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1517 弄'
-              }, {
-                date: '2016-05-01',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1519 弄'
-              }, {
-                date: '2016-05-03',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1516 弄'
-              },{
-                date: '2016-05-02',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄'
-              }, {
-                date: '2016-05-04',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1517 弄'
-              }, {
-                date: '2016-05-01',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1519 弄'
-              }, {
-                date: '2016-05-03',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1516 弄'
+                "drp": 0.5,
+                "stcd": "180104",
+                "hnnm": "涡河",
+                "__index": 38,
+                "rvnm": "涡河",
+                "stnm": "燕小庙闸",
+                "lgtd": 110.32,
+                "adcd": "341621",
+                "lttd": 30.62,
+                "sttp": "PP",
+                "bsnm": "长江",
+                "adnm": "涡阳县"
+              },
+              {
+                "drp": 0.5,
+                "stcd": "180105",
+                "hnnm": "涡河",
+                "__index": 134,
+                "rvnm": "涡河",
+                "stnm": "包河闸",
+                "lgtd": 109.884894,
+                "adcd": "341621",
+                "lttd": 30.798794,
+                "sttp": "PP",
+                "bsnm": "长江",
+                "adnm": "涡阳县"
+              },
+              {
+                "drp": 5.5,
+                "stcd": "180106",
+                "hnnm": "涡河",
+                "__index": 198,
+                "rvnm": "涡河",
+                "stnm": "曹市闸",
+                "lgtd": 108.984444,
+                "adcd": "341621",
+                "lttd": 30.134167,
+                "sttp": "PP",
+                "bsnm": "长江",
+                "adnm": "涡阳县"
+              },
+              {
+                "drp": 0.5,
+                "stcd": "180107",
+                "hnnm": "涡河",
+                "__index": 33,
+                "rvnm": "涡河",
+                "stnm": "青羊沟闸",
+                "lgtd": 109.92,
+                "adcd": "341621",
+                "lttd": 30.27,
+                "sttp": "PP",
+                "bsnm": "长江",
+                "adnm": "涡阳县"
+              },
+              {
+                "drp": 3,
+                "stcd": "180101",
+                "hnnm": "涡河",
+                "__index": 77,
+                "rvnm": "涡河",
+                "stnm": "武家河闸",
+                "lgtd": 108.5885,
+                "adcd": "341621",
+                "lttd": 29.886444,
+                "sttp": "PP",
+                "bsnm": "长江",
+                "adnm": "涡阳县"
+              },
+              {
+                "drp": 3,
+                "stcd": "180102",
+                "hnnm": "涡河",
+                "__index": 77,
+                "rvnm": "涡河",
+                "stnm": "五道沟闸",
+                "lgtd": 108.5885,
+                "adcd": "341621",
+                "lttd": 29.886444,
+                "sttp": "PP",
+                "bsnm": "长江",
+                "adnm": "涡阳县"
               }
-            ]
-          },1000)
+            ];
+            this.getOrderNumber();
+            // console.log(this.typeNum);
+          },1000);
+
         },
         methods:{
           handleSizeChange(val) {
@@ -257,51 +221,44 @@
           handleSelectionChange(val) {
             this.multipleSelection = val;
           },
-          handleEdit(index, row) {
-            this.dialogTableVisible=true
-          },
-          handleDelete(index, row) {
-            this.$confirm('是否删除?', '提示', {
-              confirmButtonText: '确定',
-              cancelButtonText: '取消',
-              type: 'warning'
-            }).then(() => {
-              this.tableData.splice(index,1);
-              this.$message({
-                type: 'success',
-                message: '删除成功!'
-              });
-            }).catch(() => {
-              this.$message({
-                type: 'info',
-                message: '已取消删除'
-              });
-            });
-          },
           rowClick(row, event, column){
             this.$refs.multipleTable.toggleRowSelection(row);
           },
-          submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
-              if (valid) {
-                alert('submit!');
-              } else {
-                console.log('error submit!!');
-                return false;
+          objectSpanMethod({ row, column, rowIndex, columnIndex }){
+            const _row=this.typeNum[rowIndex];
+            if(columnIndex===1){
+              return {
+                colspan:1,
+                rowspan:_row
               }
-            });
-          },
-          resetForm(formName) {
-            this.$refs[formName].resetFields();
+            }
           },
           primary(){
             this.loading=true;
             setTimeout(()=>{
               this.loading=false;
             },1000)
+          },
+          //计算合并
+          getOrderNumber(){
+            //排序
+            this.tableData.sort((a,b)=>a.adcd -b.adcd);
+            let index=0;
+            for(let i=0;i<this.tableData.length;i++){
 
-
-
+              if(i===0){
+                this.typeNum.push(1);
+                index=i;
+              }else{
+                if(this.tableData[i].city===this.tableData[i-1].city){
+                  this.typeNum[index]+=1;
+                  this.typeNum.push(0);
+                }else{
+                  this.typeNum.push(1);
+                  index=i;
+                }
+              }
+            }
           },
           /**
            * 导出
@@ -321,11 +278,11 @@
                * 表头和数据需处理 此处写的死数据
                * @type {string[]}
                */
-              const tHeader = ['时间','姓名','地址'];
-              const filterVal = ['date','name','address'];
+              const tHeader = ['市(县)','站名','雨量'];
+              const filterVal = ['adnm','stnm','drp'];
               const list = tableDatas;
               const data = this.formatJson(filterVal, list);
-              export_json_to_excel(tHeader, data, '商品管理列表');
+              export_json_to_excel(tHeader, data, ' 水雨情实时监控表');
             })
           },
           formatJson(filterVal, jsonData){
@@ -339,7 +296,10 @@
           },
           total(){
             return this.tableData.length
-          },
+          }
+        },
+        mounted(){
+
         }
     }
 </script>
@@ -369,16 +329,5 @@
   #real-time-rain .el-scrollbar__bar{
     display: none;
   }
+</style>
 
-</style>
-<style>
-  #real-time-rain .is-horizontal{
-    /*display: none;*/
-  }
-  #real-time-rain .el-select-dropdown .el-scrollbar__bar{
-    display: none;
-  }
-  #real-time-rain .el-dialog__body{
-    padding: 20px 30px!important;
-  }
-</style>

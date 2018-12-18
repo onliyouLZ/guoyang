@@ -305,6 +305,7 @@
               this.lakesShow = data.show;
               this.lakesData=data.data;
             },
+            //子组件控制鼠标浮动
             moves(data){
                 if(data){
                     //重新设置地图中心点
@@ -378,7 +379,7 @@
             //遮罩
             newFeature1.setStyle(new ol.style.Style({
               fill: new ol.style.Fill({
-                color: 'rgba(255,255,255,0.5)'
+                color: 'rgba(255,255,255,1)'
               })
             }));
             //边界线2
@@ -399,9 +400,6 @@
             });
             //添加图层
             this.map.addLayer(vector)
-
-
-
           });
           //水库json
           this.$http.get('/api/rsver').then((res)=>{

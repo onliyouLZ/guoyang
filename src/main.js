@@ -11,8 +11,10 @@ import 'swiper/dist/css/swiper.css'
 import 'openlayers/dist/ol.css'
 import './utils/echartsResizeHelper'
 
+
 import Blob from '@/vendor/Blob.js'
 import Export2Excel from '@/vendor/Export2Excel.js'
+import Config from '@/api/config.js'
 // import ol from 'openlayers'
 
 import VueAwesomeSwiper from 'vue-awesome-swiper'
@@ -22,14 +24,15 @@ import $ from 'jquery'
 
 
 Vue.config.productionTip = false;
-// Vue.use(ElementUI);
 Vue.use(ElementUI, { size: 'small' });
 Vue.use(VueAwesomeSwiper);
 
 
 
+
 Vue.prototype.$http = axios;
 Vue.prototype.$echarts = echarts;
+Vue.prototype.$url = Config;
 // Vue.prototype.$ol=ol;
 
 

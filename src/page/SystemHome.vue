@@ -5,10 +5,10 @@
     </el-col>
     <div class="container">
       <el-row class="panel_tip mgb10">
-        <el-col :span="2" style="text-align: center">
+        <el-col :span="3" style="text-align: center">
          <i class="fa fa-user-o"></i>&nbsp;&nbsp;<span style="font-weight: 700">今日值班:</span>
         </el-col>
-        <el-col :span="22">
+        <el-col :span="21">
           <span>
             <template >
               <template v-for="item in dutyData">
@@ -226,7 +226,7 @@
                   <i class="fa fa-bar-chart"></i>&nbsp;&nbsp;年降雨分布
                 </div>
               </div>
-              <div style="min-height: 250px" class="ldhb" @click="openDliog"></div>
+              <div style="min-height: 250px" class="ldhb" @click="openDliog(2)"></div>
             </el-card>
           </el-col >
           <el-col :span="12" style="padding: 5px">
@@ -238,7 +238,7 @@
                   无雨日
                 </div>
               </div>
-              <div style="min-height: 250px" class="wxyt" @click="openDliog"></div>
+              <div style="min-height: 250px" class="wxyt" @click="openDliog(1)"></div>
             </el-card>
           </el-col>
           <!--</el-card>-->
@@ -254,7 +254,7 @@
                   <i class="fa fa-bar-chart"></i>&nbsp;&nbsp;雷达回波
                 </div>
               </div>
-              <div style="min-height: 250px" class="ldhb" @click="openDliog(1)"></div>
+              <div style="min-height: 250px" class="ldhb" @click="openDliog(2)"></div>
             </el-card>
           </el-col >
           <el-col :span="12" style="padding: 5px">
@@ -266,7 +266,7 @@
                   卫星云图
                 </div>
               </div>
-              <div style="min-height: 250px" class="wxyt" @click="openDliog(2)"></div>
+              <div style="min-height: 250px" class="wxyt" @click="openDliog(1)"></div>
             </el-card>
           </el-col>
           <!--</el-card>-->
@@ -284,7 +284,7 @@
     import swiperDliog  from '../dilog/homedliog/swiperDliog'
     import echarts from 'echarts'
 
-    import {baseUrl,fileServer} from  '../utils/utils'
+    // import {baseUrl,fileServer} from  '../utils/utils'
     export default {
         name: "SystemHome",
         components:{
@@ -320,7 +320,8 @@
               show:false,
               swiperShow:false,
               swiperData:{},
-              swiperImage:{}
+              swiperImage:{},
+              screenWidth: document.body.clientWidth
             }
         },
         created(){
@@ -354,8 +355,6 @@
               });
               this.dutyData=arr
             });
-
-
         },
         computed: {
         },
@@ -383,7 +382,7 @@
                   type: 'pie',
                   radius: ['50%', '75%'],
                   avoidLabelOverlap: false,
-                  center: ['40%', '50%'],
+                  center: ['35%', '50%'],
                   itemStyle: {
                     normal: {
                       //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
@@ -466,7 +465,7 @@
                   type: 'pie',
                   radius: ['50%', '75%'],
                   avoidLabelOverlap: false,
-                  center: ['40%', '50%'],
+                  center: ['35%', '50%'],
                   itemStyle: {
                     normal: {
                       //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
@@ -525,36 +524,58 @@
               }
             });
           },
+
+          /**
+           * 请求图片
+           * @param type 类型
+           * */
+          getImages(type){
+            const parms={
+              type:type
+            };
+            this.$http.post(this.$url.baseUrl+'api/weather-images/v0.1/ht/img/list',parms).then((res)=>{
+              if(res.status===200){
+                let data=res.data.result.urls;
+                const arr=[];
+                $.each(data[0],(v,item)=>{
+                  arr.push({"src":this.$url.fileServer+'images/weather/'+item})
+                });
+                this.swiperImage={
+                  name:type===1 ? "卫星云图":"雷达回波",
+                  data:arr
+                };
+                this.swiperShow = !this.swiperShow
+              }else{
+                console.error("请求资源失败！")
+              }
+            })
+          },
           /**
            * 打开弹窗
            */
           openDliog(type){
-            if(type===1){
-              let parms={
-                type:2
-              };
-              this.$http.post(baseUrl+'api/weather-images/v0.1/ht/img/list',parms).then((res)=>{
-                if(res.status===200){
-                  let data=res.data.result.urls;
-                  let arr=[];
-                  $.each(data[0],(v,item)=>{
-                    arr.push({"src":fileServer+'images/weather/'+item})
-                  });
-                  this.swiperImage={
-                    name:"雷达回波",
-                    data:arr
-                  };
-                  this.swiperShow = !this.swiperShow
-                }else{
-                  console.error("请求失败")
-                }
-              })
+            const _this=this;
+            if(type===2){
+              _this.getImages(2);
+            }else if(type===1){
+              _this.getImages(1);
             }
-
           }
         },
         mounted(){
           this.init_charts();
+          const that=this;
+          window.onresize=()=>{
+            return (() => {
+              window.screenWidth = document.body.clientWidth;
+              that.screenWidth = window.screenWidth;
+              if(that.screenWidth>=1920){
+                $('.container').css('width','calc(100vw - 500px)')
+              }else if(that.screenWidth<1920){
+                $('.container').css('width','calc(100vw - 200px)')
+              }
+            })()
+          }
         },
     }
 </script>

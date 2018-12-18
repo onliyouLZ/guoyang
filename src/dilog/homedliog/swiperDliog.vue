@@ -60,9 +60,7 @@
       return {
         visible: this.swiperShow,
         swiperOption:{
-          autoplay:{
-
-          },
+          autoplay:{},
           speed:100,
           effect:"fade",
         },
@@ -81,7 +79,6 @@
       },
     },
     created(){
-      // this.images=this.swiperImage.data;
     },
     computed: {
       swiper() {
@@ -95,7 +92,7 @@
       childClose(){
         this.visible=false;
         this.$emit('update:swiperShow',false);
-        // this.swiperImage={};
+        this.images=[];
         this.swiper.autoplay.stop();
         this.faPlay="fa-play";
         this.swiper.slideTo(0,0,false);
@@ -128,12 +125,14 @@
     },
     mounted(){
 
+
     },
     watch:{
       /**
        * 是否显示弹窗
        */
       swiperShow(){
+        this.images=this.swiperImage.data;
         this.visible=this.swiperShow;
       }
     }

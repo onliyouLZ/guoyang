@@ -39,13 +39,19 @@
           return{
             menuArray:[
               {name:"水情监视预警",path:""},
-              {name:" 水雨情实时监控",path:"/oneMap"},
+              {name:"",path:""},
             ],
             items:[]
           }
         },
         computed:{
           onRoutes(){
+            $.each(this.items,(v,item)=>{
+              if(item.path===this.$route.path.replace('#','')){
+                this.menuArray[1].name=item.name;
+                this.menuArray[1].path=item.path
+              }
+            });
             return this.$route.path.replace('#','');
           }
         },
