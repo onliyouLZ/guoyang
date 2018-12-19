@@ -26,7 +26,7 @@
             },
             zNodes:[
               { id:1, pId:0, name:"雨量站", open:true},
-              { id:11, pId:1, name:"金水闸"},
+              { id:11, pId:1, name:"金水闸",checked:true},
               { id:12, pId:1, name:"法泗闸"},
               { id:13, pId:1, name:"鲁湖闸"},
             ]
@@ -36,6 +36,9 @@
       },
       mounted(){
         $.fn.zTree.init($("#treeDemo"), this.setting, this.zNodes);
+      },
+      created() {
+
       }
     }
 </script>

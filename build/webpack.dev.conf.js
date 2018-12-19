@@ -22,11 +22,13 @@ const bjxJson=require('../src/sdk/XZQFW.json');
 const bjxJson1=require('../src/sdk/XZQFW1.json');
 const rsverJson=require('../src/sdk/rsver.json');
 const rainJson=require('../src/sdk/rain.json');
+const rainsJson=require('../src/sdk/rains.json');
 const duty=dataJson.duty;
 const bjx=bjxJson;
 const bjx1=bjxJson1;
 const rsver=rsverJson;
 const rain=rainJson;
+const rains=rainsJson;
 const apiRouters=express.Router();
 app.use('/api',apiRouters);
 
@@ -100,6 +102,15 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         res.json({
           error:0,
           data:rain
+        })
+      }),
+      /**
+       * 雨量jsons
+       */
+      app.get('/api/rains',(req,res)=>{
+        res.json({
+          error:0,
+          data:rains
         })
       }),
       app.use(' / __ open-in-editor ',openInEditor())

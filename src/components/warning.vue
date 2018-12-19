@@ -312,7 +312,8 @@
           },
           //重定义时间
           tmFormatter(row, column, cellValue, index){
-            return Time.getNowSecond(cellValue)
+            // return Time.getNowSecond(cellValue)
+            return new Date(cellValue).formatDate('yyyy-MM-dd HH:mm:ss')
           },
           rsverHover(row, column, cellValue, index){
             this.$emit('move',row)

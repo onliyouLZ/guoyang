@@ -8,8 +8,8 @@
         <div class="prims_card">
           <p class="prims_p_title">报表类型</p>
           <label>选择类型:</label>
-          <el-radio v-model="radio" label="1">备选项</el-radio>
-          <el-radio v-model="radio" label="2">备选项</el-radio>
+          <el-radio v-model="radio" label="1">年报表</el-radio>
+          <el-radio v-model="radio" label="2">日报表</el-radio>
         </div>
         <div class="prims_card">
           <p class="prims_p_title">时间范围</p>
@@ -86,78 +86,17 @@
         border
         height="calc(100vh - 300px)"
         style="width: 100%;"
-        header-cell-class-name="table-header-public"
+        header-cell-class-name="table-header-public“”"
         :span-method="objectSpanMethod">
-        <el-table-column
-          prop="statistics"
-          align="center"
-          label="统计">
-        </el-table-column>
-        <el-table-column
-          prop="date"
-          label="日期"
-          align="center">
-        </el-table-column>
-        <el-table-column
-          prop="one"
-          label="一月"
-          align="center">
-        </el-table-column>
-        <el-table-column
-          prop="two"
-          align="center"
-          label="二月">
-        </el-table-column>
-        <el-table-column
-          prop="three"
-          align="center"
-          label="三月">
-        </el-table-column>
-        <el-table-column
-          prop="four"
-          align="center"
-          label="四月">
-        </el-table-column>
-        <el-table-column
-          prop="five"
-          align="center"
-          label="五月">
-        </el-table-column>
-        <el-table-column
-          prop="six"
-          align="center"
-          label="六月">
-        </el-table-column>
-        <el-table-column
-          prop="seven"
-          align="center"
-          label="七月">
-        </el-table-column>
-        <el-table-column
-          prop="eight"
-          align="center"
-          label="八月">
-        </el-table-column>
-        <el-table-column
-          prop="nine"
-          align="center"
-          label="九月">
-        </el-table-column>
-        <el-table-column
-          prop="ten"
-          align="center"
-          label="十月">
-        </el-table-column>
-        <el-table-column
-          prop="eleven"
-          align="center"
-          label="十一月">
-        </el-table-column>
-        <el-table-column
-          prop="twelve"
-          align="center"
-          label="十二月">
-        </el-table-column>
+    <!--:span-method="objectSpanMethod-->
+        <template v-for="(item,index) in tableHeader">
+          <el-table-column
+            :prop="item.data"
+            align="center"
+            :label="item.title">
+          </el-table-column>
+        </template>
+
       </el-table>
     <!--</el-scrollbar>-->
     <div class="footer" v-if="tableData.length>0">
@@ -193,10 +132,10 @@
             flag:0,
             flagName:"显示",
             radio:"1",
-            value5:"",
-            value11: [],
-            value12: [],
-            input:"",
+            value5:"2018",
+            value11: ["选项1"],
+            value12: ["选项1"],
+            input:"金水闸",
             options: [
               {
               value: '选项1',
@@ -214,6 +153,7 @@
               value: '选项5',
               label: '北京烤鸭'
             }],
+            tableHeader:[]
           }
         },
         methods:{
@@ -370,30 +310,96 @@
           },
         },
         created(){
-          this.$http.get('/api/rain').then((res)=>{
-              this.loading=false;
-              let data=res.data.data.result;
-              let arr=[
-                {"statistics":"月统计","date":"总量","one":"","two":"","three":"","four":"","five":"","six":"","seven":"","eight":"","nine":"","ten":"","eleven":"","twelve":""},
-                {"statistics":"月统计","date":"最大日雨量","one":"","two":"","three":"","four":"","five":"","six":"","seven":"","eight":"","nine":"","ten":"","eleven":"","twelve":""},
-                {"statistics":"月统计","date":"降雨天数","one":"","two":"","three":"","four":"","five":"","six":"","seven":"","eight":"","nine":"","ten":"","eleven":"","twelve":""},
-                {"statistics":"年统计","date":"降雨量","one":"","two":"降雨天数","three":""},
-                {"statistics":"年统计","date":"时段(天)","one":"1","two":"3","three":"7","four":"15","five":"30"},
-                {"statistics":"年统计","date":"最大降雨量","one":"","two":"","three":"","four":"","five":"","six":"","seven":"","eight":"","nine":"","ten":"","eleven":"","twelve":""},
-                {"statistics":"年统计","date":"开始时间","one":"","two":"","three":"","four":"","five":"","six":"","seven":"","eight":"","nine":"","ten":"","eleven":"","twelve":""},
-                {"statistics":"附注","date":"",},
-              ];
-            data.forEach((key,item)=>{
-                console.log(key);
-              })
-            // $.each(data,(v,item)=>{
-            //     if(item.one){
-            //       arr[0].one +=item.one;
-            //     }
-            //   });
-              this.tableData=data;
-              this.tableData=this.tableData.concat(arr);
-              this.getOrderNumber();
+          this.$http.get('/api/rains').then((res)=>{
+            this.loading=false;
+            let data=res.data.data.result[64000001];
+            let arr=[
+              {"statistics":"年统计","date":"时段(天)","month01":"1","month02":"3","month03":"7","month04":"15","month05":"30"},
+              {"statistics":"年统计","date":"最大降雨量","month01":"","month02":"","month03":"","month04":"","month05":""},
+              {"statistics":"年统计","date":"开始时间","month01":"","month02":"","month03":"","month04":"","month05":""},
+              {"statistics":"附注","date":""},
+            ];
+
+            let gridData = [];
+            let daysData = {};
+            $.each(data, function (index, item) {
+              // daysData[item.IDTM]=item.ACCP;
+              daysData[item.IDTM]=1;
+              if(index===2){
+                daysData[item.IDTM]=4;
+              }else if(index===35){
+                daysData[item.IDTM]=8;
+              }
+              // daysData1[new Date(item.IDTM).formatDate('yyyy-MM-dd')] = item.ACCP;
+            });
+             this.tableHeader = [
+               {data: 'statistics', title: "统计"},
+               {data: "date", title: "日期"},
+               {data: "month01", title: "一月"},
+               {data: "month02", title: "二月"},
+               {data: "month03", title: "三月"},
+               {data: "month04", title: "四月"},
+               {data: "month05", title: "五月"},
+               {data: "month06", title: "六月"},
+               {data: "month07", title: "七月"},
+               {data: "month08", title: "八月"},
+               {data: "month09", title: "九月"},
+               {data: "month10", title: "十月"},
+               {data: "month11", title: "十一月"},
+               {data: "month12", title: "十二月"}
+             ];
+            //日统计
+            let _day;
+            let _month;
+            let _monthKey;
+            for (let i = 1; i <= 31; i++) {
+              let row = {statistics: '日统计',date: i};
+              for (let j = 1; j <= 12; j++) {
+                _month = j < 10 ? ('0' + j) : j;
+                _monthKey = 'month' + _month;
+                _day = '2018' + "-" + _month + "-" + (i < 10 ? ('0' + i) : i) + ' 08:00:00';
+                row[_monthKey] = (daysData[_day] || daysData[_day] === 0) ? daysData[_day] : '';
+              }
+              gridData.push(row);
+            }
+
+            //月统计 && 年统计
+            let monthTotalRow = {date: '总量', statistics: '月统计'};
+            let monthMaxDayRainRow = {date: '最大日雨量', statistics: '月统计'};
+            let monthRainyDayRow = {date: '降雨天数', statistics: '月统计'};
+            let yearTotalRow = { date: '降雨量', statistics: '年统计', month01: '', month02: '降雨天数', month03: ''};
+            for (let j = 1; j <= 12; j++) {
+              _month = j < 10 ? ('0' + j) : j;
+              _monthKey = 'month' + _month;
+              monthTotalRow[_monthKey] = "";
+              monthRainyDayRow[_monthKey] = "";
+              monthMaxDayRainRow[_monthKey] = "";
+              if (!yearTotalRow.hasOwnProperty(_monthKey)) {
+                yearTotalRow[_monthKey] = '';
+              }
+              for (let i = 1; i <= 31; i++) {
+                _day = '2018' + "-" + _month + "-" + (i < 10 ? ('0' + i) : i) + ' 08:00:00';
+                if (daysData[_day] || daysData[_day] == 0) {
+                  monthTotalRow[_monthKey] = monthTotalRow[_monthKey] === '' ? 0 : monthTotalRow[_monthKey];
+                  monthTotalRow[_monthKey] += daysData[_day];
+                  yearTotalRow[_monthKey] = yearTotalRow[_monthKey] === '' ? 0 : yearTotalRow[_monthKey];
+                  yearTotalRow.month01 +=daysData[_day];
+                  monthMaxDayRainRow[_monthKey] = daysData[_day] > monthMaxDayRainRow[_monthKey] ? daysData[_day] : monthMaxDayRainRow[_monthKey];
+                  if (daysData[_day] > 0) {
+                    //降雨日数
+                    monthRainyDayRow[_monthKey] = (monthRainyDayRow[_monthKey] ? monthRainyDayRow[_monthKey] : 0) + 1;
+                    yearTotalRow.month03 = (yearTotalRow.month03 ? yearTotalRow.month03 : 0) + 1;
+                  }
+                }
+              }
+            }
+            gridData.push(monthTotalRow);
+            gridData.push(monthMaxDayRainRow);
+            gridData.push(monthRainyDayRow);
+            gridData.push(yearTotalRow);
+            this.tableData=gridData;
+            this.tableData=this.tableData.concat(arr);
+            this.getOrderNumber();
           });
 
         },
@@ -409,6 +415,9 @@
     left:-279px;
     top: 0;
     z-index: 99;
+  }
+  #table1 .el-radio+.el-radio{
+    margin-left: 10px;
   }
   #table1 .table-title{
     text-align: center;

@@ -32,6 +32,8 @@ Vue.use(VueAwesomeSwiper);
 
 
 
+
+
 Vue.prototype.$http = axios;
 Vue.prototype.$echarts = echarts;
 Vue.prototype.$url = Config;
