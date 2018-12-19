@@ -200,7 +200,8 @@
                 "sttp": "PP",
                 "bsnm": "长江",
                 "adnm": "涡阳县"
-              }
+              },
+
             ];
             this.getOrderNumber();
             // console.log(this.typeNum);
@@ -245,7 +246,6 @@
             this.tableData.sort((a,b)=>a.adcd -b.adcd);
             let index=0;
             for(let i=0;i<this.tableData.length;i++){
-
               if(i===0){
                 this.typeNum.push(1);
                 index=i;

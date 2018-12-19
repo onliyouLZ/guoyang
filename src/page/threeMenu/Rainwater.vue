@@ -37,7 +37,6 @@
               @row-click="rowClick"
               ref="multipleTable"
               @selection-change="handleSelectionChange"
-              :span-method="objectSpanMethod"
               header-cell-class-name="table-header-public">
               <el-table-column
                 type="selection"
@@ -129,7 +128,6 @@
                 "adnm": "涡阳县"
               },
             ];
-            this.getOrderNumber();
           },1000);
 
         },
@@ -150,41 +148,11 @@
           rowClick(row, event, column){
             this.$refs.multipleTable.toggleRowSelection(row);
           },
-          objectSpanMethod({ row, column, rowIndex, columnIndex }){
-            const _row=this.typeNum[rowIndex];
-            if(columnIndex===1){
-              return {
-                colspan:1,
-                rowspan:_row
-              }
-            }
-          },
           primary(){
             this.loading=true;
             setTimeout(()=>{
               this.loading=false;
             },1000)
-          },
-          //计算合并
-          getOrderNumber(){
-            //排序
-            this.tableData.sort((a,b)=>a.adcd -b.adcd);
-            let index=0;
-            for(let i=0;i<this.tableData.length;i++){
-
-              if(i===0){
-                this.typeNum.push(1);
-                index=i;
-              }else{
-                if(this.tableData[i].city===this.tableData[i-1].city){
-                  this.typeNum[index]+=1;
-                  this.typeNum.push(0);
-                }else{
-                  this.typeNum.push(1);
-                  index=i;
-                }
-              }
-            }
           },
           /**
            * 导出
