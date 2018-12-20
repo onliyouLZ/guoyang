@@ -55,7 +55,7 @@
       return {
         name:"",
         message:1,
-        items:[]
+        items:this.$router.options.routes[1].children
       };
     },
     methods: {
@@ -77,25 +77,41 @@
         return username ? username :this.name
       },
       onRoutes(){
-
         let routerPath=this.$route.path.replace('#','');
+        console.log(routerPath);
         let active;
         $.each(this.items,(v,item)=>{
           if(routerPath===item.path){
             active=item.path;
             return false
-          }else if(item.path==="/waterMonitoring"){
-            active=item.path
+          }else if(routerPath==="/realTimeRain"){
+            active='/waterMonitoring';
+            return false
+          }else if(routerPath==="/rainwater"){
+            active='/waterMonitoring';
+            return false
+          }else if(routerPath==="/RainwaterReport"){
+            active='/waterMonitoring';
+            return false
+          }else if(routerPath==="/gates"){
+            active='/waterWorks';
+            return false
+          }else if(routerPath==="/river"){
+            active='/waterWorks';
+            return false
           }else if(item.path==="/home"){
-            active=item.path
+            active=item.path;
+            return false
           }
         });
+        console.log(active);
         return active
         // return this.$route.path.replace('#','');
       }
     },
     mounted(){
-      this.items=this.$router.options.routes[1].children;
+      // this.items=;
+      // console.log(this.items);
     }
   }
 </script>

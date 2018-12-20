@@ -7,27 +7,27 @@
               <table1 v-if="activeName==='first'" @primary="primary"></table1>
             </el-tab-pane>
             <el-tab-pane label="政区面雨量统计" name="second">
-              <div v-if="activeName==='second'">22</div>
+              <table2 v-if="activeName==='second'" @primary="primary"></table2>
             </el-tab-pane>
-            <el-tab-pane label="降雨量对比统计表"  name="third">
-              <div v-if="activeName==='third'">33</div>
-            </el-tab-pane>
-            <el-tab-pane label="雨情统计表" name="fourth">
-              <div v-if="activeName==='fourth'">44</div>
-            </el-tab-pane>
-            <el-tab-pane label="水情统计表" name="six">
-              <div v-if="activeName==='six'">55</div>
-            </el-tab-pane>
+            <!--<el-tab-pane label="降雨量对比统计表"  name="third">-->
+              <!--<div v-if="activeName==='third'">33</div>-->
+            <!--</el-tab-pane>-->
+            <!--<el-tab-pane label="雨情统计表" name="fourth">-->
+              <!--<div v-if="activeName==='fourth'">44</div>-->
+            <!--</el-tab-pane>-->
+            <!--<el-tab-pane label="水情统计表" name="six">-->
+              <!--<div v-if="activeName==='six'">55</div>-->
+            <!--</el-tab-pane>-->
         </el-tabs>
-
     </div>
 </template>
 
 <script>
     import table1 from '../../components/waterWarning/table1'
+    import table2 from '../../components/waterWarning/table2'
     export default {
         name: "RainwaterReport",
-        components:{table1},
+        components:{table1,table2},
         data(){
           return{
             activeName:"first",

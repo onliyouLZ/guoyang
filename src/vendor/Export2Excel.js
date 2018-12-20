@@ -154,5 +154,5 @@ export function export_json_to_excel(th, jsonData, defaultTitle) {
     // saveAs(new Blob([s2ab(wbout)], {type: "application/octet-stream"}), title + ".xlsx")
     FileSaver.saveAs(new Blob([s2ab(wbout)], {
       type: "application/octet-stream;charset=utf-8"
-    }), title + ".xlsx");
+    }),title + ".xlsx");
 }

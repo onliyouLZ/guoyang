@@ -203,7 +203,7 @@
 </script>
 
 <style scoped>
-  #Rainwater .el-card{
+  #Rainwater .box-card{
     height: calc(100vh - 89px);
   }
   #Rainwater .footer{

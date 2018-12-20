@@ -9,6 +9,8 @@ import SystemHome from '../page/SystemHome'
 import Login from '../page/login'
 import oneMap from '../page/oneMap'
 import waterMonitoring from '../page/waterMonitoring'
+import drought from '../page/fourMenu/Drought'
+import waterWorks from '../page/fiveMenu/waterWorks'
 import business from '../page/business'
 import essential from '../page/essential'
 import system from '../page/system'
@@ -17,6 +19,9 @@ import error404 from '../page/404'
 import realTimeRain from '../page/threeMenu/RealTimeRain'
 import rainwater from '../page/threeMenu/Rainwater'
 import rainwaterReport from '../page/threeMenu/RainwaterReport'
+
+import gates from '../components/waterWorks/gates'
+import river from '../components/waterWorks/river'
 
 
 /**
@@ -71,6 +76,29 @@ export default new Router({
               component: rainwaterReport,
               name:"雨水情综合报表",
             }
+          ]
+        },
+        {
+          path: '/drought',
+          component: drought,
+          name:"旱情监视"
+        },
+        {
+          path: '/waterWorks',
+          component: waterWorks,
+          name:"水务工程信息",
+          redirect:'/gates',
+          children:[
+            {
+              path: '/gates',
+              component: gates,
+              name:"涵闸",
+            },
+            {
+              path: '/river',
+              component: river,
+              name:"河流",
+            },
           ]
         },
         {
