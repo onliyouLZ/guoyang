@@ -12,6 +12,8 @@ import 'openlayers/dist/ol.css'
 import './utils/echartsResizeHelper'
 import './ztree/zTree_v3/js/jquery.ztree.core.min'
 import './ztree/zTree_v3/js/jquery.ztree.excheck.min'
+import './ztree/zTree_v3/js/jquery.ztree.exhide.min'
+
 
 
 import Blob from '@/vendor/Blob.js'

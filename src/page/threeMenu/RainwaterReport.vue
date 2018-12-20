@@ -4,7 +4,7 @@
          element-loading-text="加载中">
         <el-tabs type="border-card" v-model="activeName" @tab-click="handleClick">
             <el-tab-pane label="单站降雨量" name="first" >
-              <table1 v-if="activeName==='first'"></table1>
+              <table1 v-if="activeName==='first'" @primary="primary"></table1>
             </el-tab-pane>
             <el-tab-pane label="政区面雨量统计" name="second">
               <div v-if="activeName==='second'">22</div>
@@ -42,6 +42,12 @@
               this.loading=false;
             },1000)
           },
+          primary(data){
+            this.loading=data.loading;
+            setTimeout(()=>{
+              this.loading=false;
+            },1000)
+          }
         },
         computed:{
         },

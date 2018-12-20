@@ -8,1505 +8,1505 @@
       "STCD": "64000001",
       "IDTM": "2018-01-01 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 0
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-01-02 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 1
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-01-03 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 2
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-01-04 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 3
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-01-05 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 4
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-01-06 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 5
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-01-07 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 6
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-01-08 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 7
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-01-09 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 8
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-01-10 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 9
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-01-11 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 10
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-01-12 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 11
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-01-20 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 12
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-01-21 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 13
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-01-31 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 14
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-01 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 15
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-02 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 16
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-03 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 17
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-04 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 18
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-05 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 19
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-06 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 20
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-07 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 21
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-08 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 22
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-09 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 23
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-10 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 24
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-11 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 25
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-12 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 26
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-13 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 27
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-14 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 28
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-15 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 29
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-16 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 30
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-17 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 31
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-18 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 32
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-19 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 33
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-20 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 34
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-21 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 35
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-22 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 36
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-23 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 37
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-24 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 38
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-25 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 39
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-26 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 40
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-27 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 41
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-02-28 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 42
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-01 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 43
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-02 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 44
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-03 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 45
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-04 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 46
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-06 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 47
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-07 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 48
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-08 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 49
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-09 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 50
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-10 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 51
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-11 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 52
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-12 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 53
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-13 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 54
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-14 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 55
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-15 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 56
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-16 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 57
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-17 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 58
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-18 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 59
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-20 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 60
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-21 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 61
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-23 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 62
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-24 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 63
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-25 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 64
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-26 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 65
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-27 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 66
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-28 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 67
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-29 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 68
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-30 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 69
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-03-31 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 70
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-01 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 71
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-02 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 72
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-03 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 73
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-04 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 74
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-05 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 75
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-06 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 76
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-07 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 77
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-08 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 78
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-10 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 79
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-11 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 80
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-12 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 81
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-13 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 82
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-14 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 83
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-15 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 84
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-16 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 85
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-17 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 86
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-18 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 87
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-19 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 88
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-20 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 89
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-21 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 90
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-22 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 91
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-23 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 92
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-24 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 93
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-25 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 94
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-26 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 95
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-27 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 96
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-28 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 97
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-29 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 98
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-04-30 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 99
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-01 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 100
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-02 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 101
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-03 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 102
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-04 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 103
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-05 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 104
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-06 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 105
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-07 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 106
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-08 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 107
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-09 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 108
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-10 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 109
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-11 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 110
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-12 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 111
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-13 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 112
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-14 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 113
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-15 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 114
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-16 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 115
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-18 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 116
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-19 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 117
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-21 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 118
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-22 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 119
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-23 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 120
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-24 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 121
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-25 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 122
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-26 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 123
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-27 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 124
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-28 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 125
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-29 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 126
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-30 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 127
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-05-31 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 128
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-01 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 129
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-02 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 130
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-03 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 131
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-04 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 132
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-05 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 133
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-06 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 134
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-07 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 135
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-08 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 136
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-09 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 137
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-10 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 138
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-11 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 139
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-12 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 140
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-13 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 141
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-14 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 142
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-15 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 143
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-16 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 144
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-17 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 145
+    }, {
+      "WTH": "2",
+      "STCD": "64000001",
+      "IDTM": "2018-06-18 08:00:00",
+      "STTDRCD": "1",
+      "ACCP": 0,
+      "__index": 146
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-19 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 146
+      "ACCP": 0,
+      "__index": 147
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-20 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 147
+      "ACCP": 0,
+      "__index": 148
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-21 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 148
+      "ACCP": 0,
+      "__index": 149
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-22 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 149
+      "ACCP": 0,
+      "__index": 150
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-23 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 150
+      "ACCP": 0,
+      "__index": 151
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-24 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 151
+      "ACCP": 0,
+      "__index": 152
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-25 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 152
+      "ACCP": 0,
+      "__index": 153
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-26 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 153
+      "ACCP": 0,
+      "__index": 154
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-27 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 154
+      "ACCP": 0,
+      "__index": 155
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-28 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 155
+      "ACCP": 0,
+      "__index": 156
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-29 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 156
+      "ACCP": 0,
+      "__index": 157
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-06-30 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 157
+      "ACCP": 0,
+      "__index": 158
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-01 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 158
+      "ACCP": 0,
+      "__index": 159
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-02 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 159
+      "ACCP": 0,
+      "__index": 160
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-03 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 160
+      "ACCP": 0,
+      "__index": 161
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-04 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 161
+      "ACCP": 0,
+      "__index": 162
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-05 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 162
+      "ACCP": 0,
+      "__index": 163
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-06 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 163
+      "ACCP": 0,
+      "__index": 164
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-07 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 164
+      "ACCP": 0,
+      "__index": 165
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-08 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 165
+      "ACCP": 0,
+      "__index": 166
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-09 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 166
+      "ACCP": 0,
+      "__index": 167
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-10 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 167
+      "ACCP": 0,
+      "__index": 168
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-11 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 168
+      "ACCP": 0,
+      "__index": 169
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-12 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 169
+      "ACCP": 0,
+      "__index": 170
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-13 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 170
+      "ACCP": 0,
+      "__index": 171
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-14 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 171
+      "ACCP": 0,
+      "__index": 172
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-15 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 172
+      "ACCP": 0,
+      "__index": 173
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-16 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 173
+      "ACCP": 0,
+      "__index": 174
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-17 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 174
+      "ACCP": 0,
+      "__index": 175
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-18 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 175
+      "ACCP": 0,
+      "__index": 176
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-19 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 176
+      "ACCP": 0,
+      "__index": 177
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-20 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 177
+      "ACCP": 0,
+      "__index": 178
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-21 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 178
+      "ACCP": 0,
+      "__index": 179
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-22 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 179
+      "ACCP": 0,
+      "__index": 180
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-23 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 180
+      "ACCP": 0,
+      "__index": 181
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-24 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 181
+      "ACCP": 0,
+      "__index": 182
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-25 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 182
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-07-26 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 183
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-27 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 184
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-28 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 185
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-29 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 186
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-30 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 187
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-07-31 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 188
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-01 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 189
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-02 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 190
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-03 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 191
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-04 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 192
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-05 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 193
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-06 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 194
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-07 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 195
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-08 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 196
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-09 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 197
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-10 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 198
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-11 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 199
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-12 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 200
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-13 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 201
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-14 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 202
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-15 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 203
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-17 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 204
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-18 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 205
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-19 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 206
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-20 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 207
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-21 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 208
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-22 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 209
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-23 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 210
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-24 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 211
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-25 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 212
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-26 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 213
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-08-27 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 214
     }, {
       "WTH": "2",
@@ -1520,7 +1520,7 @@
       "STCD": "64000001",
       "IDTM": "2018-08-29 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 216
     }, {
       "WTH": "2",
@@ -1541,203 +1541,203 @@
       "STCD": "64000001",
       "IDTM": "2018-09-01 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 219
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-09-02 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 220
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-09-03 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 221
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-09-04 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 222
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-09-05 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 223
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-09-06 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 224
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-09-07 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 225
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-09-08 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 226
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-09-09 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 227
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-09-10 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 228
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-09-11 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 229
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-09-12 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 230
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-09-13 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 231
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-09-14 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 232
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-09-15 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 233
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-09-21 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0.5,
       "__index": 234
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-09-22 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 4.5,
       "__index": 235
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-09-23 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 236
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-09-24 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 237
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-09-25 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 2,
       "__index": 238
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-09-26 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 5.5,
       "__index": 239
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-09-27 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 4.5,
       "__index": 240
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-09-28 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 241
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-09-29 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 242
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-09-30 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 243
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-10-01 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 244
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-10-02 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 245
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-10-03 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 246
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-10-07 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 247
     }, {
       "WTH": "2",
@@ -1751,442 +1751,218 @@
       "STCD": "64000001",
       "IDTM": "2018-10-16 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 249
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-10-17 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 250
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-10-18 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 1,
       "__index": 251
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-10-19 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 252
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-10-20 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 3.5,
       "__index": 253
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-10-21 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 7,
       "__index": 254
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-10-22 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 4.5,
       "__index": 255
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-10-23 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 256
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-10-24 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 257
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-10-25 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0.5,
       "__index": 258
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-10-26 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
+      "ACCP": 0,
       "__index": 259
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-10-27 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 260
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-10-28 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 261
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-10-29 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 262
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-10-30 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 263
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-10-31 08:00:00",
       "STTDRCD": "1",
       "ACCP": null,
-      "__index": 264
+      "__index": 260
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-11-01 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 265
+      "ACCP": 0,
+      "__index": 261
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-11-02 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 266
+      "ACCP": 0,
+      "__index": 262
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-11-03 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 267
+      "ACCP": 0,
+      "__index": 263
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-11-04 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 268
+      "ACCP": 0,
+      "__index": 264
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-11-05 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 269
+      "ACCP": 0,
+      "__index": 265
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-11-06 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 270
+      "ACCP": 10,
+      "__index": 266
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-11-07 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 271
+      "ACCP": 23,
+      "__index": 267
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-11-08 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 272
+      "ACCP": 29,
+      "__index": 268
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-11-09 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 273
+      "ACCP": 0,
+      "__index": 269
+    }, {
+      "WTH": "2",
+      "STCD": "64000001",
+      "IDTM": "2018-11-10 08:00:00",
+      "STTDRCD": "1",
+      "ACCP": 7,
+      "__index": 270
+    }, {
+      "WTH": "2",
+      "STCD": "64000001",
+      "IDTM": "2018-11-11 08:00:00",
+      "STTDRCD": "1",
+      "ACCP": 14.5,
+      "__index": 271
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-11-12 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 274
+      "ACCP": 4,
+      "__index": 272
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-11-13 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 275
+      "ACCP": 0,
+      "__index": 273
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-11-14 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 276
+      "ACCP": 0,
+      "__index": 274
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-11-15 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 277
+      "ACCP": 5.5,
+      "__index": 275
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-11-16 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 278
+      "ACCP": 3,
+      "__index": 276
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-11-17 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 279
+      "ACCP": 1.5,
+      "__index": 277
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-11-18 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 280
+      "ACCP": 7.5,
+      "__index": 278
     }, {
       "WTH": "2",
       "STCD": "64000001",
       "IDTM": "2018-11-19 08:00:00",
       "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 281
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-11-20 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 282
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-11-21 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 283
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-11-22 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 284
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-11-23 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 285
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-11-24 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 286
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-11-25 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 287
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-11-26 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 288
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-11-27 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 289
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-11-28 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 290
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-11-29 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 291
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-11-30 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 292
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-12-01 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 293
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-12-02 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 294
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-12-03 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 295
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-12-04 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 296
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-12-05 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 297
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-12-06 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 298
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-12-07 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 299
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-12-08 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 300
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-12-09 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 301
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-12-10 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 302
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-12-11 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 303
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-12-12 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 304
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-12-13 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 305
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-12-14 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 306
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-12-15 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 307
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-12-16 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 308
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-12-17 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 309
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-12-18 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 310
-    }, {
-      "WTH": "2",
-      "STCD": "64000001",
-      "IDTM": "2018-12-19 08:00:00",
-      "STTDRCD": "1",
-      "ACCP": null,
-      "__index": 311
+      "ACCP": 0,
+      "__index": 279
     }]
   }
 }
