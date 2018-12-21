@@ -23,12 +23,16 @@ const bjxJson1=require('../src/sdk/XZQFW1.json');
 const rsverJson=require('../src/sdk/rsver.json');
 const rainJson=require('../src/sdk/rain.json');
 const rainsJson=require('../src/sdk/rains.json');
+const gatesJson=require('../src/sdk/gates.json');
+const riverJson=require('../src/sdk/river.json');
 const duty=dataJson.duty;
 const bjx=bjxJson;
 const bjx1=bjxJson1;
 const rsver=rsverJson;
 const rain=rainJson;
 const rains=rainsJson;
+const gates=gatesJson;
+const river=riverJson;
 const apiRouters=express.Router();
 app.use('/api',apiRouters);
 
@@ -111,6 +115,24 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         res.json({
           error:0,
           data:rains
+        })
+      }),
+      /**
+       * 涵闸jsons
+       */
+      app.get('/api/gates',(req,res)=>{
+        res.json({
+          error:0,
+          data:gates
+        })
+      }),
+      /**
+       * 河流jsons
+       */
+      app.get('/api/river',(req,res)=>{
+        res.json({
+          error:0,
+          data:river
         })
       }),
       app.use(' / __ open-in-editor ',openInEditor())

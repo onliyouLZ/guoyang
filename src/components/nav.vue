@@ -78,7 +78,6 @@
       },
       onRoutes(){
         let routerPath=this.$route.path.replace('#','');
-        console.log(routerPath);
         let active;
         $.each(this.items,(v,item)=>{
           if(routerPath===item.path){
@@ -99,12 +98,17 @@
           }else if(routerPath==="/river"){
             active='/waterWorks';
             return false
+          }else if(routerPath==="/store"){
+            active='/management';
+            return false
+          }else if(routerPath==="/goods"){
+            active='/management';
+            return false
           }else if(item.path==="/home"){
             active=item.path;
             return false
           }
         });
-        console.log(active);
         return active
         // return this.$route.path.replace('#','');
       }

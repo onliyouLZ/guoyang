@@ -9,8 +9,12 @@ import SystemHome from '../page/SystemHome'
 import Login from '../page/login'
 import oneMap from '../page/oneMap'
 import waterMonitoring from '../page/waterMonitoring'
-import drought from '../page/fourMenu/Drought'
-import waterWorks from '../page/fiveMenu/waterWorks'
+import earlyWarning from  '../page/fourMenu/earlyWarning'
+import drought from '../page/fiveMenu/Drought'
+import waterWorks from '../page/sixMenu/waterWorks'
+import management from '../page/sevenMenu/management'
+
+
 import business from '../page/business'
 import essential from '../page/essential'
 import system from '../page/system'
@@ -22,6 +26,10 @@ import rainwaterReport from '../page/threeMenu/RainwaterReport'
 
 import gates from '../components/waterWorks/gates'
 import river from '../components/waterWorks/river'
+
+
+import store from '../components/management/store'
+import godds from '../components/management/goods'
 
 
 /**
@@ -79,6 +87,11 @@ export default new Router({
           ]
         },
         {
+          path: '/earlyWarning',
+          component: earlyWarning,
+          name:"水文预警预报"
+        },
+        {
           path: '/drought',
           component: drought,
           name:"旱情监视"
@@ -102,20 +115,38 @@ export default new Router({
           ]
         },
         {
-          path: '/business',
-          component: business,
-          name:"业务管理"
+          path: '/management',
+          component: management,
+          name:"防汛物资管理",
+          redirect:'/store',
+          children:[
+            {
+              path: '/store',
+              component: store,
+              name:"仓库管理",
+            },
+            {
+              path: '/goods',
+              component: godds,
+              name:"物资管理",
+            },
+          ]
         },
-        {
-          path: '/essential',
-          component: essential,
-          name:"基础数据管理"
-        },
-        {
-          path: '/system',
-          component: system,
-          name:"系统管理"
-        },
+        // {
+        //   path: '/business',
+        //   component: business,
+        //   name:"业务管理"
+        // },
+        // {
+        //   path: '/essential',
+        //   component: essential,
+        //   name:"基础数据管理"
+        // },
+        // {
+        //   path: '/system',
+        //   component: system,
+        //   name:"系统管理"
+        // },
       ]
     },
     {

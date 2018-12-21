@@ -501,14 +501,14 @@
             let pixel = _this.getEventPixel(evt.originalEvent);
             let hit = evt.map.hasFeatureAtPixel(pixel);
             if(hit){
-              let point_overlay;
-              let point_div = document.createElement('div');
-              point_div.className="css_animation";
-              point_overlay = new ol.Overlay({
-                element: point_div,
-                positioning: 'center-center'
-              });
-              that.map.addOverlay(point_overlay);
+              // let point_overlay;
+              // let point_div = document.createElement('div');
+              // point_div.className="css_animation";
+              // point_overlay = new ol.Overlay({
+              //   element: point_div,
+              //   positioning: 'center-center'
+              // });
+              // that.map.addOverlay(point_overlay);
               evt.map.getTargetElement().style.cursor = hit ? 'pointer' : '';
               //获取图层
               let feature = _this.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {return feature;});
@@ -516,19 +516,19 @@
               if(data){
                 //坐标
                 let pixel = _this.getPixelFromCoordinate([data.LGTD, data.LTTD]);
-                point_overlay.setPosition([data.LGTD, data.LTTD]);
+                // point_overlay.setPosition([data.LGTD, data.LTTD]);
                 let left = pixel[0]+12 + 'px';
                 let top = pixel[1]+16 + 'px';
                 $(".stationInfo").css({top: top, left: left,visibility: "visible"});
                 let content=that.addFeatrueInfo(data);
                 // $(".stationInfo").html(content);
               }else{
-                $(".ol-overlaycontainer-stopevent").empty();
+                // $(".ol-overlaycontainer-stopevent").empty();
                 $(".stationInfo").css('visibility', 'hidden');
               }
               // that.moveData=feature
             }else{
-              $(".ol-overlaycontainer-stopevent").empty();
+              // $(".ol-overlaycontainer-stopevent").empty();
               $(".stationInfo").css('visibility', 'hidden');
             }
 

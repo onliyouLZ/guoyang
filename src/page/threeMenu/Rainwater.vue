@@ -29,7 +29,7 @@
           style="height: 100%;"
           tag="table"
           :viewStyle="{width:'100%'}">
-          <div style="max-height: 700px">
+          <div style="max-height: 650px">
             <el-table
               :data="tables"
               border
@@ -55,6 +55,7 @@
               <el-table-column
                 prop="myavp"
                 align="center"
+                :formatter="formatters"
                 label="多年平均（mm）">
               </el-table-column>
               <el-table-column
@@ -181,6 +182,9 @@
           },
           formatJson(filterVal, jsonData){
             return jsonData.map(v => filterVal.map(j => v[j]))
+          },
+          formatters(row, column, cellValue, index){
+            console.log(index);
           },
           //下拉选择年份
           change(){

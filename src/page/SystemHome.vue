@@ -533,22 +533,31 @@
             const parms={
               type:type
             };
-            this.$http.post(this.$url.baseUrl+'api/weather-images/v0.1/ht/img/list',parms).then((res)=>{
-              if(res.status===200){
-                let data=res.data.result.urls;
-                const arr=[];
-                $.each(data[0],(v,item)=>{
-                  arr.push({"src":this.$url.fileServer+'images/weather/'+item})
+            this.$http.post(this.$url.baseUrl+'api/weather-images/v0.1/ht/img/list',parms)
+              .then((res)=>{
+                console.log(1);
+                if(res.status===200){
+                  let data=res.data.result.urls;
+                  const arr=[];
+                  $.each(data[0],(v,item)=>{
+                    arr.push({"src":this.$url.fileServer+'images/weather/'+item})
+                  });
+                  this.swiperImage={
+                    name:type===1 ? "卫星云图":"雷达回波",
+                    data:arr
+                  };
+                  this.swiperShow = !this.swiperShow
+                }else{
+                  console.error("请求资源失败！")
+                }
+              })
+              .catch((error)=>{
+                this.$notify.error({
+                  title: '提示',
+                  message: '请求图片失败，请联系管理员！',
+                  duration: 0
                 });
-                this.swiperImage={
-                  name:type===1 ? "卫星云图":"雷达回波",
-                  data:arr
-                };
-                this.swiperShow = !this.swiperShow
-              }else{
-                console.error("请求资源失败！")
-              }
-            })
+              })
           },
           /**
            * 打开弹窗

@@ -63,7 +63,7 @@
       },
     },
     mounted(){
-      this.items=this.$router.options.routes[1].children[4].children;
+      this.items=this.$router.options.routes[1].children[5].children;
     }
   }
 </script>

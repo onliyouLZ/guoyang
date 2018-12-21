@@ -660,11 +660,13 @@
     padding: 5px;
   }
   #table1 .table-button{
-    padding-left: 20px;
+    padding-left: 5px;
+    border-top: 1px solid #dddddd;
+    border-left: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
     background: linear-gradient(to top, #dbdada 0%,#E5E5E5 10%, #efeeee 100%,#ffffff)
   }
   #table1 .table-button .el-button{
-    line-height: 20px;
     color: #666666;
     font-weight: 700;
     font-size: 14px;

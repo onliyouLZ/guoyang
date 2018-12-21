@@ -112,9 +112,6 @@
         }
       },
       created(){
-        let data=[
-
-        ]
         setTimeout(()=>{
           this.loading=false;
           this.tableData=[

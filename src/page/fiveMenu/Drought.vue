@@ -92,10 +92,9 @@
           ],
           map:{},
           rightTitles:[
-            {name:"111"},
-            {name:"222"},
-            {name:"333"},
-            {name:"444"},
+            {name:"土壤相对湿度"},
+            {name:"连续无雨日"},
+            {name:"降雨距平分析"},
           ],
           flag1:0,
           flagName1:"隐藏",
@@ -170,13 +169,13 @@
         //右隐藏
         rightHide(){
           if(this.flag1===0){
-            $('.rightCard').animate({right: -350}, "fast");
+            $('.rightCard').animate({right: -370}, "fast");
             $('.right-btn-display').animate({right: 0}, "fast");
             this.flag1=1;
             this.flagName1="显示"
           }else{
             $('.rightCard').animate({right:0}, "fast");
-            $('.right-btn-display').animate({right: 350}, "fast");
+            $('.right-btn-display').animate({right: 367}, "fast");
             this.flag1=0;
             this.flagName1="隐藏"
           }
@@ -269,7 +268,7 @@
     top: 70px;
     right:0;
     height:calc(100vh - 140px);
-    width: 340px;
+    width: 360px;
     border: 5px solid #3DAAEF;
     background-color: white;
     .rightCheckbox{
@@ -306,7 +305,7 @@
     line-height: 26px;
     top:70px;
     /*transform: translate(0,-50%);*/
-    right: 345px;
+    right: 367px;
     cursor: pointer;
     text-align: center;
     font-size: 12px;;
