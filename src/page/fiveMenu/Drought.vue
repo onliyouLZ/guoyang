@@ -116,6 +116,7 @@
           childData:[],
           moveData:{},
           titleActive:0,
+          screenWidth:document.body.clientWidth
         }
       },
       methods:{
@@ -144,13 +145,13 @@
             view: new ol.View({
               projection: 'EPSG:4326',
               // center: [114.32, 30.22],
-              center: [116.27, 33.57],
+              center: [116.27, 33.55],
               //最大显示级数
               maxZoom: 18,
               //最小显示级数
               minZoom: 1,
               //当前显示级数
-              zoom: 11,
+              zoom: 11.5,
             }),
             controls:[
               new ol.control.MousePosition({
@@ -242,6 +243,15 @@
 
       },
       mounted(){
+        this.$nextTick(()=>{
+          if(this.screenWidth>=1920){
+            this.map.getView().setCenter([116.27, 33.55]);
+            this.map.getView().setZoom(11.5);
+          }else if(this.screenWidth<1920){
+            this.map.getView().setCenter([116.33,33.53]);
+            this.map.getView().setZoom(11);
+          }
+        });
         this.initMap();
       }
     }

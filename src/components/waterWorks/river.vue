@@ -18,7 +18,8 @@
           :data="tables"
           border
           style="width: 100%"
-          max-height="650"
+          class="tables"
+          height="700"
           @row-click="rowClick"
           ref="multipleTable"
           @selection-change="handleSelectionChange"
@@ -75,27 +76,24 @@
           input:"",
           multipleSelection:[],
           loading: true,
+          screenWidth:document.body.clientWidth
         }
       },
       created(){
         setTimeout(()=>{
           this.loading=false;
-          this.tableData=[
-            {name:"西家湖港",riverLength:"14.84",underStreet:"纸坊、乌龙泉、五里界",underVillageNumber:"4"},
-            {name:"西家湖港",riverLength:"14.84",underStreet:"纸坊、乌龙泉、五里界",underVillageNumber:"4"},
-            {name:"西家湖港",riverLength:"14.84",underStreet:"纸坊、乌龙泉、五里界",underVillageNumber:"4"},
-            {name:"西家湖港",riverLength:"14.84",underStreet:"纸坊、乌龙泉、五里界",underVillageNumber:"4"},
-            {name:"西家湖港",riverLength:"14.84",underStreet:"纸坊、乌龙泉、五里界",underVillageNumber:"4"},
-            {name:"西家湖港",riverLength:"14.84",underStreet:"纸坊、乌龙泉、五里界",underVillageNumber:"4"},
-            {name:"西家湖港",riverLength:"14.84",underStreet:"纸坊、乌龙泉、五里界",underVillageNumber:"4"},
-            {name:"西家湖港",riverLength:"14.84",underStreet:"纸坊、乌龙泉、五里界",underVillageNumber:"4"},
-            {name:"西家湖港",riverLength:"14.84",underStreet:"纸坊、乌龙泉、五里界",underVillageNumber:"4"},
-            {name:"西家湖港",riverLength:"14.84",underStreet:"纸坊、乌龙泉、五里界",underVillageNumber:"4"},
-          ];
+          this.search();
         },1000);
-
       },
       methods:{
+        search(){
+          this.$http.get('/api/river').then((res)=>{
+            if(res.status===200){
+              let data=res.data.data.result;
+              this.tableData=data;
+            }
+          });
+        },
         handleSizeChange(val) {
           this.pageSize = val
         },
@@ -115,6 +113,13 @@
         primary(){
           this.loading=true;
           setTimeout(()=>{
+            if(this.input){
+              this.tableData=this.tableData.filter((tableData)=>{
+                return tableData.name.match(this.input)
+              });
+            }else{
+              this.search();
+            }
             this.loading=false;
           },1000)
         },
@@ -167,7 +172,13 @@
         }
       },
       mounted(){
-
+        this.$nextTick(()=>{
+          if(this.screenWidth>=1920){
+            $('.tables').css('height',"700px")
+          }else if(this.screenWidth<1920){
+            $('.tables').css('height',"400px")
+          }
+        })
       }
     }
 </script>

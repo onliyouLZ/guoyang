@@ -325,6 +325,7 @@
             }
         },
         created(){
+
           /**
            * 处理人员信息
            */
@@ -380,7 +381,7 @@
               series: [
                 {
                   type: 'pie',
-                  radius: ['50%', '75%'],
+                  // radius: ['50%', '75%'],
                   avoidLabelOverlap: false,
                   center: ['35%', '50%'],
                   itemStyle: {
@@ -463,7 +464,7 @@
               series: [
                 {
                   type: 'pie',
-                  radius: ['50%', '75%'],
+                  // radius: ['50%', '75%'],
                   avoidLabelOverlap: false,
                   center: ['35%', '50%'],
                   itemStyle: {
@@ -535,7 +536,6 @@
             };
             this.$http.post(this.$url.baseUrl+'api/weather-images/v0.1/ht/img/list',parms)
               .then((res)=>{
-                console.log(1);
                 if(res.status===200){
                   let data=res.data.result.urls;
                   const arr=[];
@@ -552,6 +552,7 @@
                 }
               })
               .catch((error)=>{
+                console.log(1);
                 this.$notify.error({
                   title: '提示',
                   message: '请求图片失败，请联系管理员！',
@@ -572,8 +573,10 @@
           }
         },
         mounted(){
-          this.init_charts();
           const that=this;
+          /**
+           * 设置完屏幕分辨率后加载饼状图 以免饼状图渲染不全的问题
+           */
           window.onresize=()=>{
             return (() => {
               window.screenWidth = document.body.clientWidth;
@@ -584,7 +587,13 @@
                 $('.container').css('width','calc(100vw - 200px)')
               }
             })()
+          };
+          if(this.screenWidth>=1920){
+            $('.container').css('width','calc(100vw - 500px)')
+          }else if(this.screenWidth<1920){
+            $('.container').css('width','calc(100vw - 200px)')
           }
+          this.init_charts();
         },
     }
 </script>
@@ -625,7 +634,11 @@
     cursor: pointer;
   }
 
+
 </style>
 <style>
-
+  /*#electric_prod_chart div,*/
+  /*#electric_prod_chart canvas{*/
+      /*width: 100%!important;*/
+  /*}*/
 </style>

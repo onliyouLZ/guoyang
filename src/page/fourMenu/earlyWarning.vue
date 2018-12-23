@@ -39,15 +39,17 @@
         <el-button type="primary" @click="primary">查询</el-button>
         <el-button type="success" @click="exportExcel(tableData,multipleSelection)">导出</el-button>
       </div>
-      <el-scrollbar
-        style="height: 100%;"
-        tag="table"
-        :viewStyle="{width:'100%'}">
-        <div style="max-height: 650px">
+      <!--<el-scrollbar-->
+        <!--style="height: 100%;"-->
+        <!--tag="table"-->
+        <!--:viewStyle="{width:'100%'}">-->
+        <!--<div style="max-height: 650px">-->
           <el-table
             :data="tables"
             border
+            class="tables"
             style="width: 100%"
+            height="700"
             @row-click="rowClick"
             ref="multipleTable"
             @selection-change="handleSelectionChange"
@@ -63,6 +65,13 @@
                 v-if="item.type==='normal'"
                 :prop="item.data"
                 :label="item.title"
+                align="center">
+              </el-table-column>
+              <el-table-column
+                v-if="item.data==='bjdate'"
+                :prop="item.data"
+                :label="item.title"
+                width="150"
                 align="center">
               </el-table-column>
               <el-table-column
@@ -82,8 +91,8 @@
               </el-table-column>
             </template>
           </el-table>
-        </div>
-      </el-scrollbar>
+        <!--</div>-->
+      <!--</el-scrollbar>-->
       <div class="footer" v-if="tableData.length>0">
         <el-pagination
           @size-change="handleSizeChange"
@@ -155,12 +164,13 @@
           {data:'',title:'',type:"selection"},
           {data:'stnm',title:'站点名称',type:"normal"},
           {data:'bjtype',title:'报警类型',type:"normal"},
-          {data:'bjdate',title:'报警时间',type:"normal"},
+          {data:'bjdate',title:'报警时间'},
           {data:'bjz',title:'报警值',type:"normal"},
           {data:'yz',title:'阈值',type:"normal"},
           {data:'bjjb',title:'报警级别'},
           {data:'ydcl',title:'应对策略'},
-        ]
+        ],
+        screenWidth:document.body.clientWidth
       }
     },
     created(){
@@ -193,6 +203,78 @@
             "bjz":"27.5m",
             "yz":"25m",
             "bjjb":3,
+            "ydcl":"县防指办在通报气象、水情的同时，还要将相关情况向县政府分管领导报告....."
+          },
+          {
+            "stnm":"武家河闸",
+            "bjtype":"水位报警",
+            "bjdate":"2018-12-21 08:00:00",
+            "bjz":"27.5m",
+            "yz":"25m",
+            "bjjb":1,
+            "ydcl":"县防指办在通报气象、水情的同时，还要将相关情况向县政府分管领导报告....."
+          },
+          {
+            "stnm":"武家河闸",
+            "bjtype":"水位报警",
+            "bjdate":"2018-12-21 08:00:00",
+            "bjz":"27.5m",
+            "yz":"25m",
+            "bjjb":1,
+            "ydcl":"县防指办在通报气象、水情的同时，还要将相关情况向县政府分管领导报告....."
+          },
+          {
+            "stnm":"武家河闸",
+            "bjtype":"水位报警",
+            "bjdate":"2018-12-21 08:00:00",
+            "bjz":"27.5m",
+            "yz":"25m",
+            "bjjb":1,
+            "ydcl":"县防指办在通报气象、水情的同时，还要将相关情况向县政府分管领导报告....."
+          },
+          {
+            "stnm":"武家河闸",
+            "bjtype":"水位报警",
+            "bjdate":"2018-12-21 08:00:00",
+            "bjz":"27.5m",
+            "yz":"25m",
+            "bjjb":1,
+            "ydcl":"县防指办在通报气象、水情的同时，还要将相关情况向县政府分管领导报告....."
+          },
+          {
+            "stnm":"武家河闸",
+            "bjtype":"水位报警",
+            "bjdate":"2018-12-21 08:00:00",
+            "bjz":"27.5m",
+            "yz":"25m",
+            "bjjb":1,
+            "ydcl":"县防指办在通报气象、水情的同时，还要将相关情况向县政府分管领导报告....."
+          },
+          {
+            "stnm":"武家河闸",
+            "bjtype":"水位报警",
+            "bjdate":"2018-12-21 08:00:00",
+            "bjz":"27.5m",
+            "yz":"25m",
+            "bjjb":1,
+            "ydcl":"县防指办在通报气象、水情的同时，还要将相关情况向县政府分管领导报告....."
+          },
+          {
+            "stnm":"武家河闸",
+            "bjtype":"水位报警",
+            "bjdate":"2018-12-21 08:00:00",
+            "bjz":"27.5m",
+            "yz":"25m",
+            "bjjb":1,
+            "ydcl":"县防指办在通报气象、水情的同时，还要将相关情况向县政府分管领导报告....."
+          },
+          {
+            "stnm":"武家河闸",
+            "bjtype":"水位报警",
+            "bjdate":"2018-12-21 08:00:00",
+            "bjz":"27.5m",
+            "yz":"25m",
+            "bjjb":1,
             "ydcl":"县防指办在通报气象、水情的同时，还要将相关情况向县政府分管领导报告....."
           },
           {
@@ -315,7 +397,13 @@
       }
     },
     mounted(){
-
+      this.$nextTick(()=>{
+        if(this.screenWidth>=1920){
+          $('.tables').css('height',"700px")
+        }else if(this.screenWidth<1920){
+          $('.tables').css('height',"400px")
+        }
+      })
     }
   }
 </script>

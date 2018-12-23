@@ -127,7 +127,8 @@
             year:'2017',
             tableHeader:[],
             value1:"",
-            value2:""
+            value2:"",
+            multipleSelection:[]
           }
         },
         methods:{
@@ -135,7 +136,7 @@
             this.pageSize = val
           },
           handleCurrentChange(val) {
-            this.pageIndex = val
+            this.pageIndex = val;
             this.$emit('primary',{loading:true});
           },
           show(){
@@ -203,6 +204,72 @@
                   "mom": "45.45",
                   "adnm": "涡阳县"
                 },
+                {
+                  "pa": -70.64,
+                  "tenantName": "st_pptn_r",
+                  "myavp": "10.9",
+                  "yp": "2.2",
+                  "tenantId": "422800000000000",
+                  "adcd": "341621",
+                  "avp": "3.2",
+                  "mom": "45.45",
+                  "adnm": "涡阳县"
+                },
+                {
+                  "pa": -70.64,
+                  "tenantName": "st_pptn_r",
+                  "myavp": "10.9",
+                  "yp": "2.2",
+                  "tenantId": "422800000000000",
+                  "adcd": "341621",
+                  "avp": "3.2",
+                  "mom": "45.45",
+                  "adnm": "涡阳县"
+                },
+                {
+                  "pa": -70.64,
+                  "tenantName": "st_pptn_r",
+                  "myavp": "10.9",
+                  "yp": "2.2",
+                  "tenantId": "422800000000000",
+                  "adcd": "341621",
+                  "avp": "3.2",
+                  "mom": "45.45",
+                  "adnm": "涡阳县"
+                },{
+                  "pa": -70.64,
+                  "tenantName": "st_pptn_r",
+                  "myavp": "10.9",
+                  "yp": "2.2",
+                  "tenantId": "422800000000000",
+                  "adcd": "341621",
+                  "avp": "3.2",
+                  "mom": "45.45",
+                  "adnm": "涡阳县"
+                },
+                {
+                  "pa": -70.64,
+                  "tenantName": "st_pptn_r",
+                  "myavp": "10.9",
+                  "yp": "2.2",
+                  "tenantId": "422800000000000",
+                  "adcd": "341621",
+                  "avp": "3.2",
+                  "mom": "45.45",
+                  "adnm": "涡阳县"
+                },
+                {
+                  "pa": -70.64,
+                  "tenantName": "st_pptn_r",
+                  "myavp": "10.9",
+                  "yp": "2.2",
+                  "tenantId": "422800000000000",
+                  "adcd": "341621",
+                  "avp": "3.2",
+                  "mom": "45.45",
+                  "adnm": "涡阳县"
+                },
+
               ]
             });
           },
@@ -219,16 +286,17 @@
                * 表头和数据需处理 此处写的死数据
                * @type {string[]}
                */
-
-              const tHeader = [];
-              const filterVal = [];
-              $.each(tableHeader,(v,item)=>{
-                tHeader.push(item.title);
-                filterVal.push(item.data);
-              });
+              // const tHeader = [];
+              // const filterVal = [];
+              // $.each(tableHeader,(v,item)=>{
+              //   tHeader.push(item.title);
+              //   filterVal.push(item.data);
+              // });
+              const tHeader = ['政区','面雨量（mm）','多年平均（mm）','距平（%）',this.value+'年同期（mm）','同比（%）'];
+              const filterVal = ['adnm','avp','myavp','pa','yp','mom'];
               const list = tableDatas;
               const data = this.formatJson(filterVal, list);
-              export_json_to_excel(tHeader, data, this.tableYear+'年'+this.tableName+'单站降雨量统计表');
+              export_json_to_excel(tHeader, data, '政区面雨量统计');
             })
           },
           formatJson(filterVal, jsonData){

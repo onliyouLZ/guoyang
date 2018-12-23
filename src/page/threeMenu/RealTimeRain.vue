@@ -25,15 +25,17 @@
           <el-button type="primary" @click="primary">查询</el-button>
           <el-button type="success" @click="exportExcel(tableData,multipleSelection)">导出</el-button>
         </div>
-        <el-scrollbar
-          style="height: 100%;"
-          tag="table"
-          :viewStyle="{width:'100%'}">
-          <div style="max-height: 700px">
+        <!--<el-scrollbar-->
+          <!--style="height: 100%;"-->
+          <!--tag="table"-->
+          <!--:viewStyle="{width:'100%'}">-->
+          <!--<div style="max-height: 700px">-->
             <el-table
               :data="tables"
               border
               style="width: 100%"
+              class="tables"
+              height="700"
               @row-click="rowClick"
               ref="multipleTable"
               @selection-change="handleSelectionChange"
@@ -59,8 +61,8 @@
                 label="累积雨量">
               </el-table-column>
             </el-table>
-          </div>
-        </el-scrollbar>
+          <!--</div>-->
+        <!--</el-scrollbar>-->
         <div class="footer" v-if="tableData.length>0">
           <el-pagination
             @size-change="handleSizeChange"
@@ -96,7 +98,8 @@
             value6: '',
             multipleSelection:[],
             loading: true,
-            typeNum:[]
+            typeNum:[],
+            screenWidth:document.body.clientWidth
           }
         },
         created(){
@@ -195,7 +198,105 @@
                 "rvnm": "涡河",
                 "stnm": "五道沟闸",
                 "lgtd": 108.5885,
-                "adcd": "341621",
+                "adcd": "3416221",
+                "lttd": 29.886444,
+                "sttp": "PP",
+                "bsnm": "长江",
+                "adnm": "涡阳县"
+              },
+              {
+                "drp": 3.5,
+                "stcd": "180103",
+                "hnnm": "涡河",
+                "__index": 6,
+                "rvnm": "涡河",
+                "stnm": "朱楼闸",
+                "lgtd": 108.67225,
+                "adcd": "3416221",
+                "lttd": 30.321528,
+                "sttp": "PP",
+                "bsnm": "长江",
+                "adnm": "涡阳县"
+              },
+              {
+                "drp": 0.5,
+                "stcd": "180104",
+                "hnnm": "涡河",
+                "__index": 38,
+                "rvnm": "涡河",
+                "stnm": "燕小庙闸",
+                "lgtd": 110.32,
+                "adcd": "3416221",
+                "lttd": 30.62,
+                "sttp": "PP",
+                "bsnm": "长江",
+                "adnm": "涡阳县"
+              },
+              {
+                "drp": 0.5,
+                "stcd": "180105",
+                "hnnm": "涡河",
+                "__index": 134,
+                "rvnm": "涡河",
+                "stnm": "包河闸",
+                "lgtd": 109.884894,
+                "adcd": "3416221",
+                "lttd": 30.798794,
+                "sttp": "PP",
+                "bsnm": "长江",
+                "adnm": "涡阳县"
+              },
+              {
+                "drp": 5.5,
+                "stcd": "180106",
+                "hnnm": "涡河",
+                "__index": 198,
+                "rvnm": "涡河",
+                "stnm": "曹市闸",
+                "lgtd": 108.984444,
+                "adcd": "3416221",
+                "lttd": 30.134167,
+                "sttp": "PP",
+                "bsnm": "长江",
+                "adnm": "涡阳县"
+              },
+              {
+                "drp": 0.5,
+                "stcd": "180107",
+                "hnnm": "涡河",
+                "__index": 33,
+                "rvnm": "涡河",
+                "stnm": "青羊沟闸",
+                "lgtd": 109.92,
+                "adcd": "3416221",
+                "lttd": 30.27,
+                "sttp": "PP",
+                "bsnm": "长江",
+                "adnm": "涡阳县"
+              },
+              {
+                "drp": 3,
+                "stcd": "180101",
+                "hnnm": "涡河",
+                "__index": 77,
+                "rvnm": "涡河",
+                "stnm": "武家河闸",
+                "lgtd": 108.5885,
+                "adcd": "3416221",
+                "lttd": 29.886444,
+                "sttp": "PP",
+                "bsnm": "长江",
+                "adnm": "涡阳县"
+              },
+              {
+                "drp": 3,
+                "stcd": "180102",
+                "hnnm": "涡河",
+                "__index": 77,
+                "rvnm": "涡河",
+                "stnm": "五道沟闸",
+                "lgtd": 108.5885,
+                "adcd": "3416221",
                 "lttd": 29.886444,
                 "sttp": "PP",
                 "bsnm": "长江",
@@ -204,8 +305,8 @@
 
             ];
             this.getOrderNumber();
-            // console.log(this.typeNum);
           },1000);
+
 
         },
         methods:{
@@ -250,7 +351,7 @@
                 this.typeNum.push(1);
                 index=i;
               }else{
-                if(this.tableData[i].city===this.tableData[i-1].city){
+                if(this.tableData[i].adcd===this.tableData[i-1].adcd){
                   this.typeNum[index]+=1;
                   this.typeNum.push(0);
                 }else{
@@ -296,10 +397,17 @@
           },
           total(){
             return this.tableData.length
-          }
+          },
+
         },
         mounted(){
-
+          this.$nextTick(()=>{
+            if(this.screenWidth>=1920){
+              $('.tables').css('height',"700px")
+            }else if(this.screenWidth<1920){
+              $('.tables').css('height',"400px")
+            }
+          })
         }
     }
 </script>

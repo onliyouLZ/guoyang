@@ -69,7 +69,7 @@
         <div class="prims_card">
           <el-scrollbar
           style="height: 100%;">
-            <z-tree style="max-height: 450px;padding: 5px" @checkTree="checkTree" :treeData="treeData" :treeID="treeValue"></z-tree>
+            <z-tree class="trees" @checkTree="checkTree" :treeData="treeData" :treeID="treeValue"></z-tree>
           </el-scrollbar>
         </div>
         <hr />
@@ -175,7 +175,8 @@
             treeValue:[],
             oldTableData:[],
             tableFooter:false,
-            multipleSelection:[]
+            multipleSelection:[],
+            screenWidth:document.body.clientWidth
           }
         },
         methods:{
@@ -636,10 +637,20 @@
           },
         },
         created(){
-          this.search();
+
         },
         watch:{
 
+        },
+        mounted() {
+          this.$nextTick(()=>{
+            this.search();
+            if(this.screenWidth>=1920){
+              $('.trees').css('height',"300px")
+            }else if(this.screenWidth<1920){
+              $('.trees').css('height',"130px")
+            }
+          })
         }
     }
 </script>

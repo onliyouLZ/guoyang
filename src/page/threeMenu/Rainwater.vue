@@ -25,15 +25,17 @@
           <el-button type="primary" @click="primary">查询</el-button>
           <el-button type="success" @click="exportExcel(tableData,multipleSelection)">导出</el-button>
         </div>
-        <el-scrollbar
-          style="height: 100%;"
-          tag="table"
-          :viewStyle="{width:'100%'}">
-          <div style="max-height: 650px">
+        <!--<el-scrollbar-->
+          <!--style="height: 100%;"-->
+          <!--tag="table"-->
+          <!--:viewStyle="{width:'100%'}">-->
+          <!--<div style="max-height: 650px">-->
             <el-table
               :data="tables"
               border
               style="width: 100%"
+              class="tables"
+              :height="tableHeight"
               @row-click="rowClick"
               ref="multipleTable"
               @selection-change="handleSelectionChange"
@@ -55,7 +57,6 @@
               <el-table-column
                 prop="myavp"
                 align="center"
-                :formatter="formatters"
                 label="多年平均（mm）">
               </el-table-column>
               <el-table-column
@@ -74,8 +75,8 @@
                 label="同比（%）">
               </el-table-column>
             </el-table>
-          </div>
-        </el-scrollbar>
+          <!--</div>-->
+        <!--</el-scrollbar>-->
         <div class="footer" v-if="tableData.length>0">
           <el-pagination
             @size-change="handleSizeChange"
@@ -111,6 +112,8 @@
             multipleSelection:[],
             loading: true,
             typeNum:[],
+            tableHeight:700,
+            screenWidth:document.body.clientWidth
           }
         },
         created(){
@@ -128,7 +131,144 @@
                 "mom": "45.45",
                 "adnm": "涡阳县"
               },
+              {
+                "pa": -70.64,
+                "tenantName": "st_pptn_r",
+                "myavp": "10.9",
+                "yp": "2.2",
+                "tenantId": "422800000000000",
+                "adcd": "341621",
+                "avp": "3.2",
+                "mom": "45.45",
+                "adnm": "涡阳县"
+              },
+              {
+                "pa": -70.64,
+                "tenantName": "st_pptn_r",
+                "myavp": "10.9",
+                "yp": "2.2",
+                "tenantId": "422800000000000",
+                "adcd": "341621",
+                "avp": "3.2",
+                "mom": "45.45",
+                "adnm": "涡阳县"
+              },
+              {
+                "pa": -70.64,
+                "tenantName": "st_pptn_r",
+                "myavp": "10.9",
+                "yp": "2.2",
+                "tenantId": "422800000000000",
+                "adcd": "341621",
+                "avp": "3.2",
+                "mom": "45.45",
+                "adnm": "涡阳县"
+              },
+              {
+                "pa": -70.64,
+                "tenantName": "st_pptn_r",
+                "myavp": "10.9",
+                "yp": "2.2",
+                "tenantId": "422800000000000",
+                "adcd": "341621",
+                "avp": "3.2",
+                "mom": "45.45",
+                "adnm": "涡阳县"
+              },
+              {
+                "pa": -70.64,
+                "tenantName": "st_pptn_r",
+                "myavp": "10.9",
+                "yp": "2.2",
+                "tenantId": "422800000000000",
+                "adcd": "341621",
+                "avp": "3.2",
+                "mom": "45.45",
+                "adnm": "涡阳县"
+              },
+              {
+                "pa": -70.64,
+                "tenantName": "st_pptn_r",
+                "myavp": "10.9",
+                "yp": "2.2",
+                "tenantId": "422800000000000",
+                "adcd": "341621",
+                "avp": "3.2",
+                "mom": "45.45",
+                "adnm": "涡阳县"
+              },
+              {
+                "pa": -70.64,
+                "tenantName": "st_pptn_r",
+                "myavp": "10.9",
+                "yp": "2.2",
+                "tenantId": "422800000000000",
+                "adcd": "341621",
+                "avp": "3.2",
+                "mom": "45.45",
+                "adnm": "涡阳县"
+              },
+              {
+                "pa": -70.64,
+                "tenantName": "st_pptn_r",
+                "myavp": "10.9",
+                "yp": "2.2",
+                "tenantId": "422800000000000",
+                "adcd": "341621",
+                "avp": "3.2",
+                "mom": "45.45",
+                "adnm": "涡阳县"
+              },
+              {
+                "pa": -70.64,
+                "tenantName": "st_pptn_r",
+                "myavp": "10.9",
+                "yp": "2.2",
+                "tenantId": "422800000000000",
+                "adcd": "341621",
+                "avp": "3.2",
+                "mom": "45.45",
+                "adnm": "涡阳县"
+              },
+              {
+                "pa": -70.64,
+                "tenantName": "st_pptn_r",
+                "myavp": "10.9",
+                "yp": "2.2",
+                "tenantId": "422800000000000",
+                "adcd": "341621",
+                "avp": "3.2",
+                "mom": "45.45",
+                "adnm": "涡阳县"
+              },
+              {
+                "pa": -70.64,
+                "tenantName": "st_pptn_r",
+                "myavp": "10.9",
+                "yp": "2.2",
+                "tenantId": "422800000000000",
+                "adcd": "341621",
+                "avp": "3.2",
+                "mom": "45.45",
+                "adnm": "涡阳县"
+              },
+              {
+                "pa": -70.64,
+                "tenantName": "st_pptn_r",
+                "myavp": "10.9",
+                "yp": "2.2",
+                "tenantId": "422800000000000",
+                "adcd": "341621",
+                "avp": "3.2",
+                "mom": "45.45",
+                "adnm": "涡阳县"
+              },
             ];
+            if(this.screenWidth>=1920){
+              $('.tables').css('height',"700px")
+            }else if(this.screenWidth<1920){
+              $('.tables').css('height',"400px")
+            }
           },1000);
 
         },
@@ -177,14 +317,11 @@
               const filterVal = ['adnm','avp','myavp','pa','yp','mom'];
               const list = tableDatas;
               const data = this.formatJson(filterVal, list);
-              export_json_to_excel(tHeader, data, ' 雨水情分析表');
+              export_json_to_excel(tHeader, data, '雨水情分析表');
             })
           },
           formatJson(filterVal, jsonData){
             return jsonData.map(v => filterVal.map(j => v[j]))
-          },
-          formatters(row, column, cellValue, index){
-            console.log(index);
           },
           //下拉选择年份
           change(){
@@ -202,12 +339,13 @@
         },
         mounted(){
 
+
         }
     }
 </script>
 
 <style scoped>
-  #Rainwater .box-card{
+  #Rainwater .el-card{
     height: calc(100vh - 89px);
   }
   #Rainwater .footer{
@@ -229,6 +367,6 @@
     color: #606266;
   }
   #Rainwater .el-scrollbar__bar{
-    display: none;
+    /*display: none;*/
   }
 </style>
