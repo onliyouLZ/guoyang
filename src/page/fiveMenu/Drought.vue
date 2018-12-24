@@ -75,10 +75,10 @@
     /**
      * 右侧模板组件
      */
-    import warning from '../../components/warning'
-    import Hydrologic from '../../components/Hydrologic'
-    import Precipitation from '../../components/Precipitation'
-    import videoSurveillance from '../../components/videoSurveillance'
+    import warning from '../../components/oneMap/warning'
+    import Hydrologic from '../../components/oneMap/Hydrologic'
+    import Precipitation from '../../components/oneMap/Precipitation'
+    import videoSurveillance from '../../components/oneMap/videoSurveillance'
     export default {
       name: "Drought",
       components:{

@@ -94,10 +94,10 @@
     /**
      * 右侧模板组件
      */
-    import warning from '../components/warning'
-    import Hydrologic from '../components/Hydrologic'
-    import Precipitation from '../components/Precipitation'
-    import videoSurveillance from '../components/videoSurveillance'
+    import warning from '../components/oneMap/warning'
+    import Hydrologic from '../components/oneMap/Hydrologic'
+    import Precipitation from '../components/oneMap/Precipitation'
+    import videoSurveillance from '../components/oneMap/videoSurveillance'
 
     /**
      * 弹窗
@@ -105,7 +105,7 @@
     import lakes from '../dilog/oneMapdliog/warning/lakes'
 
     //标注站点
-    const BZ =['sk'];
+    const BZ =['sk','sp','ck'];
     export default {
         name: "one-map",
         components:{
@@ -129,10 +129,10 @@
               {name:"影像"},
             ],
             checkboxCard:[
-              {name:"预警监视",checked:true,component: 'warning'},
-              {name:"水情信息",checked:true,component: 'Hydrologic'},
-              {name:"降水信息",checked:true,component: 'Precipitation'},
+              {name:"河道水情",checked:true,component: 'warning'},
               {name:"视频监视",checked:false,component: 'videoSurveillance'},
+              {name:"涉水工程",checked:false,component: 'Precipitation'},
+              // {name:"视频监视",checked:false,component: 'videoSurveillance'},
             ],
             rightTitles:[],
             active:0,
@@ -195,14 +195,14 @@
                 layers: [normalLayer,l2,TileLayer],
                 view: new ol.View({
                   projection: 'EPSG:4326',
-                  center: [114.32, 30.22],
-                  // center: [116.27, 33.57],
+                  // center: [114.32, 30.22],
+                  center: [116.27, 33.55],
                   //最大显示级数
                   maxZoom: 18,
                   //最小显示级数
                   minZoom: 1,
                   //当前显示级数
-                  zoom: 11,
+                  zoom: 11.5,
                 }),
                 controls:[
                   new ol.control.MousePosition({
@@ -293,6 +293,18 @@
                }else{
                  mapFuncs.getLayerName(this.map,'sk').setVisible(false)
                }
+              }else if(index===1){
+                if(event.target.checked){
+                  this.getVideo();
+                }else{
+                  mapFuncs.getLayerName(this.map,'sp').setVisible(false)
+                }
+              }else if(index===2){
+                if(event.target.checked){
+                  this.getStock();
+                }else{
+                  mapFuncs.getLayerName(this.map,'ck').setVisible(false)
+                }
               }
             },
             //右tab切换
@@ -345,11 +357,230 @@
                   content += '<p>'+info.STNM+'</p></div>';
                   return content
                 }
+            },
+            getRiver(){
+              //水库json
+              this.$http.get('/api/rsver').then((res)=>{
+                let data=res.data.data.result;
+                if(data.length>0){
+                  // this.childData=data;
+                  let arr=[];
+                  //创建一个点
+                  $.each(data,(v,item)=>{
+                    let LGTD=item.LGTD;
+                    let LTTD=item.LTTD;
+                    let point=new ol.Feature({
+                      data:item,
+                      geometry: new ol.geom.Point([LGTD, LTTD])
+                    });
+                    //设置点的样式信息
+                    point.setStyle(new ol.style.Style({
+                      //形状
+                      image: new ol.style.Icon({
+                        // anchor:[1,1],
+                        // anchorOrigin: 'top-right',
+                        // anchorXUnits: 'fraction',
+                        // anchorYUnits: 'pixels',
+                        // offsetOrigin: 'top-right',
+                        // offset:[1,0],
+                        //图标缩放比例
+                        // scale:1,
+                        //透明度
+                        size:[15,15],
+                        //图标的url
+                        src:mapFuncs.getColor(item.OFSLTDZ)
+                      }),
+                      text: new ol.style.Text({
+                        //位置
+                        textAlign: 'center',
+                        //基准线
+                        textBaseline: 'middle',
+                        //文字样式
+                        font: 'normal 14px 微软雅黑',
+                        offsetY:15,
+                        //文本内容
+                        text:"",
+                        //文本填充样式（即文字颜色）
+                        fill: new ol.style.Fill({ color: '#aa3300' }),
+                        stroke: new ol.style.Stroke({ color: '#ffcc33', width: 2 })
+                      })
+                    }));
+
+                    arr.push(point)
+                  });
+
+                  //实例化一个矢量图层Vector作为绘制层
+                  let source = new ol.source.Vector({
+                    features: arr
+                  });
+
+
+                  //创建一个图层
+                  let vector = new ol.layer.Vector({
+                    name:"sk",
+                    TileName : "水库",
+                    source: source
+                  });
+                  //将绘制层添加到地图容器中
+                  // this.map.addLayer(vector);
+
+                }else{
+                  console.error('暂无水库数据');
+                }
+              });
+            },
+            getVideo(){
+              //视频站
+              this.$http.post('api/system-video/v0.1/list?type',{stnm:""}).then((res)=>{
+                if(res.status===200){
+                  let data=res.data.result;
+                  if(data.length>0){
+                    let arr=[];
+                    //创建一个点
+                    $.each(data,(v,item)=>{
+                      let LGTD=item.LGTD;
+                      let LTTD=item.LTTD;
+                      let point=new ol.Feature({
+                        data:item,
+                        geometry: new ol.geom.Point([LGTD, LTTD])
+                      });
+                      //设置点的样式信息
+                      point.setStyle(new ol.style.Style({
+                        //形状
+                        image: new ol.style.Icon({
+                          // anchor:[1,1],
+                          // anchorOrigin: 'top-right',
+                          // anchorXUnits: 'fraction',
+                          // anchorYUnits: 'pixels',
+                          // offsetOrigin: 'top-right',
+                          // offset:[1,0],
+                          //图标缩放比例
+                          // scale:1,
+                          //透明度
+                          size:[25,25],
+                          //图标的url
+                          src:"../../static/legend/视频.png"
+                        }),
+                        text: new ol.style.Text({
+                          //位置
+                          textAlign: 'center',
+                          //基准线
+                          textBaseline: 'middle',
+                          //文字样式
+                          font: 'normal 14px 微软雅黑',
+                          offsetY:15,
+                          //文本内容
+                          text:"",
+                          //文本填充样式（即文字颜色）
+                          fill: new ol.style.Fill({ color: '#aa3300' }),
+                          stroke: new ol.style.Stroke({ color: '#ffcc33', width: 2 })
+                        })
+                      }));
+                      arr.push(point)
+                    });
+
+                    //实例化一个矢量图层Vector作为绘制层
+                    let source = new ol.source.Vector({
+                      features: arr
+                    });
+
+
+                    //创建一个图层
+                    let vector = new ol.layer.Vector({
+                      name:"sp",
+                      TileName : "视频",
+                      source: source,
+                      visible: true,
+                    });
+                    //将绘制层添加到地图容器中
+                    this.map.addLayer(vector);
+
+                  }else{
+                    console.error('暂无水库数据');
+                  }
+                }
+              });
+            },
+            getStock(){
+              let prams={
+                orgcd:"",
+                whName:""
+              };
+              //仓库
+              this.$http.post('api/guoYang/v0.1/material-manage/warehouse/list',prams).then((res)=>{
+                if(res.status===200){
+                  let data=res.data.result;
+                  if(data.length>0){
+                    let arr=[];
+                    //创建一个点
+                    $.each(data,(v,item)=>{
+                      let LGTD=item.LGTD;
+                      let LTTD=item.LTTD;
+                      let point=new ol.Feature({
+                        data:item,
+                        geometry: new ol.geom.Point([LGTD, LTTD])
+                      });
+                      //设置点的样式信息
+                      point.setStyle(new ol.style.Style({
+                        //形状
+                        image: new ol.style.Icon({
+                          // anchor:[1,1],
+                          // anchorOrigin: 'top-right',
+                          // anchorXUnits: 'fraction',
+                          // anchorYUnits: 'pixels',
+                          // offsetOrigin: 'top-right',
+                          // offset:[1,0],
+                          //图标缩放比例
+                          // scale:1,
+                          //透明度
+                          size:[25,25],
+                          //图标的url
+                          src:"../../static/legend/物资仓库.png"
+                        }),
+                        text: new ol.style.Text({
+                          //位置
+                          textAlign: 'center',
+                          //基准线
+                          textBaseline: 'middle',
+                          //文字样式
+                          font: 'normal 14px 微软雅黑',
+                          offsetY:15,
+                          //文本内容
+                          text:"",
+                          //文本填充样式（即文字颜色）
+                          fill: new ol.style.Fill({ color: '#aa3300' }),
+                          stroke: new ol.style.Stroke({ color: '#ffcc33', width: 2 })
+                        })
+                      }));
+                      arr.push(point)
+                    });
+
+                    //实例化一个矢量图层Vector作为绘制层
+                    let source = new ol.source.Vector({
+                      features: arr
+                    });
+
+
+                    //创建一个图层
+                    let vector = new ol.layer.Vector({
+                      name:"ck",
+                      TileName : "仓库",
+                      source: source,
+                      visible: true,
+                    });
+                    //将绘制层添加到地图容器中
+                    this.map.addLayer(vector);
+
+                  }else{
+                    console.error('暂无仓库数据');
+                  }
+                }
+              });
             }
         },
         created(){
           //边界线处理
-          this.$http.get('/api/bjx1').then((res)=>{
+          this.$http.get('/api/bjx').then((res)=>{
             let shape=res.data.data.result.shape;
 
             let mapJson=res.data.data.result.json;
@@ -401,76 +632,6 @@
             //添加图层
             this.map.addLayer(vector)
           });
-          //水库json
-          this.$http.get('/api/rsver').then((res)=>{
-            let data=res.data.data.result;
-            if(data.length>0){
-              this.childData=data;
-              let arr=[];
-              //创建一个点
-              $.each(data,(v,item)=>{
-                let LGTD=item.LGTD;
-                let LTTD=item.LTTD;
-                let point=new ol.Feature({
-                  data:item,
-                  geometry: new ol.geom.Point([LGTD, LTTD])
-                });
-                //设置点的样式信息
-                point.setStyle(new ol.style.Style({
-                  //形状
-                  image: new ol.style.Icon({
-                    // anchor:[1,1],
-                    // anchorOrigin: 'top-right',
-                    // anchorXUnits: 'fraction',
-                    // anchorYUnits: 'pixels',
-                    // offsetOrigin: 'top-right',
-                    // offset:[1,0],
-                    //图标缩放比例
-                    // scale:1,
-                    //透明度
-                    size:[15,15],
-                    //图标的url
-                    src:mapFuncs.getColor(item.OFSLTDZ)
-                  }),
-                  text: new ol.style.Text({
-                    //位置
-                    textAlign: 'center',
-                    //基准线
-                    textBaseline: 'middle',
-                    //文字样式
-                    font: 'normal 14px 微软雅黑',
-                    offsetY:15,
-                    //文本内容
-                    text:"",
-                    //文本填充样式（即文字颜色）
-                    fill: new ol.style.Fill({ color: '#aa3300' }),
-                    stroke: new ol.style.Stroke({ color: '#ffcc33', width: 2 })
-                  })
-                }));
-
-                arr.push(point)
-              });
-
-              //实例化一个矢量图层Vector作为绘制层
-              let source = new ol.source.Vector({
-                features: arr
-              });
-
-
-              //创建一个图层
-              let vector = new ol.layer.Vector({
-                name:"sk",
-                TileName : "水库",
-                source: source
-              });
-              //将绘制层添加到地图容器中
-              this.map.addLayer(vector);
-
-            }else{
-              console.error('暂无水库数据');
-            }
-          });
-
         },
         mounted(){
           const that=this;

@@ -64,49 +64,31 @@
                       label="检测时间">
                     </el-table-column>
                     <el-table-column
-                      prop="RZ"
+                      prop="Z"
                       min-width="150"
                       align="center"
                       label="实时水位(m)">
                     </el-table-column>
                     <el-table-column
-                      prop="gksw"
-                      min-width="150"
-                      align="center"
-                      label="干枯水位">
-                    </el-table-column>
-                    <el-table-column
-                      prop="sfsw"
-                      min-width="150"
-                      align="center"
-                      label="设防水位(万m³)">
-                    </el-table-column>
-                    <el-table-column
-                      prop="jjsw"
+                      prop="WRZ"
                       min-width="150"
                       align="center"
                       label="警戒水位(万m³)">
                     </el-table-column>
                     <el-table-column
-                      prop="bzsw"
+                      prop="GRZ"
                       min-width="150"
                       align="center"
                       label="保证水位(万m³)">
                     </el-table-column>
                     <el-table-column
-                      prop="csfsw"
-                      min-width="150"
-                      align="center"
-                      label="超设防水位(万m³)">
-                    </el-table-column>
-                    <el-table-column
-                      prop="cjjsw"
+                      prop="OWRZ"
                       min-width="150"
                       align="center"
                       label="超警戒水位(万m³)">
                     </el-table-column>
                     <el-table-column
-                      prop="cbzsw"
+                      prop="OGRZ"
                       min-width="150"
                       align="center"
                       label="超保证水位(万m³)">
@@ -321,7 +303,9 @@
               swiperShow:false,
               swiperData:{},
               swiperImage:{},
-              screenWidth: document.body.clientWidth
+              screenWidth: document.body.clientWidth,
+              bgtm:new Date().formatDate('yyyy-MM-dd 08:00'),
+              endtm:new Date().formatDate('yyyy-MM-dd HH:mm')
             }
         },
         created(){
@@ -561,6 +545,31 @@
               })
           },
           /**
+           * 获取河道实时数据
+           * */
+          getRiver(){
+            let parms={
+              "bgtm": "2018-12-22 08:00",
+              "endtm": "2018-12-22 18:40",
+              "ad": "341621000000000",
+              "hnnm": "",
+              "warntp": "",
+              "keyword": ""
+            };
+            this.$http.post(this.$url.baseUrl+'api/sys/river/jx-real',parms)
+              .then((res)=>{
+                if(res.status===200){
+                  let data=res.data.result;
+                  this.tableData=data;
+                }
+              });
+            this.$http.get(this.$url.baseUrl+'api/sys/drought/soil/latest?'+this.bgtm+'&keyword=&ad=341621000000000&type[]=1&type[]=2&type[]=3')
+              .then((res)=>{
+                console.log(res);
+              });
+
+          },
+          /**
            * 打开弹窗
            */
           openDliog(type){
@@ -593,7 +602,17 @@
           }else if(this.screenWidth<1920){
             $('.container').css('width','calc(100vw - 200px)')
           }
-          this.init_charts();
+          //修改时间参数
+          if (new Date().getHours() > 8) {
+            //过了早八点
+            that.bgtm=new Date().formatDate('yyyy-MM-dd 08:00');
+            that.endtm=new Date().formatDate('yyyy-MM-dd HH:00');
+          } else {
+            that.bgtm=new Date().datePro('{%d-1}').formatDate('yyyy-MM-dd 08:00');
+            that.endtm=new Date().formatDate('yyyy-MM-dd HH:00');
+          }
+          that.init_charts();
+          that.getRiver();
         },
     }
 </script>

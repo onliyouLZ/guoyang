@@ -104,6 +104,9 @@
           }else if(routerPath==="/goods"){
             active='/management';
             return false
+          }else if(routerPath==="/materials"){
+            active='/management';
+            return false
           }else if(item.path==="/home"){
             active=item.path;
             return false

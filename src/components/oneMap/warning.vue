@@ -185,7 +185,7 @@
             tag="table">
             <div style="max-height: 200px">
               <el-table
-                :data="childData"
+                :data="tableData"
                 stripe
                 size="mini"
                 height="150"
@@ -207,16 +207,15 @@
                   width="120">
                 </el-table-column>
                 <el-table-column
-                  prop="RZ"
+                  prop="rz"
                   label="水位"
                   align="center"
                   width="60">
                 </el-table-column>
                 <el-table-column
-                  prop="TM"
+                  prop="date"
                   label="时间"
                   align="center"
-                  :formatter="tmFormatter"
                   width="180">
                 </el-table-column>
               </el-table>
@@ -229,7 +228,7 @@
 </template>
 
 <script>
-    import {Time} from "../utils/utils";
+    import {Time} from "../../utils/utils";
     export default {
         name: "warning",
         data(){
@@ -313,7 +312,7 @@
           //重定义时间
           tmFormatter(row, column, cellValue, index){
             // return Time.getNowSecond(cellValue)
-            return new Date(cellValue).formatDate('yyyy-MM-dd HH:mm:ss')
+            // return new Date(cellValue).formatDate('yyyy-MM-dd HH:mm:ss')
           },
           rsverHover(row, column, cellValue, index){
             this.$emit('move',row)

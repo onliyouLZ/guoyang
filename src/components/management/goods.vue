@@ -32,7 +32,7 @@
           </el-option>
         </el-select>
         <label>物资名称:</label>
-        <el-input v-model="mdName" placeholder="请输入物资名称" style="width: 150px"></el-input>
+        <el-input v-model="mdName" clearable placeholder="请输入物资名称" style="width: 150px"></el-input>
         <label>物资种类:</label>
         <el-select
           v-model="materialType"
@@ -85,7 +85,34 @@
             width="180"
             align="center">
             <template slot-scope="scope">
-              <a @click="table1(scope.$index, scope.row)" style="text-decoration: underline;cursor: pointer;color: #0a95ef">{{ scope.row.MSR_NUMBER_SUM }}</a>
+              <a @click="table1(scope.$index, scope.row)" class="goods">{{ scope.row.MSR_NUMBER_SUM }}</a>
+            </template>
+          </el-table-column>
+          <el-table-column
+            v-if="item.data==='MIR_NUMBER_SUM'"
+            :label="item.title"
+            width="180"
+            align="center">
+            <template slot-scope="scope">
+              <a @click="table2(scope.$index, scope.row)" class="goods">{{ scope.row.MIR_NUMBER_SUM }}</a>
+            </template>
+          </el-table-column>
+          <el-table-column
+            v-if="item.data==='MRR_NUMBER_SUM'"
+            :label="item.title"
+            width="180"
+            align="center">
+            <template slot-scope="scope">
+              <a @click="table3(scope.$index, scope.row)" class="goods">{{ scope.row.MRR_NUMBER_SUM }}</a>
+            </template>
+          </el-table-column>
+          <el-table-column
+            v-if="item.data==='MDR_NUMBER_SUM'"
+            :label="item.title"
+            width="180"
+            align="center">
+            <template slot-scope="scope">
+              <a @click="table4(scope.$index, scope.row)" class="goods">{{ scope.row.MDR_NUMBER_SUM }}</a>
             </template>
           </el-table-column>
           <el-table-column
@@ -537,16 +564,92 @@
       title="防汛抗旱物资入库登记明细表"
       :visible.sync="table1Visible"
       :modal-append-to-body="bodyFalse"
-      width="80%!important">
+      width="80%!important"
+      @close="closeTable">
       <el-table
         :data="tableData1"
         border
-        v-loading="loading2"
-        element-loading-text="拼命加载中"
+        v-loading="loadingTable"
+        element-loading-text="加载中"
         style="width: 100%"
         header-cell-class-name="table-header-public"
         height="400">
         <template v-for="item in tableHeader1">
+          <el-table-column
+            :prop="item.data"
+            :label="item.title"
+            min-width="150"
+            align="center">
+          </el-table-column>
+        </template>
+      </el-table>
+    </el-dialog>
+    <!--出库表格-->
+    <el-dialog
+      title="防汛抗旱物资出库登记明细表"
+      :visible.sync="table2Visible"
+      :modal-append-to-body="bodyFalse"
+      width="80%!important"
+      @close="closeTable">
+      <el-table
+        :data="tableData2"
+        border
+        v-loading="loadingTable"
+        element-loading-text="加载中"
+        style="width: 100%"
+        header-cell-class-name="table-header-public"
+        height="400">
+        <template v-for="item in tableHeader2">
+          <el-table-column
+            :prop="item.data"
+            :label="item.title"
+            min-width="150"
+            align="center">
+          </el-table-column>
+        </template>
+      </el-table>
+    </el-dialog>
+    <!--返还表格-->
+    <el-dialog
+      title="防汛抗旱物资返还登记明细表"
+      :visible.sync="table3Visible"
+      :modal-append-to-body="bodyFalse"
+      width="80%!important"
+      @close="closeTable">
+      <el-table
+        :data="tableData3"
+        border
+        v-loading="loadingTable"
+        element-loading-text="加载中"
+        style="width: 100%"
+        header-cell-class-name="table-header-public"
+        height="400">
+        <template v-for="item in tableHeader3">
+          <el-table-column
+            :prop="item.data"
+            :label="item.title"
+            min-width="150"
+            align="center">
+          </el-table-column>
+        </template>
+      </el-table>
+    </el-dialog>
+    <!--销毁表格-->
+    <el-dialog
+      title="防汛抗旱物资销毁登记明细表"
+      :visible.sync="table4Visible"
+      :modal-append-to-body="bodyFalse"
+      width="80%!important"
+      @close="closeTable">
+      <el-table
+        :data="tableData4"
+        border
+        v-loading="loadingTable"
+        element-loading-text="加载中"
+        style="width: 100%"
+        header-cell-class-name="table-header-public"
+        height="400">
+        <template v-for="item in tableHeader4">
           <el-table-column
             :prop="item.data"
             :label="item.title"
@@ -561,6 +664,7 @@
 </template>
 
 <script>
+    import {convertObjectToArray} from '../../utils/utils'
     export default {
         name: "goods",
         data(){
@@ -591,7 +695,7 @@
           };
           return {
             loading:true,
-            loading2:true,
+            loadingTable:true,
             mdName:"",
             tableHeader:[
               {data:'',title:'',type:"selection"},
@@ -599,12 +703,12 @@
               {data:'ML_NAME',title:'货品类型',type:"normal"},
               {data:'MD_SPECIFICATION',title:'货品及品名',type:"normal"},
               {data:'MD_MUNIT',title:'计量单位',type:"normal"},
-              {data:'MD_PRICE',title:'单价',type:"normal"},
+              {data:'MD_PRICE',title:'单价(元)',type:"normal"},
               {data:'MSR_NUMBER_SUM',title:'入库数量',type:"MSR_NUMBER_SUM"},
               {data:'WH_NAME',title:'存放地',type:"normal"},
-              {data:'MIR_NUMBER_SUM',title:'出库数量',type:"normal"},
-              {data:'MRR_NUMBER_SUM',title:'最近返还',type:"normal"},
-              {data:'MDR_NUMBER_SUM',title:'销毁数量',type:"normal"},
+              {data:'MIR_NUMBER_SUM',title:'出库数量',type:"MIR_NUMBER_SUM"},
+              {data:'MRR_NUMBER_SUM',title:'最近返还',type:"MRR_NUMBER_SUM"},
+              {data:'MDR_NUMBER_SUM',title:'销毁数量',type:"MDR_NUMBER_SUM"},
               {data:'INVENTORY_NUM',title:'库存数量',type:"normal"},
               {data:'caozuo',title:'操作'},
             ],
@@ -619,7 +723,40 @@
               {data:"MSR_UPHONE",title:"联系电话"},
               {data:"COMMENTS",title:"备注"},
             ],
+            tableHeader2:[
+              {data:"MD_NAME",title:"货品及货名"},
+              {data:"WH_NAME",title:"存放地"},
+              {data:"MIR_NUMBER",title:"出库数量"},
+              {data:"MIR_OUTBOUND_TIME",title:"出库时间"},
+              {data:"MIR_UNAME",title:"出库人"},
+              {data:"MIR_UPHONE",title:"联系电话"},
+              {data:"MIR_UDEPT",title:"所在单位"},
+              {data:"MIR_PURPOSE",title:"用途"},
+              {data:"COMMENTS",title:"备注"},
+            ],
+            tableHeader3:[
+              {data:"MD_NAME",title:"货品及货名"},
+              {data:"WH_NAME",title:"存放地"},
+              {data:"MRR_NUMBER",title:"返还数量"},
+              {data:"MRR_RETURN_TIME",title:"返还时间"},
+              {data:"MRR_UNAME",title:"返还人"},
+              {data:"MRR_UPHONE",title:"联系电话"},
+              {data:"COMMENTS",title:"备注"},
+            ],
+            tableHeader4:[
+              {data:"MD_NAME",title:"货品及货名"},
+              {data:"WH_NAME",title:"存放地"},
+              {data:"MDR_NUMBER",title:"销毁数量"},
+              {data:"MDR_DESTROY_TIME",title:"销毁时间"},
+              {data:"MDR_UNAME",title:"销毁人"},
+              {data:"MDR_DESTROY_REASON",title:"销毁原因"},
+              {data:"MDR_UPHONE",title:"联系电话"},
+              {data:"COMMENTS",title:"备注"},
+            ],
             tableData1:[],
+            tableData2:[],
+            tableData3:[],
+            tableData4:[],
             tableData:[
             ],
             multipleSelection:[],
@@ -633,6 +770,9 @@
             returningVisible:false,
             destroyVisible:false,
             table1Visible:false,
+            table2Visible:false,
+            table3Visible:false,
+            table4Visible:false,
             bodyFalse:false,
             ruleForm:{
               mdName:"",
@@ -854,7 +994,33 @@
             this.search();
           },
           exportExcel(tableData,multipleSelection){
-
+            let tableDatas=[];
+            if(multipleSelection.length>0){
+              tableDatas=multipleSelection
+            }else{
+              tableDatas=tableData
+            }
+            require.ensure([], () => {
+              const { export_json_to_excel } = require('../../vendor/Export2Excel');
+              /**
+               * 表头和数据需处理 此处写的死数据
+               * @type {string[]}
+               */
+              const tHeader=[];
+              const filterVal=[];
+              $.each(this.tableHeader,(v,item)=>{
+                if(item.title && item.type){
+                  tHeader.push(item.title);
+                  filterVal.push(item.data);
+                }
+              });
+              const list = tableDatas;
+              const data = this.formatJson(filterVal, list);
+              export_json_to_excel(tHeader, data, ' 物资管理统计表');
+            })
+          },
+          formatJson(filterVal, jsonData){
+            return jsonData.map(v => filterVal.map(j => v[j]))
           },
           rowClick(row, event, column){
             if(row){
@@ -1415,12 +1581,48 @@
             this.table1Visible=true;
             this.$http.get(this.$url.baseUrl+'api/guoYang/v0.1/material-manage/material/storage/record/'+row.MD_CD+'?whCd='+row.WH_CD)
               .then((res)=>{
-                let data=res.data.result;
+                let data=convertObjectToArray(res.data.result,'MSR_STORAGE_TIME');
                 setTimeout(()=>{
-                  this.loading2=false;
+                  this.loadingTable=false;
                   this.tableData1=data;
-                },1000)
+                },500)
               })
+          },
+          table2(index,row){
+            this.table2Visible=true;
+            this.$http.get(this.$url.baseUrl+'api/guoYang/v0.1/material-manage/material/outbound/record/'+row.MD_CD+'?whCd='+row.WH_CD)
+              .then((res)=>{
+                let data=convertObjectToArray(res.data.result,'MIR_OUTBOUND_TIME');
+                setTimeout(()=>{
+                  this.loadingTable=false;
+                  this.tableData2=data;
+                },500)
+              })
+          },
+          table3(index,row){
+            this.table3Visible=true;
+            this.$http.get(this.$url.baseUrl+'api/guoYang/v0.1/material-manage/material/restore/record/'+row.MD_CD+'?whCd='+row.WH_CD)
+              .then((res)=>{
+                let data=convertObjectToArray(res.data.result,'MIR_OUTBOUND_TIME');
+                setTimeout(()=>{
+                  this.loadingTable=false;
+                  this.tableData3=data;
+                },500)
+              })
+          },
+          table4(index,row){
+            this.table4Visible=true;
+            this.$http.get(this.$url.baseUrl+'api/guoYang/v0.1/material-manage/material/destroy/record/'+row.MD_CD+'?whCd='+row.WH_CD)
+              .then((res)=>{
+                let data=convertObjectToArray(res.data.result,'MIR_OUTBOUND_TIME');
+                setTimeout(()=>{
+                  this.loadingTable=false;
+                  this.tableData4=data;
+                },500)
+              })
+          },
+          closeTable(){
+            this.loadingTable=true;
           }
         },
         created(){
@@ -1479,8 +1681,10 @@
           this.$nextTick(()=>{
             if(this.screenWidth>=1920){
               $('.tables').css('height',"700px")
-            }else if(this.screenWidth<1920){
+            }else if(this.screenWidth<=1366){
               $('.tables').css('height',"400px")
+            }else if(this.screenWidth>1366 || this.screenWidth<1920){
+              $('.tables').css('height',"500px")
             }
           })
         }
@@ -1526,6 +1730,11 @@
   }
   #goods .table-button .add:hover{
     color: #0a95ef;
+  }
+  #goods .goods{
+    text-decoration: underline;
+    cursor: pointer;
+    color: #0a95ef
   }
 </style>
 <style>

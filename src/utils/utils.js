@@ -482,6 +482,71 @@ export const Time = time;
 export const Formatter = FormatterData;
 
 
+/**
+ * 将类似Java的Map的Object对象转换为Array,并提供排序.
+ *
+ * eg1. object = {a:1,b:3} => [1,3]
+ * eg2. object = {a:[1,2],b:[3,4]} => [1,2,3,4]
+ *
+ *
+ * @param object
+ * @param sortKey   用来排序的key
+ * @param isAsc     true升序,false降序
+ * @return {Array}
+ */
+export function convertObjectToArray(object, sortKey, isAsc){
+  let result = [];
+  if (!object) {
+    return result;
+  }
+  for (let pro in object) {
+    if (object.hasOwnProperty(pro)) {
+      if ($.isArray(object[pro])) {
+        result = result.concat(object[pro]);
+      } else {
+        result.push(object[pro]);
+      }
+    }
+  }
+  //排序
+  if (result.length > 0 && sortKey !== undefined) {
+    if (isAsc === undefined) {
+      isAsc = true;
+    }
+    let _sort = 0;
+    if (isAsc) {
+      result.sort(function (a, b) {
+        if (!a[sortKey] && !b[sortKey]) {
+          _sort = 0;
+        } else if (!a[sortKey]) {
+          _sort = 1;
+        } else if (!b[sortKey]) {
+          _sort = -1;
+        } else {
+          _sort = a[sortKey] > b[sortKey] ? -1 : 1;
+        }
+        return _sort;
+      });
+    } else {
+      result.sort(function (a, b) {
+        if (!a[sortKey] && !b[sortKey]) {
+          _sort = 0;
+        } else if (!a[sortKey]) {
+          _sort = -1;
+        } else if (!b[sortKey]) {
+          _sort = 1;
+        } else {
+          _sort = a[sortKey] < b[sortKey] ? -1 : 1;
+        }
+        return _sort;
+      });
+    }
+  }
+  return result;
+}
+
+
+
 
 //export const baseUrl = 'http://172.16.100.33:8080/nxhzz_2017/api/'; //服务地址
 //export const uploadUrl = 'http://121.42.25.6:8080/fss/api/file/uploadFile.do'; //文件上传地址

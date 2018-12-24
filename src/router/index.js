@@ -29,7 +29,8 @@ import river from '../components/waterWorks/river'
 
 
 import store from '../components/management/store'
-import godds from '../components/management/goods'
+import goods from '../components/management/goods'
+import materials from '../components/management/materials'
 
 
 /**
@@ -127,8 +128,13 @@ export default new Router({
             },
             {
               path: '/goods',
-              component: godds,
+              component: goods,
               name:"物资管理",
+            },
+            {
+              path: '/materials',
+              component: materials,
+              name:"物资名录",
             },
           ]
         },

@@ -161,6 +161,7 @@
 
 <script>
   import mapDliog from '../../components/mapDliog'
+
   export default {
     name: "store",
     components:{mapDliog},
@@ -394,6 +395,7 @@
       },
       //行内删除
       handleDelete(index, row) {
+        this.multipleSelection=[];
         this.multipleSelection.push(row.WH_CD);
         this.del();
       },
@@ -488,8 +490,10 @@
       this.$nextTick(()=>{
         if(this.screenWidth>=1920){
           $('.tables').css('height',"700px")
-        }else if(this.screenWidth<1920){
+        }else if(this.screenWidth<=1366){
           $('.tables').css('height',"400px")
+        }else if(this.screenWidth>1366 || this.screenWidth<1920){
+          $('.tables').css('height',"500px")
         }
       })
     }
