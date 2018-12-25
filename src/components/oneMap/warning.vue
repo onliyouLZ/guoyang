@@ -319,10 +319,28 @@
           },
           leaveHover(row, column, cellValue, index){
             this.$emit('move',"");
+          },
+          getTableData(){
+            let parms={
+              "bgtm": "2018-12-22 08:00",
+              "endtm": "2018-12-22 18:40",
+              "ad": "341621000000000",
+              "hnnm": "",
+              "warntp": "",
+              "keyword": ""
+            };
+            this.$http.post(this.$url.baseUrl+'api/sys/river/jx-real',parms).then((res)=>{
+              console.log(res);
+            })
           }
         },
         created(){
 
+        },
+        mounted() {
+          this.$n(()=>{
+            this. getTableData()
+          })
         }
     }
 </script>

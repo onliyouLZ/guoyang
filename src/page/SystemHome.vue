@@ -560,10 +560,15 @@
               .then((res)=>{
                 if(res.status===200){
                   let data=res.data.result;
+                  $.each(data,(v,item)=>{
+                    if(item.TM){
+                      item.TM=new Date(item.TM).formatDate('yyyy-MM-dd HH:mm:ss')
+                    }
+                  });
                   this.tableData=data;
                 }
               });
-            this.$http.get(this.$url.baseUrl+'api/sys/drought/soil/latest?'+this.bgtm+'&keyword=&ad=341621000000000&type[]=1&type[]=2&type[]=3')
+            this.$http.get(this.$url.baseUrl+'api/sys/drought/soil/latest?bgtm=2018-12-21 08:00&keyword=&ad=&type[]=1&type[]=2&type[]=3')
               .then((res)=>{
                 console.log(res);
               });

@@ -105,7 +105,7 @@
     import lakes from '../dilog/oneMapdliog/warning/lakes'
 
     //标注站点
-    const BZ =['sk','sp','ck'];
+    const BZ =['river','sp','ck'];
     export default {
         name: "one-map",
         components:{
@@ -289,9 +289,9 @@
                */
               if(index===0){
                if(event.target.checked){
-                 mapFuncs.getLayerName(this.map,'sk').setVisible(true)
+                 mapFuncs.getLayerName(this.map,'river').setVisible(true)
                }else{
-                 mapFuncs.getLayerName(this.map,'sk').setVisible(false)
+                 mapFuncs.getLayerName(this.map,'river').setVisible(false)
                }
               }else if(index===1){
                 if(event.target.checked){
@@ -359,9 +359,17 @@
                 }
             },
             getRiver(){
-              //水库json
-              this.$http.get('/api/rsver').then((res)=>{
-                let data=res.data.data.result;
+              //获取河道
+              let parms={
+                "bgtm": "2018-12-22 08:00",
+                "endtm": "2018-12-22 18:40",
+                "ad": "341621000000000",
+                "hnnm": "",
+                "warntp": "",
+                "keyword": ""
+              };
+              this.$http.post(this.$url.baseUrl+'api/sys/river/jx-real',parms).then((res)=>{
+                let data=res.data.result;
                 if(data.length>0){
                   // this.childData=data;
                   let arr=[];
@@ -388,7 +396,7 @@
                         //透明度
                         size:[15,15],
                         //图标的url
-                        src:mapFuncs.getColor(item.OFSLTDZ)
+                        src:"../../static/legend/河道站.png"
                       }),
                       text: new ol.style.Text({
                         //位置
@@ -417,12 +425,12 @@
 
                   //创建一个图层
                   let vector = new ol.layer.Vector({
-                    name:"sk",
-                    TileName : "水库",
+                    name:"river",
+                    TileName : "河道",
                     source: source
                   });
                   //将绘制层添加到地图容器中
-                  // this.map.addLayer(vector);
+                  this.map.addLayer(vector);
 
                 }else{
                   console.error('暂无水库数据');
@@ -514,8 +522,10 @@
                     let arr=[];
                     //创建一个点
                     $.each(data,(v,item)=>{
+                      console.log(item);
                       let LGTD=item.LGTD;
                       let LTTD=item.LTTD;
+                      item.STNM=item.WH_NAME;
                       let point=new ol.Feature({
                         data:item,
                         geometry: new ol.geom.Point([LGTD, LTTD])
@@ -632,6 +642,7 @@
             //添加图层
             this.map.addLayer(vector)
           });
+          this.getRiver();
         },
         mounted(){
           const that=this;
