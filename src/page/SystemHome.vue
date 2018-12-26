@@ -145,37 +145,37 @@
                 label="检测时间">
               </el-table-column>
               <el-table-column
-                prop="xzqh"
+                prop="ADNM"
                 min-width="150"
                 align="center"
                 label="行政区划(m)">
               </el-table-column>
               <el-table-column
-                prop="number1"
+                prop="SLM10"
                 min-width="150"
                 align="center"
                 label="10cm">
               </el-table-column>
               <el-table-column
-                prop="number2"
+                prop="SLM20"
                 min-width="150"
                 align="center"
                 label="20cm">
               </el-table-column>
               <el-table-column
-                prop="number3"
+                prop="SLM40"
                 min-width="150"
                 align="center"
                 label="40cm">
               </el-table-column>
               <el-table-column
-                prop="czpj"
+                prop="VSLM"
                 min-width="150"
                 align="center"
                 label="垂直平均">
               </el-table-column>
               <el-table-column
-                prop="trxdsd"
+                prop="RSM"
                 min-width="150"
                 align="center"
                 label="土壤相对湿度">
@@ -267,6 +267,7 @@
     import echarts from 'echarts'
 
     // import {baseUrl,fileServer} from  '../utils/utils'
+    import {convertObjectToArray} from '../utils/utils'
     export default {
         name: "SystemHome",
         components:{
@@ -348,10 +349,140 @@
            * 初始化图表
            */
           init_charts() {
+            let parms={
+              "bgtm": "2018-12-22 08:00",
+              "endtm": "2018-12-22 18:40",
+              "ad": "341621000000000",
+              "hnnm": "",
+              "warntp": "",
+              "keyword": ""
+            };
+            this.$http.post(this.$url.baseUrl+'api/sys/river/jx-real',parms)
+              .then((res)=>{
+                if(res.status===200){
+                  let data=res.data.result;
+                  let guarantee = [];//超保证
+                  let guard = [];//超警戒
+                  let notguard = [];//未超警
+                  $.each(data,(v,item)=>{
+                    if(item.TM){
+                      item.TM=new Date(item.TM).formatDate('yyyy-MM-dd HH:mm:ss');
+                      if(item.OGRZ>0){
+                        guarantee.push(item);
+                      }else if(item.OWRZ>0){
+                        guard.push(item)
+                      }else{
+                        notguard.push(item)
+                      };
+                    }
+                  });
+                  // 饼状图初始化
+                  let electric_prod_chart = echarts.init(document.getElementById('electric_prod_chart'));
+                  // 设置option
+                  let electric_prod_chart_option = {
+                    tooltip: {
+                      trigger: 'item',
+                      formatter: "{b}"
+                    },
+                    legend: {
+                      orient: 'vertical',
+                      x: 'right',
+                      top:'center',
+                      data:[
+                        '超保证水位'+guarantee.length+'个',
+                        '超警戒水位'+guard.length+'个',
+                        '未超警'+notguard.length+'个']
+                    },
+                    series: [
+                      {
+                        type: 'pie',
+                        // radius: ['50%', '75%'],
+                        avoidLabelOverlap: false,
+                        center: ['35%', '50%'],
+                        itemStyle: {
+                          normal: {
+                            //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
+                            color: function (params) {
+                              //我这边就两个柱子，大体就两个柱子颜色渐变，所以数组只有两个值，多个颜色就多个值
+                              var colorList = [
+                                ['#FE7B18', '#FF561E', '#FF431E'],
+
+                                ['#FF9B01', '#FF8A01', '#FF8000'],
+
+                                // ['#FFF87C', '#FFED51', '#FFDD12'],
+
+                                ['#13A2F2', '#0796EF', '#0192EF']
+
+                              ];
+                              return new echarts.graphic.LinearGradient(0, 1, 0, 0,
+                                [
+                                  {offset: 0, color: colorList[params.dataIndex][0]},
+                                  {offset: 0.5, color: colorList[params.dataIndex][1]},
+                                  {offset: 1, color: colorList[params.dataIndex][2]}
+                                ]);
+                            },
+                            barBorderRadius: 5  //柱状角成椭圆形
+                          }
+                        },
+                        label: {
+                          normal: {
+                            show: false,
+                            position: 'center'
+                          },
+                          emphasis: {
+                            show: true,
+                            textStyle: {
+                              fontSize: '14',
+                              fontWeight: 'bold'
+                            }
+                          }
+                        },
+                        labelLine: {
+                          normal: {
+                            show: false
+                          }
+                        },
+                        data:[
+                          {value:guarantee.length, name:'超保证水位'+guarantee.length+'个'},
+                          {value:guard.length, name:'超警戒水位'+guard.length+'个'},
+                          {value:notguard.length, name:'未超警'+notguard.length+'个'},
+                        ]
+                      }
+                    ]
+                  };
+                  // 绘制图表
+                  electric_prod_chart.setOption(electric_prod_chart_option);
+                  electric_prod_chart.on('click',(param)=>{
+                    this.show = !this.show;
+                    if (param.name.indexOf('超保证水位') !== -1) {
+                      this.swiperData={
+                        name:"河道站超保证统计",
+                        data:guarantee
+                      }
+                    }
+                    else if (param.name.indexOf('超警戒水位') !== -1) {
+                      this.swiperData={
+                        name:"河道站超警戒统计",
+                        data:guard
+                      }
+                    }
+                    else if (param.name.indexOf('未超警') !== -1) {
+                      this.swiperData={
+                        name:"河道站未超警统计",
+                        data:notguard
+                      }
+                    }
+
+                  });
+                  this.tableData=data;
+                }
+              });
+
+
             // 饼状图初始化
-            let electric_prod_chart = echarts.init(document.getElementById('electric_prod_chart'));
+            let electric_prod_chart1 = echarts.init(document.getElementById('electric_prod_chart1'));
             // 设置option
-            let electric_prod_chart_option = {
+            let electric_prod_chart_option1 = {
               tooltip: {
                 trigger: 'item',
                 formatter: "{b}"
@@ -360,7 +491,7 @@
                 orient: 'vertical',
                 x: 'right',
                 top:'center',
-                data:['超保证水位3个','超警戒水位2个','超设防水位9个','未超警16个']
+                data:['特大干旱3个','重大干旱2个','中等干旱9个','轻微干旱2个','无干旱14个']
               },
               series: [
                 {
@@ -380,86 +511,7 @@
 
                           ['#FFF87C', '#FFED51', '#FFDD12'],
 
-                          ['#13A2F2', '#0796EF', '#0192EF']
-
-                        ];
-                        return new echarts.graphic.LinearGradient(0, 1, 0, 0,
-                          [
-                            {offset: 0, color: colorList[params.dataIndex][0]},
-                            {offset: 0.5, color: colorList[params.dataIndex][1]},
-                            {offset: 1, color: colorList[params.dataIndex][2]}
-                          ]);
-                      },
-                      barBorderRadius: 5  //柱状角成椭圆形
-                    }
-                  },
-                  label: {
-                    normal: {
-                      show: false,
-                      position: 'center'
-                    },
-                    emphasis: {
-                      show: true,
-                      textStyle: {
-                        fontSize: '14',
-                        fontWeight: 'bold'
-                      }
-                    }
-                  },
-                  labelLine: {
-                    normal: {
-                      show: false
-                    }
-                  },
-                  data:[
-                    {value:3, name:'超保证水位3个'},
-                    {value:2, name:'超警戒水位2个'},
-                    {value:9, name:'超设防水位9个'},
-                    {value:16, name:'未超警16个'},
-                  ]
-                }
-              ]
-            };
-            // 绘制图表
-            electric_prod_chart.setOption(electric_prod_chart_option);
-            electric_prod_chart.on('click',()=>{
-              this.show = !this.show;
-              this.swiperData={
-                name:"河道站超警统计",
-              }
-            });
-
-
-
-            // 饼状图初始化
-            let electric_prod_chart1 = echarts.init(document.getElementById('electric_prod_chart1'));
-            // 设置option
-            let electric_prod_chart_option1 = {
-              tooltip: {
-                trigger: 'item',
-                formatter: "{b}"
-              },
-              legend: {
-                orient: 'vertical',
-                x: 'right',
-                top:'center',
-                data:['超设计洪水位3个','超汛限水位2个','正常水位9个']
-              },
-              series: [
-                {
-                  type: 'pie',
-                  // radius: ['50%', '75%'],
-                  avoidLabelOverlap: false,
-                  center: ['35%', '50%'],
-                  itemStyle: {
-                    normal: {
-                      //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-                      color: function (params) {
-                        //我这边就两个柱子，大体就两个柱子颜色渐变，所以数组只有两个值，多个颜色就多个值
-                        var colorList = [
-                          ['#FE7B18', '#FF561E', '#FF431E'],
-
-                          ['#FF9B01', '#FF8A01', '#FF8000'],
+                          ['#13A2F2', '#0796BF', '#0192BF'],
 
                           ['#13A2F2', '#0796EF', '#0192EF']
 
@@ -493,9 +545,11 @@
                     }
                   },
                   data:[
-                    {value:3, name:'超设计洪水位3个'},
-                    {value:2, name:'超汛限水位2个'},
-                    {value:9, name:'正常水位9个'},
+                    {value:3, name:'特大干旱3个'},
+                    {value:2, name:'重大干旱2个'},
+                    {value:9, name:'中等干旱9个'},
+                    {value:2, name:'轻微干旱2个'},
+                    {value:14, name:'无干旱14个'},
                   ]
                 }
               ]
@@ -505,7 +559,7 @@
             electric_prod_chart1.on('click',()=>{
               this.show = !this.show;
               this.swiperData={
-                name:"墒情站超警统计",
+                name:"墒情站干旱统计",
               }
             });
           },
@@ -548,31 +602,23 @@
            * 获取河道实时数据
            * */
           getRiver(){
-            let parms={
-              "bgtm": "2018-12-22 08:00",
-              "endtm": "2018-12-22 18:40",
-              "ad": "341621000000000",
-              "hnnm": "",
-              "warntp": "",
-              "keyword": ""
-            };
-            this.$http.post(this.$url.baseUrl+'api/sys/river/jx-real',parms)
-              .then((res)=>{
-                if(res.status===200){
-                  let data=res.data.result;
-                  $.each(data,(v,item)=>{
-                    if(item.TM){
-                      item.TM=new Date(item.TM).formatDate('yyyy-MM-dd HH:mm:ss')
-                    }
-                  });
-                  this.tableData=data;
-                }
-              });
+
+          },
+
+          /**
+           * 获取墒情实时数据
+           * */
+          getSoil(){
             this.$http.get(this.$url.baseUrl+'api/sys/drought/soil/latest?bgtm=2018-12-21 08:00&keyword=&ad=&type[]=1&type[]=2&type[]=3')
               .then((res)=>{
-                console.log(res);
-              });
-
+                  if(res.status===200){
+                    let data=convertObjectToArray(res.data.result);
+                    $.each(data,(v,item)=>{
+                      item.TM=new Date(item.TM).formatDate('yyyy-MM-dd HH:mm:ss')
+                    });
+                    this.tableData1=data;
+                  }
+              })
           },
           /**
            * 打开弹窗
@@ -618,6 +664,7 @@
           }
           that.init_charts();
           that.getRiver();
+          that.getSoil()
         },
     }
 </script>

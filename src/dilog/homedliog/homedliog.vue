@@ -6,7 +6,7 @@
     width="50%"
     @close="childClose">
     <el-table
-      :data="tableData1"
+      :data="tableData"
       border
       height="500"
       size="mini"
@@ -16,46 +16,47 @@
         prop="STNM"
         min-width="120"
         align="center"
-        label="测站名称">
+        fixed
+        label="站点名称">
       </el-table-column>
       <el-table-column
         prop="TM"
         min-width="120"
         align="center"
-        label="时间">
+        label="检测时间">
       </el-table-column>
       <el-table-column
         prop="Z"
         min-width="120"
         align="center"
-        label="河道水位">
+        label="实时水位(m)">
       </el-table-column>
       <el-table-column
-        prop="number1"
+        prop="WRZ"
         min-width="120"
         align="center"
-        label="设防水位">
+        label="警戒水位(万m³)">
       </el-table-column>
       <el-table-column
-        prop="number2"
+        prop="GRZ"
+        min-width="150"
+        align="center"
+        label="保证水位(万m³)">
+      </el-table-column>
+      <el-table-column
+        prop="OWRZ"
         min-width="120"
         align="center"
-        label="警戒水位">
+        label="超警戒水位(万m³)">
       </el-table-column>
       <el-table-column
-        prop="number3"
+        prop="OGRZ"
         min-width="120"
         align="center"
-        label="保证水位">
+        label="超保证水位(万m³)">
       </el-table-column>
       <el-table-column
-        prop="czpj"
-        min-width="120"
-        align="center"
-        label="超防汛水位">
-      </el-table-column>
-      <el-table-column
-        prop="trxdsd"
+        prop="STLC"
         min-width="120"
         align="center"
         label="站点地址">
@@ -75,14 +76,7 @@
     data() {
       return {
         visible: this.show,
-        tableData1: [
-          {STNM: "西阳镇墒情站", TM: "2018-10-11 11:11:11", Z: "11", number1: "22", number2: "22", number3: "22", czpj: "22", trxdsd: "22"},
-          {STNM: "涡南镇墒情站", TM: "2018-10-11 11:11:11", Z: "12", number1: "22", number2: "22", number3: "22", czpj: "22", trxdsd: "22"},
-          {STNM: "楚店镇墒情站", TM: "2018-10-11 11:11:11", Z: "13", number1: "22", number2: "22", number3: "22", czpj: "22", trxdsd: "22"},
-          {STNM: "高公镇墒情站", TM: "2018-10-11 11:11:11", Z: "14", number1: "22", number2: "22", number3: "22", czpj: "22", trxdsd: "22"},
-          {STNM: "高炉镇墒情站", TM: "2018-10-11 11:11:11", Z: "15", number1: "22", number2: "22", number3: "22", czpj: "22", trxdsd: "22"},
-          {STNM: "曹市镇墒情站", TM: "2018-10-11 11:11:11", Z: "16", number1: "22", number2: "22", number3: "22", czpj: "22", trxdsd: "22"},
-        ],
+        tableData:[],
       }
     },
     props:{
@@ -109,8 +103,6 @@
 
     },
     mounted(){
-
-
     },
     watch:{
       /**
@@ -118,6 +110,8 @@
        */
       show(){
         this.visible=this.show;
+        this.tableData=this.swiperData.data;
+        console.log();
       }
     }
   }

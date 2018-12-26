@@ -1,54 +1,64 @@
 <template>
   <el-collapse v-model="activeName">
-    <el-collapse-item name="1">
+    <el-collapse-item  name="1">
       <template slot="title">
-        <i class="fa fa-user-o" style="margin: 0 10px"></i>湖泊信息
+        <i class="fa fa-user-o" style="margin: 0 10px"></i>仓库信息
       </template>
-      <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-      <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
-    </el-collapse-item>
-    <el-collapse-item  name="2">
-      <template slot="title">
-        <i class="fa fa-user-o" style="margin: 0 10px"></i>水库信息
-      </template>
-      <div>控制反馈：通过界面样式和交互动效让用户可以清晰的感知自己的操作；</div>
-      <div>页面反馈：操作后，通过页面元素的变化清晰地展现当前状态。</div>
-    </el-collapse-item>
-    <el-collapse-item  name="3">
-      <template slot="title">
-        <i class="fa fa-user-o" style="margin: 0 10px"></i>涵闸水位
-      </template>
-      <div>简化流程：设计简洁直观的操作流程；</div>
-      <div>清晰明确：语言表达清晰且表意明确，让用户快速理解进而作出决策；</div>
-      <div>帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。</div>
-    </el-collapse-item>
-    <el-collapse-item  name="4">
-      <template slot="title">
-        <i class="fa fa-user-o" style="margin: 0 10px"></i>雨情信息
-      </template>
-      <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
-      <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
-    </el-collapse-item>
-    <el-collapse-item  name="5">
-      <template slot="title">
-        <i class="fa fa-user-o" style="margin: 0 10px"></i>渍水点水情
-      </template>
-      <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
-      <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
-    </el-collapse-item>
-    <el-collapse-item  name="6">
-      <template slot="title">
-        <i class="fa fa-user-o" style="margin: 0 10px"></i>河道信息
-      </template>
-      <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
-      <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
-    </el-collapse-item>
-    <el-collapse-item name="7">
-      <template slot="title">
-        <i class="fa fa-user-o" style="margin: 0 10px"></i>灾情险情
-      </template>
-      <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
-      <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
+      <div>
+        <el-scrollbar
+          style="height: 100%"
+          tag="table">
+          <div style="max-height: 200px">
+            <el-table
+              :data="tableData"
+              stripe
+              size="mini"
+              height="150"
+              style="width: 100%;font-size: 12px"
+              header-cell-class-name="table-dliog-header"
+              cell-class-name="table-dliog-body"
+              @row-dblclick="lakeDbClick"
+              @cell-mouse-enter="rsverHover"
+              @cell-mouse-leave="leaveHover" >
+              <el-table-column
+                label=" "
+                type="index"
+                width="20">
+              </el-table-column>
+              <el-table-column
+                prop="WH_NAME"
+                label="仓库名称"
+                align="center"
+                width="120">
+              </el-table-column>
+              <el-table-column
+                prop="WH_AREA"
+                label="占地面积"
+                align="center"
+                width="120">
+              </el-table-column>
+              <el-table-column
+                prop="ORGNM"
+                label="所在位置"
+                align="center"
+                min-width="160">
+              </el-table-column>
+              <el-table-column
+                prop="ADDVNM"
+                label="管理单位"
+                align="center"
+                width="120">
+              </el-table-column>
+              <el-table-column
+                prop="MANAGE_DUTY_PERSON"
+                label="责任人"
+                align="center"
+                width="120">
+              </el-table-column>
+            </el-table>
+          </div>
+        </el-scrollbar>
+      </div>
     </el-collapse-item>
   </el-collapse>
 </template>
@@ -58,8 +68,76 @@
         name: "precipitation",
         data(){
           return{
-            activeName: '3'
+            activeName: ["1"],
+            tableData: [ ],
+            tableDataRain:[],
+            swiperShow:false,
           }
+        },
+        props:{
+          show:{
+            type:Boolean,
+            default:false
+          },
+          childData:{
+            type:Array,
+            default:[]
+          }
+        },
+        methods:{
+          lakeDbClick(row, event, column){
+            /**
+             * 向父组件传递一个方法
+             */
+            this.$emit('show',{show:true,data:row});
+            $('.stationInfo').css({visibility:'hidden'});
+          },
+          rsverDbClick(row, event, column){
+            this.$emit('show',{show:true,data:row});
+            $('.stationInfo').css({visibility:'hidden'});
+          },
+          //重定义时间
+          tmFormatter(row, column, cellValue, index){
+            // return Time.getNowSecond(cellValue)
+            // return new Date(cellValue).formatDate('yyyy-MM-dd HH:mm:ss')
+          },
+          rsverHover(row, column, cellValue, index){
+            this.$emit('move',row)
+          },
+          leaveHover(row, column, cellValue, index){
+            this.$emit('move',"");
+          },
+          getTableData(){
+            let prams={
+              orgcd:"",
+              whName:""
+            };
+            //仓库
+            this.$http.post('api/guoYang/v0.1/material-manage/warehouse/list',prams).then((res)=>{
+              if(res.status===200){
+                let data=res.data.result;
+                console.log(data);
+                if(data.length>0){
+                  $.each(data,(v,item)=>{
+                    let LGTD=item.LGTD;
+                    let LTTD=item.LTTD;
+                    item.STNM=item.WH_NAME;
+                  });
+                  this.tableData=data;
+                }else{
+                  console.error('暂无仓库数据');
+                }
+              }
+            });
+          }
+        },
+        created(){
+
+        },
+        mounted() {
+          this.$nextTick(()=>{
+            this. getTableData()
+          })
         }
     }
 </script>

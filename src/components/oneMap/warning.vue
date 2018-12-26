@@ -3,12 +3,9 @@
     <el-collapse v-model="activeName">
       <el-collapse-item  name="1">
         <template slot="title">
-          <i class="fa fa-user-o" style="margin: 0 10px"></i>湖泊信息
+          <i class="fa fa-user-o" style="margin: 0 10px"></i>河道信息
         </template>
         <div>
-          <div class="cardHeader">
-            <label>超保证水位:<span>3</span>个</label>
-          </div>
           <el-scrollbar
             style="height: 100%"
             tag="table">
@@ -21,7 +18,9 @@
                 style="width: 100%;font-size: 12px"
                 header-cell-class-name="table-dliog-header"
                 cell-class-name="table-dliog-body"
-                @row-dblclick="lakeDbClick">
+                @row-dblclick="lakeDbClick"
+                @cell-mouse-enter="rsverHover"
+                @cell-mouse-leave="leaveHover" >
                 <el-table-column
                   label=" "
                   type="index"
@@ -29,143 +28,45 @@
                 </el-table-column>
                 <el-table-column
                   prop="STNM"
-                  label="湖泊名称"
+                  label="河道名称"
                   align="center"
-                  width="80">
+                  width="120">
                 </el-table-column>
                 <el-table-column
-                  prop="rz"
+                  prop="Z"
                   label="水位"
                   align="center"
-                  width="80">
+                  width="120">
                 </el-table-column>
                 <el-table-column
-                  prop="date"
+                  prop="TM"
                   label="时间"
                   align="center"
                   min-width="160">
                 </el-table-column>
                 <el-table-column
-                  prop="bz"
+                  prop="WRQ"
+                  label="警戒水位"
+                  align="center"
+                  width="120">
+                </el-table-column>
+                <el-table-column
+                  prop="OWRQ"
+                  label="超警戒水位"
+                  align="center"
+                  width="120">
+                </el-table-column>
+                <el-table-column
+                  prop="GRZ"
                   label="保证水位"
                   align="center"
-                  width="80">
+                  width="120">
                 </el-table-column>
                 <el-table-column
-                  prop="cbz"
+                  prop="OGRZ"
                   label="超保证水位"
                   align="center"
-                  width="100">
-                </el-table-column>
-              </el-table>
-            </div>
-          </el-scrollbar>
-        </div>
-        <div>
-          <div class="cardHeader">
-            <label>超警戒水位:<span>3</span>个</label>
-          </div>
-          <el-scrollbar
-            style="height: 100%"
-            tag="table">
-            <div style="max-height: 200px">
-              <el-table
-                :data="tableData"
-                stripe
-                size="mini"
-                height="150"
-                style="width: 100%;font-size: 12px"
-                header-cell-class-name="table-dliog-header"
-                cell-class-name="table-dliog-body">
-                <el-table-column
-                  label=" "
-                  type="index"
-                  width="20">
-                </el-table-column>
-                <el-table-column
-                  prop="STNM"
-                  label="湖泊名称"
-                  align="center"
-                  width="80">
-                </el-table-column>
-                <el-table-column
-                  prop="rz"
-                  label="水位"
-                  align="center"
-                  width="80">
-                </el-table-column>
-                <el-table-column
-                  prop="date"
-                  label="时间"
-                  align="center"
-                  min-width="160">
-                </el-table-column>
-                <el-table-column
-                  prop="bz"
-                  label="保证水位"
-                  align="center"
-                  width="80">
-                </el-table-column>
-                <el-table-column
-                  prop="cbz"
-                  label="超保证水位"
-                  align="center"
-                  width="100">
-                </el-table-column>
-              </el-table>
-            </div>
-          </el-scrollbar>
-        </div>
-        <div>
-          <div class="cardHeader">
-            <label>超设防水位:<span>3</span>个</label>
-          </div>
-          <el-scrollbar
-            style="height: 100%"
-            tag="table">
-            <div style="max-height: 200px">
-              <el-table
-                :data="tableData"
-                stripe
-                size="mini"
-                height="150"
-                style="width: 100%;font-size: 12px"
-                header-cell-class-name="table-dliog-header"
-                cell-class-name="table-dliog-body">
-                <el-table-column
-                  label=" "
-                  type="index"
-                  width="20">
-                </el-table-column>
-                <el-table-column
-                  prop="STNM"
-                  label="湖泊名称"
-                  align="center"
-                  width="80">
-                </el-table-column>
-                <el-table-column
-                  prop="rz"
-                  label="水位"
-                  align="center"
-                  width="80">
-                </el-table-column>
-                <el-table-column
-                  prop="date"
-                  label="时间"
-                  align="center"
-                  min-width="160">
-                </el-table-column>
-                <el-table-column
-                  prop="bz"
-                  label="保证水位"
-                  align="center"
-                  width="80">
-                </el-table-column>
-                <el-table-column
-                  prop="cbz"
-                  label="超保证水位"
-                  align="center"
-                  width="100">
+                  width="120">
                 </el-table-column>
               </el-table>
             </div>
@@ -174,18 +75,15 @@
       </el-collapse-item>
       <el-collapse-item  name="2">
         <template slot="title">
-          <i class="fa fa-user-o" style="margin: 0 10px"></i>水库信息
+          <i class="fa fa-user-o" style="margin: 0 10px"></i>雨量站信息
         </template>
         <div>
-          <div class="cardHeader">
-            <label>超保证水位:<span>{{childData.length}}</span>个</label>
-          </div>
           <el-scrollbar
             style="height: 100%"
             tag="table">
             <div style="max-height: 200px">
               <el-table
-                :data="tableData"
+                :data="tableDataRain"
                 stripe
                 size="mini"
                 height="150"
@@ -202,19 +100,19 @@
                 </el-table-column>
                 <el-table-column
                   prop="STNM"
-                  label="湖泊名称"
+                  label="雨量站名称"
                   align="center"
                   width="120">
                 </el-table-column>
                 <el-table-column
-                  prop="rz"
-                  label="水位"
+                  prop="drp"
+                  label="雨量"
                   align="center"
                   width="60">
                 </el-table-column>
                 <el-table-column
-                  prop="date"
-                  label="时间"
+                  prop="adnm"
+                  label="行政区"
                   align="center"
                   width="180">
                 </el-table-column>
@@ -233,57 +131,9 @@
         name: "warning",
         data(){
           return{
-            activeName: '2',
-            tableData: [
-              {
-                STNM: '道士湖',
-                rz: '18.97',
-                date: '2018-11-11 15:00:00',
-                bz:"18.65",
-                cbz:"0.32"
-              },
-              {
-                STNM: '道士湖',
-                rz: '18.97',
-                date: '2018-11-11 15:00:00',
-                bz:"18.65",
-                cbz:"0.32"
-              },
-              {
-                STNM: '道士湖',
-                rz: '18.97',
-                date: '2018-11-11 15:00:00',
-                bz:"18.65",
-                cbz:"0.32"
-              },{
-                STNM: '道士湖',
-                rz: '18.97',
-                date: '2018-11-11 15:00:00',
-                bz:"18.65",
-                cbz:"0.32"
-              },
-              {
-                STNM: '道士湖',
-                rz: '18.97',
-                date: '2018-11-11 15:00:00',
-                bz:"18.65",
-                cbz:"0.32"
-              },
-              {
-                STNM: '道士湖',
-                rz: '18.97',
-                date: '2018-11-11 15:00:00',
-                bz:"18.65",
-                cbz:"0.32"
-              },
-              {
-                STNM: '道士湖',
-                rz: '18.97',
-                date: '2018-11-11 15:00:00',
-                bz:"18.65",
-                cbz:"0.32"
-              },
-            ],
+            activeName: ["1","2"],
+            tableData: [ ],
+            tableDataRain:[],
             swiperShow:false,
           }
         },
@@ -330,15 +180,40 @@
               "keyword": ""
             };
             this.$http.post(this.$url.baseUrl+'api/sys/river/jx-real',parms).then((res)=>{
-              console.log(res);
-            })
+              if(res.status===200){
+                let data=res.data.result;
+                $.each(data,(v,item)=>{
+                  if(item.TM){
+                    item.TM=new Date(item.TM).formatDate('yyyy-MM-dd HH:mm:ss');
+                  }
+                });
+                this.tableData=data
+              }
+            });
+            this.$http.get(this.$url.baseUrl+'api/sl323/realtime/rain/ad/sum_x/341621/2018-12-22 08:00/2018-12-22 16:33?bgtm=2018-12-22 08:00&endtm=2018-12-22 16:33&ad=341621')
+              .then((res)=>{
+                if(res.status===200){
+                  let data=res.data.result.totalMap.rainOne.list;
+                  console.log(data);
+                  if(data.length>0){
+                    $.each(data,(v,item)=>{
+                      item.LGTD=item.lgtd;
+                      item.LTTD=item.lttd;
+                      item.STNM=item.stnm;
+                    });
+                    this.tableDataRain=data;
+                  }else{
+                    console.error('暂无雨量站数据');
+                  }
+                }
+              })
           }
         },
         created(){
 
         },
         mounted() {
-          this.$n(()=>{
+          this.$nextTick(()=>{
             this. getTableData()
           })
         }

@@ -91,6 +91,7 @@
 <script>
     import Breadcrumb from '../components/Breadcrumb'
     import {mapFuncs} from '../utils/mapUtils'
+    import {convertObjectToArray} from '../utils/utils'
     /**
      * 右侧模板组件
      */
@@ -105,7 +106,7 @@
     import lakes from '../dilog/oneMapdliog/warning/lakes'
 
     //标注站点
-    const BZ =['river','sp','ck'];
+    const BZ =['river','sp','ck','rain','sq'];
     export default {
         name: "one-map",
         components:{
@@ -309,8 +310,12 @@
             },
             //右tab切换
             titleBar(index,item){
-              this.titleActive=index;
-              this.showComponent=item.component;
+              if(item){
+                this.titleActive=index;
+                this.showComponent=item.component;
+              }else{
+                this.showComponent=""
+              }
             },
             //子组件控制弹窗
             showFormChild(data){
@@ -433,7 +438,7 @@
                   this.map.addLayer(vector);
 
                 }else{
-                  console.error('暂无水库数据');
+                  console.error('暂无河道数据');
                 }
               });
             },
@@ -504,7 +509,7 @@
                     this.map.addLayer(vector);
 
                   }else{
-                    console.error('暂无水库数据');
+                    console.error('暂无视频数据');
                   }
                 }
               });
@@ -522,7 +527,6 @@
                     let arr=[];
                     //创建一个点
                     $.each(data,(v,item)=>{
-                      console.log(item);
                       let LGTD=item.LGTD;
                       let LTTD=item.LTTD;
                       item.STNM=item.WH_NAME;
@@ -586,7 +590,156 @@
                   }
                 }
               });
+            },
+            getRain(){
+              this.$http.get(this.$url.baseUrl+'api/sl323/realtime/rain/ad/sum_x/341621/2018-12-22 08:00/2018-12-22 16:33?bgtm=2018-12-22 08:00&endtm=2018-12-22 16:33&ad=341621')
+                .then((res)=>{
+                  if(res.status===200){
+                    let data=res.data.result.totalMap.rainOne.list;
+
+                    if(data.length>0){
+                      let arr=[];
+                      //创建一个点
+                      $.each(data,(v,item)=>{
+                        let LGTD=item.lgtd;
+                        item.LGTD=item.lgtd;
+                        let LTTD=item.lttd;
+                        item.LTTD=item.lttd;
+                        item.STNM=item.stnm;
+                        let point=new ol.Feature({
+                          data:item,
+                          geometry: new ol.geom.Point([LGTD, LTTD])
+                        });
+                        //设置点的样式信息
+                        point.setStyle(new ol.style.Style({
+                          //形状
+                          image: new ol.style.Icon({
+                            // anchor:[1,1],
+                            // anchorOrigin: 'top-right',
+                            // anchorXUnits: 'fraction',
+                            // anchorYUnits: 'pixels',
+                            // offsetOrigin: 'top-right',
+                            // offset:[1,0],
+                            //图标缩放比例
+                            // scale:1,
+                            //透明度
+                            size:[25,25],
+                            //图标的url
+                            src:"../../static/legend/雨量站.png"
+                          }),
+                          text: new ol.style.Text({
+                            //位置
+                            textAlign: 'center',
+                            //基准线
+                            textBaseline: 'middle',
+                            //文字样式
+                            font: 'normal 14px 微软雅黑',
+                            offsetY:15,
+                            //文本内容
+                            text:"",
+                            //文本填充样式（即文字颜色）
+                            fill: new ol.style.Fill({ color: '#aa3300' }),
+                            stroke: new ol.style.Stroke({ color: '#ffcc33', width: 2 })
+                          })
+                        }));
+                        arr.push(point)
+                      });
+
+                      //实例化一个矢量图层Vector作为绘制层
+                      let source = new ol.source.Vector({
+                        features: arr
+                      });
+
+
+                      //创建一个图层
+                      let vector = new ol.layer.Vector({
+                        name:"rain",
+                        TileName : "雨量",
+                        source: source,
+                        visible: true,
+                      });
+                      //将绘制层添加到地图容器中
+                      this.map.addLayer(vector);
+
+                    }else{
+                      console.error('暂无雨量站数据');
+                    }
+                  }
+                })
+            },
+            getSoil(){
+              this.$http.get(this.$url.baseUrl+'api/sys/drought/soil/latest?bgtm=2018-12-21 08:00&keyword=&ad=&type[]=1&type[]=2&type[]=3')
+                .then((res)=>{
+                  if(res.status===200){
+                    let data=convertObjectToArray(res.data.result);
+                    if(data.length>0){
+                      let arr=[];
+                      //创建一个点
+                      $.each(data,(v,item)=>{
+                        let LGTD=item.LGTD;
+                        let LTTD=item.LTTD;
+                        let point=new ol.Feature({
+                          data:item,
+                          geometry: new ol.geom.Point([LGTD, LTTD])
+                        });
+                        //设置点的样式信息
+                        point.setStyle(new ol.style.Style({
+                          //形状
+                          image: new ol.style.Icon({
+                            // anchor:[1,1],
+                            // anchorOrigin: 'top-right',
+                            // anchorXUnits: 'fraction',
+                            // anchorYUnits: 'pixels',
+                            // offsetOrigin: 'top-right',
+                            // offset:[1,0],
+                            //图标缩放比例
+                            // scale:1,
+                            //透明度
+                            size:[25,25],
+                            //图标的url
+                            src:"../../static/legend/墒情站.png"
+                          }),
+                          text: new ol.style.Text({
+                            //位置
+                            textAlign: 'center',
+                            //基准线
+                            textBaseline: 'middle',
+                            //文字样式
+                            font: 'normal 14px 微软雅黑',
+                            offsetY:15,
+                            //文本内容
+                            text:"",
+                            //文本填充样式（即文字颜色）
+                            fill: new ol.style.Fill({ color: '#aa3300' }),
+                            stroke: new ol.style.Stroke({ color: '#ffcc33', width: 2 })
+                          })
+                        }));
+                        arr.push(point)
+                      });
+
+                      //实例化一个矢量图层Vector作为绘制层
+                      let source = new ol.source.Vector({
+                        features: arr
+                      });
+
+
+                      //创建一个图层
+                      let vector = new ol.layer.Vector({
+                        name:"sq",
+                        TileName : "墒情",
+                        source: source,
+                        visible: true,
+                      });
+                      //将绘制层添加到地图容器中
+                      this.map.addLayer(vector);
+
+                    }else{
+                      console.error('暂无墒情站数据');
+                    }
+                  }
+                });
             }
+
         },
         created(){
           //边界线处理
@@ -643,11 +796,13 @@
             this.map.addLayer(vector)
           });
           this.getRiver();
+          this.getRain();
         },
         mounted(){
           const that=this;
           this.initMap();
           this.rightTitle();
+          this.getSoil();
           /**
            * 地图缩放控制
            */
