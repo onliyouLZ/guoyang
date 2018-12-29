@@ -18,8 +18,8 @@
                 style="width: 100%;font-size: 12px"
                 header-cell-class-name="table-dliog-header"
                 cell-class-name="table-dliog-body"
-                @row-dblclick="lakeDbClick"
-                @cell-mouse-enter="rsverHover"
+                @row-dblclick="rowDbClick"
+                @cell-mouse-enter="enterHover"
                 @cell-mouse-leave="leaveHover" >
                 <el-table-column
                   label=" "
@@ -90,8 +90,8 @@
                 style="width: 100%;font-size: 12px"
                 header-cell-class-name="table-dliog-header"
                 cell-class-name="table-dliog-body"
-                @row-dblclick="rsverDbClick"
-                @cell-mouse-enter="rsverHover"
+                @row-dblclick="rowDbClick"
+                @cell-mouse-enter="enterHover"
                 @cell-mouse-leave="leaveHover" >
                 <el-table-column
                   label=" "
@@ -148,14 +148,11 @@
           }
         },
         methods:{
-          lakeDbClick(row, event, column){
+          rowDbClick(row, event, column){
             /**
              * 向父组件传递一个方法
              */
-            this.$emit('show',{show:true,data:row});
-            $('.stationInfo').css({visibility:'hidden'});
-          },
-          rsverDbClick(row, event, column){
+
             this.$emit('show',{show:true,data:row});
             $('.stationInfo').css({visibility:'hidden'});
           },
@@ -164,7 +161,7 @@
             // return Time.getNowSecond(cellValue)
             // return new Date(cellValue).formatDate('yyyy-MM-dd HH:mm:ss')
           },
-          rsverHover(row, column, cellValue, index){
+          enterHover(row, column, cellValue, index){
             this.$emit('move',row)
           },
           leaveHover(row, column, cellValue, index){
@@ -183,6 +180,7 @@
               if(res.status===200){
                 let data=res.data.result;
                 $.each(data,(v,item)=>{
+                  item.type='river';
                   if(item.TM){
                     item.TM=new Date(item.TM).formatDate('yyyy-MM-dd HH:mm:ss');
                   }
@@ -194,12 +192,12 @@
               .then((res)=>{
                 if(res.status===200){
                   let data=res.data.result.totalMap.rainOne.list;
-                  console.log(data);
                   if(data.length>0){
                     $.each(data,(v,item)=>{
                       item.LGTD=item.lgtd;
                       item.LTTD=item.lttd;
                       item.STNM=item.stnm;
+                      item.type='rain';
                     });
                     this.tableDataRain=data;
                   }else{

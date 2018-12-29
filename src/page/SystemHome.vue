@@ -181,7 +181,7 @@
                 label="土壤相对湿度">
               </el-table-column>
               <el-table-column
-                prop="ghdj"
+                prop="type"
                 min-width="150"
                 align="center"
                 label="干旱等级">
@@ -265,8 +265,6 @@
     import homeDliog  from '../dilog/homedliog/homedliog'
     import swiperDliog  from '../dilog/homedliog/swiperDliog'
     import echarts from 'echarts'
-
-    // import {baseUrl,fileServer} from  '../utils/utils'
     import {convertObjectToArray} from '../utils/utils'
     export default {
         name: "SystemHome",
@@ -357,6 +355,9 @@
               "warntp": "",
               "keyword": ""
             };
+            /**
+             * 获取河道实时数据
+             * */
             this.$http.post(this.$url.baseUrl+'api/sys/river/jx-real',parms)
               .then((res)=>{
                 if(res.status===200){
@@ -479,89 +480,132 @@
               });
 
 
-            // 饼状图初始化
-            let electric_prod_chart1 = echarts.init(document.getElementById('electric_prod_chart1'));
-            // 设置option
-            let electric_prod_chart_option1 = {
-              tooltip: {
-                trigger: 'item',
-                formatter: "{b}"
-              },
-              legend: {
-                orient: 'vertical',
-                x: 'right',
-                top:'center',
-                data:['特大干旱3个','重大干旱2个','中等干旱9个','轻微干旱2个','无干旱14个']
-              },
-              series: [
-                {
-                  type: 'pie',
-                  // radius: ['50%', '75%'],
-                  avoidLabelOverlap: false,
-                  center: ['35%', '50%'],
-                  itemStyle: {
-                    normal: {
-                      //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-                      color: function (params) {
-                        //我这边就两个柱子，大体就两个柱子颜色渐变，所以数组只有两个值，多个颜色就多个值
-                        var colorList = [
-                          ['#FE7B18', '#FF561E', '#FF431E'],
 
-                          ['#FF9B01', '#FF8A01', '#FF8000'],
-
-                          ['#FFF87C', '#FFED51', '#FFDD12'],
-
-                          ['#13A2F2', '#0796BF', '#0192BF'],
-
-                          ['#13A2F2', '#0796EF', '#0192EF']
-
-                        ];
-                        return new echarts.graphic.LinearGradient(0, 1, 0, 0,
-                          [
-                            {offset: 0, color: colorList[params.dataIndex][0]},
-                            {offset: 0.5, color: colorList[params.dataIndex][1]},
-                            {offset: 1, color: colorList[params.dataIndex][2]}
-                          ]);
-                      },
-                      barBorderRadius: 5  //柱状角成椭圆形
+            /**
+             * 获取墒情实时数据
+             * */
+            this.$http.get(this.$url.baseUrl+'api/sys/drought/soil/latest?bgtm=2018-12-21 08:00&keyword=&ad=&type[]=1&type[]=2&type[]=3')
+              .then((res)=>{
+                if(res.status===200){
+                  let data=convertObjectToArray(res.data.result);
+                  //RSM 干旱程度分析
+                  let especially = [];//特大
+                  let great = [];//重大
+                  let medium = [];//中等
+                  let slight = [];//轻微
+                  let normal = [];//正常
+                  $.each(data,(v,item)=>{
+                    item.TM=new Date(item.TM).formatDate('yyyy-MM-dd HH:mm:ss');
+                    if(item.RSM>55){
+                      item.type="无干旱";
+                      normal.push(item);
+                    }else if(item.RSM >=45 && item.RSM <=55){
+                      item.type="轻微干旱";
+                      slight.push(item);
+                    }else if(item.RSM >=35 && item.RSM <=46){
+                      item.type="中等干旱";
+                      medium.push(item);
+                    }else if(item.RSM >=25 && item.RSM <=36){
+                      item.type="重大干旱";
+                      great.push(item);
+                    }else if(item.RSM <25){
+                      item.type="特大干旱";
+                      especially.push(item);
                     }
-                  },
-                  label: {
-                    normal: {
-                      show: false,
-                      position: 'center'
+                  });
+                  this.tableData1=data;
+                  // 饼状图初始化
+                  let electric_prod_chart1 = echarts.init(document.getElementById('electric_prod_chart1'));
+                  // 设置option
+                  let electric_prod_chart_option1 = {
+                    tooltip: {
+                      trigger: 'item',
+                      formatter: "{b}"
                     },
-                    emphasis: {
-                      show: true,
-                      textStyle: {
-                        fontSize: '14',
-                        fontWeight: 'bold'
+                    legend: {
+                      orient: 'vertical',
+                      x: 'right',
+                      top:'center',
+                      data:[
+                        '特大干旱'+especially.length+'个',
+                        '重大干旱'+great.length+'个',
+                        '中等干旱'+medium.length+'个',
+                        '轻微干旱'+slight.length+'个',
+                        '无干旱'+normal.length+'个'
+                      ]
+                    },
+                    series: [
+                      {
+                        type: 'pie',
+                        // radius: ['50%', '75%'],
+                        avoidLabelOverlap: false,
+                        center: ['35%', '50%'],
+                        itemStyle: {
+                          normal: {
+                            //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
+                            color: function (params) {
+                              //我这边就两个柱子，大体就两个柱子颜色渐变，所以数组只有两个值，多个颜色就多个值
+                              var colorList = [
+                                ['#FE7B18', '#FF561E', '#FF431E'],
+
+                                ['#FF9B01', '#FF8A01', '#FF8000'],
+
+                                ['#FFF87C', '#FFED51', '#FFDD12'],
+
+                                ['#13A2F2', '#0796BF', '#0192BF'],
+
+                                ['#13A2F2', '#0796EF', '#0192EF']
+
+                              ];
+                              return new echarts.graphic.LinearGradient(0, 1, 0, 0,
+                                [
+                                  {offset: 0, color: colorList[params.dataIndex][0]},
+                                  {offset: 0.5, color: colorList[params.dataIndex][1]},
+                                  {offset: 1, color: colorList[params.dataIndex][2]}
+                                ]);
+                            },
+                            barBorderRadius: 5  //柱状角成椭圆形
+                          }
+                        },
+                        label: {
+                          normal: {
+                            show: false,
+                            position: 'center'
+                          },
+                          emphasis: {
+                            show: true,
+                            textStyle: {
+                              fontSize: '14',
+                              fontWeight: 'bold'
+                            }
+                          }
+                        },
+                        labelLine: {
+                          normal: {
+                            show: false
+                          }
+                        },
+                        data:[
+                          {value:especially.length, name:'特大干旱'+especially.length+'个'},
+                          {value:great.length, name:'重大干旱'+great.length+'个'},
+                          {value:medium.length, name:'中等干旱'+medium.length+'个'},
+                          {value:slight.length, name:'轻微干旱'+slight.length+'个'},
+                          {value:normal.length, name:'无干旱'+normal.length+'个'},
+                        ]
                       }
-                    }
-                  },
-                  labelLine: {
-                    normal: {
-                      show: false
-                    }
-                  },
-                  data:[
-                    {value:3, name:'特大干旱3个'},
-                    {value:2, name:'重大干旱2个'},
-                    {value:9, name:'中等干旱9个'},
-                    {value:2, name:'轻微干旱2个'},
-                    {value:14, name:'无干旱14个'},
-                  ]
+                    ]
+                  };
+                  // 绘制图表
+                  electric_prod_chart1.setOption(electric_prod_chart_option1);
+                  // electric_prod_chart1.on('click',()=>{
+                  //   this.show = !this.show;
+                  //   this.swiperData={
+                  //     name:"墒情站干旱统计",
+                  //   }
+                  // });
                 }
-              ]
-            };
-            // 绘制图表
-            electric_prod_chart1.setOption(electric_prod_chart_option1);
-            electric_prod_chart1.on('click',()=>{
-              this.show = !this.show;
-              this.swiperData={
-                name:"墒情站干旱统计",
-              }
-            });
+              });
+
           },
 
           /**
@@ -598,28 +642,7 @@
                 });
               })
           },
-          /**
-           * 获取河道实时数据
-           * */
-          getRiver(){
 
-          },
-
-          /**
-           * 获取墒情实时数据
-           * */
-          getSoil(){
-            this.$http.get(this.$url.baseUrl+'api/sys/drought/soil/latest?bgtm=2018-12-21 08:00&keyword=&ad=&type[]=1&type[]=2&type[]=3')
-              .then((res)=>{
-                  if(res.status===200){
-                    let data=convertObjectToArray(res.data.result);
-                    $.each(data,(v,item)=>{
-                      item.TM=new Date(item.TM).formatDate('yyyy-MM-dd HH:mm:ss')
-                    });
-                    this.tableData1=data;
-                  }
-              })
-          },
           /**
            * 打开弹窗
            */
@@ -663,8 +686,6 @@
             that.endtm=new Date().formatDate('yyyy-MM-dd HH:00');
           }
           that.init_charts();
-          that.getRiver();
-          that.getSoil()
         },
     }
 </script>

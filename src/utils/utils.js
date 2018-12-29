@@ -372,7 +372,7 @@ export function parseTime(time, cFormat) {
         return value || 0
     })
     return time_str
-}
+};
 
 export function param2Obj(url) {
     const search = url.split('?')[1]
@@ -387,7 +387,7 @@ export function param2Obj(url) {
             .replace(/=/g, '":"') +
         '"}'
     )
-}
+};
 
 export function formatTime(time, option) {
     time = +time * 1000
@@ -421,7 +421,7 @@ export function formatTime(time, option) {
             '分'
         )
     }
-}
+};
 
 // 格式化时间
 export function getQueryObject(url) {
@@ -437,7 +437,7 @@ export function getQueryObject(url) {
         return rs
     })
     return obj
-}
+};
 
 export const pickerOptions = [
     {
@@ -476,7 +476,7 @@ export const pickerOptions = [
             picker.$emit('pick', [start, end])
         }
     }
-]
+];
 
 export const Time = time;
 export const Formatter = FormatterData;
@@ -543,8 +543,7 @@ export function convertObjectToArray(object, sortKey, isAsc){
     }
   }
   return result;
-}
-
+};
 
 
 

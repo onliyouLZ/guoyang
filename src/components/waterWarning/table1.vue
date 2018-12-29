@@ -645,7 +645,7 @@
         mounted() {
           this.$nextTick(()=>{
             this.search();
-            if(this.screenWidth>=1920){
+            if(this.screenWidth>=1800){
               $('.trees').css('height',"300px")
             }else if(this.screenWidth<1920){
               $('.trees').css('height',"130px")

@@ -84,7 +84,12 @@
       {{flagName1}}
     </div>
     <div id="mouse-position" style="float: left; position: absolute; bottom: 5px; width: 350px; height: 20px; z-index: 2000;"></div>
-    <lakes :lakesData.sync="lakesData"  :lakesShow.sync="lakesShow" ref="child"></lakes>
+    <div id="openDialog">
+      <el-dialog :title="dialogData.STNM"  :visible="dialogVisible" @close="childClose">
+          <component :is="dialogShow" :dialogDatas="dialogData"></component>
+      </el-dialog>
+    </div>
+    <!--<lakes :lakesData.sync="lakesData"  :lakesShow.sync="lakesShow" ref="child"></lakes>-->
   </div>
 </template>
 
@@ -103,7 +108,7 @@
     /**
      * 弹窗
      */
-    import lakes from '../dilog/oneMapdliog/warning/lakes'
+    import river from '../dilog/oneMapdliog/warning/river'
 
     //标注站点
     const BZ =['river','sp','ck','rain','sq'];
@@ -115,7 +120,7 @@
           Hydrologic:Hydrologic,
           Precipitation:Precipitation,
           videoSurveillance:videoSurveillance,
-          lakes:lakes
+          river:river
         },
         data(){
           return{
@@ -131,9 +136,10 @@
             ],
             checkboxCard:[
               {name:"河道水情",checked:true,component: 'warning'},
+              {name:"水雨情测站",checked:false,component: 'videoSurveillance'},
+              {name:"土壤墒情",checked:false,component: 'videoSurveillance'},
               {name:"视频监视",checked:false,component: 'videoSurveillance'},
               {name:"涉水工程",checked:false,component: 'Precipitation'},
-              // {name:"视频监视",checked:false,component: 'videoSurveillance'},
             ],
             rightTitles:[],
             active:0,
@@ -156,10 +162,11 @@
               }
             },
             showComponent:"warning",
-            lakesShow:false,
-            lakesData:{},
+            dialogShow:"",
+            dialogData:"",
             childData:[],
-            moveData:{}
+            moveData:{},
+            dialogVisible:false,
           }
         },
         methods:{
@@ -241,13 +248,13 @@
             //左隐藏
             leftHide(){
               if(this.flag===0){
-                $('.checkboxCard').animate({left: -112}, "fast");
+                $('.checkboxCard').animate({left: -132}, "fast");
                 $('.btn-display').animate({left: 0}, "fast");
                 this.flag=1;
                 this.flagName="显示"
               }else{
                 $('.checkboxCard').animate({left: 0}, "fast");
-                $('.btn-display').animate({left: 112}, "fast");
+                $('.btn-display').animate({left: 132}, "fast");
                 this.flag=0;
                 this.flagName="隐藏"
               }
@@ -319,8 +326,9 @@
             },
             //子组件控制弹窗
             showFormChild(data){
-              this.lakesShow = data.show;
-              this.lakesData=data.data;
+              this.dialogVisible=data.show;
+              this.dialogShow=data.data.type;
+              this.dialogData=data.data;
             },
             //子组件控制鼠标浮动
             moves(data){
@@ -594,6 +602,7 @@
             getRain(){
               this.$http.get(this.$url.baseUrl+'api/sl323/realtime/rain/ad/sum_x/341621/2018-12-22 08:00/2018-12-22 16:33?bgtm=2018-12-22 08:00&endtm=2018-12-22 16:33&ad=341621')
                 .then((res)=>{
+                  console.log(res);
                   if(res.status===200){
                     let data=res.data.result.totalMap.rainOne.list;
 
@@ -738,6 +747,9 @@
                     }
                   }
                 });
+            },
+            childClose(){
+                this.dialogVisible=false
             }
 
         },
@@ -871,7 +883,7 @@
               //获取数据
               let data=feature.get('data');
               if(data){
-                that.lakesShow=true;
+
                 that.lakesData=data;
               }
             }
@@ -963,7 +975,7 @@
     position: absolute;
     top: 70px;
     left:0;
-    height: 145px;
+    height: 170px;
     .checkboxCard{
       height: 100%;
       position: absolute;
@@ -975,7 +987,7 @@
       background-color: white;
       li{
         list-style: none;
-        width: 100px;
+        width: 120px;
         line-height: 35px;
         font-size: 14px;
         i{
@@ -997,7 +1009,7 @@
       line-height: 26px;
       top: 50%;
       transform: translate(0,-50%);
-      right: -133px;
+      right: -152px;
       cursor: pointer;
       text-align: center;
       font-size: 12px;;
