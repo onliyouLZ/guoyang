@@ -1,5 +1,7 @@
 <template>
-  <el-tabs v-model="activeName" @tab-click="handleClick">
+  <el-tabs v-model="activeName" @tab-click="handleClick"
+           v-loading="loading"
+           element-loading-text="加载中">
     <el-tab-pane name="first" lazy>
       <span slot="label"><i class="fa fa-calendar-o"></i>&nbsp;基本信息</span>
       <table class="dilogTable" cellspacing="0">
@@ -72,7 +74,7 @@
         <el-radio-group
           v-model="radio3"
           style="float: right"
-          :change="change(radio3)">
+          @change="changeType">
           <el-radio-button label="图"></el-radio-button>
           <el-radio-button label="表"></el-radio-button>
         </el-radio-group>
@@ -93,6 +95,12 @@
                 height="350"
                 cell-class-name="table-body"
                 header-cell-class-name="table-header">
+                <el-table-column
+                  type="index"
+                  width="50"
+                  label="序号"
+                  align="center">
+                </el-table-column>
                 <el-table-column
                   prop="TM"
                   align="center"
@@ -141,9 +149,8 @@
         </el-select>
         <el-button type="primary" style="margin-left: 10px;">查询</el-button>
         <el-radio-group
-          v-model="radio3"
-          style="float: right;"
-          :change="change(radio3)">
+          v-model="radio4"
+          style="float: right;">
           <el-radio-button label="图"></el-radio-button>
           <el-radio-button label="表"></el-radio-button>
         </el-radio-group>
@@ -163,6 +170,11 @@
               height="350"
               cell-class-name="table-body"
               header-cell-class-name="table-header">
+              <el-table-column
+                type="index"
+                width="50"
+                label="序号">
+              </el-table-column>
               <el-table-column
                 prop="date"
                 align="center"
@@ -197,9 +209,12 @@
         tableData: [ ],
         tableShow:false,
         echartShow:true,
+        loading:true,
         radio3:"图",
+        radio4:"图",
         echartWidth:"",
         echartHeigth:"",
+        // firstTime: [new Date().datePro('{%d-1}'), new Date()],
         firstTime: [new Date("2018-12-22 08:00:00"), new Date("2018-12-22 20:00:00")],
         secondTime:[new Date("2018-12-22 08:00:00"), new Date("2018-12-22 20:00:00")],
         value11:"",
@@ -220,7 +235,8 @@
           value: '选项5',
           label: '2022'
         }],
-        optionData:""
+        optionData:"",
+        echartData:""
       }
     },
     props:{
@@ -230,10 +246,10 @@
       }
     },
     methods:{
-      childClose(){
+      close(){
         // this.tableShow=false;
-        // this.activeName="first";
-        // this.radio3="图";
+        this.activeName="first";
+        this.radio3="图";
         // this.$emit('update:lakesShow',false);
       },
       /**
@@ -241,14 +257,11 @@
        */
       handleClick(tab, event){
         if(tab.index==="0"){
-          this.radio3="图";
         }else if(tab.index==="1"){
-          this.radio3="图";
           this.$nextTick(()=>{
             this.initWater();
           });
         }else if(tab.index==="2"){
-          this.radio3="图";
           this.$nextTick(()=>{
             this.initHistory();
           });
@@ -278,10 +291,14 @@
         electric_prod_chart1.setOption(electric_prod_chart_option1);
       },
       search(){
-        let parms={
-          bgtm:this.firstTime[0].formatDate('yyyy-MM-dd HH:00'),
-          endtm:this.firstTime[1].formatDate('yyyy-MM-dd HH:00')
-        };
+        let parms={};
+        if(this.firstTime){
+          parms.bgtm=this.firstTime[0].formatDate('yyyy-MM-dd HH:00');
+          parms.endtm=this.firstTime[1].formatDate('yyyy-MM-dd HH:00')
+        }else{
+          parms.bgtm="";
+          parms.endtm="";
+        }
         this.$http.get(this.$url.baseUrl+"api/sl323/realtime/river/list/?bgtm="+parms.bgtm+'&endtm='+parms.endtm+'&STCD='+this.dialogDatas.STCD)
           .then((res)=>{
             let data=res.data.result;
@@ -289,94 +306,191 @@
             $.each(data,(v,item)=>{
               item.TM=new Date(item.TM).formatDate('yyyy-MM-dd HH:00');
             });
-            this.initWater(data);
+            this.echartData=data;
+            setTimeout(()=>{
+              this.loading=false;
+            },500)
+          });
+        //获取历史同期对比 接口不对
+        let getHis={
+          "stcdList":[this.dialogDatas.STCD],
+          "tms":[],
+          "tmList":
+            [
+              {"bgtm":"2018-12-30 08:00","endtm":"2018-12-31 15:00"},
+              {"bgtm":"2017-12-30 08:00","endtm":"2017-12-31 15:00"}
+            ]
+        };
+        this.$http.post(this.$url.baseUrl+"api/sl323/realtime/river/list-by-tms“/",getHis)
+          .then((res)=>{
+            console.log(res);
           });
       },
-      //获取水位流量过程线
-      initWater(data){
-        console.log(data);
-        let electric_prod_chart = $('#electric_prod_char');
-        if(electric_prod_chart[0]){
-          let electric_prod_chart =  echarts.init(document.getElementById('electric_prod_char'));
-          // 设置option
-          let electric_prod_chart_option = {
-            title: {
-              text: this.optionData.STNM+'水位过程线',
-              left: 'center'
-            },
-            tooltip: {
-              trigger: 'axis',
-              axisPointer: {
-                type: "cross",
-                lineStyle: {
-                  color: "#48b",
-                  width: 2,
-                  type: "solid"
+      //水位流量过程线
+      initWater(){
+        let data=this.echartData;
+        if(data){
+          let electric_prod_chart = $('#electric_prod_char');
+          if(electric_prod_chart[0]){
+            let electric_prod_chart =  echarts.init(document.getElementById('electric_prod_char'));
+            // 设置option
+            let electric_prod_chart_option = {
+              title: {
+                text: this.optionData.STNM+'水位过程线',
+                left: 'center'
+              },
+              tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                  type: "cross",
+                  lineStyle: {
+                    color: "#48b",
+                    width: 2,
+                    type: "solid"
+                  },
+                  crossStyle: {
+                    color: "#1e90ff",
+                    width: 1,
+                    type: "dashed"
+                  },
+                  shadowStyle: {
+                    color: "rgba(150,150,150,0.3)",
+                    width: "auto",
+                    type: "default"
+                  }
                 },
-                crossStyle: {
-                  color: "#1e90ff",
-                  width: 1,
-                  type: "dashed"
+              },
+              legend: {
+                data:['水位','流量'],
+                bottom:0
+              },
+              xAxis: {
+                type: 'category',
+                data: data.map(function (item) {
+                  return item.TM;
+                }),
+                boundaryGap: false,
+                lineWidth: 2.5,
+                splitLine: false,
+                onZero: true,   //x轴的位置
+                nameLocation: 'end',
+                labelFormatter: null,
+                position: 'bottom',
+                show: true,
+                gridIndex: 0
+              },
+              yAxis: [
+                {
+                  type: 'value',
+                  name: '水量',
                 },
-                shadowStyle: {
-                  color: "rgba(150,150,150,0.3)",
-                  width: "auto",
-                  type: "default"
+                {
+                  type: 'value',
+                  name: '流量',
                 }
+              ],
+              series: [
+                {
+                  name:'水位',
+                  data: data.map(function (item) {
+                    return item.Z;
+                  }),
+                  type: 'line',
+                  smooth: true
+                },
+                {
+                  name:'流量',
+                  yAxisIndex:1,
+                  data: data.map(function (item) {
+                    return item.Q;
+                  }),
+                  type: 'line',
+                  smooth: true
+                }
+              ]
+            };
+            // 绘制图表
+            electric_prod_chart.setOption(electric_prod_chart_option);
+          }
+        }else{
+          let electric_prod_chart = $('#electric_prod_char');
+          if(electric_prod_chart[0]){
+            let electric_prod_chart =  echarts.init(document.getElementById('electric_prod_char'));
+            // 设置option
+            let electric_prod_chart_option = {
+              title: {
+                text: this.optionData.STNM+'水位过程线',
+                left: 'center'
               },
-            },
-            legend: {
-              data:['水位','流量'],
-              bottom:0
-            },
-            xAxis: {
-              type: 'category',
-              data: data.map(function (item) {
-                return item.TM;
-              }),
-              boundaryGap: false,
-              lineWidth: 2.5,
-              splitLine: false,
-              onZero: true,   //x轴的位置
-              nameLocation: 'end',
-              labelFormatter: null,
-              position: 'bottom',
-              show: true,
-              gridIndex: 0
-            },
-            yAxis: [
-              {
-                type: 'value',
-                name: '水量',
+              tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                  type: "cross",
+                  lineStyle: {
+                    color: "#48b",
+                    width: 2,
+                    type: "solid"
+                  },
+                  crossStyle: {
+                    color: "#1e90ff",
+                    width: 1,
+                    type: "dashed"
+                  },
+                  shadowStyle: {
+                    color: "rgba(150,150,150,0.3)",
+                    width: "auto",
+                    type: "default"
+                  }
+                },
               },
-              {
-                type: 'value',
-                name: '流量',
-              }
-            ],
-            series: [
-              {
-                name:'水位',
-                data: data.map(function (item) {
-                  return item.Z;
-                }),
-                type: 'line',
-                smooth: true
+              legend: {
+                data:['水位','流量'],
+                bottom:0
               },
-              {
-                name:'流量',
-                yAxisIndex:1,
-                data: data.map(function (item) {
-                  return item.Q;
-                }),
-                type: 'line',
-                smooth: true
-              }
-            ]
-          };
-          // 绘制图表
-          electric_prod_chart.setOption(electric_prod_chart_option);
+              xAxis: {
+                type: 'category',
+                data:[],
+                boundaryGap: false,
+                lineWidth: 2.5,
+                splitLine: false,
+                onZero: true,   //x轴的位置
+                nameLocation: 'end',
+                labelFormatter: null,
+                position: 'bottom',
+                show: true,
+                gridIndex: 0
+              },
+              yAxis: [
+                {
+                  type: 'value',
+                  name: '水量',
+                },
+                {
+                  type: 'value',
+                  name: '流量',
+                }
+              ],
+              series: [
+                {
+                  name:'水位',
+                  data:[],
+                  type: 'line',
+                  smooth: true
+                },
+                {
+                  name:'流量',
+                  yAxisIndex:1,
+                  data:[],
+                  type: 'line',
+                  smooth: true
+                }
+              ]
+            };
+            // 绘制图表
+            electric_prod_chart.setOption(electric_prod_chart_option);
+          }
         }
+
       },
       /**
        * 销毁图表实例下次进入重新渲染
@@ -397,15 +511,15 @@
        * 图表切换
        * @param value
        */
-      change(value){
-        if(value==="图"){
+      changeType(){
+        if(this.radio3==="图"){
           this.echartShow=true;
           this.tableShow=false;
           this.$nextTick(()=>{
             this.dispose();
             this.initWater();
           })
-        }else if(value==='表'){
+        }else if(this.radio3==='表'){
           this.echartShow=false;
           this.tableShow=true
         }
@@ -428,12 +542,20 @@
       },
 
       primary(){
-        this.search()
+        this.loading=true;
+        this.search();
+        this. dispose();
+        this.initWater();
       }
     },
     watch:{
       dialogDatas(){
+        this.activeName="first";
+        this.radio3="图";
+        this.loading=true;
         this.getStcd();
+        this.search();
+        this.initWater();
       }
     },
     mounted(){

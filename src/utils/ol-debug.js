@@ -2267,7 +2267,7 @@ goog.global.CLOSURE_CSS_NAME_MAP_FN;
  * mappings are used. In the BY_PART style, each part (i.e. in between hyphens)
  * of the passed in css name is rewritten according to the map. In the BY_WHOLE
  * style, the full css name is looked up in the map directly. If a rewrite is
- * not specified by the map, the compiler will output a warning.
+ * not specified by the map, the compiler will output a riverRegime.
  *
  * When the mapping is passed to the compiler, it will replace calls to
  * goog.getCssName with the strings from the mapping, e.g.

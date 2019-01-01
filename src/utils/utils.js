@@ -546,6 +546,46 @@ export function convertObjectToArray(object, sortKey, isAsc){
 };
 
 
+/**
+ * 人员数据组合成树类型
+ * @param data
+ * @returns {Array}
+ */
+export function toTree (data) {
+  // 删除 所有 children,以防止多次调用
+  data.forEach(function(item) {
+    delete item.children;
+  });
+
+  // 将数据存储为 以 id 为 KEY 的 map 索引数据列
+  let map = {};
+  data.forEach(function(item) {
+    map[item.GROUP_ID] = item;
+  });
+  let val = [];
+  data.forEach(function(item) {
+    if(item.type==="duty"){
+      item.open='true';
+      item.nocheck='true';
+      item.iconSkin="pIcon01"
+    }
+    item.name=item.GROUP_NAME;
+    item.id=item.GROUP_ID;
+    item.pid=item.GROUP_PID;
+    // 以当前遍历项，的pid,去map对象中找到索引的id
+    let parent = map[item.GROUP_PID];
+    // 如果找到索引，那么说明此项不在顶级当中,那么需要把此项添加到，他对应的父级中
+    if(parent) {
+      (parent.children || (parent.children = [])).push(item);
+    } else {
+      //如果没有在map中找到对应的索引ID,那么直接把 当前的item添加到 val结果集中，作为顶级
+      val.push(item);
+    }
+  });
+  return val;
+};
+
+
 
 //export const baseUrl = 'http://172.16.100.33:8080/nxhzz_2017/api/'; //服务地址
 //export const uploadUrl = 'http://121.42.25.6:8080/fss/api/file/uploadFile.do'; //文件上传地址

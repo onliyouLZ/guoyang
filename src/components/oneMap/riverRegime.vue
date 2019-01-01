@@ -1,5 +1,5 @@
 <template>
-  <div id="warning">
+  <div id="riverRegime">
     <el-collapse v-model="activeName">
       <el-collapse-item  name="1">
         <template slot="title">
@@ -9,12 +9,12 @@
           <el-scrollbar
             style="height: 100%"
             tag="table">
-            <div style="max-height: 200px">
+            <div style="max-height: 500px">
               <el-table
                 :data="tableData"
                 stripe
                 size="mini"
-                height="150"
+                height="400"
                 style="width: 100%;font-size: 12px"
                 header-cell-class-name="table-dliog-header"
                 cell-class-name="table-dliog-body"
@@ -24,7 +24,7 @@
                 <el-table-column
                   label=" "
                   type="index"
-                  width="20">
+                  width="40">
                 </el-table-column>
                 <el-table-column
                   prop="STNM"
@@ -73,54 +73,6 @@
           </el-scrollbar>
         </div>
       </el-collapse-item>
-      <el-collapse-item  name="2">
-        <template slot="title">
-          <i class="fa fa-user-o" style="margin: 0 10px"></i>雨量站信息
-        </template>
-        <div>
-          <el-scrollbar
-            style="height: 100%"
-            tag="table">
-            <div style="max-height: 200px">
-              <el-table
-                :data="tableDataRain"
-                stripe
-                size="mini"
-                height="150"
-                style="width: 100%;font-size: 12px"
-                header-cell-class-name="table-dliog-header"
-                cell-class-name="table-dliog-body"
-                @row-dblclick="rowDbClick"
-                @cell-mouse-enter="enterHover"
-                @cell-mouse-leave="leaveHover" >
-                <el-table-column
-                  label=" "
-                  type="index"
-                  width="40">
-                </el-table-column>
-                <el-table-column
-                  prop="STNM"
-                  label="雨量站名称"
-                  align="center"
-                  width="120">
-                </el-table-column>
-                <el-table-column
-                  prop="drp"
-                  label="雨量"
-                  align="center"
-                  width="60">
-                </el-table-column>
-                <el-table-column
-                  prop="adnm"
-                  label="行政区"
-                  align="center"
-                  width="180">
-                </el-table-column>
-              </el-table>
-            </div>
-          </el-scrollbar>
-        </div>
-      </el-collapse-item>
     </el-collapse>
   </div>
 </template>
@@ -128,12 +80,11 @@
 <script>
     import {Time} from "../../utils/utils";
     export default {
-        name: "warning",
+        name: "riverRegime",
         data(){
           return{
-            activeName: ["1","2"],
+            activeName: ["1"],
             tableData: [ ],
-            tableDataRain:[],
             swiperShow:false,
           }
         },
@@ -188,23 +139,6 @@
                 this.tableData=data
               }
             });
-            this.$http.get(this.$url.baseUrl+'api/sl323/realtime/rain/ad/sum_x/341621/2018-12-22 08:00/2018-12-22 16:33?bgtm=2018-12-22 08:00&endtm=2018-12-22 16:33&ad=341621')
-              .then((res)=>{
-                if(res.status===200){
-                  let data=res.data.result.totalMap.rainOne.list;
-                  if(data.length>0){
-                    $.each(data,(v,item)=>{
-                      item.LGTD=item.lgtd;
-                      item.LTTD=item.lttd;
-                      item.STNM=item.stnm;
-                      item.type='rain';
-                    });
-                    this.tableDataRain=data;
-                  }else{
-                    console.error('暂无雨量站数据');
-                  }
-                }
-              })
           }
         },
         created(){
@@ -223,30 +157,5 @@
   .is-scrolling-none::-webkit-scrollbar{
     width: 0;
   }
-
-  /**
- 表格
-  */
-  .table-dliog-body{
-      color: red;
-      padding: 0!important;
-      font-size: 14px;
-  }
-  .el-table__row{
-    cursor: pointer;
-  }
-  .table-dliog-header{
-    background-color: #A4D0EF !important;
-    border-bottom: 1px solid #bbb!important;
-    padding: 0!important;
-    line-height: 25px;
-    color: #333333;
-    font-weight: normal;
-    font-size: 14px;
-  }
-  .el-table--striped .el-table__body tr.el-table__row--striped td{
-    background-color: #e0eef8!important;
-  }
-
 </style>
 

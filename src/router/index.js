@@ -9,6 +9,7 @@ import SystemHome from '../page/SystemHome'
 import Login from '../page/login'
 import oneMap from '../page/oneMap'
 import waterMonitoring from '../page/waterMonitoring'
+import floodControl from '../page/Eight/floodControl'
 import earlyWarning from  '../page/fourMenu/earlyWarning'
 import drought from '../page/fiveMenu/Drought'
 import waterWorks from '../page/sixMenu/waterWorks'
@@ -23,6 +24,10 @@ import error404 from '../page/404'
 import realTimeRain from '../page/threeMenu/RealTimeRain'
 import rainwater from '../page/threeMenu/Rainwater'
 import rainwaterReport from '../page/threeMenu/RainwaterReport'
+
+
+import organization from '../components/floodControl/organization'
+import rescue from '../components/floodControl/rescue'
 
 import gates from '../components/waterWorks/gates'
 import river from '../components/waterWorks/river'
@@ -136,6 +141,24 @@ export default new Router({
               component: materials,
               name:"物资名录",
             },
+          ]
+        },
+        {
+          path: '/floodControl',
+          component: floodControl,
+          name:"防汛组织",
+          redirect:'/organization',
+          children:[
+            {
+              path: '/organization',
+              component: organization,
+              name:"指挥机构",
+            },
+            {
+              path: '/rescue',
+              component: rescue,
+              name:"抢险队伍",
+            }
           ]
         },
         // {

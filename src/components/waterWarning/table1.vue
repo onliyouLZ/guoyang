@@ -184,7 +184,7 @@
             this.pageSize = val
           },
           handleCurrentChange(val) {
-            this.pageIndex = val
+            this.pageIndex = val;
             this.$emit('primary',{loading:true});
           },
           objectSpanMethod({ row, column, rowIndex, columnIndex }){

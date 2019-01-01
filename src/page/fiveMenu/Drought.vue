@@ -75,7 +75,7 @@
     /**
      * 右侧模板组件
      */
-    import warning from '../../components/oneMap/warning'
+    import warning from '../../components/oneMap/riverRegime'
     import Hydrologic from '../../components/oneMap/Hydrologic'
     import Precipitation from '../../components/oneMap/Precipitation'
     import videoSurveillance from '../../components/oneMap/videoSurveillance'

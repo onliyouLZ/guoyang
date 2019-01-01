@@ -107,6 +107,12 @@
           }else if(routerPath==="/materials"){
             active='/management';
             return false
+          }else if(routerPath==="/organization"){
+            active='/floodControl';
+            return false
+          }else if(routerPath==="/rescue"){
+            active='/floodControl';
+            return false
           }else if(item.path==="/home"){
             active=item.path;
             return false

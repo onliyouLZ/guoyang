@@ -4,28 +4,7 @@
     <div id="map">
       <!--<div class="css_animation"></div>-->
       <div class="stationInfo">
-        <div class="arrow" ></div>
-        <p class="p_rsvr_bg">道士湖</p>
-        <div class="div_bg">
-          <div class="div_top">
-            <div class="div_t_l">
-              <span style="font-size: 12px;">实时水位:</span>
-              <span>45.57</span><sub>m</sub>
-            </div>
-            <div class="div_t_r">
-              <p>设防水位:18.00m</p>
-              <p>警戒水位:37.86m</p>
-              <p>保证水位:37.86m</p>
-            </div>
-          </div>
-          <div class="div_lend"></div>
-          <div class="div_bottom">
-            <p>类型: 小一</p>
-            <p>溢洪: <span>0.8</span>(<span>10<sup style="font-size: 10px;">6</sup></span>m<sup>3</sup>)</p>
-            <p>水系: 长江流域</p>
-            <p class="psvr">地址: 武汉市 江夏区 xxxxx街道...</p>
-          </div>
-        </div>
+
       </div>
     </div>
 
@@ -85,7 +64,7 @@
     </div>
     <div id="mouse-position" style="float: left; position: absolute; bottom: 5px; width: 350px; height: 20px; z-index: 2000;"></div>
     <div id="openDialog">
-      <el-dialog :title="dialogData.STNM"  :visible="dialogVisible" @close="childClose">
+      <el-dialog :title="dialogData.STNM"  :visible="dialogVisible"  @close="childClose">
           <component :is="dialogShow" :dialogDatas="dialogData"></component>
       </el-dialog>
     </div>
@@ -100,24 +79,27 @@
     /**
      * 右侧模板组件
      */
-    import warning from '../components/oneMap/warning'
-    import Hydrologic from '../components/oneMap/Hydrologic'
-    import Precipitation from '../components/oneMap/Precipitation'
-    import videoSurveillance from '../components/oneMap/videoSurveillance'
+    import riverRegime from '../components/oneMap/riverRegime' //河道
+    import rainfall from '../components/oneMap/Rainfall' //雨情
+    import soilMoisture from '../components/oneMap/SoilMoisture' //墒情
+    import Precipitation from '../components/oneMap/Precipitation' //仓库
+    import videoSurveillance from '../components/oneMap/videoSurveillance' //视频
 
     /**
      * 弹窗
      */
-    import river from '../dilog/oneMapdliog/warning/river'
+    import river from '../dilog/oneMapdliog/riverRegime/river' //河道弹窗
+
 
     //标注站点
-    const BZ =['river','sp','ck','rain','sq'];
+    const BZ =['river','rain','sq','sp','ck',];
     export default {
         name: "one-map",
         components:{
           Breadcrumb:Breadcrumb,
-          warning:warning,
-          Hydrologic:Hydrologic,
+          riverRegime:riverRegime,
+          rainfall:rainfall,
+          soilMoisture:soilMoisture,
           Precipitation:Precipitation,
           videoSurveillance:videoSurveillance,
           river:river
@@ -135,9 +117,9 @@
               {name:"影像"},
             ],
             checkboxCard:[
-              {name:"河道水情",checked:true,component: 'warning'},
-              {name:"水雨情测站",checked:false,component: 'videoSurveillance'},
-              {name:"土壤墒情",checked:false,component: 'videoSurveillance'},
+              {name:"河道水情",checked:true,component: 'riverRegime'},
+              {name:"水雨情测站",checked:true,component: 'rainfall'},
+              {name:"土壤墒情",checked:true,component: 'soilMoisture'},
               {name:"视频监视",checked:false,component: 'videoSurveillance'},
               {name:"涉水工程",checked:false,component: 'Precipitation'},
             ],
@@ -161,7 +143,7 @@
                 prevEl: '.swiper-button-prev',//上一页
               }
             },
-            showComponent:"warning",
+            showComponent:"riverRegime",
             dialogShow:"",
             dialogData:"",
             childData:[],
@@ -303,13 +285,25 @@
                }
               }else if(index===1){
                 if(event.target.checked){
-                  this.getVideo();
+                  mapFuncs.getLayerName(this.map,'rain').setVisible(true)
                 }else{
-                  mapFuncs.getLayerName(this.map,'sp').setVisible(false)
+                  mapFuncs.getLayerName(this.map,'rain').setVisible(false)
                 }
               }else if(index===2){
                 if(event.target.checked){
-                  this.getStock();
+                  mapFuncs.getLayerName(this.map,'sq').setVisible(true)
+                }else{
+                  mapFuncs.getLayerName(this.map,'sq').setVisible(false)
+                }
+              }else if(index===3){
+                if(event.target.checked){
+                  this.getVideo()
+                }else{
+                  mapFuncs.getLayerName(this.map,'sp').setVisible(false)
+                }
+              }else if(index===4){
+                if(event.target.checked){
+                  this.getStock()
                 }else{
                   mapFuncs.getLayerName(this.map,'ck').setVisible(false)
                 }
@@ -335,7 +329,7 @@
                 if(data){
                     //重新设置地图中心点
                     this.map.getView().setCenter([data.LGTD, data.LTTD]);
-                    this.map.getView().setZoom(13);
+                    this.map.getView().setZoom(15);
                     //异步操作避免地图在移动过程中去寻找定位点
                     setTimeout(()=>{
                       let point_overlay;
@@ -350,9 +344,9 @@
                       let pixel = this.map.getPixelFromCoordinate([data.LGTD, data.LTTD]);
                       let left = pixel[0]+12 + 'px';
                       let top = pixel[1]+16 + 'px';
-                      $(".stationInfo").css({top: top, left: left,visibility: "visible"});
                       let content=this.addFeatrueInfo(data);
-                      // $(".stationInfo").html(content);
+                      $(".stationInfo").html(content);
+                      $(".stationInfo").css({top: top, left: left,visibility: "visible"});
                     },0)
                 }else{
                     //同理异步操作
@@ -365,10 +359,59 @@
             //地图上鼠标浮动显示窗口内容创建
             addFeatrueInfo(info){
                 if(info){
+
                   let content ="";
-                  content += '<div>';
-                  content += '<p>'+info.STNM+'</p></div>';
-                  return content
+                  let type=info.type;
+                  if(type){
+                    console.log(info);
+                    switch (type) {
+                      case 'river':
+                        content += '<div class="arrow" ></div>';
+                        content += '<p class="p_rsvr_bg">'+info.STNM+'</p>';
+                        content += '<div class="div_bg"><div class="div_top"><div class="div_t_l">';
+                        content += '<span style="font-size:12px;display: inline-block">实时水位:</span>';
+                        if(info.Z){
+                          info.Z=info.Z;
+                        }else{
+                          info.Z=" ";
+                        }
+                        content += '<span>'+info.Z+'</span><sub>m</sub></div><div class="div_t_r">';
+                        if(info.GRQ){
+                          info.GRQ=info.GRQ;
+                        }else{
+                          info.GRQ=" ";
+                        }
+                        content += '<p>保证水位:'+info.GRQ+'m</p>';
+                        if(info.WRQ){
+                          info.WRQ=info.WRQ;
+                        }else{
+                          info.WRQ=" ";
+                        }
+                        content += '<p>警戒水位:'+info.WRQ+'m</p>';
+                        content += '</div></div><div class="div_lend"></div><div class="div_bottom">';
+                        content += '<p>水系:涡阳水系</p>';
+                        if(info.ADNM){
+                          info.ADNM=info.ADNM;
+                        }else{
+                          info.ADNM=" ";
+                        }
+                        content += '<p class="psvr">地址:'+info.ADNM+'</p>';
+                        content += '</div></div></div>';
+                        return content;
+                        break;
+                      default:
+                        content += '<div class="arrow" ></div>';
+                        content += '<p class="p_rsvr_bg">'+info.STNM+'</p>';
+                        return content;
+                        break;
+                    }
+                  }else{
+                    content += '<div class="arrow" ></div>';
+                    content += '<p class="p_rsvr_bg">'+info.STNM+'</p>';
+                    return content;
+                  }
+
+
                 }
             },
             getRiver(){
@@ -390,6 +433,7 @@
                   $.each(data,(v,item)=>{
                     let LGTD=item.LGTD;
                     let LTTD=item.LTTD;
+                    item.type='river';
                     let point=new ol.Feature({
                       data:item,
                       geometry: new ol.geom.Point([LGTD, LTTD])
@@ -749,9 +793,9 @@
                 });
             },
             childClose(){
-                this.dialogVisible=false
+                this.dialogVisible=false;
+                this.dialogData={};
             }
-
         },
         created(){
           //边界线处理
@@ -812,19 +856,19 @@
         },
         mounted(){
           const that=this;
-          this.initMap();
-          this.rightTitle();
-          this.getSoil();
+          that.initMap();
+          that.rightTitle();
+          that.getSoil();
           /**
            * 地图缩放控制
            */
-          this.map.getView().on('change:resolution',()=>{
-            let level =  this.map.getView().getZoom();
+          that.map.getView().on('change:resolution',()=>{
+            let level =  that.map.getView().getZoom();
             $.each(BZ,(v,item)=>{
-              let labelLayer =mapFuncs.getLayerName(this.map,item);
+              let labelLayer =mapFuncs.getLayerName(that.map,item);
               if (!labelLayer) return;
               labelLayer.getSource().getFeatures().forEach(function (items, i) {
-                if(level>=12 && level <=13){
+                if(level>=12 && level <=18){
                   items.getStyle().getText().setText(items.get("data").STNM);
                 }else if(level <=11){
                   items.getStyle().getText().setText("");
@@ -835,7 +879,7 @@
           /**
            * 地图移动事件控制
            */
-          this.map.on('pointermove', function (evt) {
+          that.map.on('pointermove', function (evt) {
             let _this=this;
             let pixel = _this.getEventPixel(evt.originalEvent);
             let hit = evt.map.hasFeatureAtPixel(pixel);
@@ -858,9 +902,9 @@
                 // point_overlay.setPosition([data.LGTD, data.LTTD]);
                 let left = pixel[0]+12 + 'px';
                 let top = pixel[1]+16 + 'px';
-                $(".stationInfo").css({top: top, left: left,visibility: "visible"});
                 let content=that.addFeatrueInfo(data);
-                // $(".stationInfo").html(content);
+                $(".stationInfo").html(content);
+                $(".stationInfo").css({top: top, left: left,visibility: "visible"});
               }else{
                 // $(".ol-overlaycontainer-stopevent").empty();
                 $(".stationInfo").css('visibility', 'hidden');
@@ -876,15 +920,16 @@
           /**
            * 地图点击事件控制
            */
-          this.map.on('click', function (evt) {
+          that.map.on('click', function (evt) {
             let _this=this;
             let feature = _this.forEachFeatureAtPixel(evt.pixel, function (feature, layer) { return feature; });
             if(feature){
               //获取数据
               let data=feature.get('data');
               if(data){
-
-                that.lakesData=data;
+                that.dialogVisible=true;
+                that.dialogShow=data.type;
+                that.dialogData=data;
               }
             }
           });
@@ -1063,5 +1108,32 @@
     cursor: pointer;
     text-align: center;
     font-size: 12px;;
+  }
+
+
+</style>
+<style lang="less">
+  /**
+ 表格
+  */
+  .table-dliog-body{
+    color: red;
+    padding: 0!important;
+    font-size: 14px;
+  }
+  .el-table__row{
+    cursor: pointer;
+  }
+  .table-dliog-header{
+    background-color: #A4D0EF !important;
+    border-bottom: 1px solid #bbb!important;
+    padding: 0!important;
+    line-height: 25px;
+    color: #333333;
+    font-weight: normal;
+    font-size: 14px;
+  }
+  .el-table--striped .el-table__body tr.el-table__row--striped td{
+    background-color: #e0eef8!important;
   }
 </style>
