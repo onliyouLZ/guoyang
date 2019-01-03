@@ -91,6 +91,7 @@
       :title="title"
       :visible.sync="dialogVisible"
       :modal-append-to-body="bodyFalse"
+      @close="dialogClose"
       width="30%">
       <!--<el-form  ref="form" :model="form" label-width="80px" :rules="rules">-->
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
@@ -152,6 +153,7 @@
       title="选点"
       :visible.sync="mapDligShow"
       :modal-append-to-body="bodyFalse"
+
       style="height: 100%;overflow-y: hidden"
       width="30%">
       <map-dliog @closeMap="closeMap"></map-dliog>
@@ -403,6 +405,28 @@
       resetForm(ruleForm) {
         this.dialogVisible=false;
         this.$refs[ruleForm].resetFields();
+        this.ruleForm={
+          whName:"",
+            orgcd:'',
+            lgtd:"",
+            lttd:"",
+            whArea:"",
+            comments:"",
+            manageDutyPerson:""
+        }
+      },
+      dialogClose(){
+        this.dialogVisible=false;
+        this.ruleForm={
+          whName:"",
+          orgcd:'',
+          lgtd:"",
+          lttd:"",
+          whArea:"",
+          comments:"",
+          manageDutyPerson:""
+        };
+        this.$refs['ruleForm'].resetFields();
       },
       closeMap(data){
         if(data){
@@ -464,12 +488,30 @@
                 _this.search();
               }
               _this.$refs['ruleForm'].resetFields();
+              this.ruleForm={
+                whName:"",
+                orgcd:'',
+                lgtd:"",
+                lttd:"",
+                whArea:"",
+                comments:"",
+                manageDutyPerson:""
+              }
             }).catch((error)=>{
               _this.$message({
                 type:"success",
                 message:msg1
               });
               _this.$refs['ruleForm'].resetFields();
+              this.ruleForm={
+                whName:"",
+                orgcd:'',
+                lgtd:"",
+                lttd:"",
+                whArea:"",
+                comments:"",
+                manageDutyPerson:""
+              }
             });
           } else {
             return false;

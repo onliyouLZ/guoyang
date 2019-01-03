@@ -39,23 +39,23 @@
         methods:{
           handleClick(tab, event) {
             this.loading=true;
-            setTimeout(()=>{
-              this.loading=false;
-            },1000)
+            // setTimeout(()=>{
+            //   this.loading=false;
+            // },1000)
           },
           primary(data){
             this.loading=data.loading;
-            setTimeout(()=>{
-              this.loading=false;
-            },1000)
+            // setTimeout(()=>{
+            //   this.loading=false;
+            // },1000)
           }
         },
         computed:{
         },
         created(){
-          setTimeout(()=>{
-            this.loading=false
-          },1000)
+          // setTimeout(()=>{
+          //   this.loading=false
+          // },1000)
         }
     }
 </script>

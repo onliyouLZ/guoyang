@@ -34,7 +34,6 @@
               size="mini"
               collapse-tags
               @change="basinChange"
-              @remove-tag="basinRemove"
               placeholder="请选择">
               <el-option
                 v-for="item in basinOption"
@@ -51,7 +50,6 @@
               size="mini"
               collapse-tags
               @change="gradeChange"
-              @remove-tag="gradeRemove"
               placeholder="请选择">
               <el-option
                 v-for="item in gradeOption"
@@ -62,7 +60,7 @@
             </el-select></p>
           <p class="prims_p_title_child">
             <label>站点搜索:</label>
-            <el-input style="width: 193px" size="mini" v-model="input" placeholder="请输入内容" @change="sxChange"></el-input>
+            <el-input style="width: 193px" size="mini" v-model="keyWord" placeholder="请输入站点名称" @change="sxChange"></el-input>
           </p>
         </div>
         <hr />
@@ -85,7 +83,7 @@
       <!--:viewStyle="{width:'100%'}">-->
 
       <div class="table-title">
-        <p style="font-size: 20px;color: red"><span>{{tableName}}(雨量)逐日降雨量</span></p>
+        <p style="font-size: 20px;color: red"><span>{{tableName}}降雨量</span></p>
         <p><span>年份：{{tableYear}} 单位：mm</span></p>
       </div>
        <div class="table-button">
@@ -151,16 +149,11 @@
             flag:0,
             flagName:"显示",
             radio:"1",
-            year:new Date(),
+            year:new Date('2018'),
             basin: [],
             grade: [],
-            input:"",
-            basinOption: [
-              {
-                value: '64000001',
-                label: '涡阳水系'
-              }
-            ],
+            keyWord:"",
+            basinOption: [],
             gradeOption: [
               {label: '中央（1）', value: "1"},
               {label: '省级重点（2）', value: "2"},
@@ -176,7 +169,9 @@
             oldTableData:[],
             tableFooter:false,
             multipleSelection:[],
-            screenWidth:document.body.clientWidth
+            screenWidth:document.body.clientWidth,
+            ztreeData:[],
+            tableFlag:1
           }
         },
         methods:{
@@ -305,15 +300,16 @@
               this.flagName="显示"
             }
           },
+          //查询
           primary(){
             if(this.checkNode.name){
-              this.tableName=this.checkNode.name;
               $('.prims').animate({left:-279}, "fast");
               $('.prims_button').animate({left: 0}, "fast");
               this.flag=0;
               this.flagName="显示";
               this.tableYear=new Date(this.year).getFullYear();
               if(this.radio==="2"){
+                this.tableName=this.checkNode.name+'(雨量)实时';
                 this.tableHeader=[
                   {data: '__index', title: "序号",type:"index"},
                   {data: "IDTM", title: "时间",type:"normal"},
@@ -330,11 +326,14 @@
                 this.tableFooter=true;
                 this.pageSize=10;
                 this.tableData=this.oldTableData;
+                this.tableFlag=2;
               }else if(this.radio==="1"){
+                this.tableName=this.checkNode.name+'(雨量)逐日';
                 this.tableFooter=false;
                 this.pageSize=40;
                 this.typeNum=[];
                 this.tableData=[];
+                this.tableFlag=1;
                 this.search();
                 this.$emit('primary',{loading:true});
               };
@@ -396,99 +395,83 @@
             return result;
           },
           checkTree(data){
-            console.log(data);
-            this.checkNode=data
+            this.checkNode=data;
+          },
+          //筛选数据
+          filertData(){
+            let params={
+              HNNM:this.basin,
+              FRGRD:this.grade,
+              keyWord:this.keyWord
+            };
+            let treeData=this.ztreeData.filter((item)=>{
+              if (params.keyWord || params.keyWord === 0) {
+                if(item.STCD){
+                  if (item.STCD.search(params.keyWord) < 0 && item.name.search(params.keyWord) < 0 ) {
+                    return false;
+                  }
+                }
+              }
+              if (params.HNNM.length > 0 && $.inArray((item.HNNM === '' ? '暂无' : item.HNNM), params.HNNM) === -1) {
+                return false;
+              }
+              if (params.FRGRD.length > 0 && $.inArray(item.FRGRD, params.FRGRD) === -1) {
+                return false;
+              }
+              return true
+            });
+            return treeData;
           },
           basinChange(){
-            if(this.basin){
-              this.treeData=[
-                { id:1, pId:0, name:"雨量站", open:true,nocheck:true},
-                { id:11, pId:1, name:"金水闸"},
-                { id:12, pId:1, name:"法泗闸"},
-                { id:13, pId:1, name:"鲁湖闸"},
-                { id:14, pId:1, name:"鲁湖闸"},
-              ]
-            }
+            this.treeData=this.filertData()
           },
           gradeChange(){
-            if(this.grade){
-              this.treeData=[
-                { id:1, pId:0, name:"雨量站", open:true,nocheck:true},
-                { id:11, pId:1, name:"法泗闸"},
-              ]
-            }
-          },
-          basinRemove(){
-            if(this.basin.length===0){
-              this.treeData=[
-                { id:1, pId:0, name:"雨量站", open:true,nocheck:true},
-                { id:11, pId:1, name:"鲁湖闸"},
-                { id:12, pId:1, name:"法泗闸"},
-                { id:13, pId:1, name:"鲁湖闸"},
-                { id:14, pId:1, name:"鲁湖闸"},
-                { id:15, pId:1, name:"鲁湖闸"},
-                { id:16, pId:1, name:"鲁湖闸"},
-                { id:17, pId:1, name:"鲁湖闸"},
-              ];
-            }
-          },
-          gradeRemove(){
-           if(this.grade.length===0){
-             this.treeData=[
-               { id:1, pId:0, name:"雨量站", open:true,nocheck:true},
-               { id:11, pId:1, name:"鲁湖闸"},
-               { id:12, pId:1, name:"法泗闸"},
-               { id:13, pId:1, name:"鲁湖闸"},
-               { id:14, pId:1, name:"鲁湖闸"},
-               { id:15, pId:1, name:"鲁湖闸"},
-               { id:16, pId:1, name:"鲁湖闸"},
-               { id:17, pId:1, name:"鲁湖闸"},
-             ];
-           }
+            this.treeData=this.filertData()
           },
           sxChange(){
-            let arr=[
-              { id:1, pId:0, name:"雨量站", open:true,nocheck:true,children:[]},
-            ];
-            if(this.input){
-              arr[0].children=this.treeData.filter((data)=>{
-                return data.name.match(this.input)
-              });
-              this.treeValue=arr;
-            }else{
-              this.treeValue=[
-                { id:1, pId:0, name:"雨量站", open:true,nocheck:true},
-                { id:11, pId:1, name:"鲁湖闸",checked:true},
-                { id:12, pId:1, name:"法泗闸"},
-                { id:13, pId:1, name:"鲁湖闸"},
-                { id:14, pId:1, name:"鲁湖闸"},
-                { id:15, pId:1, name:"鲁湖闸"},
-                { id:16, pId:1, name:"鲁湖闸"},
-                { id:17, pId:1, name:"鲁湖闸"},
-              ];
-            }
+            this.treeData=this.filertData()
           },
+          //获取水系
+          getRvnms(data){
+            let rvnmObj = {};
+            $.each(data, function (i, item) {
+              item.HNNM = item.HNNM === null ? '暂无' : item.HNNM;
+              if (!rvnmObj[item.HNNM]) {
+                rvnmObj[item.HNNM] = [];
+              }
+              rvnmObj[item.HNNM].push(item);
+            });
+            let rvnmArr = [];
+            for (let rvnm in rvnmObj) {
+              if (rvnmObj.hasOwnProperty(rvnm)) {
+                rvnmArr.push({stArr: rvnmObj[rvnm], label: rvnm, value: rvnm});
+              }
+            }
+            // 根据名称排序
+            rvnmArr.sort(function (a, b) {
+              if (a.label === '暂无') {
+                return 1;
+              } else if (b.label === '暂无') {
+                return -1;
+              } else {
+                return a.label.localeCompare(b.label, 'zh')
+              }
+
+            });
+            return rvnmArr
+          },
+          //初始化
           search(){
             const that=this;
-            this.$http.get('/api/rains').then((res)=>{
+            let parmas={
+              stcdList: [that.checkNode.STCD],
+              sttdrcd: "1",
+              // tmList: [{bgtm: new Date(that.year).formatDate('yyyy-MM-dd'), endtm: new Date(that.year).datePro('{%y+1}').formatDate('yyyy-MM-dd')}],
+              tmList: [{bgtm: "2018-01-01", endtm: "2019-01-01"}],
+            };
+            this.$http.post(this.$url.baseUrl+'api/commonApi/sl323/v0.1/realtime/rain/sttdrcd',parmas).then((res)=>{
               that.tableYear=new Date(that.year).getFullYear();
-              that.treeData=[
-                { id:1, pId:0, name:"雨量站", open:true,nocheck:true},
-                { id:11, pId:1, name:"鲁湖闸",checked:true},
-                { id:12, pId:1, name:"法泗闸"},
-                { id:13, pId:1, name:"鲁湖闸"},
-                { id:14, pId:1, name:"鲁湖闸"},
-                { id:15, pId:1, name:"鲁湖闸"},
-                { id:16, pId:1, name:"鲁湖闸"},
-                { id:17, pId:1, name:"鲁湖闸"},
-              ];
-              $.each(this.treeData,(v,item)=>{
-                if(item.checked){
-                  this.tableName=item.name;
-                  return false
-                }
-              });
-              let data=res.data.data.result[64000001];
+              let data=res.data.result[that.checkNode.STCD];
               this.oldTableData=data;
               let gridData = [];
               let daysData = {};
@@ -532,23 +515,23 @@
               let monthTotalRow = {date: '总量', statistics: '月统计'};
               let monthMaxDayRainRow = {date: '最大日雨量', statistics: '月统计'};
               let monthRainyDayRow = {date: '降雨天数', statistics: '月统计'};
-              let yearTotalRow = { date: '降雨量', statistics: '年统计', month01: '', month02: '降雨天数', month03: ''};
+              let yearTotalRow = { date: '降雨量', statistics: '年统计', month01:0, month02: '降雨天数', month03: ''};
               for (let j = 1; j <= 12; j++) {
                 _month = j < 10 ? ('0' + j) : j;
                 _monthKey = 'month' + _month;
-                monthTotalRow[_monthKey] = "";
-                monthRainyDayRow[_monthKey] = "";
-                monthMaxDayRainRow[_monthKey] = "";
+                monthTotalRow[_monthKey] = '';
+                monthRainyDayRow[_monthKey] = '';
+                monthMaxDayRainRow[_monthKey] = '';
                 if (!yearTotalRow.hasOwnProperty(_monthKey)) {
                   yearTotalRow[_monthKey] = '';
                 }
                 for (let i = 1; i <= 31; i++) {
                   _day =that.tableYear + "-" + _month + "-" + (i < 10 ? ('0' + i) : i) + ' 08:00:00';
-                  if (daysData[_day] || daysData[_day] == 0) {
+                  if (daysData[_day] || daysData[_day] === 0) {
                     monthTotalRow[_monthKey] = monthTotalRow[_monthKey] === '' ? 0 : monthTotalRow[_monthKey];
-                    monthTotalRow[_monthKey] += daysData[_day];
                     yearTotalRow[_monthKey] = yearTotalRow[_monthKey] === '' ? 0 : yearTotalRow[_monthKey];
-                    yearTotalRow.month01 +=daysData[_day];
+                    monthTotalRow[_monthKey] += daysData[_day];
+                    yearTotalRow.month01 += daysData[_day];
                     monthMaxDayRainRow[_monthKey] = daysData[_day] > monthMaxDayRainRow[_monthKey] ? daysData[_day] : monthMaxDayRainRow[_monthKey];
                     if (daysData[_day] > 0) {
                       //降雨日数
@@ -558,6 +541,9 @@
                   }
                 }
               };
+              if(yearTotalRow.month01===0){
+                yearTotalRow.month01=""
+              }
               gridData.push(monthTotalRow);
               gridData.push(monthMaxDayRainRow);
               gridData.push(monthRainyDayRow);
@@ -593,11 +579,13 @@
               ];
               this.tableData=gridData;
               this.tableData=this.tableData.concat(arr);
-              console.log(this.tableData);
               this.getOrderNumber();
-              // this.$emit('primary',{loading:false});
+              setTimeout(()=>{
+                this.$emit('primary',{loading:false});
+              },500)
             });
           },
+          //导出
           exportExcel(tableData,multipleSelection,tableHeader){
             let tableDatas=[];
             if(multipleSelection.length>0){
@@ -630,7 +618,11 @@
         computed:{
           tables(){
             //实现前端分页
-            return this.tableData.slice((this.pageIndex-1)*this.pageSize,this.pageIndex*this.pageSize)
+            if(this.tableFlag===1){
+              return this.tableData;
+            }else if(this.tableFlag===2){
+              return this.tableData.slice((this.pageIndex-1)*this.pageSize,this.pageIndex*this.pageSize)
+            }
           },
           total(){
             return this.tableData.length
@@ -644,12 +636,46 @@
         },
         mounted() {
           this.$nextTick(()=>{
-            this.search();
             if(this.screenWidth>=1800){
               $('.trees').css('height',"300px")
-            }else if(this.screenWidth<1920){
+            }else if(this.screenWidth<1800){
               $('.trees').css('height',"130px")
-            }
+            };
+            this.$http.post(this.$url.baseUrl+'api/commonApi/sl323/v0.1/basic/st/stStbprpB/selectAll')
+              .then((res)=>{
+                if(res.status===200){
+                  let data=res.data.result;
+                  this.basinOption=this.getRvnms(data);
+                  $.each(data,(v,item)=>{
+                    if(item.STNM==="孙土楼"){
+                      item.checked=true;
+                    }
+                    let obj={
+                      id:item.STCD,
+                      STCD:item.STCD,
+                      PHCD:item.PHCD,
+                      pId:1,
+                      name:item.STNM,
+                      HNNM:item.HNNM === null ? '暂无' : item.HNNM,
+                      FRGRD:item.FRGRD
+                    };
+                    if(item.checked){
+                      obj.checked=item.checked;
+                    }
+                    this.treeData.push(obj);
+                  });
+                  this.ztreeData=this.treeData;
+                  $.each(this.treeData,(v,item)=>{
+                    if(item.checked){
+                      this.tableName=item.name+'(雨量)逐日';
+                      this.checkNode=item;
+                      return false
+                    }
+                  });
+                  this.$emit('primary',{loading:true});
+                  this.search();
+                }
+              })
           })
         }
     }

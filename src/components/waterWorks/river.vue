@@ -87,12 +87,12 @@
       },
       methods:{
         search(){
-          this.$http.get('/api/river').then((res)=>{
+          this.$http.post(this.$url.baseUrl+'api/fhgc/v0.1/common-query/clob-geo',{tableName: "RV"}).then((res)=>{
             if(res.status===200){
               let data=res.data.data.result;
               this.tableData=data;
             }
-          });
+          })
         },
         handleSizeChange(val) {
           this.pageSize = val

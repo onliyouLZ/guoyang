@@ -16,8 +16,8 @@
           <!--</el-select>-->
           <label>时间:</label>
           <el-date-picker
-            v-model="value6"
-            type="daterange"
+            v-model="times"
+            type="datetimerange"
             range-separator="至"
             start-placeholder="开始日期"
             end-placeholder="结束日期">
@@ -94,222 +94,32 @@
             options: [
               {value: '1',label: '涡阳县'}
             ],
-            value: '',
-            value6: '',
+            // times: [new Date().formatDate('yyyy-MM-dd 08:00'), new Date()],
+            times: [new Date("2018-12-22 08:00"), new Date("2018-12-22 20:00")],
             multipleSelection:[],
             loading: true,
             typeNum:[],
             screenWidth:document.body.clientWidth
           }
         },
-        created(){
-          setTimeout(()=>{
-            this.loading=false;
-            this.tableData=[
-              {
-                "drp": 3.5,
-                "stcd": "180103",
-                "hnnm": "涡河",
-                "__index": 6,
-                "rvnm": "涡河",
-                "stnm": "朱楼闸",
-                "lgtd": 108.67225,
-                "adcd": "341621",
-                "lttd": 30.321528,
-                "sttp": "PP",
-                "bsnm": "长江",
-                "adnm": "涡阳县"
-              },
-              {
-                "drp": 0.5,
-                "stcd": "180104",
-                "hnnm": "涡河",
-                "__index": 38,
-                "rvnm": "涡河",
-                "stnm": "燕小庙闸",
-                "lgtd": 110.32,
-                "adcd": "341621",
-                "lttd": 30.62,
-                "sttp": "PP",
-                "bsnm": "长江",
-                "adnm": "涡阳县"
-              },
-              {
-                "drp": 0.5,
-                "stcd": "180105",
-                "hnnm": "涡河",
-                "__index": 134,
-                "rvnm": "涡河",
-                "stnm": "包河闸",
-                "lgtd": 109.884894,
-                "adcd": "341621",
-                "lttd": 30.798794,
-                "sttp": "PP",
-                "bsnm": "长江",
-                "adnm": "涡阳县"
-              },
-              {
-                "drp": 5.5,
-                "stcd": "180106",
-                "hnnm": "涡河",
-                "__index": 198,
-                "rvnm": "涡河",
-                "stnm": "曹市闸",
-                "lgtd": 108.984444,
-                "adcd": "341621",
-                "lttd": 30.134167,
-                "sttp": "PP",
-                "bsnm": "长江",
-                "adnm": "涡阳县"
-              },
-              {
-                "drp": 0.5,
-                "stcd": "180107",
-                "hnnm": "涡河",
-                "__index": 33,
-                "rvnm": "涡河",
-                "stnm": "青羊沟闸",
-                "lgtd": 109.92,
-                "adcd": "341621",
-                "lttd": 30.27,
-                "sttp": "PP",
-                "bsnm": "长江",
-                "adnm": "涡阳县"
-              },
-              {
-                "drp": 3,
-                "stcd": "180101",
-                "hnnm": "涡河",
-                "__index": 77,
-                "rvnm": "涡河",
-                "stnm": "武家河闸",
-                "lgtd": 108.5885,
-                "adcd": "341621",
-                "lttd": 29.886444,
-                "sttp": "PP",
-                "bsnm": "长江",
-                "adnm": "涡阳县"
-              },
-              {
-                "drp": 3,
-                "stcd": "180102",
-                "hnnm": "涡河",
-                "__index": 77,
-                "rvnm": "涡河",
-                "stnm": "五道沟闸",
-                "lgtd": 108.5885,
-                "adcd": "3416221",
-                "lttd": 29.886444,
-                "sttp": "PP",
-                "bsnm": "长江",
-                "adnm": "涡阳县"
-              },
-              {
-                "drp": 3.5,
-                "stcd": "180103",
-                "hnnm": "涡河",
-                "__index": 6,
-                "rvnm": "涡河",
-                "stnm": "朱楼闸",
-                "lgtd": 108.67225,
-                "adcd": "3416221",
-                "lttd": 30.321528,
-                "sttp": "PP",
-                "bsnm": "长江",
-                "adnm": "涡阳县"
-              },
-              {
-                "drp": 0.5,
-                "stcd": "180104",
-                "hnnm": "涡河",
-                "__index": 38,
-                "rvnm": "涡河",
-                "stnm": "燕小庙闸",
-                "lgtd": 110.32,
-                "adcd": "3416221",
-                "lttd": 30.62,
-                "sttp": "PP",
-                "bsnm": "长江",
-                "adnm": "涡阳县"
-              },
-              {
-                "drp": 0.5,
-                "stcd": "180105",
-                "hnnm": "涡河",
-                "__index": 134,
-                "rvnm": "涡河",
-                "stnm": "包河闸",
-                "lgtd": 109.884894,
-                "adcd": "3416221",
-                "lttd": 30.798794,
-                "sttp": "PP",
-                "bsnm": "长江",
-                "adnm": "涡阳县"
-              },
-              {
-                "drp": 5.5,
-                "stcd": "180106",
-                "hnnm": "涡河",
-                "__index": 198,
-                "rvnm": "涡河",
-                "stnm": "曹市闸",
-                "lgtd": 108.984444,
-                "adcd": "3416221",
-                "lttd": 30.134167,
-                "sttp": "PP",
-                "bsnm": "长江",
-                "adnm": "涡阳县"
-              },
-              {
-                "drp": 0.5,
-                "stcd": "180107",
-                "hnnm": "涡河",
-                "__index": 33,
-                "rvnm": "涡河",
-                "stnm": "青羊沟闸",
-                "lgtd": 109.92,
-                "adcd": "3416221",
-                "lttd": 30.27,
-                "sttp": "PP",
-                "bsnm": "长江",
-                "adnm": "涡阳县"
-              },
-              {
-                "drp": 3,
-                "stcd": "180101",
-                "hnnm": "涡河",
-                "__index": 77,
-                "rvnm": "涡河",
-                "stnm": "武家河闸",
-                "lgtd": 108.5885,
-                "adcd": "3416221",
-                "lttd": 29.886444,
-                "sttp": "PP",
-                "bsnm": "长江",
-                "adnm": "涡阳县"
-              },
-              {
-                "drp": 3,
-                "stcd": "180102",
-                "hnnm": "涡河",
-                "__index": 77,
-                "rvnm": "涡河",
-                "stnm": "五道沟闸",
-                "lgtd": 108.5885,
-                "adcd": "3416221",
-                "lttd": 29.886444,
-                "sttp": "PP",
-                "bsnm": "长江",
-                "adnm": "涡阳县"
-              },
-
-            ];
-            this.getOrderNumber();
-          },1000);
-
-
-        },
         methods:{
+          search(){
+            let parms={
+              bgtm:new Date(this.times[0]).formatDate('yyyy-MM-dd HH:mm'),
+              endtm:new Date(this.times[1]).formatDate('yyyy-MM-dd HH:mm')
+            };
+            this.$http.get(this.$url.baseUrl+'api/sl323/realtime/rain/ad/sum_x/341621/'+parms.bgtm+'/'+parms.endtm+'?bgtm='+parms.bgtm+'&endtm='+parms.endtm+'&ad=341621')
+                .then((res)=>{
+                  if(res.status===200){
+                    let data=res.data.result.totalMap.rainTotal.list;
+                    setTimeout(()=>{
+                      this.loading=false;
+                      this.tableData=data;
+                      this.getOrderNumber();
+                    },500)
+                  }
+                })
+          },
           handleSizeChange(val) {
             this.pageSize = val
           },
@@ -337,9 +147,7 @@
           },
           primary(){
             this.loading=true;
-            setTimeout(()=>{
-              this.loading=false;
-            },1000)
+            this.search();
           },
           //计算合并
           getOrderNumber(){
@@ -402,11 +210,12 @@
         },
         mounted(){
           this.$nextTick(()=>{
-            if(this.screenWidth>=1920){
+            if(this.screenWidth>=1800){
               $('.tables').css('height',"700px")
-            }else if(this.screenWidth<1920){
+            }else if(this.screenWidth<1800){
               $('.tables').css('height',"400px")
             }
+            this.search();
           })
         }
     }

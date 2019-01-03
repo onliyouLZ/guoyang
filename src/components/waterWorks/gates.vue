@@ -44,7 +44,7 @@
                  :prop="item.data"
                  :label="item.title"
                   align="center"
-                  width="150">
+                  min-width="150">
                </el-table-column>
              </template>
            </el-table>
@@ -75,11 +75,6 @@
           pageIndex: 1, // 默认第一页
           tableData: [],
           currentPage4: 1,
-          options: [
-            {value: '2017',label: '2017'},
-            {value: '2016',label: '2016'},
-            {value: '2015',label: '2015'},
-          ],
           tableHeader:[
             {data:'',title:'',type:"selection"},
             {data:'wagaCode',title:'水闸代码'},
@@ -121,15 +116,149 @@
       },
       methods:{
         search(){
-          this.$http.get('/api/gates').then((res)=>{
-            if(res.status===200){
-              let data=res.data.data.result;
-              $.each(data,(v,item)=>{
-                item.collDate=new Date(item.collDate).formatDate('yyyy-MM-dd')
-              });
-              this.tableData=data;
-            }
-          });
+          this.$http.post(this.$url.baseUrl+'api/fhgc/v0.1/common-query/table',{tableName:'ATT_WAGA_BASE'})
+            .then((res)=>{
+              if(res.status===200){
+                let data=res.data.result;
+                $.each(data,(v,item)=>{
+                  item.collDate=new Date(item.collDate).formatDate('yyyy-MM-dd');
+                  //水闸类型
+                  if(!item.wagaType){
+                    item.wagaType='';
+                  }
+                  else if(item.wagaType==="1"){
+                    item.wagaType='分（泄）洪闸';
+                  }
+                  else if(item.wagaType==="2"){
+                    item.wagaType='节制闸';
+                  }
+                  else if(item.wagaType==="3"){
+                    item.wagaType='排（退）水闸';
+                  }
+                  else if(item.wagaType==="4"){
+                    item.wagaType='引（进）水闸';
+                  }
+                  else if(item.wagaType==="5"){
+                    item.wagaType='挡潮闸';
+                  }
+                  else if(item.wagaType==="6"){
+                    item.wagaType='船闸';
+                  }
+                  else if(item.wagaType==="9"){
+                    item.wagaType='其他';
+                  }
+                  //工程等别
+                  if(!item.engGrad){
+                    item.engGrad='';
+                  }
+                  else if(item.engGrad==="1"){
+                    item.engGrad='Ⅰ';
+                  }
+                  else if(item.engGrad==="2"){
+                    item.engGrad='Ⅱ';
+                  }
+                  else if(item.engGrad==="3"){
+                    item.engGrad='Ⅲ';
+                  }
+                  else if(item.engGrad==="4"){
+                    item.engGrad='Ⅳ';
+                  }
+                  else if(item.engGrad==="5"){
+                    item.engGrad='Ⅴ';
+                  }
+                  //工程规模
+                  if(!item.engScal){
+                    item.engScal='';
+                  }
+                  else if(item.engScal==="1"){
+                    item.engScal='大（1）型';
+                  }
+                  else if(item.engScal==="2"){
+                    item.engScal='大（2）型';
+                  }
+                  else if(item.engScal==="3"){
+                    item.engScal='中型';
+                  }
+                  else if(item.engScal==="4"){
+                    item.engScal='小（1）型';
+                  }
+                  else if(item.engScal==="5"){
+                    item.engScal='小（2）型';
+                  }
+                  //取水水源类型
+                  if(!item.wainWasoType){
+                    item.wainWasoType='';
+                  }
+                  else if(item.wainWasoType==="1"){
+                    item.wainWasoType='水库';
+                  }
+                  else if(item.wainWasoType==="2"){
+                    item.wainWasoType='湖泊';
+                  }
+                  else if(item.wainWasoType==="3"){
+                    item.wainWasoType='河流';
+                  }
+                  else if(item.wainWasoType==="4"){
+                    item.wainWasoType='其他';
+                  }
+                  //工程建设情况
+                  if(!item.engStat && item.engStat!=="0"){
+                    item.engStat='';
+                  }
+                  else if(item.engStat==="0"){
+                    item.engStat='未建';
+                  }
+                  else if(item.engStat==="1"){
+                    item.engStat='在建';
+                  }
+                  else if(item.engStat==="2"){
+                    item.engStat='已建';
+                  }
+                  //运行状况
+                  if(!item.runStat){
+                    item.runStat='';
+                  }
+                  else if(item.runStat==="1"){
+                    item.runStat='在用良好';
+                  }
+                  else if(item.runStat==="2"){
+                    item.runStat='在用故障';
+                  }
+                  else if(item.runStat==="3"){
+                    item.runStat='停用';
+                  }
+                  //归口管理部门
+                  if(!item.admDep){
+                    item.admDep='';
+                  }
+                  else if(item.admDep==="1"){
+                    item.admDep='水利部门';
+                  }
+                  else if(item.admDep==="2"){
+                    item.admDep='电力部门';
+                  }
+                  else if(item.admDep==="3"){
+                    item.admDep='农业部门';
+                  }
+                  else if(item.admDep==="4"){
+                    item.admDep='林业部门';
+                  }
+                  else if(item.admDep==="5"){
+                    item.admDep='城建部门';
+                  }
+                  else if(item.admDep==="6"){
+                    item.admDep='航运部门';
+                  }
+                  else if(item.admDep==="7"){
+                    item.admDep='环保部门';
+                  }
+                  else if(item.admDep==="9"){
+                    item.admDep='其他部门';
+                  }
+                });
+                this.tableData=data;
+              }
+            })
         },
         handleSizeChange(val) {
           this.pageSize = val

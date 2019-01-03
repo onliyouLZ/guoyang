@@ -30,7 +30,14 @@
                 onCheck: this.zTreeOnCheck
               },
             },
-            zNodes:[],
+            zNodes:{
+              id:1,
+              pId:0,
+              name:"雨量站",
+              open:true,
+              nocheck:true,
+              children: []
+            },
           }
         },
         props:{
@@ -55,7 +62,7 @@
         },
         watch:{
           treeData(){
-            this.zNodes=this.treeData;
+            this.zNodes.children=this.treeData;
             $.fn.zTree.init($("#treeDemo"), this.setting, this.zNodes)
           },
           treeID(){

@@ -31,6 +31,7 @@ import rescue from '../components/floodControl/rescue'
 
 import gates from '../components/waterWorks/gates'
 import river from '../components/waterWorks/river'
+import dyke from '../components/waterWorks/dyke'
 
 
 import store from '../components/management/store'
@@ -117,6 +118,11 @@ export default new Router({
               path: '/river',
               component: river,
               name:"河流",
+            },
+            {
+              path: '/dyke',
+              component: dyke,
+              name:"堤防",
             },
           ]
         },

@@ -98,6 +98,9 @@
           }else if(routerPath==="/river"){
             active='/waterWorks';
             return false
+          }else if(routerPath==="/dyke"){
+            active='/waterWorks';
+            return false
           }else if(routerPath==="/store"){
             active='/management';
             return false

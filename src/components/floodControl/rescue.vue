@@ -5,7 +5,7 @@
       <el-card class="box-card">
         <div slot="header" class="clearfix">
           <label>单位:</label>
-          <el-select v-model="company" placeholder="请选择" style="width: 150px">
+          <el-select v-model="company" clearable  placeholder="请选择" style="width: 150px">
             <el-option
               v-for="item in cOptions"
               :key="item.value"
@@ -14,7 +14,7 @@
             </el-option>
           </el-select>
           <label>姓名:</label>
-          <el-select v-model="person" placeholder="请选择" style="width: 150px">
+          <el-select v-model="person" clearable  placeholder="请选择" style="width: 150px">
             <el-option
               v-for="item in pOptions"
               :key="item.value"
@@ -100,6 +100,7 @@
         :title="title"
         :visible.sync="dialogVisible"
         :modal-append-to-body="bodyFalse"
+        @close="dialogClose('ruleForm')"
         width="30%">
         <!--<el-form  ref="form" :model="form" label-width="80px" :rules="rules">-->
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
@@ -109,7 +110,7 @@
                 <el-input v-model="ruleForm.rtName"  placeholder="请输入队伍名称"></el-input>
               </el-form-item>
               <el-form-item label="领导" prop="userId">
-                <ul v-model="ruleForm.userId" id="treeDemo" class="ztree"></ul>
+                <ul  id="treeDemo" class="ztree"></ul>
               </el-form-item>
             </el-col>
             <el-col :span="12">
@@ -123,8 +124,8 @@
             </el-col>
             <el-col :span="24" style="text-align: right">
               <el-form-item style="margin-bottom: 0!important;">
-                <el-button type="primary" @click="submitForm()">提交</el-button>
-                <el-button @click="resetForm('ruleForm')">重置</el-button>
+                <el-button type="primary" @click="submitForm">提交</el-button>
+                <el-button @click="resetForm">重置</el-button>
               </el-form-item>
             </el-col>
           </el-row>
@@ -170,7 +171,7 @@
           rtName:"",
           rtType:'常驻抢险队伍',
           teamMemberInfo:"",
-          userId:""
+          userId:"",
         },
         rules:{
           rtName: [
@@ -220,8 +221,8 @@
       search(){
         const that=this;
         let parms={
-          "gidList":[],
-          "userIdList":[]
+          "gidList":this.company ==""? []:[this.company],
+          "userIdList":this.person ==""? []:[this.person]
         };
         that.$http.post(that.$url.baseUrl+'api/guoYang/rescue-team/v0.1/team/list',parms)
           .then((res)=>{
@@ -256,7 +257,6 @@
       handleSelectionChange(val) {
         if(val.length>0){
           this.multipleSelection=[];
-          console.log(val);
           $.each(val,(v,item)=>{
             this.multipleSelection.push(item.RT_ID);
           });
@@ -289,10 +289,6 @@
         }
         require.ensure([], () => {
           const { export_json_to_excel } = require('../../vendor/Export2Excel');
-          /**
-           * 表头和数据需处理 此处写的死数据
-           * @type {string[]}
-           */
           const tHeader=[];
           const filterVal=[];
           $.each(this.tableHeader,(v,item)=>{
@@ -313,10 +309,11 @@
       handleEdit(index, row) {
         this.title="抢险队伍修改";
         this.dialogVisible=true;
-        this.ruleForm.rtName=row.GNAME;
+        this.ruleForm.rtName=row.RT_NAME;
         this.ruleForm.rtType=row.RT_TYPE;
         this.ruleForm.teamMemberInfo=row.TEAM_MEMBER_INFO;
         this.ruleForm.userId=row.USER_ID;
+        this.ruleForm.rtId=row.RT_ID;
         $.each(this.upNodes,(v,item)=>{
            if(item.id===row.USER_ID){
              item.checked="true";
@@ -330,25 +327,32 @@
       //行内删除
       handleDelete(index, row) {
         this.multipleSelection=[];
-        this.multipleSelection.push(row.WH_CD);
+        this.multipleSelection.push(row.RT_ID);
         this.del();
       },
       //重置
-      resetForm(ruleForm) {
+      resetForm() {
+        this.$refs['ruleForm'].resetFields();
+        this.ruleForm={
+          rtName:"",
+          rtType:'常驻抢险队伍',
+          teamMemberInfo:"",
+          userId:"",
+        };
+        this.dialogVisible=false;
+      },
+      dialogClose(ruleForm){
         this.dialogVisible=false;
         this.$refs[ruleForm].resetFields();
-      },
-      closeMap(data){
-        if(data){
-          this.mapDligShow=false;
-          this.ruleForm.lgtd=parseFloat(data[0].toFixed(2));
-          this.ruleForm.lttd=parseFloat(data[1].toFixed(2));
-          this.$refs['ruleForm'].clearValidate(['lgtd','lttd']);
-          this.$message({
-            message: '获取坐标成功！',
-            type: 'success'
-          });
-        }
+        this.ruleForm={
+          rtName:"",
+          rtType:'常驻抢险队伍',
+          teamMemberInfo:"",
+          userId:"",
+        };
+        $.each(this.upNodes,(v,item)=>{
+          item.checked="false";
+        });
       },
       /**
        * 抢险队伍删除
@@ -385,34 +389,50 @@
         _this.$refs['ruleForm'].validate((valid) => {
           if (valid) {
             let url,msg,msg1;
+            let parms;
             if(_this.title==="新增抢险队伍"){
               url=_this.$url.baseUrl+'api/guoYang/rescue-team/v0.1/team';
               msg="新增成功";
-              msg1="新增失败"
+              msg1="新增失败";
+              parms=[];
+              parms.push(_this.ruleForm);
             }else{
-              url=_this.$url.baseUrl+'api/guoYang/v0.1/material-manage/warehouse/update';
+              url=_this.$url.baseUrl+'api/guoYang/rescue-team/v0.1/team/update';
               msg="修改成功";
               msg1="修改失败";
+              parms=_this.ruleForm;
             }
             _this.dialogVisible=false;
-            _this.$http.put(url,_this.ruleForm).then((res)=>{
-              console.log(res);
+            _this.$http.put(url,parms).then((res)=>{
               if(res.status===200){
                 _this.$message({
                   type:"success",
                   message:msg
                 });
                 _this.loading=true;
+                _this.multipleSelection=[];
                 _this.search();
+                _this.$refs['ruleForm'].resetFields();
+                this.ruleForm={
+                  rtName:"",
+                  rtType:'常驻抢险队伍',
+                  teamMemberInfo:"",
+                  userId:"",
+                };
+              }else{
+                _this.$message({
+                  type:"error",
+                  message:msg1
+                });
+                _this.$refs['ruleForm'].resetFields();
+                this.ruleForm={
+                  rtName:"",
+                  rtType:'常驻抢险队伍',
+                  teamMemberInfo:"",
+                  userId:"",
+                };
               }
-              _this.$refs['ruleForm'].resetFields();
-            }).catch((error)=>{
-              _this.$message({
-                type:"error",
-                message:msg1
-              });
-              _this.$refs['ruleForm'].resetFields();
-            });
+            })
           } else {
             return false;
           }
@@ -448,7 +468,7 @@
         };
         //获取单位
         function getCompany() {
-          return that.$http.post(that.$url.baseUrl+'api/guoYang/v0.1/material-manage/sysorg/list');
+          return that.$http.post(that.$url.baseUrl+'api/user/v0.1/ht/pda-group/list');
         };
         //获取用户组
         function getPdaGroup() {
@@ -466,8 +486,8 @@
               let arr=[];
               $.each(data,(v,item)=>{
                 let obj={
-                  label:item.ORGNM,
-                  value:item.ORGCD
+                  label:item.GROUP_NAME,
+                  value:item.GROUP_ID
                 };
                 arr.push(obj);
               });

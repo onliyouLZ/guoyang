@@ -303,10 +303,24 @@
       resetForm(ruleForm) {
         this.dialogVisible=false;
         this.$refs[ruleForm].resetFields();
+        this.ruleForm={
+          mlName:"",
+          mlType:'',
+          mlMeasureUnit:"",
+          comments:"",
+          mlCd:""
+        }
       },
       dialogClose(){
         this.dialogVisible=false;
         this.$refs['ruleForm'].resetFields();
+        this.ruleForm={
+          mlName:"",
+          mlType:'',
+          mlMeasureUnit:"",
+          comments:"",
+          mlCd:""
+        }
       },
       /**
        * 物资名录删除
@@ -356,12 +370,26 @@
                 _this.search();
               }
               _this.$refs['ruleForm'].resetFields();
+              _this.ruleForm={
+                mlName:"",
+                  mlType:'',
+                  mlMeasureUnit:"",
+                  comments:"",
+                  mlCd:""
+              }
             }).catch((error)=>{
               _this.$message({
                 type:"error",
                 message:msg1
               });
               _this.$refs['ruleForm'].resetFields();
+              _this.ruleForm={
+                mlName:"",
+                mlType:'',
+                mlMeasureUnit:"",
+                comments:"",
+                mlCd:""
+              }
             });
           } else {
             return false;

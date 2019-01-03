@@ -10,7 +10,7 @@
           <p class="prims_p_title_child">
             <label>开始时间:</label>
             <el-date-picker
-              v-model="value1"
+              v-model="bgtm"
               type="date"
               placeholder="选择日期"
               align="right"
@@ -20,7 +20,7 @@
           <p class="prims_p_title_child">
             <label>结束时间:</label>
             <el-date-picker
-              v-model="value2"
+              v-model="endtm"
               type="date"
               placeholder="选择日期"
               align="right"
@@ -68,7 +68,7 @@
         label="序号">
       </el-table-column>
       <el-table-column
-        prop="adnm"
+        prop="ADDVNM"
         label="政区"
         align="center">
       </el-table-column>
@@ -88,12 +88,12 @@
         label="距平（%）">
       </el-table-column>
       <el-table-column
-        prop="yp"
+        prop="navp"
         align="center"
         :label="new Date(year).getFullYear()+'年同期（mm）'">
       </el-table-column>
       <el-table-column
-        prop="mom"
+        prop="tongbi"
         align="center"
         label="同比（%）">
       </el-table-column>
@@ -114,6 +114,7 @@
 </template>
 
 <script>
+    import {convertObjectToArray} from '../../utils/utils'
     export default {
         name: "table2",
         data(){
@@ -124,10 +125,10 @@
             currentPage4: 1,
             flag:0,
             flagName:"显示",
-            year:'2017',
+            year:new Date().datePro('{%y-1}'),
             tableHeader:[],
-            value1:"",
-            value2:"",
+            bgtm:new Date().datePro('{%d-7}'),
+            endtm:new Date(),
             multipleSelection:[]
           }
         },
@@ -158,6 +159,7 @@
             this.flag=0;
             this.flagName="显示";
             this.$emit('primary',{loading:true});
+            this.search();
           },
           reset(){
             $('.prims').animate({left:-279}, "fast");
@@ -165,113 +167,89 @@
             this.flag=0;
             this.flagName="显示";
             this.$emit('primary',{loading:true});
+            this.bgtm=new Date().datePro('{%d-7}');
+            this.endtm=new Date();
+            this.year=new Date().datePro('{%y-1}');
+            this.search();
           },
 
           search(){
             const that=this;
-            this.$http.get('/api/rains').then((res)=>{
-              this.tableData=[
-                {
-                  "pa": -70.64,
-                  "tenantName": "st_pptn_r",
-                  "myavp": "10.9",
-                  "yp": "2.2",
-                  "tenantId": "422800000000000",
-                  "adcd": "341621",
-                  "avp": "3.2",
-                  "mom": "45.45",
-                  "adnm": "涡阳县"
-                },
-                {
-                  "pa": -70.64,
-                  "tenantName": "st_pptn_r",
-                  "myavp": "10.9",
-                  "yp": "2.2",
-                  "tenantId": "422800000000000",
-                  "adcd": "341621",
-                  "avp": "3.2",
-                  "mom": "45.45",
-                  "adnm": "涡阳县"
-                },
-                {
-                  "pa": -70.64,
-                  "tenantName": "st_pptn_r",
-                  "myavp": "10.9",
-                  "yp": "2.2",
-                  "tenantId": "422800000000000",
-                  "adcd": "341621",
-                  "avp": "3.2",
-                  "mom": "45.45",
-                  "adnm": "涡阳县"
-                },
-                {
-                  "pa": -70.64,
-                  "tenantName": "st_pptn_r",
-                  "myavp": "10.9",
-                  "yp": "2.2",
-                  "tenantId": "422800000000000",
-                  "adcd": "341621",
-                  "avp": "3.2",
-                  "mom": "45.45",
-                  "adnm": "涡阳县"
-                },
-                {
-                  "pa": -70.64,
-                  "tenantName": "st_pptn_r",
-                  "myavp": "10.9",
-                  "yp": "2.2",
-                  "tenantId": "422800000000000",
-                  "adcd": "341621",
-                  "avp": "3.2",
-                  "mom": "45.45",
-                  "adnm": "涡阳县"
-                },
-                {
-                  "pa": -70.64,
-                  "tenantName": "st_pptn_r",
-                  "myavp": "10.9",
-                  "yp": "2.2",
-                  "tenantId": "422800000000000",
-                  "adcd": "341621",
-                  "avp": "3.2",
-                  "mom": "45.45",
-                  "adnm": "涡阳县"
-                },{
-                  "pa": -70.64,
-                  "tenantName": "st_pptn_r",
-                  "myavp": "10.9",
-                  "yp": "2.2",
-                  "tenantId": "422800000000000",
-                  "adcd": "341621",
-                  "avp": "3.2",
-                  "mom": "45.45",
-                  "adnm": "涡阳县"
-                },
-                {
-                  "pa": -70.64,
-                  "tenantName": "st_pptn_r",
-                  "myavp": "10.9",
-                  "yp": "2.2",
-                  "tenantId": "422800000000000",
-                  "adcd": "341621",
-                  "avp": "3.2",
-                  "mom": "45.45",
-                  "adnm": "涡阳县"
-                },
-                {
-                  "pa": -70.64,
-                  "tenantName": "st_pptn_r",
-                  "myavp": "10.9",
-                  "yp": "2.2",
-                  "tenantId": "422800000000000",
-                  "adcd": "341621",
-                  "avp": "3.2",
-                  "mom": "45.45",
-                  "adnm": "涡阳县"
-                },
+            function NowYear() {
+              let parms={
+                bgtm: new Date(that.bgtm).formatDate('yyyy-MM-dd'),
+                endtm:new Date(that.endtm).formatDate('yyyy-MM-dd')
+              };
+              return  that.$http.post(that.$url.baseUrl+'api/sl323/realtime/rain/pa',parms)
+            }
+            function OldYear() {
+              let parms={
+                bgtm: new Date(that.bgtm).datePro('{%y-1}').formatDate('yyyy-MM-dd'),
+                endtm: new Date(that.endtm).datePro('{%y-1}').formatDate('yyyy-MM-dd')
+              };
+              return  that.$http.post(that.$url.baseUrl+'api/sl323/realtime/rain/pa',parms)
+            }
+            function adList() {
+              let parms={
+                adcd: '341621',
+                adcdList: []
+              };
+              return  that.$http.post(that.$url.baseUrl+'api/commonApi/sl323/v0.1/basic/ad/list',parms)
+            }
+            that.$http.all([NowYear(),OldYear(),adList()]).then(that.$http.spread((now,old,ad)=>{
+              let arr=[];
+              if(now.status===200){
+                let data=convertObjectToArray(now.data.result);
+                $.each(data,(v,item)=>{
+                  let obj={};
+                  obj.pa=item.pa;
+                  obj.avp=item.avp;
+                  obj.myavp=item.myavp;
+                  obj.adcd=item.adcd;
+                  arr.push(obj);
+                })
+              }
+              if(old.status===200){
+                let data=convertObjectToArray(old.data.result);
+                for (let i = 0; i < arr.length; i++) {
+                  for (let j = 0; j < data.length; j++) {
+                    if(arr[i].adcd===data[j].adcd){
+                      arr[i].navp=data[j].avp;
+                      break;
+                    }
+                  }
+                }
+              }
+              arr.forEach(function (v) {
+                if(!v.navp||v.navp==='0.0'){
+                  v.tongbi='';
+                }else {
+                  v.tongbi=parseFloat(100 * ( v.avp - v.navp ) / v.navp).toFixed(2)+'%';
+                }
+              });
+              if(ad.status===200){
+                let data=ad.data.result;
+                arr.forEach(function (v) {
+                  data.forEach(function (k) {
+                    if(v.adcd==(k.ADDVCD+"000000000")) {
+                      v.ADDVNM=k.ADDVNM
+                    }
+                  })
+                });
+              }
+              arr.forEach(function (v) {
+                if(!v.ADDVNM) {
+                  v.ADDVNM='';
+                }
+              });
+              if(now.status===200 && old.status===200 && ad.status===200){
+                setTimeout(()=>{
+                  that.tableData=arr;
+                  this.$emit('primary',{loading:false});
+                },500)
+              }
+            }))
 
-              ]
-            });
           },
           exportExcel(tableData,multipleSelection,tableHeader){
             let tableDatas=[];
@@ -293,7 +271,7 @@
               //   filterVal.push(item.data);
               // });
               const tHeader = ['政区','面雨量（mm）','多年平均（mm）','距平（%）',this.value+'年同期（mm）','同比（%）'];
-              const filterVal = ['adnm','avp','myavp','pa','yp','mom'];
+              const filterVal = ['ADDVNM','avp','myavp','pa','navp','tongbi'];
               const list = tableDatas;
               const data = this.formatJson(filterVal, list);
               export_json_to_excel(tHeader, data, '政区面雨量统计');
@@ -312,11 +290,11 @@
             return this.tableData.length
           },
         },
-        created(){
-          this.search();
-        },
-        watch:{
-
+        mounted(){
+          this.$nextTick(()=>{
+            this.$emit('primary',{loading:true});
+            this.search();
+          })
         }
     }
 </script>
