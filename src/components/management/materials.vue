@@ -411,7 +411,7 @@
         if(this.screenWidth>=1920){
           $('.tables').css('height',"700px")
         }else if(this.screenWidth<=1366){
-          $('.tables').css('height',"400px")
+          $('.tables').css('height',"350")
         }else if(this.screenWidth>1366 || this.screenWidth<1920){
           $('.tables').css('height',"500px")
         }

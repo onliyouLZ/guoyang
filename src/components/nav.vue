@@ -5,6 +5,7 @@
       <i class="el-icon-menu"></i>
     </div>
     <div class="header-name">涡阳防汛抗旱系统</div>
+
     <div class="header-right">
       <el-menu
         :default-active="onRoutes"
@@ -13,16 +14,24 @@
         background-color="#0a95ef"
         text-color="#fff"
         router
-        active-text-color="#ffd04b">
-        <template v-for="item in items">
-          <template>
+        active-text-color="#ffd04b"
+        style="width:730px">
+        <swiper :options="swiperOption">
+          <swiper-slide
+            style="box-sizing: border-box"
+            v-for="(item,index) in items"
+            :key="index">
             <el-menu-item :index="item.path" :key="item.path">
               <!--<i :class="item.icon"></i>-->
               <span slot="title">{{ item.name }}</span>
             </el-menu-item>
-          </template>
-        </template>
+          </swiper-slide>
+        </swiper>
+        <!--<template v-for="(item,index) in items">-->
+           <!---->
+        <!--</template>-->
       </el-menu>
+      <!--<a  class="fa fa-chevron-right" style="float: left;padding:0 5px;line-height: 60px;background-color: #0a95ef;cursor: pointer"></a>-->
       <div class="header-user-con">
         <!--消息中心-->
         <div class="btn-bell">
@@ -45,6 +54,7 @@
           </el-dropdown-menu>
         </el-dropdown>
       </div>
+
     </div>
   </div>
 </template>
@@ -55,7 +65,20 @@
       return {
         name:"",
         message:1,
-        items:this.$router.options.routes[1].children
+        items:this.$router.options.routes[1].children,
+        swiperOption:{
+          allowTouchMove:true,//禁止拖动
+          // spaceBetween:20,//slider 之间的间隔
+          centerInsufficientSlides:false, //当slides的总数小于slidesPerView时，slides居中。
+          noSwiping : true,
+          noSwipingClass : 'stop-swiping',
+          slidesPerView: 6,//设置容器中slider的个数
+          navigation: {
+            nextEl: '.swiper-button-next',//下一页
+            prevEl: '.swiper-button-prev',//上一页
+          }
+        },
+        screenWidth:document.body.clientWidth,
       };
     },
     methods: {
@@ -116,6 +139,15 @@
           }else if(routerPath==="/rescue"){
             active='/floodControl';
             return false
+          }else if(routerPath==="/responsibility"){
+            active='/floodControl';
+            return false
+          }else if(routerPath==="/plan"){
+            active='/PlanManagement';
+            return false
+          }else if(routerPath==="/knowledge"){
+            active='/PlanManagement';
+            return false
           }else if(item.path==="/home"){
             active=item.path;
             return false
@@ -126,8 +158,15 @@
       }
     },
     mounted(){
-      // this.items=;
-      // console.log(this.items);
+      const  that=this;
+      // if(that.screenWidth>=1920){
+      //   $('.header-menu').css('width',"1200px")
+      // }else if(that.screenWidth<=1366){
+      //   $('.header-menu').css('width',"700px");
+      //   that.swiperOption.slidesPerView=4;
+      // }else if(that.screenWidth>1366 || this.screenWidth<1920){
+      //   $('.header-menu').css('width',"800px")
+      // };
     }
   }
 </script>
@@ -156,11 +195,12 @@
     padding-right: 50px;
     .header-menu {
       float: left;
-      height: 59px;
+      height: 60px;
       background-color: #0a95ef!important;
       li {
         height: 60px;
         line-height: 60px;
+        text-align:center;
       }
     }
   }
@@ -213,6 +253,9 @@
     color: white!important;
     background-color:#efbb0d!important;
     border-bottom: #efbb0d!important;
+  }
+  .el-menu.el-menu--horizontal{
+    border-bottom: none;
   }
 
 </style>

@@ -280,22 +280,10 @@
                 {name:"首页",path:"/SystemHome"},
               ],
               tableData: [
-                  {STNM:"五道沟闸",TM:"2018-10-11 11:11:11",RZ:"5.23",gksw:"0.5",sfsw:"25",jjsw:"27.3",bzsw:"29.7",csfsw:"-19.77",cjjsw:"-22.07",cbzsw:"24.47"},
-                  {STNM:"朱楼闸",TM:"2018-10-11 11:11:11",RZ:"5.23",gksw:"0.5",sfsw:"25",jjsw:"27.3",bzsw:"29.7",csfsw:"-19.77",cjjsw:"-22.07",cbzsw:"24.47"},
-                  {STNM:"燕小庙闸",TM:"2018-10-11 11:11:11",RZ:"5.23",gksw:"0.5",sfsw:"25",jjsw:"27.3",bzsw:"29.7",csfsw:"-19.77",cjjsw:"-22.07",cbzsw:"24.47"},
-                  {STNM:"包河闸",TM:"2018-10-11 11:11:11",RZ:"5.23",gksw:"0.5",sfsw:"25",jjsw:"27.3",bzsw:"29.7",csfsw:"-19.77",cjjsw:"-22.07",cbzsw:"24.47"},
-                  {STNM:"武家河闸",TM:"2018-10-11 11:11:11",RZ:"5.23",gksw:"0.5",sfsw:"25",jjsw:"27.3",bzsw:"29.7",csfsw:"-19.77",cjjsw:"-22.07",cbzsw:"24.47"},
-                  {STNM:"武家河闸",TM:"2018-10-11 11:11:11",RZ:"5.23",gksw:"0.5",sfsw:"25",jjsw:"27.3",bzsw:"29.7",csfsw:"-19.77",cjjsw:"-22.07",cbzsw:"24.47"},
-                  {STNM:"武家河闸",TM:"2018-10-11 11:11:11",RZ:"5.23",gksw:"0.5",sfsw:"25",jjsw:"27.3",bzsw:"29.7",csfsw:"-19.77",cjjsw:"-22.07",cbzsw:"24.47"},
+
               ],
               tableData1:[
-                  {STNM:"西阳镇墒情站",TM:"2018-10-11 11:11:11",xzqh:"西阳镇",number1:"55%",number2:"63%",number3:"75%",czpj:"63%",trxdsd:"65%",ghdj:"无干旱"},
-                  {STNM:"涡南镇墒情站",TM:"2018-10-11 11:11:11",xzqh:"西阳镇",number1:"55%",number2:"63%",number3:"75%",czpj:"63%",trxdsd:"65%",ghdj:"无干旱"},
-                  {STNM:"楚店镇墒情站",TM:"2018-10-11 11:11:11",xzqh:"西阳镇",number1:"55%",number2:"63%",number3:"75%",czpj:"63%",trxdsd:"65%",ghdj:"无干旱"},
-                  {STNM:"高公镇墒情站",TM:"2018-10-11 11:11:11",xzqh:"西阳镇",number1:"55%",number2:"63%",number3:"75%",czpj:"63%",trxdsd:"65%",ghdj:"无干旱"},
-                  {STNM:"高炉镇墒情站",TM:"2018-10-11 11:11:11",xzqh:"西阳镇",number1:"55%",number2:"63%",number3:"75%",czpj:"63%",trxdsd:"65%",ghdj:"无干旱"},
-                  {STNM:"高炉镇墒情站",TM:"2018-10-11 11:11:11",xzqh:"西阳镇",number1:"55%",number2:"63%",number3:"75%",czpj:"63%",trxdsd:"65%",ghdj:"无干旱"},
-                  {STNM:"高炉镇墒情站",TM:"2018-10-11 11:11:11",xzqh:"西阳镇",number1:"55%",number2:"63%",number3:"75%",czpj:"63%",trxdsd:"65%",ghdj:"无干旱"},
+
               ],
               dutyData:[],
               show:false,
@@ -634,7 +622,6 @@
                 }
               })
               .catch((error)=>{
-                console.log(1);
                 this.$notify.error({
                   title: '提示',
                   message: '请求图片失败，请联系管理员！',

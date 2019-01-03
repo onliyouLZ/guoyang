@@ -10,6 +10,7 @@ import Login from '../page/login'
 import oneMap from '../page/oneMap'
 import waterMonitoring from '../page/waterMonitoring'
 import floodControl from '../page/Eight/floodControl'
+import PlanManagement from '../page/nine/PlanManagement'
 import earlyWarning from  '../page/fourMenu/earlyWarning'
 import drought from '../page/fiveMenu/Drought'
 import waterWorks from '../page/sixMenu/waterWorks'
@@ -28,6 +29,10 @@ import rainwaterReport from '../page/threeMenu/RainwaterReport'
 
 import organization from '../components/floodControl/organization'
 import rescue from '../components/floodControl/rescue'
+import responsibility from '../components/floodControl/responsibility'
+
+import plan from '../components/PlanManagement/plan'
+import knowledge from '../components/PlanManagement/knowledge'
 
 import gates from '../components/waterWorks/gates'
 import river from '../components/waterWorks/river'
@@ -164,6 +169,29 @@ export default new Router({
               path: '/rescue',
               component: rescue,
               name:"抢险队伍",
+            },
+            {
+              path: '/responsibility',
+              component: responsibility,
+              name:"防汛抗旱责任制",
+            }
+          ]
+        },
+        {
+          path: '/PlanManagement',
+          component: PlanManagement,
+          name:"防汛预案管理",
+          redirect:'/plan',
+          children:[
+            {
+              path: '/plan',
+              component: plan,
+              name:"预案管理",
+            },
+            {
+              path: '/knowledge',
+              component: knowledge,
+              name:"知识库",
             }
           ]
         },
