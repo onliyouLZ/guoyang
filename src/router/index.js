@@ -11,6 +11,7 @@ import oneMap from '../page/oneMap'
 import waterMonitoring from '../page/waterMonitoring'
 import floodControl from '../page/Eight/floodControl'
 import PlanManagement from '../page/nine/PlanManagement'
+import dutyManagement from '../page/ten/management'
 import earlyWarning from  '../page/fourMenu/earlyWarning'
 import drought from '../page/fiveMenu/Drought'
 import waterWorks from '../page/sixMenu/waterWorks'
@@ -33,6 +34,12 @@ import responsibility from '../components/floodControl/responsibility'
 
 import plan from '../components/PlanManagement/plan'
 import knowledge from '../components/PlanManagement/knowledge'
+
+import arrange from '../components/dutyManagement/arrange'
+import logbook from '../components/dutyManagement/logbook'
+import personnel from '../components/dutyManagement/personnel'
+import roster from '../components/dutyManagement/roster'
+
 
 import gates from '../components/waterWorks/gates'
 import river from '../components/waterWorks/river'
@@ -192,6 +199,34 @@ export default new Router({
               path: '/knowledge',
               component: knowledge,
               name:"知识库",
+            }
+          ]
+        },
+        {
+          path: '/dutyManagement',
+          component: dutyManagement,
+          name:"值班管理",
+          redirect:'/arrange',
+          children:[
+            {
+              path: '/arrange',
+              component: arrange,
+              name:"值班安排",
+            },
+            {
+              path: '/roster',
+              component: roster,
+              name:"值班表",
+            },
+            {
+              path: '/logbook',
+              component: logbook,
+              name:"值班日志",
+            },
+            {
+              path: '/personnel',
+              component: personnel,
+              name:"人员类型",
             }
           ]
         },

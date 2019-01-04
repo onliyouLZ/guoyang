@@ -312,6 +312,16 @@ String.prototype.toDate = function () {
   return date;
 };
 
+let  weekEnum = [
+  {zh: "周日", en: "Sunday"},
+  {zh: "周一", en: "Monday"},
+  {zh: "周二", en: "Tuesday"},
+  {zh: "周三", en: "Wednesday"},
+  {zh: "周四", en: "Thursday"},
+  {zh: "周五", en: "Friday"},
+  {zh: "周六", en: "Saturday"}
+];
+
 
 
 /**
@@ -480,6 +490,60 @@ export const pickerOptions = [
 
 export const Time = time;
 export const Formatter = FormatterData;
+
+
+export const parserDate = function (date) {
+  let t = Date.parse(date);
+  if (!isNaN(t)) {
+    return new Date(Date.parse(date.replace(/-/g, "/")));
+  } else {
+    return new Date();
+  }
+};
+
+export const groupByWeek=function (dutyInfoArr) {
+  let resultArr = [];
+  if ($.isArray(dutyInfoArr) && dutyInfoArr.length > 0) {
+    let weekOfYear = dutyInfoArr[0].weekOfYear;  //本年第几周
+    let year = dutyInfoArr[0].date.substr(0, 4);
+    let defaultObj = {
+      year: null,           //年份
+      weekOfYear: null,     //年内第几周,从0开始
+      Monday: null,         //
+      Tuesday: null,        //
+      Wednesday: null,      //
+      Thursday: null,       //
+      Friday: null,         //
+      Saturday: null,       //
+      Sunday: null,         //
+    };
+
+
+    let obj = $.extend(true, {}, defaultObj, {year: year, weekOfYear: weekOfYear});
+    $.each(dutyInfoArr, function (i, item) {
+
+      if (year !== item.date.substr(0, 4) || item.weekOfYear !== weekOfYear) {
+        //认为是新的一周,计算上周有数据的第一天和最后一天那么将上周数据放入结果中.
+        resultArr.push(obj);
+        //重新计算 year 和 weekOfYear
+        year = item.date.substr(0, 4);
+        weekOfYear = item.weekOfYear;
+        obj = $.extend(true, {}, defaultObj, {year: year, weekOfYear: weekOfYear});
+      }
+      obj[weekEnum[item.date.toDate().getDay()].en] = item;
+
+    });
+    resultArr.push(obj);
+  }
+
+
+  // $.each(resultArr, function (i, item) {
+  //     item.firstItem = item.Monday || item.Tuesday || item.Wednesday || item.Thursday || item.Friday || item.Saturday || item.Sunday;
+  //     item.lastItem = item.Sunday || item.Saturday || item.Friday || item.Thursday || item.Wednesday || item.Tuesday || item.Monday;
+  //
+  // });
+  return resultArr;
+}
 
 
 /**

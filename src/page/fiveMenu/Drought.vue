@@ -188,11 +188,12 @@
       },
       created(){
         //边界线处理
-        this.$http.get('/api/bjx').then((res)=>{
-          let shape=res.data.data.result.shape;
-
-          let mapJson=res.data.data.result.json;
-
+        const that=this;
+        that.$nextTick(()=>{
+          //边界线处理
+          let bjx= require('../../../static/sdk/XZQFW');
+          let shape=bjx.result.shape;
+          let mapJson=bjx.result.json;
           //处理数据的方式
           let format = new ol.format.WKT();
           //处理数据
@@ -238,7 +239,7 @@
             source: source
           });
           //添加图层
-          this.map.addLayer(vector)
+          that.map.addLayer(vector);
         });
 
       },

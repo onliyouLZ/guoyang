@@ -170,7 +170,7 @@
           {data:'bjjb',title:'报警级别'},
           {data:'ydcl',title:'应对策略'},
         ],
-        screenWidth:document.body.clientWidth
+        screenWidth:document.body.clientWidth,
       }
     },
     created(){

@@ -246,6 +246,7 @@
       }
     },
     methods:{
+      //子组件传递至父组件
       close(){
         // this.tableShow=false;
         this.activeName="first";
@@ -312,19 +313,19 @@
             },500)
           });
         //获取历史同期对比 接口不对
-        let getHis={
-          "stcdList":[this.dialogDatas.STCD],
-          "tms":[],
-          "tmList":
-            [
-              {"bgtm":"2018-12-30 08:00","endtm":"2018-12-31 15:00"},
-              {"bgtm":"2017-12-30 08:00","endtm":"2017-12-31 15:00"}
-            ]
-        };
-        this.$http.post(this.$url.baseUrl+"api/sl323/realtime/river/list-by-tms“/",getHis)
-          .then((res)=>{
-            console.log(res);
-          });
+        // let getHis={
+        //   "stcdList":[this.dialogDatas.STCD],
+        //   "tms":[],
+        //   "tmList":
+        //     [
+        //       {"bgtm":"2018-12-30 08:00","endtm":"2018-12-31 15:00"},
+        //       {"bgtm":"2017-12-30 08:00","endtm":"2017-12-31 15:00"}
+        //     ]
+        // };
+        // this.$http.post(this.$url.baseUrl+"api/sl323/realtime/river/list-by-tms/",getHis)
+        //   .then((res)=>{
+        //     console.log(res);
+        //   });
       },
       //水位流量过程线
       initWater(){

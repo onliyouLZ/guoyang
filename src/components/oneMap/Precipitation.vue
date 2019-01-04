@@ -113,7 +113,7 @@
               whName:""
             };
             //仓库
-            this.$http.post('api/guoYang/v0.1/material-manage/warehouse/list',prams).then((res)=>{
+            this.$http.post(this.$url.baseUrl+'api/guoYang/v0.1/material-manage/warehouse/list',prams).then((res)=>{
               if(res.status===200){
                 let data=res.data.result;
                 console.log(data);

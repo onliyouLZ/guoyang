@@ -2,7 +2,7 @@
   <el-collapse v-model="activeName">
     <el-collapse-item name="1">
       <template slot="title">
-        <i class="fa fa-user-o" style="margin: 0 10px"></i>视频站{{childData.length}}个
+        <i class="fa fa-user-o" style="margin: 0 10px"></i>视频信息
       </template>
       <el-scrollbar
         style="height: 100%"
@@ -92,7 +92,7 @@
           this.$emit('move',"");
         },
         getTableData(){
-          this.$http.post('api/system-video/v0.1/list?type',{stnm:""}).then((res)=>{
+          this.$http.post(this.$url.baseUrl+'api/system-video/v0.1/list?type',{stnm:""}).then((res)=>{
             if(res.status===200){
               let data=res.data.result;
               if(data.length>0){

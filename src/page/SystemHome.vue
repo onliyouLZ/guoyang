@@ -266,6 +266,7 @@
     import swiperDliog  from '../dilog/homedliog/swiperDliog'
     import echarts from 'echarts'
     import {convertObjectToArray} from '../utils/utils'
+
     export default {
         name: "SystemHome",
         components:{
@@ -296,39 +297,65 @@
             }
         },
         created(){
-
           /**
            * 处理人员信息
            */
-          this.$http.get('/api/duty').then((res)=>{
-              const data=res.data.data;
-              var arr=[];
-              $.each(data.tm,function(v,item){
-                let peoples="";
-                var obj={
-                  dutyType:"",
-                  people:""
-                };
-                obj.dutyType=item.dutyTypeName;
-                if(item.leaders.length>0){
-                  $.each(item.leaders,function(s,people){
-                    peoples+=people.realName+"("+people.userMobilePhone+")"+"，";
-                  })
-                }
-                if(item.persons.length>0){
-                  $.each(item.persons,function(s,people){
-                    peoples+=people.realName+"("+people.userMobilePhone+")"+"，";
-                    obj.people=peoples
-                  })
-                }
-                peoples=peoples.substr(0, peoples.length - 1);
-                obj.people=peoples;
-                arr.push(obj)
-              });
-              this.dutyData=arr
-            });
+          const duty= require('../../static/sdk/package');
+          let data=duty.duty;
+          let arr=[];
+          $.each(data.tm,function(v,item){
+            let peoples="";
+            let obj={
+              dutyType:"",
+              people:""
+            };
+            obj.dutyType=item.dutyTypeName;
+            if(item.leaders.length>0){
+              $.each(item.leaders,function(s,people){
+                peoples+=people.realName+"("+people.userMobilePhone+")"+"，";
+              })
+            }
+            if(item.persons.length>0){
+              $.each(item.persons,function(s,people){
+                peoples+=people.realName+"("+people.userMobilePhone+")"+"，";
+                obj.people=peoples
+              })
+            }
+            peoples=peoples.substr(0, peoples.length - 1);
+            obj.people=peoples;
+            arr.push(obj)
+          });
+          this.dutyData=arr
+          // this.$http.get('/api/duty').then((res)=>{
+          //     const data=res.data.data;
+          //     var arr=[];
+          //     $.each(data.tm,function(v,item){
+          //       let peoples="";
+          //       var obj={
+          //         dutyType:"",
+          //         people:""
+          //       };
+          //       obj.dutyType=item.dutyTypeName;
+          //       if(item.leaders.length>0){
+          //         $.each(item.leaders,function(s,people){
+          //           peoples+=people.realName+"("+people.userMobilePhone+")"+"，";
+          //         })
+          //       }
+          //       if(item.persons.length>0){
+          //         $.each(item.persons,function(s,people){
+          //           peoples+=people.realName+"("+people.userMobilePhone+")"+"，";
+          //           obj.people=peoples
+          //         })
+          //       }
+          //       peoples=peoples.substr(0, peoples.length - 1);
+          //       obj.people=peoples;
+          //       arr.push(obj)
+          //     });
+          //     this.dutyData=arr
+          //   });
         },
         computed: {
+
         },
         methods: {
           /**
@@ -643,6 +670,7 @@
           }
         },
         mounted(){
+
           const that=this;
           /**
            * 设置完屏幕分辨率后加载饼状图 以免饼状图渲染不全的问题

@@ -359,11 +359,9 @@
             //地图上鼠标浮动显示窗口内容创建
             addFeatrueInfo(info){
                 if(info){
-
                   let content ="";
                   let type=info.type;
                   if(type){
-                    console.log(info);
                     switch (type) {
                       case 'river':
                         content += '<div class="arrow" ></div>';
@@ -453,7 +451,7 @@
                         //透明度
                         size:[15,15],
                         //图标的url
-                        src:"../../static/legend/河道站.png"
+                        src:"./static/legend/河道站.png"
                       }),
                       text: new ol.style.Text({
                         //位置
@@ -496,7 +494,7 @@
             },
             getVideo(){
               //视频站
-              this.$http.post('api/system-video/v0.1/list?type',{stnm:""}).then((res)=>{
+              this.$http.post(this.$url.baseUrl+'api/system-video/v0.1/list?type',{stnm:""}).then((res)=>{
                 if(res.status===200){
                   let data=res.data.result;
                   if(data.length>0){
@@ -524,7 +522,7 @@
                           //透明度
                           size:[25,25],
                           //图标的url
-                          src:"../../static/legend/视频.png"
+                          src:"./static/legend/视频.png"
                         }),
                         text: new ol.style.Text({
                           //位置
@@ -572,7 +570,7 @@
                 whName:""
               };
               //仓库
-              this.$http.post('api/guoYang/v0.1/material-manage/warehouse/list',prams).then((res)=>{
+              this.$http.post(this.$url.baseUrl+'api/guoYang/v0.1/material-manage/warehouse/list',prams).then((res)=>{
                 if(res.status===200){
                   let data=res.data.result;
                   if(data.length>0){
@@ -601,7 +599,7 @@
                           //透明度
                           size:[25,25],
                           //图标的url
-                          src:"../../static/legend/物资仓库.png"
+                          src:"./static/legend/物资仓库.png"
                         }),
                         text: new ol.style.Text({
                           //位置
@@ -678,7 +676,7 @@
                             //透明度
                             size:[25,25],
                             //图标的url
-                            src:"../../static/legend/雨量站.png"
+                            src:"./static/legend/雨量站.png"
                           }),
                           text: new ol.style.Text({
                             //位置
@@ -750,7 +748,7 @@
                             //透明度
                             size:[25,25],
                             //图标的url
-                            src:"../../static/legend/墒情站.png"
+                            src:"./static/legend/墒情站.png"
                           }),
                           text: new ol.style.Text({
                             //位置
@@ -794,14 +792,64 @@
             },
             childClose(){
                 this.dialogVisible=false;
-                this.dialogData={};
             }
         },
         created(){
-          //边界线处理
+          // const that=this;
+          // that.$nextTick(()=>{
+          //   //边界线处理
+          //   let bjx= require('../../static/sdk/XZQFW');
+          //   let shape=bjx.result.shape;
+          //   let mapJson=bjx.result.json;
+          //   //处理数据的方式
+          //   let format = new ol.format.WKT();
+          //   //处理数据
+          //   let newFeature = format.readFeature(shape, {
+          //     dataProjection: 'EPSG:4326',
+          //     featureProjection: 'EPSG:4326'
+          //   });
+          //   let newFeature1 = format.readFeature(mapJson, {
+          //     dataProjection: 'EPSG:4326',
+          //     featureProjection: 'EPSG:4326'
+          //   });
+          //   let newFeature2 = format.readFeature(shape, {
+          //     dataProjection: 'EPSG:4326',
+          //     featureProjection: 'EPSG:4326'
+          //   });
+          //   //边界线1
+          //   newFeature.setStyle(new ol.style.Style({
+          //     stroke: new ol.style.Stroke({
+          //       color: "#03956b",
+          //       width: 3
+          //     })
+          //   }));
+          //   //遮罩
+          //   newFeature1.setStyle(new ol.style.Style({
+          //     fill: new ol.style.Fill({
+          //       color: 'rgba(255,255,255,1)'
+          //     })
+          //   }));
+          //   //边界线2
+          //   newFeature2.setStyle(new ol.style.Style({
+          //     stroke: new ol.style.Stroke({
+          //       color: "#94ffe0",
+          //       width: 2
+          //     })
+          //   }));
+          //
+          //   //实例化一个矢量图层Vector作为绘制层
+          //   let source = new ol.source.Vector({
+          //     features: [newFeature1,newFeature,newFeature2]
+          //   });
+          //   //创建一个图层
+          //   let vector = new ol.layer.Vector({
+          //     source: source
+          //   });
+          //   //添加图层
+          //   that.map.addLayer(vector);
+          // });
           this.$http.get('/api/bjx').then((res)=>{
             let shape=res.data.data.result.shape;
-
             let mapJson=res.data.data.result.json;
 
             //处理数据的方式
@@ -851,12 +899,13 @@
             //添加图层
             this.map.addLayer(vector)
           });
-          this.getRiver();
-          this.getRain();
+
         },
         mounted(){
           const that=this;
           that.initMap();
+          that.getRiver();
+          that.getRain();
           that.rightTitle();
           that.getSoil();
           /**

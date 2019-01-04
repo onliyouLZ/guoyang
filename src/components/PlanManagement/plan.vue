@@ -319,6 +319,7 @@
       //重置
       resetForm() {
         this.$refs['ruleForm'].resetFields();
+        this.fileList=[];
         this.ruleForm={
           thresholdName:"",
           thresholdValue:"",
@@ -332,6 +333,7 @@
       dialogClose(ruleForm){
         this.dialogVisible=false;
         this.$refs[ruleForm].resetFields();
+        this.fileList=[];
         this.ruleForm={
           thresholdName:"",
           thresholdValue:"",
@@ -390,6 +392,7 @@
                 _this.$refs.upload.submit();
                 _this.loading=true;
                 _this.multipleSelection=[];
+                _this.fileList=[];
                 _this.search();
                 _this.$refs['ruleForm'].resetFields();
                 this.ruleForm={
@@ -406,6 +409,7 @@
                   message:msg1
                 });
                 _this.$refs['ruleForm'].resetFields();
+                _this.fileList=[];
                 this.ruleForm={
                   thresholdName:"",
                   thresholdValue:"",
@@ -522,5 +526,7 @@
   }
   #plan .el-dialog .el-dialog__body{
     padding: 20px!important;
+    height: 350px;
+    overflow-y: auto;
   }
 </style>

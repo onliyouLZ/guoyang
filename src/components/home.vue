@@ -32,7 +32,7 @@
     z-index: 999;
     width: 100%;
   }
-  .el-main[data-v-957c9522]{
+  .el-main{
     margin-top: 60px;
   }
 </style>
