@@ -644,10 +644,8 @@
             getRain(){
               this.$http.get(this.$url.baseUrl+'api/sl323/realtime/rain/ad/sum_x/341621/2018-12-22 08:00/2018-12-22 16:33?bgtm=2018-12-22 08:00&endtm=2018-12-22 16:33&ad=341621')
                 .then((res)=>{
-                  console.log(res);
                   if(res.status===200){
                     let data=res.data.result.totalMap.rainOne.list;
-
                     if(data.length>0){
                       let arr=[];
                       //创建一个点
