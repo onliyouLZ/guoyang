@@ -1,0 +1,5232 @@
+{
+  "url": "/api-server/api/duty/v0.1/duty/manage",
+  "uuid": "423096bf-aee2-440c-b4f0-ef93dc04b253",
+  "version": "v0.1",
+  "result": [
+    {
+      "tenantid": "2019-04-15_1",
+      "date": "2019-04-15",
+      "weekOfYear": 16,
+      "dayOfWeek": 1,
+      "month": 3,
+      "groupId": 1,
+      "groupName": "江夏区",
+      "tm": [
+        {
+          "date": "2019-04-15",
+          "dutyType": "1",
+          "dutyBgtm": "2019-04-15 08:00:00",
+          "dutyEdtm": "2019-04-15 18:30:00",
+          "dutyDateGroupType": "2019-04-15_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [
+            {
+              "id": 58,
+              "realName": "马天",
+              "userName": "matian",
+              "userTel": null,
+              "userMobilePhone": "456",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "水库科科长",
+              "dutyPersonTypeName": "值班领导",
+              "dutyPersonType": "1"
+            },
+            {
+              "id": 58,
+              "realName": "马天",
+              "userName": "matian",
+              "userTel": null,
+              "userMobilePhone": "456",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "水库科科长",
+              "dutyPersonTypeName": "值班领导",
+              "dutyPersonType": "1"
+            },
+            {
+              "id": 58,
+              "realName": "马天",
+              "userName": "matian",
+              "userTel": null,
+              "userMobilePhone": "456",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "水库科科长",
+              "dutyPersonTypeName": "值班领导",
+              "dutyPersonType": "1"
+            },
+            {
+              "id": 58,
+              "realName": "马天",
+              "userName": "matian",
+              "userTel": null,
+              "userMobilePhone": "456",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "水库科科长",
+              "dutyPersonTypeName": "值班领导",
+              "dutyPersonType": "1"
+            },
+            {
+              "id": 58,
+              "realName": "马天",
+              "userName": "matian",
+              "userTel": null,
+              "userMobilePhone": "456",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "水库科科长",
+              "dutyPersonTypeName": "值班领导",
+              "dutyPersonType": "1"
+            },
+            {
+              "id": 58,
+              "realName": "马天",
+              "userName": "matian",
+              "userTel": null,
+              "userMobilePhone": "456",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "水库科科长",
+              "dutyPersonTypeName": "值班领导",
+              "dutyPersonType": "1"
+            },
+            {
+              "id": 58,
+              "realName": "马天",
+              "userName": "matian",
+              "userTel": null,
+              "userMobilePhone": "456",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "水库科科长",
+              "dutyPersonTypeName": "值班领导",
+              "dutyPersonType": "1"
+            },
+            {
+              "id": 58,
+              "realName": "马天",
+              "userName": "matian",
+              "userTel": null,
+              "userMobilePhone": "456",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "水库科科长",
+              "dutyPersonTypeName": "值班领导",
+              "dutyPersonType": "1"
+            },
+            {
+              "id": 58,
+              "realName": "马天",
+              "userName": "matian",
+              "userTel": null,
+              "userMobilePhone": "456",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "水库科科长",
+              "dutyPersonTypeName": "值班领导",
+              "dutyPersonType": "1"
+            },
+            {
+              "id": 58,
+              "realName": "马天",
+              "userName": "matian",
+              "userTel": null,
+              "userMobilePhone": "456",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "水库科科长",
+              "dutyPersonTypeName": "值班领导",
+              "dutyPersonType": "1"
+            },
+            {
+              "id": 58,
+              "realName": "马天",
+              "userName": "matian",
+              "userTel": null,
+              "userMobilePhone": "456",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "水库科科长",
+              "dutyPersonTypeName": "值班领导",
+              "dutyPersonType": "1"
+            },{
+              "id": 58,
+              "realName": "马天",
+              "userName": "matian",
+              "userTel": null,
+              "userMobilePhone": "456",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "水库科科长",
+              "dutyPersonTypeName": "值班领导",
+              "dutyPersonType": "1"
+            }
+
+          ],
+          "persons": [
+            {
+              "id": 3804,
+              "realName": "刘波",
+              "userName": "liubo",
+              "userTel": "027-88598888",
+              "userMobilePhone": "15072758314",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "管理员",
+              "dutyPersonTypeName": "值班人员",
+              "dutyPersonType": "2"
+            }
+          ]
+        }, {
+          "date": "2019-04-15",
+          "dutyType": "2",
+          "dutyBgtm": "2019-04-15 18:30:00",
+          "dutyEdtm": "2019-04-16 08:00:00",
+          "dutyDateGroupType": "2019-04-15_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [
+            {
+              "id": 61,
+              "realName": "陈辉",
+              "userName": "chenhui",
+              "userTel": "15072758314",
+              "userMobilePhone": "17620786506",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "防汛处长",
+              "dutyPersonTypeName": "值班领导",
+              "dutyPersonType": "1"
+            },
+            {
+              "id": 61,
+              "realName": "陈辉",
+              "userName": "chenhui",
+              "userTel": "15072758314",
+              "userMobilePhone": "17620786506",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "防汛处长",
+              "dutyPersonTypeName": "值班领导",
+              "dutyPersonType": "1"
+            }
+          ],
+          "persons": [
+            {
+              "id": 63,
+              "realName": "赵老八1111",
+              "userName": "zhaolaoba",
+              "userTel": null,
+              "userMobilePhone": "13012345678",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "水库管理员",
+              "dutyPersonTypeName": "值班人员",
+              "dutyPersonType": "2"
+            },
+            {
+              "id": 63,
+              "realName": "赵老八1111",
+              "userName": "zhaolaoba",
+              "userTel": null,
+              "userMobilePhone": "13012345678",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "水库管理员",
+              "dutyPersonTypeName": "值班人员",
+              "dutyPersonType": "2"
+            },
+            {
+              "id": 63,
+              "realName": "赵老八1111",
+              "userName": "zhaolaoba",
+              "userTel": null,
+              "userMobilePhone": "13012345678",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "水库管理员",
+              "dutyPersonTypeName": "值班人员",
+              "dutyPersonType": "2"
+            },
+            {
+              "id": 63,
+              "realName": "赵老八1111",
+              "userName": "zhaolaoba",
+              "userTel": null,
+              "userMobilePhone": "13012345678",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "水库管理员",
+              "dutyPersonTypeName": "值班人员",
+              "dutyPersonType": "2"
+            },
+            {
+              "id": 63,
+              "realName": "赵老八1111",
+              "userName": "zhaolaoba",
+              "userTel": null,
+              "userMobilePhone": "13012345678",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "水库管理员",
+              "dutyPersonTypeName": "值班人员",
+              "dutyPersonType": "2"
+            },
+            {
+              "id": 63,
+              "realName": "赵老八1111",
+              "userName": "zhaolaoba",
+              "userTel": null,
+              "userMobilePhone": "13012345678",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "水库管理员",
+              "dutyPersonTypeName": "值班人员",
+              "dutyPersonType": "2"
+            },
+            {
+              "id": 63,
+              "realName": "赵老八1111",
+              "userName": "zhaolaoba",
+              "userTel": null,
+              "userMobilePhone": "13012345678",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "水库管理员",
+              "dutyPersonTypeName": "值班人员",
+              "dutyPersonType": "2"
+            },
+            {
+              "id": 63,
+              "realName": "赵老八1111",
+              "userName": "zhaolaoba",
+              "userTel": null,
+              "userMobilePhone": "13012345678",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "水库管理员",
+              "dutyPersonTypeName": "值班人员",
+              "dutyPersonType": "2"
+            },
+            {
+              "id": 63,
+              "realName": "赵老八1111",
+              "userName": "zhaolaoba",
+              "userTel": null,
+              "userMobilePhone": "13012345678",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "水库管理员",
+              "dutyPersonTypeName": "值班人员",
+              "dutyPersonType": "2"
+            },
+            {
+              "id": 63,
+              "realName": "赵老八1111",
+              "userName": "zhaolaoba",
+              "userTel": null,
+              "userMobilePhone": "13012345678",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "水库管理员",
+              "dutyPersonTypeName": "值班人员",
+              "dutyPersonType": "2"
+            }
+          ]
+        }
+      ]
+    }, {
+      "tenantid": "2019-04-16_1",
+      "date": "2019-04-16",
+      "weekOfYear": 16,
+      "dayOfWeek": 2,
+      "month": 3,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-04-16",
+          "dutyType": "1",
+          "dutyBgtm": "2019-04-16 08:00:00",
+          "dutyEdtm": "2019-04-16 18:30:00",
+          "dutyDateGroupType": "2019-04-16_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-04-16",
+          "dutyType": "2",
+          "dutyBgtm": "2019-04-16 18:30:00",
+          "dutyEdtm": "2019-04-17 08:00:00",
+          "dutyDateGroupType": "2019-04-16_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-04-17_1",
+      "date": "2019-04-17",
+      "weekOfYear": 16,
+      "dayOfWeek": 3,
+      "month": 3,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-04-17",
+          "dutyType": "1",
+          "dutyBgtm": "2019-04-17 08:00:00",
+          "dutyEdtm": "2019-04-17 18:30:00",
+          "dutyDateGroupType": "2019-04-17_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-04-17",
+          "dutyType": "2",
+          "dutyBgtm": "2019-04-17 18:30:00",
+          "dutyEdtm": "2019-04-18 08:00:00",
+          "dutyDateGroupType": "2019-04-17_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-04-18_1",
+      "date": "2019-04-18",
+      "weekOfYear": 16,
+      "dayOfWeek": 4,
+      "month": 3,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-04-18",
+          "dutyType": "1",
+          "dutyBgtm": "2019-04-18 08:00:00",
+          "dutyEdtm": "2019-04-18 18:30:00",
+          "dutyDateGroupType": "2019-04-18_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-04-18",
+          "dutyType": "2",
+          "dutyBgtm": "2019-04-18 18:30:00",
+          "dutyEdtm": "2019-04-19 08:00:00",
+          "dutyDateGroupType": "2019-04-18_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-04-19_1",
+      "date": "2019-04-19",
+      "weekOfYear": 16,
+      "dayOfWeek": 5,
+      "month": 3,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-04-19",
+          "dutyType": "1",
+          "dutyBgtm": "2019-04-19 08:00:00",
+          "dutyEdtm": "2019-04-19 18:30:00",
+          "dutyDateGroupType": "2019-04-19_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-04-19",
+          "dutyType": "2",
+          "dutyBgtm": "2019-04-19 18:30:00",
+          "dutyEdtm": "2019-04-20 08:00:00",
+          "dutyDateGroupType": "2019-04-19_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-04-20_1",
+      "date": "2019-04-20",
+      "weekOfYear": 16,
+      "dayOfWeek": 6,
+      "month": 3,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-04-20",
+          "dutyType": "3",
+          "dutyBgtm": "2019-04-20 00:00:00",
+          "dutyEdtm": "2019-04-21 00:00:00",
+          "dutyDateGroupType": "2019-04-20_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [
+            {
+              "id": 58,
+              "realName": "222",
+              "userName": "matian",
+              "userTel": null,
+              "userMobilePhone": "456",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "水库科科长",
+              "dutyPersonTypeName": "值班领导",
+              "dutyPersonType": "1"
+            }
+          ],
+          "persons": [
+            {
+              "id": 3804,
+              "realName": "111",
+              "userName": "liubo",
+              "userTel": "027-88598888",
+              "userMobilePhone": "15072758314",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "管理员",
+              "dutyPersonTypeName": "值班人员",
+              "dutyPersonType": "2"
+            }
+          ]
+        }
+      ]
+    }, {
+      "tenantid": "2019-04-21_1",
+      "date": "2019-04-21",
+      "weekOfYear": 16,
+      "dayOfWeek": 7,
+      "month": 3,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-04-21",
+          "dutyType": "3",
+          "dutyBgtm": "2019-04-21 00:00:00",
+          "dutyEdtm": "2019-04-22 00:00:00",
+          "dutyDateGroupType": "2019-04-21_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [
+            {
+              "id": 58,
+              "realName": "马天",
+              "userName": "matian",
+              "userTel": null,
+              "userMobilePhone": "456",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "水库科科长",
+              "dutyPersonTypeName": "值班领导",
+              "dutyPersonType": "1"
+            }
+          ],
+          "persons": [
+            {
+              "id": 3804,
+              "realName": "刘波",
+              "userName": "liubo",
+              "userTel": "027-88598888",
+              "userMobilePhone": "15072758314",
+              "groupId": 1,
+              "groupName": "江夏区",
+              "userDepart": "管理员",
+              "dutyPersonTypeName": "值班人员",
+              "dutyPersonType": "2"
+            }
+          ]
+        }
+      ]
+    }, {
+      "tenantid": "2019-04-22_1",
+      "date": "2019-04-22",
+      "weekOfYear": 17,
+      "dayOfWeek": 1,
+      "month": 3,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-04-22",
+          "dutyType": "1",
+          "dutyBgtm": "2019-04-22 08:00:00",
+          "dutyEdtm": "2019-04-22 18:30:00",
+          "dutyDateGroupType": "2019-04-22_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-04-22",
+          "dutyType": "2",
+          "dutyBgtm": "2019-04-22 18:30:00",
+          "dutyEdtm": "2019-04-23 08:00:00",
+          "dutyDateGroupType": "2019-04-22_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-04-23_1",
+      "date": "2019-04-23",
+      "weekOfYear": 17,
+      "dayOfWeek": 2,
+      "month": 3,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-04-23",
+          "dutyType": "1",
+          "dutyBgtm": "2019-04-23 08:00:00",
+          "dutyEdtm": "2019-04-23 18:30:00",
+          "dutyDateGroupType": "2019-04-23_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-04-23",
+          "dutyType": "2",
+          "dutyBgtm": "2019-04-23 18:30:00",
+          "dutyEdtm": "2019-04-24 08:00:00",
+          "dutyDateGroupType": "2019-04-23_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-04-24_1",
+      "date": "2019-04-24",
+      "weekOfYear": 17,
+      "dayOfWeek": 3,
+      "month": 3,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-04-24",
+          "dutyType": "1",
+          "dutyBgtm": "2019-04-24 08:00:00",
+          "dutyEdtm": "2019-04-24 18:30:00",
+          "dutyDateGroupType": "2019-04-24_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-04-24",
+          "dutyType": "2",
+          "dutyBgtm": "2019-04-24 18:30:00",
+          "dutyEdtm": "2019-04-25 08:00:00",
+          "dutyDateGroupType": "2019-04-24_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-04-25_1",
+      "date": "2019-04-25",
+      "weekOfYear": 17,
+      "dayOfWeek": 4,
+      "month": 3,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-04-25",
+          "dutyType": "1",
+          "dutyBgtm": "2019-04-25 08:00:00",
+          "dutyEdtm": "2019-04-25 18:30:00",
+          "dutyDateGroupType": "2019-04-25_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-04-25",
+          "dutyType": "2",
+          "dutyBgtm": "2019-04-25 18:30:00",
+          "dutyEdtm": "2019-04-26 08:00:00",
+          "dutyDateGroupType": "2019-04-25_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-04-26_1",
+      "date": "2019-04-26",
+      "weekOfYear": 17,
+      "dayOfWeek": 5,
+      "month": 3,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-04-26",
+          "dutyType": "1",
+          "dutyBgtm": "2019-04-26 08:00:00",
+          "dutyEdtm": "2019-04-26 18:30:00",
+          "dutyDateGroupType": "2019-04-26_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-04-26",
+          "dutyType": "2",
+          "dutyBgtm": "2019-04-26 18:30:00",
+          "dutyEdtm": "2019-04-27 08:00:00",
+          "dutyDateGroupType": "2019-04-26_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-04-27_1",
+      "date": "2019-04-27",
+      "weekOfYear": 17,
+      "dayOfWeek": 6,
+      "month": 3,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-04-27",
+          "dutyType": "3",
+          "dutyBgtm": "2019-04-27 00:00:00",
+          "dutyEdtm": "2019-04-28 00:00:00",
+          "dutyDateGroupType": "2019-04-27_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-04-28_1",
+      "date": "2019-04-28",
+      "weekOfYear": 17,
+      "dayOfWeek": 7,
+      "month": 3,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-04-28",
+          "dutyType": "3",
+          "dutyBgtm": "2019-04-28 00:00:00",
+          "dutyEdtm": "2019-04-29 00:00:00",
+          "dutyDateGroupType": "2019-04-28_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-04-29_1",
+      "date": "2019-04-29",
+      "weekOfYear": 18,
+      "dayOfWeek": 1,
+      "month": 3,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-04-29",
+          "dutyType": "1",
+          "dutyBgtm": "2019-04-29 08:00:00",
+          "dutyEdtm": "2019-04-29 18:30:00",
+          "dutyDateGroupType": "2019-04-29_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-04-29",
+          "dutyType": "2",
+          "dutyBgtm": "2019-04-29 18:30:00",
+          "dutyEdtm": "2019-04-30 08:00:00",
+          "dutyDateGroupType": "2019-04-29_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-04-30_1",
+      "date": "2019-04-30",
+      "weekOfYear": 18,
+      "dayOfWeek": 2,
+      "month": 3,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-04-30",
+          "dutyType": "1",
+          "dutyBgtm": "2019-04-30 08:00:00",
+          "dutyEdtm": "2019-04-30 18:30:00",
+          "dutyDateGroupType": "2019-04-30_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-04-30",
+          "dutyType": "2",
+          "dutyBgtm": "2019-04-30 18:30:00",
+          "dutyEdtm": "2019-05-01 08:00:00",
+          "dutyDateGroupType": "2019-04-30_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-01_1",
+      "date": "2019-05-01",
+      "weekOfYear": 18,
+      "dayOfWeek": 3,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-01",
+          "dutyType": "1",
+          "dutyBgtm": "2019-05-01 08:00:00",
+          "dutyEdtm": "2019-05-01 18:30:00",
+          "dutyDateGroupType": "2019-05-01_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-05-01",
+          "dutyType": "2",
+          "dutyBgtm": "2019-05-01 18:30:00",
+          "dutyEdtm": "2019-05-02 08:00:00",
+          "dutyDateGroupType": "2019-05-01_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-02_1",
+      "date": "2019-05-02",
+      "weekOfYear": 18,
+      "dayOfWeek": 4,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-02",
+          "dutyType": "1",
+          "dutyBgtm": "2019-05-02 08:00:00",
+          "dutyEdtm": "2019-05-02 18:30:00",
+          "dutyDateGroupType": "2019-05-02_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-05-02",
+          "dutyType": "2",
+          "dutyBgtm": "2019-05-02 18:30:00",
+          "dutyEdtm": "2019-05-03 08:00:00",
+          "dutyDateGroupType": "2019-05-02_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-03_1",
+      "date": "2019-05-03",
+      "weekOfYear": 18,
+      "dayOfWeek": 5,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-03",
+          "dutyType": "1",
+          "dutyBgtm": "2019-05-03 08:00:00",
+          "dutyEdtm": "2019-05-03 18:30:00",
+          "dutyDateGroupType": "2019-05-03_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-05-03",
+          "dutyType": "2",
+          "dutyBgtm": "2019-05-03 18:30:00",
+          "dutyEdtm": "2019-05-04 08:00:00",
+          "dutyDateGroupType": "2019-05-03_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-04_1",
+      "date": "2019-05-04",
+      "weekOfYear": 18,
+      "dayOfWeek": 6,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-04",
+          "dutyType": "3",
+          "dutyBgtm": "2019-05-04 00:00:00",
+          "dutyEdtm": "2019-05-05 00:00:00",
+          "dutyDateGroupType": "2019-05-04_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-05_1",
+      "date": "2019-05-05",
+      "weekOfYear": 18,
+      "dayOfWeek": 7,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-05",
+          "dutyType": "3",
+          "dutyBgtm": "2019-05-05 00:00:00",
+          "dutyEdtm": "2019-05-06 00:00:00",
+          "dutyDateGroupType": "2019-05-05_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-06_1",
+      "date": "2019-05-06",
+      "weekOfYear": 19,
+      "dayOfWeek": 1,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-06",
+          "dutyType": "1",
+          "dutyBgtm": "2019-05-06 08:00:00",
+          "dutyEdtm": "2019-05-06 18:30:00",
+          "dutyDateGroupType": "2019-05-06_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-05-06",
+          "dutyType": "2",
+          "dutyBgtm": "2019-05-06 18:30:00",
+          "dutyEdtm": "2019-05-07 08:00:00",
+          "dutyDateGroupType": "2019-05-06_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-07_1",
+      "date": "2019-05-07",
+      "weekOfYear": 19,
+      "dayOfWeek": 2,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-07",
+          "dutyType": "1",
+          "dutyBgtm": "2019-05-07 08:00:00",
+          "dutyEdtm": "2019-05-07 18:30:00",
+          "dutyDateGroupType": "2019-05-07_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-05-07",
+          "dutyType": "2",
+          "dutyBgtm": "2019-05-07 18:30:00",
+          "dutyEdtm": "2019-05-08 08:00:00",
+          "dutyDateGroupType": "2019-05-07_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-08_1",
+      "date": "2019-05-08",
+      "weekOfYear": 19,
+      "dayOfWeek": 3,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-08",
+          "dutyType": "1",
+          "dutyBgtm": "2019-05-08 08:00:00",
+          "dutyEdtm": "2019-05-08 18:30:00",
+          "dutyDateGroupType": "2019-05-08_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-05-08",
+          "dutyType": "2",
+          "dutyBgtm": "2019-05-08 18:30:00",
+          "dutyEdtm": "2019-05-09 08:00:00",
+          "dutyDateGroupType": "2019-05-08_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-09_1",
+      "date": "2019-05-09",
+      "weekOfYear": 19,
+      "dayOfWeek": 4,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-09",
+          "dutyType": "1",
+          "dutyBgtm": "2019-05-09 08:00:00",
+          "dutyEdtm": "2019-05-09 18:30:00",
+          "dutyDateGroupType": "2019-05-09_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-05-09",
+          "dutyType": "2",
+          "dutyBgtm": "2019-05-09 18:30:00",
+          "dutyEdtm": "2019-05-10 08:00:00",
+          "dutyDateGroupType": "2019-05-09_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-10_1",
+      "date": "2019-05-10",
+      "weekOfYear": 19,
+      "dayOfWeek": 5,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-10",
+          "dutyType": "1",
+          "dutyBgtm": "2019-05-10 08:00:00",
+          "dutyEdtm": "2019-05-10 18:30:00",
+          "dutyDateGroupType": "2019-05-10_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-05-10",
+          "dutyType": "2",
+          "dutyBgtm": "2019-05-10 18:30:00",
+          "dutyEdtm": "2019-05-11 08:00:00",
+          "dutyDateGroupType": "2019-05-10_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-11_1",
+      "date": "2019-05-11",
+      "weekOfYear": 19,
+      "dayOfWeek": 6,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-11",
+          "dutyType": "3",
+          "dutyBgtm": "2019-05-11 00:00:00",
+          "dutyEdtm": "2019-05-12 00:00:00",
+          "dutyDateGroupType": "2019-05-11_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-12_1",
+      "date": "2019-05-12",
+      "weekOfYear": 19,
+      "dayOfWeek": 7,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-12",
+          "dutyType": "3",
+          "dutyBgtm": "2019-05-12 00:00:00",
+          "dutyEdtm": "2019-05-13 00:00:00",
+          "dutyDateGroupType": "2019-05-12_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-13_1",
+      "date": "2019-05-13",
+      "weekOfYear": 20,
+      "dayOfWeek": 1,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-13",
+          "dutyType": "1",
+          "dutyBgtm": "2019-05-13 08:00:00",
+          "dutyEdtm": "2019-05-13 18:30:00",
+          "dutyDateGroupType": "2019-05-13_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-05-13",
+          "dutyType": "2",
+          "dutyBgtm": "2019-05-13 18:30:00",
+          "dutyEdtm": "2019-05-14 08:00:00",
+          "dutyDateGroupType": "2019-05-13_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-14_1",
+      "date": "2019-05-14",
+      "weekOfYear": 20,
+      "dayOfWeek": 2,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-14",
+          "dutyType": "1",
+          "dutyBgtm": "2019-05-14 08:00:00",
+          "dutyEdtm": "2019-05-14 18:30:00",
+          "dutyDateGroupType": "2019-05-14_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-05-14",
+          "dutyType": "2",
+          "dutyBgtm": "2019-05-14 18:30:00",
+          "dutyEdtm": "2019-05-15 08:00:00",
+          "dutyDateGroupType": "2019-05-14_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-15_1",
+      "date": "2019-05-15",
+      "weekOfYear": 20,
+      "dayOfWeek": 3,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-15",
+          "dutyType": "1",
+          "dutyBgtm": "2019-05-15 08:00:00",
+          "dutyEdtm": "2019-05-15 18:30:00",
+          "dutyDateGroupType": "2019-05-15_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-05-15",
+          "dutyType": "2",
+          "dutyBgtm": "2019-05-15 18:30:00",
+          "dutyEdtm": "2019-05-16 08:00:00",
+          "dutyDateGroupType": "2019-05-15_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-16_1",
+      "date": "2019-05-16",
+      "weekOfYear": 20,
+      "dayOfWeek": 4,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-16",
+          "dutyType": "1",
+          "dutyBgtm": "2019-05-16 08:00:00",
+          "dutyEdtm": "2019-05-16 18:30:00",
+          "dutyDateGroupType": "2019-05-16_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-05-16",
+          "dutyType": "2",
+          "dutyBgtm": "2019-05-16 18:30:00",
+          "dutyEdtm": "2019-05-17 08:00:00",
+          "dutyDateGroupType": "2019-05-16_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-17_1",
+      "date": "2019-05-17",
+      "weekOfYear": 20,
+      "dayOfWeek": 5,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-17",
+          "dutyType": "1",
+          "dutyBgtm": "2019-05-17 08:00:00",
+          "dutyEdtm": "2019-05-17 18:30:00",
+          "dutyDateGroupType": "2019-05-17_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-05-17",
+          "dutyType": "2",
+          "dutyBgtm": "2019-05-17 18:30:00",
+          "dutyEdtm": "2019-05-18 08:00:00",
+          "dutyDateGroupType": "2019-05-17_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-18_1",
+      "date": "2019-05-18",
+      "weekOfYear": 20,
+      "dayOfWeek": 6,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-18",
+          "dutyType": "3",
+          "dutyBgtm": "2019-05-18 00:00:00",
+          "dutyEdtm": "2019-05-19 00:00:00",
+          "dutyDateGroupType": "2019-05-18_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-19_1",
+      "date": "2019-05-19",
+      "weekOfYear": 20,
+      "dayOfWeek": 7,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-19",
+          "dutyType": "3",
+          "dutyBgtm": "2019-05-19 00:00:00",
+          "dutyEdtm": "2019-05-20 00:00:00",
+          "dutyDateGroupType": "2019-05-19_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-20_1",
+      "date": "2019-05-20",
+      "weekOfYear": 21,
+      "dayOfWeek": 1,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-20",
+          "dutyType": "1",
+          "dutyBgtm": "2019-05-20 08:00:00",
+          "dutyEdtm": "2019-05-20 18:30:00",
+          "dutyDateGroupType": "2019-05-20_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-05-20",
+          "dutyType": "2",
+          "dutyBgtm": "2019-05-20 18:30:00",
+          "dutyEdtm": "2019-05-21 08:00:00",
+          "dutyDateGroupType": "2019-05-20_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-21_1",
+      "date": "2019-05-21",
+      "weekOfYear": 21,
+      "dayOfWeek": 2,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-21",
+          "dutyType": "1",
+          "dutyBgtm": "2019-05-21 08:00:00",
+          "dutyEdtm": "2019-05-21 18:30:00",
+          "dutyDateGroupType": "2019-05-21_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-05-21",
+          "dutyType": "2",
+          "dutyBgtm": "2019-05-21 18:30:00",
+          "dutyEdtm": "2019-05-22 08:00:00",
+          "dutyDateGroupType": "2019-05-21_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-22_1",
+      "date": "2019-05-22",
+      "weekOfYear": 21,
+      "dayOfWeek": 3,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-22",
+          "dutyType": "1",
+          "dutyBgtm": "2019-05-22 08:00:00",
+          "dutyEdtm": "2019-05-22 18:30:00",
+          "dutyDateGroupType": "2019-05-22_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-05-22",
+          "dutyType": "2",
+          "dutyBgtm": "2019-05-22 18:30:00",
+          "dutyEdtm": "2019-05-23 08:00:00",
+          "dutyDateGroupType": "2019-05-22_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-23_1",
+      "date": "2019-05-23",
+      "weekOfYear": 21,
+      "dayOfWeek": 4,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-23",
+          "dutyType": "1",
+          "dutyBgtm": "2019-05-23 08:00:00",
+          "dutyEdtm": "2019-05-23 18:30:00",
+          "dutyDateGroupType": "2019-05-23_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-05-23",
+          "dutyType": "2",
+          "dutyBgtm": "2019-05-23 18:30:00",
+          "dutyEdtm": "2019-05-24 08:00:00",
+          "dutyDateGroupType": "2019-05-23_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-24_1",
+      "date": "2019-05-24",
+      "weekOfYear": 21,
+      "dayOfWeek": 5,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-24",
+          "dutyType": "1",
+          "dutyBgtm": "2019-05-24 08:00:00",
+          "dutyEdtm": "2019-05-24 18:30:00",
+          "dutyDateGroupType": "2019-05-24_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-05-24",
+          "dutyType": "2",
+          "dutyBgtm": "2019-05-24 18:30:00",
+          "dutyEdtm": "2019-05-25 08:00:00",
+          "dutyDateGroupType": "2019-05-24_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-25_1",
+      "date": "2019-05-25",
+      "weekOfYear": 21,
+      "dayOfWeek": 6,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-25",
+          "dutyType": "3",
+          "dutyBgtm": "2019-05-25 00:00:00",
+          "dutyEdtm": "2019-05-26 00:00:00",
+          "dutyDateGroupType": "2019-05-25_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-26_1",
+      "date": "2019-05-26",
+      "weekOfYear": 21,
+      "dayOfWeek": 7,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-26",
+          "dutyType": "3",
+          "dutyBgtm": "2019-05-26 00:00:00",
+          "dutyEdtm": "2019-05-27 00:00:00",
+          "dutyDateGroupType": "2019-05-26_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-27_1",
+      "date": "2019-05-27",
+      "weekOfYear": 22,
+      "dayOfWeek": 1,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-27",
+          "dutyType": "1",
+          "dutyBgtm": "2019-05-27 08:00:00",
+          "dutyEdtm": "2019-05-27 18:30:00",
+          "dutyDateGroupType": "2019-05-27_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-05-27",
+          "dutyType": "2",
+          "dutyBgtm": "2019-05-27 18:30:00",
+          "dutyEdtm": "2019-05-28 08:00:00",
+          "dutyDateGroupType": "2019-05-27_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-28_1",
+      "date": "2019-05-28",
+      "weekOfYear": 22,
+      "dayOfWeek": 2,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-28",
+          "dutyType": "1",
+          "dutyBgtm": "2019-05-28 08:00:00",
+          "dutyEdtm": "2019-05-28 18:30:00",
+          "dutyDateGroupType": "2019-05-28_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-05-28",
+          "dutyType": "2",
+          "dutyBgtm": "2019-05-28 18:30:00",
+          "dutyEdtm": "2019-05-29 08:00:00",
+          "dutyDateGroupType": "2019-05-28_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-29_1",
+      "date": "2019-05-29",
+      "weekOfYear": 22,
+      "dayOfWeek": 3,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-29",
+          "dutyType": "1",
+          "dutyBgtm": "2019-05-29 08:00:00",
+          "dutyEdtm": "2019-05-29 18:30:00",
+          "dutyDateGroupType": "2019-05-29_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-05-29",
+          "dutyType": "2",
+          "dutyBgtm": "2019-05-29 18:30:00",
+          "dutyEdtm": "2019-05-30 08:00:00",
+          "dutyDateGroupType": "2019-05-29_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-30_1",
+      "date": "2019-05-30",
+      "weekOfYear": 22,
+      "dayOfWeek": 4,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-30",
+          "dutyType": "1",
+          "dutyBgtm": "2019-05-30 08:00:00",
+          "dutyEdtm": "2019-05-30 18:30:00",
+          "dutyDateGroupType": "2019-05-30_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-05-30",
+          "dutyType": "2",
+          "dutyBgtm": "2019-05-30 18:30:00",
+          "dutyEdtm": "2019-05-31 08:00:00",
+          "dutyDateGroupType": "2019-05-30_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-05-31_1",
+      "date": "2019-05-31",
+      "weekOfYear": 22,
+      "dayOfWeek": 5,
+      "month": 4,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-05-31",
+          "dutyType": "1",
+          "dutyBgtm": "2019-05-31 08:00:00",
+          "dutyEdtm": "2019-05-31 18:30:00",
+          "dutyDateGroupType": "2019-05-31_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-05-31",
+          "dutyType": "2",
+          "dutyBgtm": "2019-05-31 18:30:00",
+          "dutyEdtm": "2019-06-01 08:00:00",
+          "dutyDateGroupType": "2019-05-31_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-01_1",
+      "date": "2019-06-01",
+      "weekOfYear": 22,
+      "dayOfWeek": 6,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-01",
+          "dutyType": "3",
+          "dutyBgtm": "2019-06-01 00:00:00",
+          "dutyEdtm": "2019-06-02 00:00:00",
+          "dutyDateGroupType": "2019-06-01_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-02_1",
+      "date": "2019-06-02",
+      "weekOfYear": 22,
+      "dayOfWeek": 7,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-02",
+          "dutyType": "3",
+          "dutyBgtm": "2019-06-02 00:00:00",
+          "dutyEdtm": "2019-06-03 00:00:00",
+          "dutyDateGroupType": "2019-06-02_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-03_1",
+      "date": "2019-06-03",
+      "weekOfYear": 23,
+      "dayOfWeek": 1,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-03",
+          "dutyType": "1",
+          "dutyBgtm": "2019-06-03 08:00:00",
+          "dutyEdtm": "2019-06-03 18:30:00",
+          "dutyDateGroupType": "2019-06-03_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-06-03",
+          "dutyType": "2",
+          "dutyBgtm": "2019-06-03 18:30:00",
+          "dutyEdtm": "2019-06-04 08:00:00",
+          "dutyDateGroupType": "2019-06-03_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-04_1",
+      "date": "2019-06-04",
+      "weekOfYear": 23,
+      "dayOfWeek": 2,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-04",
+          "dutyType": "1",
+          "dutyBgtm": "2019-06-04 08:00:00",
+          "dutyEdtm": "2019-06-04 18:30:00",
+          "dutyDateGroupType": "2019-06-04_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-06-04",
+          "dutyType": "2",
+          "dutyBgtm": "2019-06-04 18:30:00",
+          "dutyEdtm": "2019-06-05 08:00:00",
+          "dutyDateGroupType": "2019-06-04_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-05_1",
+      "date": "2019-06-05",
+      "weekOfYear": 23,
+      "dayOfWeek": 3,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-05",
+          "dutyType": "1",
+          "dutyBgtm": "2019-06-05 08:00:00",
+          "dutyEdtm": "2019-06-05 18:30:00",
+          "dutyDateGroupType": "2019-06-05_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-06-05",
+          "dutyType": "2",
+          "dutyBgtm": "2019-06-05 18:30:00",
+          "dutyEdtm": "2019-06-06 08:00:00",
+          "dutyDateGroupType": "2019-06-05_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-06_1",
+      "date": "2019-06-06",
+      "weekOfYear": 23,
+      "dayOfWeek": 4,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-06",
+          "dutyType": "1",
+          "dutyBgtm": "2019-06-06 08:00:00",
+          "dutyEdtm": "2019-06-06 18:30:00",
+          "dutyDateGroupType": "2019-06-06_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-06-06",
+          "dutyType": "2",
+          "dutyBgtm": "2019-06-06 18:30:00",
+          "dutyEdtm": "2019-06-07 08:00:00",
+          "dutyDateGroupType": "2019-06-06_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-07_1",
+      "date": "2019-06-07",
+      "weekOfYear": 23,
+      "dayOfWeek": 5,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-07",
+          "dutyType": "1",
+          "dutyBgtm": "2019-06-07 08:00:00",
+          "dutyEdtm": "2019-06-07 18:30:00",
+          "dutyDateGroupType": "2019-06-07_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-06-07",
+          "dutyType": "2",
+          "dutyBgtm": "2019-06-07 18:30:00",
+          "dutyEdtm": "2019-06-08 08:00:00",
+          "dutyDateGroupType": "2019-06-07_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-08_1",
+      "date": "2019-06-08",
+      "weekOfYear": 23,
+      "dayOfWeek": 6,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-08",
+          "dutyType": "3",
+          "dutyBgtm": "2019-06-08 00:00:00",
+          "dutyEdtm": "2019-06-09 00:00:00",
+          "dutyDateGroupType": "2019-06-08_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-09_1",
+      "date": "2019-06-09",
+      "weekOfYear": 23,
+      "dayOfWeek": 7,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-09",
+          "dutyType": "3",
+          "dutyBgtm": "2019-06-09 00:00:00",
+          "dutyEdtm": "2019-06-10 00:00:00",
+          "dutyDateGroupType": "2019-06-09_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-10_1",
+      "date": "2019-06-10",
+      "weekOfYear": 24,
+      "dayOfWeek": 1,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-10",
+          "dutyType": "1",
+          "dutyBgtm": "2019-06-10 08:00:00",
+          "dutyEdtm": "2019-06-10 18:30:00",
+          "dutyDateGroupType": "2019-06-10_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-06-10",
+          "dutyType": "2",
+          "dutyBgtm": "2019-06-10 18:30:00",
+          "dutyEdtm": "2019-06-11 08:00:00",
+          "dutyDateGroupType": "2019-06-10_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-11_1",
+      "date": "2019-06-11",
+      "weekOfYear": 24,
+      "dayOfWeek": 2,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-11",
+          "dutyType": "1",
+          "dutyBgtm": "2019-06-11 08:00:00",
+          "dutyEdtm": "2019-06-11 18:30:00",
+          "dutyDateGroupType": "2019-06-11_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-06-11",
+          "dutyType": "2",
+          "dutyBgtm": "2019-06-11 18:30:00",
+          "dutyEdtm": "2019-06-12 08:00:00",
+          "dutyDateGroupType": "2019-06-11_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-12_1",
+      "date": "2019-06-12",
+      "weekOfYear": 24,
+      "dayOfWeek": 3,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-12",
+          "dutyType": "1",
+          "dutyBgtm": "2019-06-12 08:00:00",
+          "dutyEdtm": "2019-06-12 18:30:00",
+          "dutyDateGroupType": "2019-06-12_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-06-12",
+          "dutyType": "2",
+          "dutyBgtm": "2019-06-12 18:30:00",
+          "dutyEdtm": "2019-06-13 08:00:00",
+          "dutyDateGroupType": "2019-06-12_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-13_1",
+      "date": "2019-06-13",
+      "weekOfYear": 24,
+      "dayOfWeek": 4,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-13",
+          "dutyType": "1",
+          "dutyBgtm": "2019-06-13 08:00:00",
+          "dutyEdtm": "2019-06-13 18:30:00",
+          "dutyDateGroupType": "2019-06-13_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-06-13",
+          "dutyType": "2",
+          "dutyBgtm": "2019-06-13 18:30:00",
+          "dutyEdtm": "2019-06-14 08:00:00",
+          "dutyDateGroupType": "2019-06-13_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-14_1",
+      "date": "2019-06-14",
+      "weekOfYear": 24,
+      "dayOfWeek": 5,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-14",
+          "dutyType": "1",
+          "dutyBgtm": "2019-06-14 08:00:00",
+          "dutyEdtm": "2019-06-14 18:30:00",
+          "dutyDateGroupType": "2019-06-14_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-06-14",
+          "dutyType": "2",
+          "dutyBgtm": "2019-06-14 18:30:00",
+          "dutyEdtm": "2019-06-15 08:00:00",
+          "dutyDateGroupType": "2019-06-14_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-15_1",
+      "date": "2019-06-15",
+      "weekOfYear": 24,
+      "dayOfWeek": 6,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-15",
+          "dutyType": "3",
+          "dutyBgtm": "2019-06-15 00:00:00",
+          "dutyEdtm": "2019-06-16 00:00:00",
+          "dutyDateGroupType": "2019-06-15_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-16_1",
+      "date": "2019-06-16",
+      "weekOfYear": 24,
+      "dayOfWeek": 7,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-16",
+          "dutyType": "3",
+          "dutyBgtm": "2019-06-16 00:00:00",
+          "dutyEdtm": "2019-06-17 00:00:00",
+          "dutyDateGroupType": "2019-06-16_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-17_1",
+      "date": "2019-06-17",
+      "weekOfYear": 25,
+      "dayOfWeek": 1,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-17",
+          "dutyType": "1",
+          "dutyBgtm": "2019-06-17 08:00:00",
+          "dutyEdtm": "2019-06-17 18:30:00",
+          "dutyDateGroupType": "2019-06-17_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-06-17",
+          "dutyType": "2",
+          "dutyBgtm": "2019-06-17 18:30:00",
+          "dutyEdtm": "2019-06-18 08:00:00",
+          "dutyDateGroupType": "2019-06-17_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-18_1",
+      "date": "2019-06-18",
+      "weekOfYear": 25,
+      "dayOfWeek": 2,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-18",
+          "dutyType": "1",
+          "dutyBgtm": "2019-06-18 08:00:00",
+          "dutyEdtm": "2019-06-18 18:30:00",
+          "dutyDateGroupType": "2019-06-18_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-06-18",
+          "dutyType": "2",
+          "dutyBgtm": "2019-06-18 18:30:00",
+          "dutyEdtm": "2019-06-19 08:00:00",
+          "dutyDateGroupType": "2019-06-18_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-19_1",
+      "date": "2019-06-19",
+      "weekOfYear": 25,
+      "dayOfWeek": 3,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-19",
+          "dutyType": "1",
+          "dutyBgtm": "2019-06-19 08:00:00",
+          "dutyEdtm": "2019-06-19 18:30:00",
+          "dutyDateGroupType": "2019-06-19_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-06-19",
+          "dutyType": "2",
+          "dutyBgtm": "2019-06-19 18:30:00",
+          "dutyEdtm": "2019-06-20 08:00:00",
+          "dutyDateGroupType": "2019-06-19_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-20_1",
+      "date": "2019-06-20",
+      "weekOfYear": 25,
+      "dayOfWeek": 4,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-20",
+          "dutyType": "1",
+          "dutyBgtm": "2019-06-20 08:00:00",
+          "dutyEdtm": "2019-06-20 18:30:00",
+          "dutyDateGroupType": "2019-06-20_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-06-20",
+          "dutyType": "2",
+          "dutyBgtm": "2019-06-20 18:30:00",
+          "dutyEdtm": "2019-06-21 08:00:00",
+          "dutyDateGroupType": "2019-06-20_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-21_1",
+      "date": "2019-06-21",
+      "weekOfYear": 25,
+      "dayOfWeek": 5,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-21",
+          "dutyType": "1",
+          "dutyBgtm": "2019-06-21 08:00:00",
+          "dutyEdtm": "2019-06-21 18:30:00",
+          "dutyDateGroupType": "2019-06-21_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-06-21",
+          "dutyType": "2",
+          "dutyBgtm": "2019-06-21 18:30:00",
+          "dutyEdtm": "2019-06-22 08:00:00",
+          "dutyDateGroupType": "2019-06-21_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-22_1",
+      "date": "2019-06-22",
+      "weekOfYear": 25,
+      "dayOfWeek": 6,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-22",
+          "dutyType": "3",
+          "dutyBgtm": "2019-06-22 00:00:00",
+          "dutyEdtm": "2019-06-23 00:00:00",
+          "dutyDateGroupType": "2019-06-22_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-23_1",
+      "date": "2019-06-23",
+      "weekOfYear": 25,
+      "dayOfWeek": 7,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-23",
+          "dutyType": "3",
+          "dutyBgtm": "2019-06-23 00:00:00",
+          "dutyEdtm": "2019-06-24 00:00:00",
+          "dutyDateGroupType": "2019-06-23_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-24_1",
+      "date": "2019-06-24",
+      "weekOfYear": 26,
+      "dayOfWeek": 1,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-24",
+          "dutyType": "1",
+          "dutyBgtm": "2019-06-24 08:00:00",
+          "dutyEdtm": "2019-06-24 18:30:00",
+          "dutyDateGroupType": "2019-06-24_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-06-24",
+          "dutyType": "2",
+          "dutyBgtm": "2019-06-24 18:30:00",
+          "dutyEdtm": "2019-06-25 08:00:00",
+          "dutyDateGroupType": "2019-06-24_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-25_1",
+      "date": "2019-06-25",
+      "weekOfYear": 26,
+      "dayOfWeek": 2,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-25",
+          "dutyType": "1",
+          "dutyBgtm": "2019-06-25 08:00:00",
+          "dutyEdtm": "2019-06-25 18:30:00",
+          "dutyDateGroupType": "2019-06-25_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-06-25",
+          "dutyType": "2",
+          "dutyBgtm": "2019-06-25 18:30:00",
+          "dutyEdtm": "2019-06-26 08:00:00",
+          "dutyDateGroupType": "2019-06-25_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-26_1",
+      "date": "2019-06-26",
+      "weekOfYear": 26,
+      "dayOfWeek": 3,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-26",
+          "dutyType": "1",
+          "dutyBgtm": "2019-06-26 08:00:00",
+          "dutyEdtm": "2019-06-26 18:30:00",
+          "dutyDateGroupType": "2019-06-26_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-06-26",
+          "dutyType": "2",
+          "dutyBgtm": "2019-06-26 18:30:00",
+          "dutyEdtm": "2019-06-27 08:00:00",
+          "dutyDateGroupType": "2019-06-26_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-27_1",
+      "date": "2019-06-27",
+      "weekOfYear": 26,
+      "dayOfWeek": 4,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-27",
+          "dutyType": "1",
+          "dutyBgtm": "2019-06-27 08:00:00",
+          "dutyEdtm": "2019-06-27 18:30:00",
+          "dutyDateGroupType": "2019-06-27_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-06-27",
+          "dutyType": "2",
+          "dutyBgtm": "2019-06-27 18:30:00",
+          "dutyEdtm": "2019-06-28 08:00:00",
+          "dutyDateGroupType": "2019-06-27_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-28_1",
+      "date": "2019-06-28",
+      "weekOfYear": 26,
+      "dayOfWeek": 5,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-28",
+          "dutyType": "1",
+          "dutyBgtm": "2019-06-28 08:00:00",
+          "dutyEdtm": "2019-06-28 18:30:00",
+          "dutyDateGroupType": "2019-06-28_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-06-28",
+          "dutyType": "2",
+          "dutyBgtm": "2019-06-28 18:30:00",
+          "dutyEdtm": "2019-06-29 08:00:00",
+          "dutyDateGroupType": "2019-06-28_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-29_1",
+      "date": "2019-06-29",
+      "weekOfYear": 26,
+      "dayOfWeek": 6,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-29",
+          "dutyType": "3",
+          "dutyBgtm": "2019-06-29 00:00:00",
+          "dutyEdtm": "2019-06-30 00:00:00",
+          "dutyDateGroupType": "2019-06-29_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-06-30_1",
+      "date": "2019-06-30",
+      "weekOfYear": 26,
+      "dayOfWeek": 7,
+      "month": 5,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-06-30",
+          "dutyType": "3",
+          "dutyBgtm": "2019-06-30 00:00:00",
+          "dutyEdtm": "2019-07-01 00:00:00",
+          "dutyDateGroupType": "2019-06-30_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-01_1",
+      "date": "2019-07-01",
+      "weekOfYear": 27,
+      "dayOfWeek": 1,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-01",
+          "dutyType": "1",
+          "dutyBgtm": "2019-07-01 08:00:00",
+          "dutyEdtm": "2019-07-01 18:30:00",
+          "dutyDateGroupType": "2019-07-01_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-07-01",
+          "dutyType": "2",
+          "dutyBgtm": "2019-07-01 18:30:00",
+          "dutyEdtm": "2019-07-02 08:00:00",
+          "dutyDateGroupType": "2019-07-01_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-02_1",
+      "date": "2019-07-02",
+      "weekOfYear": 27,
+      "dayOfWeek": 2,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-02",
+          "dutyType": "1",
+          "dutyBgtm": "2019-07-02 08:00:00",
+          "dutyEdtm": "2019-07-02 18:30:00",
+          "dutyDateGroupType": "2019-07-02_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-07-02",
+          "dutyType": "2",
+          "dutyBgtm": "2019-07-02 18:30:00",
+          "dutyEdtm": "2019-07-03 08:00:00",
+          "dutyDateGroupType": "2019-07-02_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-03_1",
+      "date": "2019-07-03",
+      "weekOfYear": 27,
+      "dayOfWeek": 3,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-03",
+          "dutyType": "1",
+          "dutyBgtm": "2019-07-03 08:00:00",
+          "dutyEdtm": "2019-07-03 18:30:00",
+          "dutyDateGroupType": "2019-07-03_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-07-03",
+          "dutyType": "2",
+          "dutyBgtm": "2019-07-03 18:30:00",
+          "dutyEdtm": "2019-07-04 08:00:00",
+          "dutyDateGroupType": "2019-07-03_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-04_1",
+      "date": "2019-07-04",
+      "weekOfYear": 27,
+      "dayOfWeek": 4,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-04",
+          "dutyType": "1",
+          "dutyBgtm": "2019-07-04 08:00:00",
+          "dutyEdtm": "2019-07-04 18:30:00",
+          "dutyDateGroupType": "2019-07-04_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-07-04",
+          "dutyType": "2",
+          "dutyBgtm": "2019-07-04 18:30:00",
+          "dutyEdtm": "2019-07-05 08:00:00",
+          "dutyDateGroupType": "2019-07-04_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-05_1",
+      "date": "2019-07-05",
+      "weekOfYear": 27,
+      "dayOfWeek": 5,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-05",
+          "dutyType": "1",
+          "dutyBgtm": "2019-07-05 08:00:00",
+          "dutyEdtm": "2019-07-05 18:30:00",
+          "dutyDateGroupType": "2019-07-05_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-07-05",
+          "dutyType": "2",
+          "dutyBgtm": "2019-07-05 18:30:00",
+          "dutyEdtm": "2019-07-06 08:00:00",
+          "dutyDateGroupType": "2019-07-05_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-06_1",
+      "date": "2019-07-06",
+      "weekOfYear": 27,
+      "dayOfWeek": 6,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-06",
+          "dutyType": "3",
+          "dutyBgtm": "2019-07-06 00:00:00",
+          "dutyEdtm": "2019-07-07 00:00:00",
+          "dutyDateGroupType": "2019-07-06_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-07_1",
+      "date": "2019-07-07",
+      "weekOfYear": 27,
+      "dayOfWeek": 7,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-07",
+          "dutyType": "3",
+          "dutyBgtm": "2019-07-07 00:00:00",
+          "dutyEdtm": "2019-07-08 00:00:00",
+          "dutyDateGroupType": "2019-07-07_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-08_1",
+      "date": "2019-07-08",
+      "weekOfYear": 28,
+      "dayOfWeek": 1,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-08",
+          "dutyType": "1",
+          "dutyBgtm": "2019-07-08 08:00:00",
+          "dutyEdtm": "2019-07-08 18:30:00",
+          "dutyDateGroupType": "2019-07-08_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-07-08",
+          "dutyType": "2",
+          "dutyBgtm": "2019-07-08 18:30:00",
+          "dutyEdtm": "2019-07-09 08:00:00",
+          "dutyDateGroupType": "2019-07-08_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-09_1",
+      "date": "2019-07-09",
+      "weekOfYear": 28,
+      "dayOfWeek": 2,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-09",
+          "dutyType": "1",
+          "dutyBgtm": "2019-07-09 08:00:00",
+          "dutyEdtm": "2019-07-09 18:30:00",
+          "dutyDateGroupType": "2019-07-09_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-07-09",
+          "dutyType": "2",
+          "dutyBgtm": "2019-07-09 18:30:00",
+          "dutyEdtm": "2019-07-10 08:00:00",
+          "dutyDateGroupType": "2019-07-09_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-10_1",
+      "date": "2019-07-10",
+      "weekOfYear": 28,
+      "dayOfWeek": 3,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-10",
+          "dutyType": "1",
+          "dutyBgtm": "2019-07-10 08:00:00",
+          "dutyEdtm": "2019-07-10 18:30:00",
+          "dutyDateGroupType": "2019-07-10_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-07-10",
+          "dutyType": "2",
+          "dutyBgtm": "2019-07-10 18:30:00",
+          "dutyEdtm": "2019-07-11 08:00:00",
+          "dutyDateGroupType": "2019-07-10_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-11_1",
+      "date": "2019-07-11",
+      "weekOfYear": 28,
+      "dayOfWeek": 4,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-11",
+          "dutyType": "1",
+          "dutyBgtm": "2019-07-11 08:00:00",
+          "dutyEdtm": "2019-07-11 18:30:00",
+          "dutyDateGroupType": "2019-07-11_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-07-11",
+          "dutyType": "2",
+          "dutyBgtm": "2019-07-11 18:30:00",
+          "dutyEdtm": "2019-07-12 08:00:00",
+          "dutyDateGroupType": "2019-07-11_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-12_1",
+      "date": "2019-07-12",
+      "weekOfYear": 28,
+      "dayOfWeek": 5,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-12",
+          "dutyType": "1",
+          "dutyBgtm": "2019-07-12 08:00:00",
+          "dutyEdtm": "2019-07-12 18:30:00",
+          "dutyDateGroupType": "2019-07-12_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-07-12",
+          "dutyType": "2",
+          "dutyBgtm": "2019-07-12 18:30:00",
+          "dutyEdtm": "2019-07-13 08:00:00",
+          "dutyDateGroupType": "2019-07-12_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-13_1",
+      "date": "2019-07-13",
+      "weekOfYear": 28,
+      "dayOfWeek": 6,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-13",
+          "dutyType": "3",
+          "dutyBgtm": "2019-07-13 00:00:00",
+          "dutyEdtm": "2019-07-14 00:00:00",
+          "dutyDateGroupType": "2019-07-13_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-14_1",
+      "date": "2019-07-14",
+      "weekOfYear": 28,
+      "dayOfWeek": 7,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-14",
+          "dutyType": "3",
+          "dutyBgtm": "2019-07-14 00:00:00",
+          "dutyEdtm": "2019-07-15 00:00:00",
+          "dutyDateGroupType": "2019-07-14_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-15_1",
+      "date": "2019-07-15",
+      "weekOfYear": 29,
+      "dayOfWeek": 1,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-15",
+          "dutyType": "1",
+          "dutyBgtm": "2019-07-15 08:00:00",
+          "dutyEdtm": "2019-07-15 18:30:00",
+          "dutyDateGroupType": "2019-07-15_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-07-15",
+          "dutyType": "2",
+          "dutyBgtm": "2019-07-15 18:30:00",
+          "dutyEdtm": "2019-07-16 08:00:00",
+          "dutyDateGroupType": "2019-07-15_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-16_1",
+      "date": "2019-07-16",
+      "weekOfYear": 29,
+      "dayOfWeek": 2,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-16",
+          "dutyType": "1",
+          "dutyBgtm": "2019-07-16 08:00:00",
+          "dutyEdtm": "2019-07-16 18:30:00",
+          "dutyDateGroupType": "2019-07-16_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-07-16",
+          "dutyType": "2",
+          "dutyBgtm": "2019-07-16 18:30:00",
+          "dutyEdtm": "2019-07-17 08:00:00",
+          "dutyDateGroupType": "2019-07-16_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-17_1",
+      "date": "2019-07-17",
+      "weekOfYear": 29,
+      "dayOfWeek": 3,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-17",
+          "dutyType": "1",
+          "dutyBgtm": "2019-07-17 08:00:00",
+          "dutyEdtm": "2019-07-17 18:30:00",
+          "dutyDateGroupType": "2019-07-17_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-07-17",
+          "dutyType": "2",
+          "dutyBgtm": "2019-07-17 18:30:00",
+          "dutyEdtm": "2019-07-18 08:00:00",
+          "dutyDateGroupType": "2019-07-17_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-18_1",
+      "date": "2019-07-18",
+      "weekOfYear": 29,
+      "dayOfWeek": 4,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-18",
+          "dutyType": "1",
+          "dutyBgtm": "2019-07-18 08:00:00",
+          "dutyEdtm": "2019-07-18 18:30:00",
+          "dutyDateGroupType": "2019-07-18_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-07-18",
+          "dutyType": "2",
+          "dutyBgtm": "2019-07-18 18:30:00",
+          "dutyEdtm": "2019-07-19 08:00:00",
+          "dutyDateGroupType": "2019-07-18_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-19_1",
+      "date": "2019-07-19",
+      "weekOfYear": 29,
+      "dayOfWeek": 5,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-19",
+          "dutyType": "1",
+          "dutyBgtm": "2019-07-19 08:00:00",
+          "dutyEdtm": "2019-07-19 18:30:00",
+          "dutyDateGroupType": "2019-07-19_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-07-19",
+          "dutyType": "2",
+          "dutyBgtm": "2019-07-19 18:30:00",
+          "dutyEdtm": "2019-07-20 08:00:00",
+          "dutyDateGroupType": "2019-07-19_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-20_1",
+      "date": "2019-07-20",
+      "weekOfYear": 29,
+      "dayOfWeek": 6,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-20",
+          "dutyType": "3",
+          "dutyBgtm": "2019-07-20 00:00:00",
+          "dutyEdtm": "2019-07-21 00:00:00",
+          "dutyDateGroupType": "2019-07-20_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-21_1",
+      "date": "2019-07-21",
+      "weekOfYear": 29,
+      "dayOfWeek": 7,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-21",
+          "dutyType": "3",
+          "dutyBgtm": "2019-07-21 00:00:00",
+          "dutyEdtm": "2019-07-22 00:00:00",
+          "dutyDateGroupType": "2019-07-21_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-22_1",
+      "date": "2019-07-22",
+      "weekOfYear": 30,
+      "dayOfWeek": 1,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-22",
+          "dutyType": "1",
+          "dutyBgtm": "2019-07-22 08:00:00",
+          "dutyEdtm": "2019-07-22 18:30:00",
+          "dutyDateGroupType": "2019-07-22_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-07-22",
+          "dutyType": "2",
+          "dutyBgtm": "2019-07-22 18:30:00",
+          "dutyEdtm": "2019-07-23 08:00:00",
+          "dutyDateGroupType": "2019-07-22_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-23_1",
+      "date": "2019-07-23",
+      "weekOfYear": 30,
+      "dayOfWeek": 2,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-23",
+          "dutyType": "1",
+          "dutyBgtm": "2019-07-23 08:00:00",
+          "dutyEdtm": "2019-07-23 18:30:00",
+          "dutyDateGroupType": "2019-07-23_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-07-23",
+          "dutyType": "2",
+          "dutyBgtm": "2019-07-23 18:30:00",
+          "dutyEdtm": "2019-07-24 08:00:00",
+          "dutyDateGroupType": "2019-07-23_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-24_1",
+      "date": "2019-07-24",
+      "weekOfYear": 30,
+      "dayOfWeek": 3,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-24",
+          "dutyType": "1",
+          "dutyBgtm": "2019-07-24 08:00:00",
+          "dutyEdtm": "2019-07-24 18:30:00",
+          "dutyDateGroupType": "2019-07-24_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-07-24",
+          "dutyType": "2",
+          "dutyBgtm": "2019-07-24 18:30:00",
+          "dutyEdtm": "2019-07-25 08:00:00",
+          "dutyDateGroupType": "2019-07-24_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-25_1",
+      "date": "2019-07-25",
+      "weekOfYear": 30,
+      "dayOfWeek": 4,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-25",
+          "dutyType": "1",
+          "dutyBgtm": "2019-07-25 08:00:00",
+          "dutyEdtm": "2019-07-25 18:30:00",
+          "dutyDateGroupType": "2019-07-25_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-07-25",
+          "dutyType": "2",
+          "dutyBgtm": "2019-07-25 18:30:00",
+          "dutyEdtm": "2019-07-26 08:00:00",
+          "dutyDateGroupType": "2019-07-25_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-26_1",
+      "date": "2019-07-26",
+      "weekOfYear": 30,
+      "dayOfWeek": 5,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-26",
+          "dutyType": "1",
+          "dutyBgtm": "2019-07-26 08:00:00",
+          "dutyEdtm": "2019-07-26 18:30:00",
+          "dutyDateGroupType": "2019-07-26_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-07-26",
+          "dutyType": "2",
+          "dutyBgtm": "2019-07-26 18:30:00",
+          "dutyEdtm": "2019-07-27 08:00:00",
+          "dutyDateGroupType": "2019-07-26_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-27_1",
+      "date": "2019-07-27",
+      "weekOfYear": 30,
+      "dayOfWeek": 6,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-27",
+          "dutyType": "3",
+          "dutyBgtm": "2019-07-27 00:00:00",
+          "dutyEdtm": "2019-07-28 00:00:00",
+          "dutyDateGroupType": "2019-07-27_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-28_1",
+      "date": "2019-07-28",
+      "weekOfYear": 30,
+      "dayOfWeek": 7,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-28",
+          "dutyType": "3",
+          "dutyBgtm": "2019-07-28 00:00:00",
+          "dutyEdtm": "2019-07-29 00:00:00",
+          "dutyDateGroupType": "2019-07-28_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-29_1",
+      "date": "2019-07-29",
+      "weekOfYear": 31,
+      "dayOfWeek": 1,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-29",
+          "dutyType": "1",
+          "dutyBgtm": "2019-07-29 08:00:00",
+          "dutyEdtm": "2019-07-29 18:30:00",
+          "dutyDateGroupType": "2019-07-29_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-07-29",
+          "dutyType": "2",
+          "dutyBgtm": "2019-07-29 18:30:00",
+          "dutyEdtm": "2019-07-30 08:00:00",
+          "dutyDateGroupType": "2019-07-29_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-30_1",
+      "date": "2019-07-30",
+      "weekOfYear": 31,
+      "dayOfWeek": 2,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-30",
+          "dutyType": "1",
+          "dutyBgtm": "2019-07-30 08:00:00",
+          "dutyEdtm": "2019-07-30 18:30:00",
+          "dutyDateGroupType": "2019-07-30_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-07-30",
+          "dutyType": "2",
+          "dutyBgtm": "2019-07-30 18:30:00",
+          "dutyEdtm": "2019-07-31 08:00:00",
+          "dutyDateGroupType": "2019-07-30_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-07-31_1",
+      "date": "2019-07-31",
+      "weekOfYear": 31,
+      "dayOfWeek": 3,
+      "month": 6,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-07-31",
+          "dutyType": "1",
+          "dutyBgtm": "2019-07-31 08:00:00",
+          "dutyEdtm": "2019-07-31 18:30:00",
+          "dutyDateGroupType": "2019-07-31_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-07-31",
+          "dutyType": "2",
+          "dutyBgtm": "2019-07-31 18:30:00",
+          "dutyEdtm": "2019-08-01 08:00:00",
+          "dutyDateGroupType": "2019-07-31_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-01_1",
+      "date": "2019-08-01",
+      "weekOfYear": 31,
+      "dayOfWeek": 4,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-01",
+          "dutyType": "1",
+          "dutyBgtm": "2019-08-01 08:00:00",
+          "dutyEdtm": "2019-08-01 18:30:00",
+          "dutyDateGroupType": "2019-08-01_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-08-01",
+          "dutyType": "2",
+          "dutyBgtm": "2019-08-01 18:30:00",
+          "dutyEdtm": "2019-08-02 08:00:00",
+          "dutyDateGroupType": "2019-08-01_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-02_1",
+      "date": "2019-08-02",
+      "weekOfYear": 31,
+      "dayOfWeek": 5,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-02",
+          "dutyType": "1",
+          "dutyBgtm": "2019-08-02 08:00:00",
+          "dutyEdtm": "2019-08-02 18:30:00",
+          "dutyDateGroupType": "2019-08-02_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-08-02",
+          "dutyType": "2",
+          "dutyBgtm": "2019-08-02 18:30:00",
+          "dutyEdtm": "2019-08-03 08:00:00",
+          "dutyDateGroupType": "2019-08-02_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-03_1",
+      "date": "2019-08-03",
+      "weekOfYear": 31,
+      "dayOfWeek": 6,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-03",
+          "dutyType": "3",
+          "dutyBgtm": "2019-08-03 00:00:00",
+          "dutyEdtm": "2019-08-04 00:00:00",
+          "dutyDateGroupType": "2019-08-03_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-04_1",
+      "date": "2019-08-04",
+      "weekOfYear": 31,
+      "dayOfWeek": 7,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-04",
+          "dutyType": "3",
+          "dutyBgtm": "2019-08-04 00:00:00",
+          "dutyEdtm": "2019-08-05 00:00:00",
+          "dutyDateGroupType": "2019-08-04_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-05_1",
+      "date": "2019-08-05",
+      "weekOfYear": 32,
+      "dayOfWeek": 1,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-05",
+          "dutyType": "1",
+          "dutyBgtm": "2019-08-05 08:00:00",
+          "dutyEdtm": "2019-08-05 18:30:00",
+          "dutyDateGroupType": "2019-08-05_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-08-05",
+          "dutyType": "2",
+          "dutyBgtm": "2019-08-05 18:30:00",
+          "dutyEdtm": "2019-08-06 08:00:00",
+          "dutyDateGroupType": "2019-08-05_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-06_1",
+      "date": "2019-08-06",
+      "weekOfYear": 32,
+      "dayOfWeek": 2,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-06",
+          "dutyType": "1",
+          "dutyBgtm": "2019-08-06 08:00:00",
+          "dutyEdtm": "2019-08-06 18:30:00",
+          "dutyDateGroupType": "2019-08-06_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-08-06",
+          "dutyType": "2",
+          "dutyBgtm": "2019-08-06 18:30:00",
+          "dutyEdtm": "2019-08-07 08:00:00",
+          "dutyDateGroupType": "2019-08-06_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-07_1",
+      "date": "2019-08-07",
+      "weekOfYear": 32,
+      "dayOfWeek": 3,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-07",
+          "dutyType": "1",
+          "dutyBgtm": "2019-08-07 08:00:00",
+          "dutyEdtm": "2019-08-07 18:30:00",
+          "dutyDateGroupType": "2019-08-07_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-08-07",
+          "dutyType": "2",
+          "dutyBgtm": "2019-08-07 18:30:00",
+          "dutyEdtm": "2019-08-08 08:00:00",
+          "dutyDateGroupType": "2019-08-07_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-08_1",
+      "date": "2019-08-08",
+      "weekOfYear": 32,
+      "dayOfWeek": 4,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-08",
+          "dutyType": "1",
+          "dutyBgtm": "2019-08-08 08:00:00",
+          "dutyEdtm": "2019-08-08 18:30:00",
+          "dutyDateGroupType": "2019-08-08_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-08-08",
+          "dutyType": "2",
+          "dutyBgtm": "2019-08-08 18:30:00",
+          "dutyEdtm": "2019-08-09 08:00:00",
+          "dutyDateGroupType": "2019-08-08_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-09_1",
+      "date": "2019-08-09",
+      "weekOfYear": 32,
+      "dayOfWeek": 5,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-09",
+          "dutyType": "1",
+          "dutyBgtm": "2019-08-09 08:00:00",
+          "dutyEdtm": "2019-08-09 18:30:00",
+          "dutyDateGroupType": "2019-08-09_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-08-09",
+          "dutyType": "2",
+          "dutyBgtm": "2019-08-09 18:30:00",
+          "dutyEdtm": "2019-08-10 08:00:00",
+          "dutyDateGroupType": "2019-08-09_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-10_1",
+      "date": "2019-08-10",
+      "weekOfYear": 32,
+      "dayOfWeek": 6,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-10",
+          "dutyType": "3",
+          "dutyBgtm": "2019-08-10 00:00:00",
+          "dutyEdtm": "2019-08-11 00:00:00",
+          "dutyDateGroupType": "2019-08-10_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-11_1",
+      "date": "2019-08-11",
+      "weekOfYear": 32,
+      "dayOfWeek": 7,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-11",
+          "dutyType": "3",
+          "dutyBgtm": "2019-08-11 00:00:00",
+          "dutyEdtm": "2019-08-12 00:00:00",
+          "dutyDateGroupType": "2019-08-11_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-12_1",
+      "date": "2019-08-12",
+      "weekOfYear": 33,
+      "dayOfWeek": 1,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-12",
+          "dutyType": "1",
+          "dutyBgtm": "2019-08-12 08:00:00",
+          "dutyEdtm": "2019-08-12 18:30:00",
+          "dutyDateGroupType": "2019-08-12_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-08-12",
+          "dutyType": "2",
+          "dutyBgtm": "2019-08-12 18:30:00",
+          "dutyEdtm": "2019-08-13 08:00:00",
+          "dutyDateGroupType": "2019-08-12_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-13_1",
+      "date": "2019-08-13",
+      "weekOfYear": 33,
+      "dayOfWeek": 2,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-13",
+          "dutyType": "1",
+          "dutyBgtm": "2019-08-13 08:00:00",
+          "dutyEdtm": "2019-08-13 18:30:00",
+          "dutyDateGroupType": "2019-08-13_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-08-13",
+          "dutyType": "2",
+          "dutyBgtm": "2019-08-13 18:30:00",
+          "dutyEdtm": "2019-08-14 08:00:00",
+          "dutyDateGroupType": "2019-08-13_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-14_1",
+      "date": "2019-08-14",
+      "weekOfYear": 33,
+      "dayOfWeek": 3,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-14",
+          "dutyType": "1",
+          "dutyBgtm": "2019-08-14 08:00:00",
+          "dutyEdtm": "2019-08-14 18:30:00",
+          "dutyDateGroupType": "2019-08-14_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-08-14",
+          "dutyType": "2",
+          "dutyBgtm": "2019-08-14 18:30:00",
+          "dutyEdtm": "2019-08-15 08:00:00",
+          "dutyDateGroupType": "2019-08-14_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-15_1",
+      "date": "2019-08-15",
+      "weekOfYear": 33,
+      "dayOfWeek": 4,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-15",
+          "dutyType": "1",
+          "dutyBgtm": "2019-08-15 08:00:00",
+          "dutyEdtm": "2019-08-15 18:30:00",
+          "dutyDateGroupType": "2019-08-15_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-08-15",
+          "dutyType": "2",
+          "dutyBgtm": "2019-08-15 18:30:00",
+          "dutyEdtm": "2019-08-16 08:00:00",
+          "dutyDateGroupType": "2019-08-15_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-16_1",
+      "date": "2019-08-16",
+      "weekOfYear": 33,
+      "dayOfWeek": 5,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-16",
+          "dutyType": "1",
+          "dutyBgtm": "2019-08-16 08:00:00",
+          "dutyEdtm": "2019-08-16 18:30:00",
+          "dutyDateGroupType": "2019-08-16_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-08-16",
+          "dutyType": "2",
+          "dutyBgtm": "2019-08-16 18:30:00",
+          "dutyEdtm": "2019-08-17 08:00:00",
+          "dutyDateGroupType": "2019-08-16_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-17_1",
+      "date": "2019-08-17",
+      "weekOfYear": 33,
+      "dayOfWeek": 6,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-17",
+          "dutyType": "3",
+          "dutyBgtm": "2019-08-17 00:00:00",
+          "dutyEdtm": "2019-08-18 00:00:00",
+          "dutyDateGroupType": "2019-08-17_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-18_1",
+      "date": "2019-08-18",
+      "weekOfYear": 33,
+      "dayOfWeek": 7,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-18",
+          "dutyType": "3",
+          "dutyBgtm": "2019-08-18 00:00:00",
+          "dutyEdtm": "2019-08-19 00:00:00",
+          "dutyDateGroupType": "2019-08-18_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-19_1",
+      "date": "2019-08-19",
+      "weekOfYear": 34,
+      "dayOfWeek": 1,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-19",
+          "dutyType": "1",
+          "dutyBgtm": "2019-08-19 08:00:00",
+          "dutyEdtm": "2019-08-19 18:30:00",
+          "dutyDateGroupType": "2019-08-19_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-08-19",
+          "dutyType": "2",
+          "dutyBgtm": "2019-08-19 18:30:00",
+          "dutyEdtm": "2019-08-20 08:00:00",
+          "dutyDateGroupType": "2019-08-19_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-20_1",
+      "date": "2019-08-20",
+      "weekOfYear": 34,
+      "dayOfWeek": 2,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-20",
+          "dutyType": "1",
+          "dutyBgtm": "2019-08-20 08:00:00",
+          "dutyEdtm": "2019-08-20 18:30:00",
+          "dutyDateGroupType": "2019-08-20_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-08-20",
+          "dutyType": "2",
+          "dutyBgtm": "2019-08-20 18:30:00",
+          "dutyEdtm": "2019-08-21 08:00:00",
+          "dutyDateGroupType": "2019-08-20_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-21_1",
+      "date": "2019-08-21",
+      "weekOfYear": 34,
+      "dayOfWeek": 3,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-21",
+          "dutyType": "1",
+          "dutyBgtm": "2019-08-21 08:00:00",
+          "dutyEdtm": "2019-08-21 18:30:00",
+          "dutyDateGroupType": "2019-08-21_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-08-21",
+          "dutyType": "2",
+          "dutyBgtm": "2019-08-21 18:30:00",
+          "dutyEdtm": "2019-08-22 08:00:00",
+          "dutyDateGroupType": "2019-08-21_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-22_1",
+      "date": "2019-08-22",
+      "weekOfYear": 34,
+      "dayOfWeek": 4,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-22",
+          "dutyType": "1",
+          "dutyBgtm": "2019-08-22 08:00:00",
+          "dutyEdtm": "2019-08-22 18:30:00",
+          "dutyDateGroupType": "2019-08-22_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-08-22",
+          "dutyType": "2",
+          "dutyBgtm": "2019-08-22 18:30:00",
+          "dutyEdtm": "2019-08-23 08:00:00",
+          "dutyDateGroupType": "2019-08-22_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-23_1",
+      "date": "2019-08-23",
+      "weekOfYear": 34,
+      "dayOfWeek": 5,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-23",
+          "dutyType": "1",
+          "dutyBgtm": "2019-08-23 08:00:00",
+          "dutyEdtm": "2019-08-23 18:30:00",
+          "dutyDateGroupType": "2019-08-23_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-08-23",
+          "dutyType": "2",
+          "dutyBgtm": "2019-08-23 18:30:00",
+          "dutyEdtm": "2019-08-24 08:00:00",
+          "dutyDateGroupType": "2019-08-23_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-24_1",
+      "date": "2019-08-24",
+      "weekOfYear": 34,
+      "dayOfWeek": 6,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-24",
+          "dutyType": "3",
+          "dutyBgtm": "2019-08-24 00:00:00",
+          "dutyEdtm": "2019-08-25 00:00:00",
+          "dutyDateGroupType": "2019-08-24_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-25_1",
+      "date": "2019-08-25",
+      "weekOfYear": 34,
+      "dayOfWeek": 7,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-25",
+          "dutyType": "3",
+          "dutyBgtm": "2019-08-25 00:00:00",
+          "dutyEdtm": "2019-08-26 00:00:00",
+          "dutyDateGroupType": "2019-08-25_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-26_1",
+      "date": "2019-08-26",
+      "weekOfYear": 35,
+      "dayOfWeek": 1,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-26",
+          "dutyType": "1",
+          "dutyBgtm": "2019-08-26 08:00:00",
+          "dutyEdtm": "2019-08-26 18:30:00",
+          "dutyDateGroupType": "2019-08-26_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-08-26",
+          "dutyType": "2",
+          "dutyBgtm": "2019-08-26 18:30:00",
+          "dutyEdtm": "2019-08-27 08:00:00",
+          "dutyDateGroupType": "2019-08-26_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-27_1",
+      "date": "2019-08-27",
+      "weekOfYear": 35,
+      "dayOfWeek": 2,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-27",
+          "dutyType": "1",
+          "dutyBgtm": "2019-08-27 08:00:00",
+          "dutyEdtm": "2019-08-27 18:30:00",
+          "dutyDateGroupType": "2019-08-27_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-08-27",
+          "dutyType": "2",
+          "dutyBgtm": "2019-08-27 18:30:00",
+          "dutyEdtm": "2019-08-28 08:00:00",
+          "dutyDateGroupType": "2019-08-27_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-28_1",
+      "date": "2019-08-28",
+      "weekOfYear": 35,
+      "dayOfWeek": 3,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-28",
+          "dutyType": "1",
+          "dutyBgtm": "2019-08-28 08:00:00",
+          "dutyEdtm": "2019-08-28 18:30:00",
+          "dutyDateGroupType": "2019-08-28_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-08-28",
+          "dutyType": "2",
+          "dutyBgtm": "2019-08-28 18:30:00",
+          "dutyEdtm": "2019-08-29 08:00:00",
+          "dutyDateGroupType": "2019-08-28_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-29_1",
+      "date": "2019-08-29",
+      "weekOfYear": 35,
+      "dayOfWeek": 4,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-29",
+          "dutyType": "1",
+          "dutyBgtm": "2019-08-29 08:00:00",
+          "dutyEdtm": "2019-08-29 18:30:00",
+          "dutyDateGroupType": "2019-08-29_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-08-29",
+          "dutyType": "2",
+          "dutyBgtm": "2019-08-29 18:30:00",
+          "dutyEdtm": "2019-08-30 08:00:00",
+          "dutyDateGroupType": "2019-08-29_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-30_1",
+      "date": "2019-08-30",
+      "weekOfYear": 35,
+      "dayOfWeek": 5,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-30",
+          "dutyType": "1",
+          "dutyBgtm": "2019-08-30 08:00:00",
+          "dutyEdtm": "2019-08-30 18:30:00",
+          "dutyDateGroupType": "2019-08-30_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-08-30",
+          "dutyType": "2",
+          "dutyBgtm": "2019-08-30 18:30:00",
+          "dutyEdtm": "2019-08-31 08:00:00",
+          "dutyDateGroupType": "2019-08-30_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-08-31_1",
+      "date": "2019-08-31",
+      "weekOfYear": 35,
+      "dayOfWeek": 6,
+      "month": 7,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-08-31",
+          "dutyType": "3",
+          "dutyBgtm": "2019-08-31 00:00:00",
+          "dutyEdtm": "2019-09-01 00:00:00",
+          "dutyDateGroupType": "2019-08-31_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-01_1",
+      "date": "2019-09-01",
+      "weekOfYear": 35,
+      "dayOfWeek": 7,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-01",
+          "dutyType": "3",
+          "dutyBgtm": "2019-09-01 00:00:00",
+          "dutyEdtm": "2019-09-02 00:00:00",
+          "dutyDateGroupType": "2019-09-01_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-02_1",
+      "date": "2019-09-02",
+      "weekOfYear": 36,
+      "dayOfWeek": 1,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-02",
+          "dutyType": "1",
+          "dutyBgtm": "2019-09-02 08:00:00",
+          "dutyEdtm": "2019-09-02 18:30:00",
+          "dutyDateGroupType": "2019-09-02_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-09-02",
+          "dutyType": "2",
+          "dutyBgtm": "2019-09-02 18:30:00",
+          "dutyEdtm": "2019-09-03 08:00:00",
+          "dutyDateGroupType": "2019-09-02_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-03_1",
+      "date": "2019-09-03",
+      "weekOfYear": 36,
+      "dayOfWeek": 2,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-03",
+          "dutyType": "1",
+          "dutyBgtm": "2019-09-03 08:00:00",
+          "dutyEdtm": "2019-09-03 18:30:00",
+          "dutyDateGroupType": "2019-09-03_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-09-03",
+          "dutyType": "2",
+          "dutyBgtm": "2019-09-03 18:30:00",
+          "dutyEdtm": "2019-09-04 08:00:00",
+          "dutyDateGroupType": "2019-09-03_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-04_1",
+      "date": "2019-09-04",
+      "weekOfYear": 36,
+      "dayOfWeek": 3,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-04",
+          "dutyType": "1",
+          "dutyBgtm": "2019-09-04 08:00:00",
+          "dutyEdtm": "2019-09-04 18:30:00",
+          "dutyDateGroupType": "2019-09-04_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-09-04",
+          "dutyType": "2",
+          "dutyBgtm": "2019-09-04 18:30:00",
+          "dutyEdtm": "2019-09-05 08:00:00",
+          "dutyDateGroupType": "2019-09-04_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-05_1",
+      "date": "2019-09-05",
+      "weekOfYear": 36,
+      "dayOfWeek": 4,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-05",
+          "dutyType": "1",
+          "dutyBgtm": "2019-09-05 08:00:00",
+          "dutyEdtm": "2019-09-05 18:30:00",
+          "dutyDateGroupType": "2019-09-05_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-09-05",
+          "dutyType": "2",
+          "dutyBgtm": "2019-09-05 18:30:00",
+          "dutyEdtm": "2019-09-06 08:00:00",
+          "dutyDateGroupType": "2019-09-05_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-06_1",
+      "date": "2019-09-06",
+      "weekOfYear": 36,
+      "dayOfWeek": 5,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-06",
+          "dutyType": "1",
+          "dutyBgtm": "2019-09-06 08:00:00",
+          "dutyEdtm": "2019-09-06 18:30:00",
+          "dutyDateGroupType": "2019-09-06_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-09-06",
+          "dutyType": "2",
+          "dutyBgtm": "2019-09-06 18:30:00",
+          "dutyEdtm": "2019-09-07 08:00:00",
+          "dutyDateGroupType": "2019-09-06_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-07_1",
+      "date": "2019-09-07",
+      "weekOfYear": 36,
+      "dayOfWeek": 6,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-07",
+          "dutyType": "3",
+          "dutyBgtm": "2019-09-07 00:00:00",
+          "dutyEdtm": "2019-09-08 00:00:00",
+          "dutyDateGroupType": "2019-09-07_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-08_1",
+      "date": "2019-09-08",
+      "weekOfYear": 36,
+      "dayOfWeek": 7,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-08",
+          "dutyType": "3",
+          "dutyBgtm": "2019-09-08 00:00:00",
+          "dutyEdtm": "2019-09-09 00:00:00",
+          "dutyDateGroupType": "2019-09-08_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-09_1",
+      "date": "2019-09-09",
+      "weekOfYear": 37,
+      "dayOfWeek": 1,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-09",
+          "dutyType": "1",
+          "dutyBgtm": "2019-09-09 08:00:00",
+          "dutyEdtm": "2019-09-09 18:30:00",
+          "dutyDateGroupType": "2019-09-09_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-09-09",
+          "dutyType": "2",
+          "dutyBgtm": "2019-09-09 18:30:00",
+          "dutyEdtm": "2019-09-10 08:00:00",
+          "dutyDateGroupType": "2019-09-09_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-10_1",
+      "date": "2019-09-10",
+      "weekOfYear": 37,
+      "dayOfWeek": 2,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-10",
+          "dutyType": "1",
+          "dutyBgtm": "2019-09-10 08:00:00",
+          "dutyEdtm": "2019-09-10 18:30:00",
+          "dutyDateGroupType": "2019-09-10_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-09-10",
+          "dutyType": "2",
+          "dutyBgtm": "2019-09-10 18:30:00",
+          "dutyEdtm": "2019-09-11 08:00:00",
+          "dutyDateGroupType": "2019-09-10_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-11_1",
+      "date": "2019-09-11",
+      "weekOfYear": 37,
+      "dayOfWeek": 3,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-11",
+          "dutyType": "1",
+          "dutyBgtm": "2019-09-11 08:00:00",
+          "dutyEdtm": "2019-09-11 18:30:00",
+          "dutyDateGroupType": "2019-09-11_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-09-11",
+          "dutyType": "2",
+          "dutyBgtm": "2019-09-11 18:30:00",
+          "dutyEdtm": "2019-09-12 08:00:00",
+          "dutyDateGroupType": "2019-09-11_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-12_1",
+      "date": "2019-09-12",
+      "weekOfYear": 37,
+      "dayOfWeek": 4,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-12",
+          "dutyType": "1",
+          "dutyBgtm": "2019-09-12 08:00:00",
+          "dutyEdtm": "2019-09-12 18:30:00",
+          "dutyDateGroupType": "2019-09-12_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-09-12",
+          "dutyType": "2",
+          "dutyBgtm": "2019-09-12 18:30:00",
+          "dutyEdtm": "2019-09-13 08:00:00",
+          "dutyDateGroupType": "2019-09-12_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-13_1",
+      "date": "2019-09-13",
+      "weekOfYear": 37,
+      "dayOfWeek": 5,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-13",
+          "dutyType": "1",
+          "dutyBgtm": "2019-09-13 08:00:00",
+          "dutyEdtm": "2019-09-13 18:30:00",
+          "dutyDateGroupType": "2019-09-13_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-09-13",
+          "dutyType": "2",
+          "dutyBgtm": "2019-09-13 18:30:00",
+          "dutyEdtm": "2019-09-14 08:00:00",
+          "dutyDateGroupType": "2019-09-13_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-14_1",
+      "date": "2019-09-14",
+      "weekOfYear": 37,
+      "dayOfWeek": 6,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-14",
+          "dutyType": "3",
+          "dutyBgtm": "2019-09-14 00:00:00",
+          "dutyEdtm": "2019-09-15 00:00:00",
+          "dutyDateGroupType": "2019-09-14_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-15_1",
+      "date": "2019-09-15",
+      "weekOfYear": 37,
+      "dayOfWeek": 7,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-15",
+          "dutyType": "3",
+          "dutyBgtm": "2019-09-15 00:00:00",
+          "dutyEdtm": "2019-09-16 00:00:00",
+          "dutyDateGroupType": "2019-09-15_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-16_1",
+      "date": "2019-09-16",
+      "weekOfYear": 38,
+      "dayOfWeek": 1,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-16",
+          "dutyType": "1",
+          "dutyBgtm": "2019-09-16 08:00:00",
+          "dutyEdtm": "2019-09-16 18:30:00",
+          "dutyDateGroupType": "2019-09-16_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-09-16",
+          "dutyType": "2",
+          "dutyBgtm": "2019-09-16 18:30:00",
+          "dutyEdtm": "2019-09-17 08:00:00",
+          "dutyDateGroupType": "2019-09-16_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-17_1",
+      "date": "2019-09-17",
+      "weekOfYear": 38,
+      "dayOfWeek": 2,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-17",
+          "dutyType": "1",
+          "dutyBgtm": "2019-09-17 08:00:00",
+          "dutyEdtm": "2019-09-17 18:30:00",
+          "dutyDateGroupType": "2019-09-17_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-09-17",
+          "dutyType": "2",
+          "dutyBgtm": "2019-09-17 18:30:00",
+          "dutyEdtm": "2019-09-18 08:00:00",
+          "dutyDateGroupType": "2019-09-17_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-18_1",
+      "date": "2019-09-18",
+      "weekOfYear": 38,
+      "dayOfWeek": 3,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-18",
+          "dutyType": "1",
+          "dutyBgtm": "2019-09-18 08:00:00",
+          "dutyEdtm": "2019-09-18 18:30:00",
+          "dutyDateGroupType": "2019-09-18_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-09-18",
+          "dutyType": "2",
+          "dutyBgtm": "2019-09-18 18:30:00",
+          "dutyEdtm": "2019-09-19 08:00:00",
+          "dutyDateGroupType": "2019-09-18_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-19_1",
+      "date": "2019-09-19",
+      "weekOfYear": 38,
+      "dayOfWeek": 4,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-19",
+          "dutyType": "1",
+          "dutyBgtm": "2019-09-19 08:00:00",
+          "dutyEdtm": "2019-09-19 18:30:00",
+          "dutyDateGroupType": "2019-09-19_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-09-19",
+          "dutyType": "2",
+          "dutyBgtm": "2019-09-19 18:30:00",
+          "dutyEdtm": "2019-09-20 08:00:00",
+          "dutyDateGroupType": "2019-09-19_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-20_1",
+      "date": "2019-09-20",
+      "weekOfYear": 38,
+      "dayOfWeek": 5,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-20",
+          "dutyType": "1",
+          "dutyBgtm": "2019-09-20 08:00:00",
+          "dutyEdtm": "2019-09-20 18:30:00",
+          "dutyDateGroupType": "2019-09-20_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-09-20",
+          "dutyType": "2",
+          "dutyBgtm": "2019-09-20 18:30:00",
+          "dutyEdtm": "2019-09-21 08:00:00",
+          "dutyDateGroupType": "2019-09-20_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-21_1",
+      "date": "2019-09-21",
+      "weekOfYear": 38,
+      "dayOfWeek": 6,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-21",
+          "dutyType": "3",
+          "dutyBgtm": "2019-09-21 00:00:00",
+          "dutyEdtm": "2019-09-22 00:00:00",
+          "dutyDateGroupType": "2019-09-21_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-22_1",
+      "date": "2019-09-22",
+      "weekOfYear": 38,
+      "dayOfWeek": 7,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-22",
+          "dutyType": "3",
+          "dutyBgtm": "2019-09-22 00:00:00",
+          "dutyEdtm": "2019-09-23 00:00:00",
+          "dutyDateGroupType": "2019-09-22_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-23_1",
+      "date": "2019-09-23",
+      "weekOfYear": 39,
+      "dayOfWeek": 1,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-23",
+          "dutyType": "1",
+          "dutyBgtm": "2019-09-23 08:00:00",
+          "dutyEdtm": "2019-09-23 18:30:00",
+          "dutyDateGroupType": "2019-09-23_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-09-23",
+          "dutyType": "2",
+          "dutyBgtm": "2019-09-23 18:30:00",
+          "dutyEdtm": "2019-09-24 08:00:00",
+          "dutyDateGroupType": "2019-09-23_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-24_1",
+      "date": "2019-09-24",
+      "weekOfYear": 39,
+      "dayOfWeek": 2,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-24",
+          "dutyType": "1",
+          "dutyBgtm": "2019-09-24 08:00:00",
+          "dutyEdtm": "2019-09-24 18:30:00",
+          "dutyDateGroupType": "2019-09-24_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-09-24",
+          "dutyType": "2",
+          "dutyBgtm": "2019-09-24 18:30:00",
+          "dutyEdtm": "2019-09-25 08:00:00",
+          "dutyDateGroupType": "2019-09-24_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-25_1",
+      "date": "2019-09-25",
+      "weekOfYear": 39,
+      "dayOfWeek": 3,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-25",
+          "dutyType": "1",
+          "dutyBgtm": "2019-09-25 08:00:00",
+          "dutyEdtm": "2019-09-25 18:30:00",
+          "dutyDateGroupType": "2019-09-25_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-09-25",
+          "dutyType": "2",
+          "dutyBgtm": "2019-09-25 18:30:00",
+          "dutyEdtm": "2019-09-26 08:00:00",
+          "dutyDateGroupType": "2019-09-25_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-26_1",
+      "date": "2019-09-26",
+      "weekOfYear": 39,
+      "dayOfWeek": 4,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-26",
+          "dutyType": "1",
+          "dutyBgtm": "2019-09-26 08:00:00",
+          "dutyEdtm": "2019-09-26 18:30:00",
+          "dutyDateGroupType": "2019-09-26_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-09-26",
+          "dutyType": "2",
+          "dutyBgtm": "2019-09-26 18:30:00",
+          "dutyEdtm": "2019-09-27 08:00:00",
+          "dutyDateGroupType": "2019-09-26_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-27_1",
+      "date": "2019-09-27",
+      "weekOfYear": 39,
+      "dayOfWeek": 5,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-27",
+          "dutyType": "1",
+          "dutyBgtm": "2019-09-27 08:00:00",
+          "dutyEdtm": "2019-09-27 18:30:00",
+          "dutyDateGroupType": "2019-09-27_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-09-27",
+          "dutyType": "2",
+          "dutyBgtm": "2019-09-27 18:30:00",
+          "dutyEdtm": "2019-09-28 08:00:00",
+          "dutyDateGroupType": "2019-09-27_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-28_1",
+      "date": "2019-09-28",
+      "weekOfYear": 39,
+      "dayOfWeek": 6,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-28",
+          "dutyType": "3",
+          "dutyBgtm": "2019-09-28 00:00:00",
+          "dutyEdtm": "2019-09-29 00:00:00",
+          "dutyDateGroupType": "2019-09-28_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-29_1",
+      "date": "2019-09-29",
+      "weekOfYear": 39,
+      "dayOfWeek": 7,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-29",
+          "dutyType": "3",
+          "dutyBgtm": "2019-09-29 00:00:00",
+          "dutyEdtm": "2019-09-30 00:00:00",
+          "dutyDateGroupType": "2019-09-29_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-09-30_1",
+      "date": "2019-09-30",
+      "weekOfYear": 40,
+      "dayOfWeek": 1,
+      "month": 8,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-09-30",
+          "dutyType": "1",
+          "dutyBgtm": "2019-09-30 08:00:00",
+          "dutyEdtm": "2019-09-30 18:30:00",
+          "dutyDateGroupType": "2019-09-30_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-09-30",
+          "dutyType": "2",
+          "dutyBgtm": "2019-09-30 18:30:00",
+          "dutyEdtm": "2019-10-01 08:00:00",
+          "dutyDateGroupType": "2019-09-30_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-10-01_1",
+      "date": "2019-10-01",
+      "weekOfYear": 40,
+      "dayOfWeek": 2,
+      "month": 9,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-10-01",
+          "dutyType": "1",
+          "dutyBgtm": "2019-10-01 08:00:00",
+          "dutyEdtm": "2019-10-01 18:30:00",
+          "dutyDateGroupType": "2019-10-01_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-10-01",
+          "dutyType": "2",
+          "dutyBgtm": "2019-10-01 18:30:00",
+          "dutyEdtm": "2019-10-02 08:00:00",
+          "dutyDateGroupType": "2019-10-01_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-10-02_1",
+      "date": "2019-10-02",
+      "weekOfYear": 40,
+      "dayOfWeek": 3,
+      "month": 9,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-10-02",
+          "dutyType": "1",
+          "dutyBgtm": "2019-10-02 08:00:00",
+          "dutyEdtm": "2019-10-02 18:30:00",
+          "dutyDateGroupType": "2019-10-02_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-10-02",
+          "dutyType": "2",
+          "dutyBgtm": "2019-10-02 18:30:00",
+          "dutyEdtm": "2019-10-03 08:00:00",
+          "dutyDateGroupType": "2019-10-02_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-10-03_1",
+      "date": "2019-10-03",
+      "weekOfYear": 40,
+      "dayOfWeek": 4,
+      "month": 9,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-10-03",
+          "dutyType": "1",
+          "dutyBgtm": "2019-10-03 08:00:00",
+          "dutyEdtm": "2019-10-03 18:30:00",
+          "dutyDateGroupType": "2019-10-03_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-10-03",
+          "dutyType": "2",
+          "dutyBgtm": "2019-10-03 18:30:00",
+          "dutyEdtm": "2019-10-04 08:00:00",
+          "dutyDateGroupType": "2019-10-03_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-10-04_1",
+      "date": "2019-10-04",
+      "weekOfYear": 40,
+      "dayOfWeek": 5,
+      "month": 9,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-10-04",
+          "dutyType": "1",
+          "dutyBgtm": "2019-10-04 08:00:00",
+          "dutyEdtm": "2019-10-04 18:30:00",
+          "dutyDateGroupType": "2019-10-04_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-10-04",
+          "dutyType": "2",
+          "dutyBgtm": "2019-10-04 18:30:00",
+          "dutyEdtm": "2019-10-05 08:00:00",
+          "dutyDateGroupType": "2019-10-04_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-10-05_1",
+      "date": "2019-10-05",
+      "weekOfYear": 40,
+      "dayOfWeek": 6,
+      "month": 9,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-10-05",
+          "dutyType": "3",
+          "dutyBgtm": "2019-10-05 00:00:00",
+          "dutyEdtm": "2019-10-06 00:00:00",
+          "dutyDateGroupType": "2019-10-05_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-10-06_1",
+      "date": "2019-10-06",
+      "weekOfYear": 40,
+      "dayOfWeek": 7,
+      "month": 9,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-10-06",
+          "dutyType": "3",
+          "dutyBgtm": "2019-10-06 00:00:00",
+          "dutyEdtm": "2019-10-07 00:00:00",
+          "dutyDateGroupType": "2019-10-06_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-10-07_1",
+      "date": "2019-10-07",
+      "weekOfYear": 41,
+      "dayOfWeek": 1,
+      "month": 9,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-10-07",
+          "dutyType": "1",
+          "dutyBgtm": "2019-10-07 08:00:00",
+          "dutyEdtm": "2019-10-07 18:30:00",
+          "dutyDateGroupType": "2019-10-07_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-10-07",
+          "dutyType": "2",
+          "dutyBgtm": "2019-10-07 18:30:00",
+          "dutyEdtm": "2019-10-08 08:00:00",
+          "dutyDateGroupType": "2019-10-07_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-10-08_1",
+      "date": "2019-10-08",
+      "weekOfYear": 41,
+      "dayOfWeek": 2,
+      "month": 9,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-10-08",
+          "dutyType": "1",
+          "dutyBgtm": "2019-10-08 08:00:00",
+          "dutyEdtm": "2019-10-08 18:30:00",
+          "dutyDateGroupType": "2019-10-08_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-10-08",
+          "dutyType": "2",
+          "dutyBgtm": "2019-10-08 18:30:00",
+          "dutyEdtm": "2019-10-09 08:00:00",
+          "dutyDateGroupType": "2019-10-08_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-10-09_1",
+      "date": "2019-10-09",
+      "weekOfYear": 41,
+      "dayOfWeek": 3,
+      "month": 9,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-10-09",
+          "dutyType": "1",
+          "dutyBgtm": "2019-10-09 08:00:00",
+          "dutyEdtm": "2019-10-09 18:30:00",
+          "dutyDateGroupType": "2019-10-09_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-10-09",
+          "dutyType": "2",
+          "dutyBgtm": "2019-10-09 18:30:00",
+          "dutyEdtm": "2019-10-10 08:00:00",
+          "dutyDateGroupType": "2019-10-09_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-10-10_1",
+      "date": "2019-10-10",
+      "weekOfYear": 41,
+      "dayOfWeek": 4,
+      "month": 9,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-10-10",
+          "dutyType": "1",
+          "dutyBgtm": "2019-10-10 08:00:00",
+          "dutyEdtm": "2019-10-10 18:30:00",
+          "dutyDateGroupType": "2019-10-10_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-10-10",
+          "dutyType": "2",
+          "dutyBgtm": "2019-10-10 18:30:00",
+          "dutyEdtm": "2019-10-11 08:00:00",
+          "dutyDateGroupType": "2019-10-10_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-10-11_1",
+      "date": "2019-10-11",
+      "weekOfYear": 41,
+      "dayOfWeek": 5,
+      "month": 9,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-10-11",
+          "dutyType": "1",
+          "dutyBgtm": "2019-10-11 08:00:00",
+          "dutyEdtm": "2019-10-11 18:30:00",
+          "dutyDateGroupType": "2019-10-11_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-10-11",
+          "dutyType": "2",
+          "dutyBgtm": "2019-10-11 18:30:00",
+          "dutyEdtm": "2019-10-12 08:00:00",
+          "dutyDateGroupType": "2019-10-11_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-10-12_1",
+      "date": "2019-10-12",
+      "weekOfYear": 41,
+      "dayOfWeek": 6,
+      "month": 9,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-10-12",
+          "dutyType": "3",
+          "dutyBgtm": "2019-10-12 00:00:00",
+          "dutyEdtm": "2019-10-13 00:00:00",
+          "dutyDateGroupType": "2019-10-12_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-10-13_1",
+      "date": "2019-10-13",
+      "weekOfYear": 41,
+      "dayOfWeek": 7,
+      "month": 9,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-10-13",
+          "dutyType": "3",
+          "dutyBgtm": "2019-10-13 00:00:00",
+          "dutyEdtm": "2019-10-14 00:00:00",
+          "dutyDateGroupType": "2019-10-13_1_3",
+          "dutyTypeName": "全天",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-10-14_1",
+      "date": "2019-10-14",
+      "weekOfYear": 42,
+      "dayOfWeek": 1,
+      "month": 9,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-10-14",
+          "dutyType": "1",
+          "dutyBgtm": "2019-10-14 08:00:00",
+          "dutyEdtm": "2019-10-14 18:30:00",
+          "dutyDateGroupType": "2019-10-14_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-10-14",
+          "dutyType": "2",
+          "dutyBgtm": "2019-10-14 18:30:00",
+          "dutyEdtm": "2019-10-15 08:00:00",
+          "dutyDateGroupType": "2019-10-14_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }, {
+      "tenantid": "2019-10-15_1",
+      "date": "2019-10-15",
+      "weekOfYear": 42,
+      "dayOfWeek": 2,
+      "month": 9,
+      "groupId": null,
+      "groupName": null,
+      "tm": [
+        {
+          "date": "2019-10-15",
+          "dutyType": "1",
+          "dutyBgtm": "2019-10-15 08:00:00",
+          "dutyEdtm": "2019-10-15 18:30:00",
+          "dutyDateGroupType": "2019-10-15_1_1",
+          "dutyTypeName": "白班",
+          "leaders": [],
+          "persons": []
+        }, {
+          "date": "2019-10-15",
+          "dutyType": "2",
+          "dutyBgtm": "2019-10-15 18:30:00",
+          "dutyEdtm": "2019-10-16 08:00:00",
+          "dutyDateGroupType": "2019-10-15_1_2",
+          "dutyTypeName": "夜班",
+          "leaders": [],
+          "persons": []
+        }
+      ]
+    }
+  ]
+}

@@ -118,9 +118,11 @@
                 class="upload-demo"
                 ref="upload"
                 multiple
-                :action="upFileUrl"
-                :on-preview="handlePreview"
+                :data="fileData"
+                action="http://gyfxkhapi.matian.ml:8008/api-fxkh/api/attachment/v0.1/attachment/upload"
+                :on-change="handleChange"
                 :on-remove="handleRemove"
+                :on-success="handleAvatarSuccess"
                 :file-list="fileList"
                 :before-upload="beforeAvatarUpload"
                 :auto-upload="false">
@@ -201,6 +203,10 @@
         bodyFalse:false,
         title:"",
         screenWidth:document.body.clientWidth,
+        fileData:{
+          bizId:"",
+          attType:"21"
+        }
       }
     },
     created(){
@@ -372,7 +378,6 @@
         _this.$refs['ruleForm'].validate((valid) => {
           if (valid) {
             let url,msg,msg1;
-            let parms;
             if(_this.title==="新增预案管理"){
               url=_this.$url.baseUrl+'api/guoYang/auxiliary-decision/v0.1/gy-fxkh-plan-manage/add';
               msg="新增成功";
@@ -382,27 +387,31 @@
               msg="修改成功";
               msg1="修改失败";
             }
-            _this.dialogVisible=false;
             _this.$http.put(url,_this.ruleForm).then((res)=>{
               if(res.status===200){
-                _this.$message({
-                  type:"success",
-                  message:msg
-                });
-                _this.$refs.upload.submit();
-                _this.loading=true;
-                _this.multipleSelection=[];
-                _this.fileList=[];
-                _this.search();
-                _this.$refs['ruleForm'].resetFields();
-                this.ruleForm={
-                  thresholdName:"",
-                  thresholdValue:"",
-                  thresholdValueType:"",
-                  alarmLevel:"",
-                  alarmLevelColor:"red",
-                  countermeasures:"",
-                };
+                if(_this.fileList.length>0){
+                  _this.fileData.bizId=res.data.result.message;
+                  _this.$refs.upload.submit();
+                }else{
+                  _this.$message({
+                    type:"success",
+                    message:msg
+                  });
+                  _this.dialogVisible=false;
+                  _this.loading=true;
+                  _this.multipleSelection=[];
+                  _this.fileList=[];
+                  _this.search();
+                  _this.$refs['ruleForm'].resetFields();
+                  this.ruleForm={
+                    thresholdName:"",
+                    thresholdValue:"",
+                    thresholdValueType:"",
+                    alarmLevel:"",
+                    alarmLevelColor:"red",
+                    countermeasures:"",
+                  };
+                }
               }else{
                 _this.$message({
                   type:"error",
@@ -437,8 +446,8 @@
        * 选择文件后回调
        * @param file
        */
-      handlePreview(file) {
-
+      handleChange(file, fileList) {
+        this.fileList=fileList;
       },
       /**
        * 上传文件之前回调限制大小
@@ -451,6 +460,25 @@
           this.$message.error('文件大小不能超过10MB！');
         }
         return  isLt10M;
+      },
+      handleAvatarSuccess(res, file){
+        if(res){
+          this.dialogVisible=false;
+          this.loading=true;
+          this.$message({
+            type:"success",
+            message:"添加文件成功"
+          });
+          this.search();
+        }else{
+          this.dialogVisible=false;
+          this.loading=true;
+          this.$message({
+            type:"error",
+            message:"添加文件失败"
+          });
+          this.search();
+        }
       }
     },
     computed:{
