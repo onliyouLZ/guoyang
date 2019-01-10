@@ -13,8 +13,9 @@
           </el-col>
           <el-col :span="19">
             <div class="table-button">
-              <el-button type="text" icon="fa  fa-plus" class="add" @click="selectDay">选择天</el-button>
-              <el-button type="text" icon="fa fa-trash-o" class="add" @click="selectWeak">选择周</el-button>
+              <el-button type="text" icon="fa  fa-check" class="add" @click="selectDay">选择天</el-button>
+              <el-button type="text" icon="fa fa-check" class="add" @click="selectWeak">选择周</el-button>
+              <el-button type="text" icon="fa fa-trash-o" class="add" @click="clearDate">清空选择</el-button>
             </div>
             <!--@cell-click="cellClick"-->
             <!--@current-change="currentChange"-->
@@ -88,14 +89,14 @@
               </template>
             </el-table>
           </el-col>
-          <el-col :span="4">
+          <el-col :span="4" class="leftCard">
             <el-card class="box-card">
               <div slot="header" class="clearfix">
                 <span>已选择日期:</span>
                 <p style="font-size: 12px;"><span>{{cardDate}}</span></p>
               </div>
               <template v-for="item in dateArry">
-                <div>
+                <div style="margin: 20px 5px">
                   <label>
                     <i :class="item.class"></i>
                     <span>{{item.dutyTypeName}}:{{item.date}}</span>
@@ -103,7 +104,7 @@
                   <template v-for="dutyTypeItem in item.dutyPersonType">
                     <div>
                       <span class="peon">{{dutyTypeItem.name}}</span><span class='red' v-if="dutyTypeItem.code==='1'">*</span>:
-                      <el-select v-model="dutyTypeItem.selected" clearable  placeholder="请选择">
+                      <el-select v-model="dutyTypeItem.selected" multiple  clearable  placeholder="请选择">
                         <el-option
                           v-for="item in dutyTypeItem.persons"
                           :key="item.value"
@@ -114,9 +115,11 @@
                     </div>
                   </template>
                 </div>
-                <div style="width:180px;height:0px;border-top:1px black dashed;" ></div>
+                <div style="width:100%;height:0px;border-top:1px black dashed;" ></div>
               </template>
-              <el-button type="primary" @click="sub">确认修改</el-button>
+              <div style="text-align: center;margin-top: 10px">
+                <el-button type="primary" @click="sub">确认修改</el-button>
+              </div>
             </el-card>
           </el-col>
         </el-row>
@@ -156,7 +159,6 @@
         highlight:false,
         selectDuty:[],
         cardDate:"",
-        personTypeObj:{},
         dateArry:[],
       }
     },
@@ -173,7 +175,7 @@
           let queryParams = {
             bgtm: (_current.getFullYear() + 0) + '-01-01 00:00:00',
             endtm: (_current.getFullYear() + 0) + '-12-31 23:59:59',
-            userId:"3804"
+            userId:"58"
           };
           return _this.$http.post(_this.$url.baseUrl+'api/duty/v0.1/gy-duty/manage',queryParams)
         }
@@ -199,7 +201,7 @@
          * @return {AxiosPromise<any>}
          */
         function getPerson() {
-          return _this.$http.get(_this.$url.baseUrl+'api/duty/v0.1/gy-duty/duty-person?userId=104')
+          return _this.$http.get(_this.$url.baseUrl+'api/duty/v0.1/gy-duty/duty-person?userId=58')
         };
 
         _this.$http.all([getDuty(),getDutyTypes(),getPersontype(),getPerson()]).then(_this.$http.spread((duty,dutyType,personType,person)=>{
@@ -215,7 +217,6 @@
             let dutyTypes=dutyType.data.result;
             let personTypes=personType.data.result;
             let persons=person.data.result;
-            console.log(persons);
             let arr=[];
             $.each(dutyTypes,(v,dutyItem)=>{
               let obj={};
@@ -223,11 +224,11 @@
               obj.date=dutyItem.remark;
               obj.dutyType=dutyItem.code;
               if(dutyItem.code==="1"){
-                obj.class="fa  fa-plus";
+                obj.class="fa  fa-sun-o";
               }else if(dutyItem.code==="2"){
-                obj.class="fa  fa-plus";
+                obj.class="fa  fa-moon-o";
               }else if(dutyItem.code==="3"){
-                obj.class="fa  fa-plus"
+                obj.class="fa  fa-id-card"
               }
               obj.dutyPersonType=[];
               $.each(personTypes,(j,PersonTypeItem)=>{
@@ -236,7 +237,7 @@
                 personTypeObj.code=PersonTypeItem.code;
                 personTypeObj.dutyType=dutyItem.code;
                 personTypeObj.persons=[];
-                personTypeObj.selected="";
+                personTypeObj.selected=[];
                 obj.dutyPersonType.push(personTypeObj);
                 $.each(persons,function (k,personItem) {
                   let personObj={};
@@ -249,27 +250,13 @@
               });
               arr.push(obj);
             });
-            console.log(arr);
-            _this.dateArry=arr;
+            setTimeout(()=>{
+              _this.loading=false;
+              _this.dateArry=arr;
+            },500);
+
         }));
 
-
-
-
-
-
-        // this.$http.post(this.$url.baseUrl+'api/duty/v0.1/gy-duty/manage',queryParams)
-        //   .then((res)=>{
-        //     if(res.status===200){
-        //       let data=res.data.result;
-        //       $.each(data,function (v,item) {
-        //         let Hdate=lunar(parserDate(item.date));
-        //         item.Hdates=Hdate.festivals
-        //       });
-        //       data=groupByWeek(data);
-        //       this.tableData=data;
-        //     }
-        //   })
       },
       selectMonth(index){
         this.timeIndex = index;
@@ -278,6 +265,7 @@
         if(this.flag){
           $(cell).css('backgroundColor',"#d9f0ff");
           this.selectDuty.push(row[column.property]);
+          this.selectDuty=this.selectDuty.unique1();
         }
       },
       currentChange(currentRow, oldCurrentRow){
@@ -422,15 +410,76 @@
         this.selectDuty=[];
         $('.cell-duty-class').css('background','none');
       },
+      clearDate(){
+        this.flag=true;
+        $('.cell-duty-class').css('background','none');
+        this.highlight=false;
+        this.selectDuty=[];
+      },
       sub(){
-        console.log(this.selectDuty);
-        console.log(this.dateArry);
+        if(this.selectDuty.length>0){
+          let resultArr = [],obj;
+          let dutyTypePersonMap = {};
+          $.each(this.dateArry,function (i,iItem) {
+            let dutyType = iItem['dutyType'];
+            dutyTypePersonMap[dutyType] = [];
+            $.each(iItem.dutyPersonType,function (j, jItem) {
+              dutyTypePersonMap[dutyType] = dutyTypePersonMap[dutyType].concat(jItem.selected.map(function (v) {
+                return {id:v,dutyPersonType:jItem.code};
+              }));
+            });
+          });
+          if(this.selectDuty[0].year){
+            for(let key in this.selectDuty[0]){
+              $.each(this.selectDuty[0][key].tm,function (j,jItem) {
+                obj={
+                  personList:dutyTypePersonMap[jItem.dutyType],
+                  date:jItem.date+" "+"00:00:00",
+                  dutyType:jItem.dutyType
+                };
+                resultArr.push(obj);
+              });
+            }
+          }else{
+            $.each(this.selectDuty,function (i,iItem) {
+              $.each(iItem.tm,function (j,jItem) {
+                obj={
+                  personList:dutyTypePersonMap[jItem.dutyType],
+                  date:jItem.date+" "+"00:00:00",
+                  dutyType:jItem.dutyType,
+                  userId:"58"
+                };
+                resultArr.push(obj);
+              })
+            });
+          }
+          this.$http.put(this.$url.baseUrl+'api/duty/v0.1/gy-duty/manage',resultArr).then((res)=>{
+            if(res.status===200){
+              this.$message({
+                type:'success',
+                message:"修改值班人员成功！"
+              });
+              this.flag=true;
+              $('.cell-duty-class').css('background','none');
+              this.highlight=false;
+              this.selectDuty=[];
+              this.loading=true;
+              this.search();
+            }
+          });
+        }else{
+          this.$message({
+            message: '日期为空，请选择日期！',
+            type: 'error',
+            duration:2000
+          });
+          return
+        }
       }
     },
     mounted(){
       this.$nextTick(()=>{
         setTimeout(()=>{
-          this.loading=false;
           this.search()
         },500)
       })
@@ -574,4 +623,9 @@
   #arrange .el-card__header{
     padding: 10px!important;
   }
+  #arrange .leftCard .el-card{
+    /*max-height: 700px;*/
+    overflow-y: auto;
+  }
+
 </style>
