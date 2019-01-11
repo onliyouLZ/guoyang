@@ -169,19 +169,6 @@
             _this.getOrderNumber();
           },500)
         }));
-
-
-        // this.$http.get(this.$url.baseUrl+'api/sl323/realtime/rain/ad/sum_x/341621/'+parms.bgtm+'/'+parms.endtm+'?bgtm='+parms.bgtm+'&endtm='+parms.endtm+'&ad=341621')
-        //   .then((res)=>{
-        //     if(res.status===200){
-        //       let data=res.data.result.totalMap.rainTotal.list;
-        //       setTimeout(()=>{
-        //         this.loading=false;
-        //         this.tableData=data;
-        //         this.getOrderNumber();
-        //       },500)
-        //     }
-        //   })
       },
       //获取人员名称
       getName(arr){

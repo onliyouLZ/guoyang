@@ -676,6 +676,51 @@ export function groupByWeek (dutyInfoArr) {
 
 
 
+let formatString=function () {
+  for (let i = 1; i < arguments.length; i++) {
+    let exp = new RegExp('\\{' + (i - 1) + '\\}', 'gm');
+    arguments[0] = arguments[0].replace(exp, arguments[i]);
+  }
+  return arguments[0];
+};
+
+/**
+ * 文件下载
+ * @param url       服务地址(完整地址)
+ * @param method    请求方法类型:post/get
+ * @param data      附加在请求中的参数
+ */
+export function download  (url, method, data) {
+  //创建iframe
+  let downloadHelper = $('<iframe style="display:none;" id="_downloadHelper_"></iframe>').appendTo('body')[0];
+  let doc = downloadHelper.contentWindow.document;
+  if (doc) {
+    doc.open();
+    //微软为doc.clear();
+    doc.write('');
+    doc.writeln(formatString("<html><body><form id='downloadForm' name='downloadForm' method='{0}' action='{1}'>", method, url));
+    if(data){
+      for (let key in data) {
+        if (data.hasOwnProperty(key)) {
+          if (data[key] instanceof Function) {
+            doc.writeln(formatString("<input type='hidden' name='{0}' value='{1}'>", key, data[key]()));
+          } else {
+            doc.writeln(formatString("<input type='hidden' name='{0}' value='{1}'>", key, data[key]));
+          }
+        }
+      }
+    }
+    doc.writeln('<\/form><\/body><\/html>');
+    doc.close();
+    let form = doc.forms[0];
+    if (form) {
+      form.submit();
+    }
+  }
+};
+
+
+
 //export const baseUrl = 'http://172.16.100.33:8080/nxhzz_2017/api/'; //服务地址
 //export const uploadUrl = 'http://121.42.25.6:8080/fss/api/file/uploadFile.do'; //文件上传地址
 //export const downLoadUrl = 'http://121.42.25.6:8080/fss/api/file/download/'; //文件预览地址
