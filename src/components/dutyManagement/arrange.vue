@@ -2,8 +2,8 @@
   <div id="arrange"
        v-loading="loading"
        element-loading-text="加载中">
-    <el-card class="box-card">
-        <el-row>
+    <el-card class="box-card content-card">
+        <el-row style="height: 100%">
           <el-col :span="1">
             <ul class="leftMonth">
               <li v-for="(item,index) in leftMonth" :key="index" @click.stop="selectMonth(index)" :class="timeIndex === index ? 'active' : ''">
@@ -528,11 +528,11 @@
 </script>
 
 <style lang="less" scoped>
-  #arrange .box-card{
+  #arrange .content-card {
     height: calc(100vh - 89px);
   }
   #arrange .leftMonth{
-    margin-top: 34px;
+    margin-top: 75px;
     list-style: none;
     li{
       width: 100%;
@@ -573,6 +573,7 @@
 
 </style>
 <style lang="less">
+
   /*#arrange .el-table tr:hover{*/
     /*background: none!important;*/
   /*}*/
@@ -623,8 +624,8 @@
   #arrange .el-card__header{
     padding: 10px!important;
   }
-  #arrange .leftCard .el-card{
-    /*max-height: 700px;*/
+  #arrange .leftCard{
+    height: calc(100vh - 109px);
     overflow-y: auto;
   }
 

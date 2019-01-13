@@ -280,7 +280,7 @@
         setTimeout(()=>{
           if(this.input){
             this.tableData=this.tableData.filter((tableData)=>{
-              return tableData.wagaName.match(this.input)
+              return tableData.dikeName.match(this.input)
             });
           }else{
             this.search();
