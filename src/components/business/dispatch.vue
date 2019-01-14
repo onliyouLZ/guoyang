@@ -175,13 +175,18 @@
       <!--</span>-->
     </el-dialog>
     <el-dialog
+      class="preview"
       :title="previewTitle"
       :visible.sync="previewVisible"
       :modal-append-to-body="bodyFalse"
       width="30%">
-      <div>
-        <input v-model.number="page" type="number" style="width: 5em"> /{{numPages}}
-        <div v-if="loadedRatio > 0 && loadedRatio < 1" style="background-color: green; color: white; text-align: center" :style="{ width: loadedRatio * 100 + '%' }">{{ Math.floor(loadedRatio * 100) }}%</div>
+
+      <div class="preview-header" style="text-align: center;">
+        <div>
+          <el-button type="primary" icon="el-icon-arrow-left" disabled>上一页</el-button>
+          <span>{{page}}/{{numPages}}</span>
+          <el-button type="primary">下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
+        </div>
         <pdf
           :src="previewSrc"
           :page="page"
@@ -190,6 +195,7 @@
         ></pdf>
       </div>
     </el-dialog>
+
   </div>
 </template>
 
@@ -205,6 +211,8 @@
         pageSize: 20, // 每页大小默认值
         pageIndex: 1, // 默认第一页
         tableData: [],
+        pdfurls:'',
+        isshowpdf:false,
         loadedRatio:0,
         page: 1,
         numPages: 0,
@@ -392,6 +400,7 @@
       },
       preview(item){
         this.previewTitle=item.name;
+
         this.previewVisible=true;
         this.previewSrc=item.pdfurl;
         // attachmentPreview(item.name,item.url,item.type)
@@ -641,5 +650,9 @@
     padding: 20px!important;
     height: 550px;
     overflow-y: auto;
+  }
+  #dispatch .preview .el-dialog__body{
+    padding: 0!important;
+    overflow-y: hidden;
   }
 </style>

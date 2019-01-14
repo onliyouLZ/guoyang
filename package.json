@@ -26,6 +26,7 @@
     "vue-pdf": "^4.0.5",
     "vue-router": "^3.0.1",
     "vuejs-datepicker": "^1.5.4",
+    "vueshowpdf": "^1.1.2",
     "wangeditor": "^3.1.1",
     "xlsx": "^0.14.1"
   },
