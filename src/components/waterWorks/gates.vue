@@ -105,6 +105,7 @@
           input:"",
           multipleSelection:[],
           loading: true,
+          oldData:[],
           screenWidth:document.body.clientWidth
         }
       },
@@ -257,6 +258,7 @@
                   }
                 });
                 this.tableData=data;
+                this.oldData=data;
               }
             })
         },
@@ -280,7 +282,7 @@
           this.loading=true;
           setTimeout(()=>{
             if(this.input){
-              this.tableData=this.tableData.filter((tableData)=>{
+              this.tableData=this.oldData.filter((tableData)=>{
                 return tableData.wagaName.match(this.input)
               });
             }else{

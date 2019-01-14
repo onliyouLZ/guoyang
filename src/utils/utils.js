@@ -721,6 +721,8 @@ export function download  (url, method, data) {
 
 
 
+
+
 //export const baseUrl = 'http://172.16.100.33:8080/nxhzz_2017/api/'; //服务地址
 //export const uploadUrl = 'http://121.42.25.6:8080/fss/api/file/uploadFile.do'; //文件上传地址
 //export const downLoadUrl = 'http://121.42.25.6:8080/fss/api/file/download/'; //文件预览地址

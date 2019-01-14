@@ -1,11 +1,27 @@
 <template>
-  <div id="plan"
+  <div id="dispatch"
        v-loading="loading"
        element-loading-text="加载中">
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <label>阀值名称:</label>
-        <el-input style="width: 150px" v-model="thresholdName" placeholder="请输入阀值名称"></el-input>
+        <label>年 份:</label>
+        <el-date-picker
+          style="width: 150px"
+          v-model="summaryYear"
+          type="year"
+          placeholder="选择年">
+        </el-date-picker>
+        <label>总结类型:</label>
+        <el-select v-model="summaryType" placeholder="请选择" style="width: 150px">
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
+        <label>总结名称:</label>
+        <el-input style="width: 150px" v-model="summarizeName" placeholder="请输入总结名称"></el-input>
         <el-button type="primary" @click="primary">查询</el-button>
         <el-button type="success" @click="exportExcel(tableData,multipleSelection)">导出</el-button>
       </div>
@@ -42,11 +58,15 @@
             align="center">
           </el-table-column>
           <el-table-column
-            v-if="item.data==='PARTICIPATE_MEMBERS'"
-            :prop="item.data"
+            v-if="item.data==='ATTACHMENT'"
             :label="item.title"
-            min-width="150"
+            width="250"
             align="center">
+            <template slot-scope="scope">
+              <template v-if="scope.row.ATTACHMENT" v-for="item in scope.row.ATTACHMENT">
+                <a href="javascript:void(0)" class="attachment" @click="preview(item)">{{item.name}}</a>
+              </template>
+            </template>
           </el-table-column>
           <el-table-column
             v-if="item.data==='caozuo'"
@@ -90,26 +110,36 @@
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="130px" class="demo-ruleForm">
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item label="阀值名称:" prop="thresholdName">
-              <el-input v-model="ruleForm.thresholdName"  placeholder="请输入阀值名称"></el-input>
+            <el-form-item label="汛后总结标题:" prop="title">
+              <el-input v-model="ruleForm.title"  placeholder="请输入汛后总结标题"></el-input>
             </el-form-item>
-            <el-form-item label="阀值类型:" prop="thresholdValueType">
-              <el-input v-model="ruleForm.thresholdValueType"  placeholder="请输入阀值类型"></el-input>
-            </el-form-item>
-            <el-form-item label="报警级别颜色:" prop="alarmLevelColor">
-              <el-color-picker style="float: left" v-model="ruleForm.alarmLevelColor"></el-color-picker>
-              <el-input style="width: 190px" v-model="ruleForm.alarmLevelColor" disabled ></el-input>
+            <el-form-item label="填写人员:" prop="reportUserid">
+              <el-input v-model="ruleForm.reportUserid"  placeholder="请输入填写人员" disabled></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="阀值:" prop="thresholdValue">
-              <el-input v-model="ruleForm.thresholdValue"  placeholder="请输入阀值"></el-input>
+            <el-form-item label="总结类型:" prop="summaryType">
+              <el-select v-model="ruleForm.summaryType" placeholder="请选择总结类型" style="width: 100%">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
             </el-form-item>
-            <el-form-item label="报警级别:" prop="alarmLevel">
-              <el-input v-model="ruleForm.alarmLevel"  placeholder="请输入报警级别"></el-input>
+            <el-form-item label="填写时间:" prop="summaryYear">
+              <el-date-picker
+                style="width: 100%"
+                v-model="ruleForm.summaryYear"
+                type="year"
+                placeholder="选择年">
+              </el-date-picker>
             </el-form-item>
-            <el-form-item label="应对措施:" prop="countermeasures">
-              <el-input v-model="ruleForm.countermeasures"  placeholder="请输入应对措施"></el-input>
+          </el-col>
+          <el-col :span="24">
+            <el-form-item label="内容:">
+              <wangEditor  :catchData="catchData"></wangEditor>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -144,68 +174,99 @@
       <!--<el-button type="primary" @click="dialogVisible = false">确 定</el-button>-->
       <!--</span>-->
     </el-dialog>
+    <el-dialog
+      :title="previewTitle"
+      :visible.sync="previewVisible"
+      :modal-append-to-body="bodyFalse"
+      width="30%">
+      <div>
+        <input v-model.number="page" type="number" style="width: 5em"> /{{numPages}}
+        <div v-if="loadedRatio > 0 && loadedRatio < 1" style="background-color: green; color: white; text-align: center" :style="{ width: loadedRatio * 100 + '%' }">{{ Math.floor(loadedRatio * 100) }}%</div>
+        <pdf
+          :src="previewSrc"
+          :page="page"
+          @num-pages="numPages = $event"
+          @progress="loadedRatio = $event"
+        ></pdf>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
+  import wangEditor from '../wangEditor'
+  import pdf from 'vue-pdf'
+  import preview from '../preview'
   export default {
-    name: "plan",
+    name: "dispatch",
+    components:{wangEditor,preview,pdf},
     data(){
       return{
         pageSize: 20, // 每页大小默认值
         pageIndex: 1, // 默认第一页
         tableData: [],
+        loadedRatio:0,
+        page: 1,
+        numPages: 0,
+        summaryYear:new Date(),
+        options: [
+          {
+            value: '1',
+            label: '年中总结'
+          },
+          {
+            value: '2',
+            label: '年终总结'
+          }],
+        summaryType: "",
+        summarizeName:"",
         currentPage4: 1,
-        thresholdName:"",
         fileList: [],
         upFileUrl:this.$url.uploadUrl,
         tableHeader:[
           {data:'',title:'',type:"selection"},
-          {data:'THRESHOLD_NAME',title:'阀值名称',type:"normal"},
-          {data:'THRESHOLD_VALUE',title:'阀值',type:"normal"},
-          {data:'THRESHOLD_VALUE_TYPE',title:'阀值类型',type:"normal"},
-          {data:'ALARM_LEVEL',title:'报警级别',type:"normal"},
-          {data:'ALARM_LEVEL_COLOR',title:'报警级别颜色',type:"normal"},
-          {data:'COUNTERMEASURES',title:'应对措施',type:"normal"},
+          {data:'TITLE',title:'总结名称',type:"normal"},
+          {data:'SUMMARY_YEAR',title:'总结年份',type:"normal"},
+          {data:'NAME',title:'总结类型',type:"normal"},
+          {data:'REALNAME',title:'填写人员',type:"normal"},
+          {data:'GNAME',title:'填写单位',type:"normal"},
+          {data:'CREATE_TIME',title:'填写时间',type:"normal"},
+          {data:'ATTACHMENT',title:'附件',},
           {data:'caozuo',title:'操作'},
         ],
         multipleSelection:[],
         loading: true,
         dialogVisible: false,
+        previewVisible: false,
         ruleForm:{
-          thresholdName:"",
-          thresholdValue:"",
-          thresholdValueType:"",
-          alarmLevel:"",
-          alarmLevelColor:"red",
-          countermeasures:"",
+          title:"",
+          reportUserid:"刘波",
+          summaryType:"",
+          summaryYear:new Date(),
+          content:""
         },
         rules:{
-          thresholdName: [
-            { required: true, message: '请输入阀值名称', trigger: 'blur' },
+          title: [
+            { required: true, message: '请输入汛后总结标题', trigger: 'blur' },
           ],
-          thresholdValue: [
-            { required: true, message: '请输入阀值', trigger: 'blur' },
+          reportUserid: [
+            { required: true, message: '请输入填写人员', trigger: 'blur' },
           ],
-          thresholdValueType:[
-            { required: true, message: '请输入阀值类型', trigger: 'blur' }
+          summaryType:[
+            { required: true, message: '请选择总结类型', trigger: 'change' }
           ],
-          alarmLevel:[
-            { required: true, message: '请输入报警级别', trigger: 'blur' }
-          ],
-          alarmLevelColor:[
-            { required: true, message: '请选择报警级别颜色', trigger: 'blur' }
-          ],
-          countermeasures:[
-            { required: true, message: '请输入应对措施', trigger: 'blur' }
+          summaryYear:[
+            { required: true, message: '请选择时间', trigger: 'blur' }
           ],
         },
         bodyFalse:false,
         title:"",
+        previewTitle:"",
+        previewSrc:"",
         screenWidth:document.body.clientWidth,
         fileData:{
           bizId:"",
-          attType:"21"
+          attType:"8"
         }
       }
     },
@@ -217,18 +278,22 @@
       search(){
         const that=this;
         let parms={
-          "thresholdName":this.thresholdName,
-          "thresholdValueType":"",
-          "alarmLevel":"",
-          "alarmLevelColor":"",
-          "countermeasures":""
+          "summaryYear":new Date(that.summaryYear).getFullYear(),
+          "title":that.summarizeName,
+          "summaryType":that.summaryType,
         };
-        that.$http.post(that.$url.baseUrl+'api/guoYang/auxiliary-decision/v0.1/gy-fxkh-plan-manage/list',parms)
+        that.$http.post(that.$url.baseUrl+'api/guoYang/v0.1/latter-summary/gy/list',parms)
           .then((res)=>{
             if(res.status===200){
               setTimeout(()=>{
                 that.loading=false;
                 let data=res.data.result;
+                $.each(data,(v,item)=>{
+                  item.CREATE_TIME=new Date(item.CREATE_TIME).formatDate('yyyy-MM-dd');
+                  if (item.ATTACHMENT) {
+                    item.ATTACHMENT = JSON.parse(item.ATTACHMENT)
+                  }
+                });
                 that.tableData=data;
               },500);
 
@@ -269,6 +334,9 @@
           this.$refs.multipleTable.toggleRowSelection(row);
         }
       },
+      // Formatter(scope){
+      //   console.log(scope);
+      // },
       //查询
       primary(){
         this.loading=true;
@@ -322,6 +390,12 @@
         this.multipleSelection.push(row.PLAN_ID);
         this.del();
       },
+      preview(item){
+        this.previewTitle=item.name;
+        this.previewVisible=true;
+        this.previewSrc=item.pdfurl;
+        // attachmentPreview(item.name,item.url,item.type)
+      },
       //重置
       resetForm() {
         this.$refs['ruleForm'].resetFields();
@@ -368,24 +442,28 @@
       },
       add(){
         this.dialogVisible=true;
-        this.title='新增预案管理';
+        this.title='新增汛后总结';
       },
       /**
-       *预案管理新增及修改
+       *汛后总结新增及修改
        */
       submitForm() {
         const _this=this;
         _this.$refs['ruleForm'].validate((valid) => {
           if (valid) {
             let url,msg,msg1;
-            if(_this.title==="新增预案管理"){
-              url=_this.$url.baseUrl+'api/guoYang/auxiliary-decision/v0.1/gy-fxkh-plan-manage/add';
+            if(_this.title==="新增汛后总结"){
+              url=_this.$url.baseUrl+'api/guoYang/v0.1/latter-summary/gy';
               msg="新增成功";
               msg1="新增失败";
+              _this.ruleForm.reportUserid='3804';
+              _this.ruleForm.summaryYear=new Date(this.ruleForm.summaryYear).getFullYear();
             }else{
-              url=_this.$url.baseUrl+'api/guoYang/auxiliary-decision/v0.1/gy-fxkh-plan-manage/update';
+              url=_this.$url.baseUrl+'api/guoYang/v0.1/latter-summary/update';
               msg="修改成功";
               msg1="修改失败";
+              _this.ruleForm.reportUserid='3804';
+              _this.ruleForm.summaryYear=new Date(this.ruleForm.summaryYear).getFullYear();
             }
             _this.$http.put(url,_this.ruleForm).then((res)=>{
               if(res.status===200){
@@ -405,12 +483,11 @@
                   _this.search();
                   _this.$refs['ruleForm'].resetFields();
                   this.ruleForm={
-                    thresholdName:"",
-                    thresholdValue:"",
-                    thresholdValueType:"",
-                    alarmLevel:"",
-                    alarmLevelColor:"red",
-                    countermeasures:"",
+                    title:"",
+                    reportUserid:"3804",
+                    summaryType:"",
+                    summaryYear:new Date(),
+                    content:""
                   };
                 }
               }else{
@@ -421,12 +498,11 @@
                 _this.$refs['ruleForm'].resetFields();
                 _this.fileList=[];
                 this.ruleForm={
-                  thresholdName:"",
-                  thresholdValue:"",
-                  thresholdValueType:"",
-                  alarmLevel:"",
-                  alarmLevelColor:"red",
-                  countermeasures:"",
+                  title:"",
+                  reportUserid:"3804",
+                  summaryType:"",
+                  summaryYear:new Date(),
+                  content:""
                 };
               }
             })
@@ -480,6 +556,9 @@
           });
           this.search();
         }
+      },
+      catchData(value){
+        this.ruleForm.content=value
       }
     },
     computed:{
@@ -506,56 +585,61 @@
   }
 </script>
 <style scoped>
-  #plan .box-card{
+  #dispatch .box-card{
     height: calc(100vh - 89px);
   }
-  #plan .footer{
+  #dispatch .footer{
     position: absolute;
     bottom: 10px;
 
   }
-  #plan .el-pagination{
+  #dispatch .el-pagination{
     float: left;
   }
-  #plan .choice{
+  #dispatch .choice{
     float: left;
     padding: 2px 5px;
 
   }
-  #plan .choice span{
+  #dispatch .choice span{
     line-height: 28px;
     font-size: 13px;
     color: #606266;
   }
-  #plan .el-scrollbar__bar{
+  #dispatch .el-scrollbar__bar{
     /*display: none;*/
   }
-  #plan .table-button{
+  #dispatch .table-button{
     padding-left: 5px;
     border-top: 1px solid #dddddd;
     border-left: 1px solid #dddddd;
     border-right: 1px solid #dddddd;
     background: linear-gradient(to top, #dbdada 0%,#E5E5E5 10%, #efeeee 100%,#ffffff)
   }
-  #plan .table-button .add{
+  #dispatch .table-button .add{
     color: #333;
     font-size: 14px;
     margin-left: 0;
   }
-  #plan .table-button .add:hover{
+  #dispatch .table-button .add:hover{
     color: #0a95ef;
+  }
+  #dispatch .attachment{
+    text-decoration: underline;
+    cursor: pointer;
+    color: #0a95ef
   }
 </style>
 <style>
-  #plan .table-button .add span{
+  #dispatch .table-button .add span{
     margin-left: 5px!important;
   }
-  #plan .el-dialog{
+  #dispatch .el-dialog{
     width: 50%!important;
   }
-  #plan .el-dialog .el-dialog__body{
+  #dispatch .el-dialog .el-dialog__body{
     padding: 20px!important;
-    height: 350px;
+    height: 550px;
     overflow-y: auto;
   }
 </style>

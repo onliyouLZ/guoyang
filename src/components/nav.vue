@@ -159,6 +159,12 @@
           }else if(routerPath==="/personnel"){
             active='/dutyManagement';
             return false
+          }else if(routerPath==="/concerned"){
+            active='/business';
+            return false
+          }else if(routerPath==="/dispatch"){
+            active='/business';
+            return false
           }else if(item.path==="/home"){
             active=item.path;
             return false

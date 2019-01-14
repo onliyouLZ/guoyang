@@ -1,11 +1,11 @@
 <template>
-  <div id="personnel"
+  <div id="concerned"
        v-loading="loading"
        element-loading-text="加载中">
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <label>名称:</label>
-        <el-input style="width: 150px" v-model="typeName" placeholder="值班人员类型名称"></el-input>
+        <label>阀值名称:</label>
+        <el-input style="width: 150px" v-model="thresholdName" placeholder="请输入阀值名称"></el-input>
         <el-button type="primary" @click="primary">查询</el-button>
         <el-button type="success" @click="exportExcel(tableData,multipleSelection)">导出</el-button>
       </div>
@@ -39,6 +39,13 @@
             v-if="item.type==='normal'"
             :prop="item.data"
             :label="item.title"
+            align="center">
+          </el-table-column>
+          <el-table-column
+            v-if="item.data==='PARTICIPATE_MEMBERS'"
+            :prop="item.data"
+            :label="item.title"
+            min-width="150"
             align="center">
           </el-table-column>
           <el-table-column
@@ -80,21 +87,53 @@
       @close="dialogClose('ruleForm')"
       width="30%">
       <!--<el-form  ref="form" :model="form" label-width="80px" :rules="rules">-->
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="150px" class="demo-ruleForm">
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="130px" class="demo-ruleForm">
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item label="值班人员类型名称:" prop="name">
-              <el-input v-model="ruleForm.name"  placeholder="请输入值班人员类型名称"></el-input>
+            <el-form-item label="阀值名称:" prop="thresholdName">
+              <el-input v-model="ruleForm.thresholdName"  placeholder="请输入阀值名称"></el-input>
+            </el-form-item>
+            <el-form-item label="阀值类型:" prop="thresholdValueType">
+              <el-input v-model="ruleForm.thresholdValueType"  placeholder="请输入阀值类型"></el-input>
+            </el-form-item>
+            <el-form-item label="报警级别颜色:" prop="alarmLevelColor">
+              <el-color-picker style="float: left" v-model="ruleForm.alarmLevelColor"></el-color-picker>
+              <el-input style="width: 190px" v-model="ruleForm.alarmLevelColor" disabled ></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="值班人员类型ID:" prop="code">
-              <el-input v-model="ruleForm.code"  placeholder="请输入值班人员类型ID" :disabled="disabled"></el-input>
+            <el-form-item label="阀值:" prop="thresholdValue">
+              <el-input v-model="ruleForm.thresholdValue"  placeholder="请输入阀值"></el-input>
+            </el-form-item>
+            <el-form-item label="报警级别:" prop="alarmLevel">
+              <el-input v-model="ruleForm.alarmLevel"  placeholder="请输入报警级别"></el-input>
+            </el-form-item>
+            <el-form-item label="应对措施:" prop="countermeasures">
+              <el-input v-model="ruleForm.countermeasures"  placeholder="请输入应对措施"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item>
+              <el-upload
+                class="upload-demo"
+                ref="upload"
+                multiple
+                :data="fileData"
+                action="http://gyfxkhapi.matian.ml:8008/api-fxkh/api/attachment/v0.1/attachment/upload"
+                :on-change="handleChange"
+                :on-remove="handleRemove"
+                :on-success="handleAvatarSuccess"
+                :file-list="fileList"
+                :before-upload="beforeAvatarUpload"
+                :auto-upload="false">
+                <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+                <!--<el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>-->
+              </el-upload>
             </el-form-item>
           </el-col>
           <el-col :span="24" style="text-align: right">
             <el-form-item style="margin-bottom: 0!important;">
-              <el-button type="primary" @click="submitForm">提交</el-button>
+              <el-button type="primary" @click="submitForm" :loading="true">提交</el-button>
               <el-button @click="resetForm">重置</el-button>
             </el-form-item>
           </el-col>
@@ -110,41 +149,64 @@
 
 <script>
   export default {
-    name: "personnel",
+    name: "concerned",
     data(){
       return{
         pageSize: 20, // 每页大小默认值
         pageIndex: 1, // 默认第一页
         tableData: [],
         currentPage4: 1,
-        typeName:"",
+        thresholdName:"",
+        fileList: [],
+        upFileUrl:this.$url.uploadUrl,
         tableHeader:[
           {data:'',title:'',type:"selection"},
-          {data:'code',title:'值班人员类型ID',type:"normal"},
-          {data:'name',title:'值班人员类型名称',type:"normal"},
+          {data:'THRESHOLD_NAME',title:'阀值名称',type:"normal"},
+          {data:'THRESHOLD_VALUE',title:'阀值',type:"normal"},
+          {data:'THRESHOLD_VALUE_TYPE',title:'阀值类型',type:"normal"},
+          {data:'ALARM_LEVEL',title:'报警级别',type:"normal"},
+          {data:'ALARM_LEVEL_COLOR',title:'报警级别颜色',type:"normal"},
+          {data:'COUNTERMEASURES',title:'应对措施',type:"normal"},
           {data:'caozuo',title:'操作'},
         ],
-        disabled:false,
         multipleSelection:[],
         loading: true,
         dialogVisible: false,
         ruleForm:{
-          code:"",
-          name:'',
-          type:"dutyPersonType",
+          thresholdName:"",
+          thresholdValue:"",
+          thresholdValueType:"",
+          alarmLevel:"",
+          alarmLevelColor:"red",
+          countermeasures:"",
         },
         rules:{
-          code: [
-            { required: true, message: '请输入值班人员类型ID', trigger: 'blur' },
+          thresholdName: [
+            { required: true, message: '请输入阀值名称', trigger: 'blur' },
           ],
-          name: [
-            { required: true, message: '请输入值班人员类型名称', trigger: 'blur' },
+          thresholdValue: [
+            { required: true, message: '请输入阀值', trigger: 'blur' },
+          ],
+          thresholdValueType:[
+            { required: true, message: '请输入阀值类型', trigger: 'blur' }
+          ],
+          alarmLevel:[
+            { required: true, message: '请输入报警级别', trigger: 'blur' }
+          ],
+          alarmLevelColor:[
+            { required: true, message: '请选择报警级别颜色', trigger: 'blur' }
+          ],
+          countermeasures:[
+            { required: true, message: '请输入应对措施', trigger: 'blur' }
           ],
         },
         bodyFalse:false,
-        title:"新增人员类型",
-        oldData:[],
+        title:"",
         screenWidth:document.body.clientWidth,
+        fileData:{
+          bizId:"",
+          attType:"21"
+        }
       }
     },
     created(){
@@ -154,14 +216,20 @@
       //初始化搜索
       search(){
         const that=this;
-        that.$http.get(that.$url.baseUrl+'api/duty/v0.1/gy-duty/duty-person-type')
+        let parms={
+          "thresholdName":this.thresholdName,
+          "thresholdValueType":"",
+          "alarmLevel":"",
+          "alarmLevelColor":"",
+          "countermeasures":""
+        };
+        that.$http.post(that.$url.baseUrl+'api/guoYang/auxiliary-decision/v0.1/gy-fxkh-plan-manage/list',parms)
           .then((res)=>{
             if(res.status===200){
               setTimeout(()=>{
                 that.loading=false;
                 let data=res.data.result;
                 that.tableData=data;
-                that.oldData=data;
               },500);
 
             }else{
@@ -189,12 +257,7 @@
         if(val.length>0){
           this.multipleSelection=[];
           $.each(val,(v,item)=>{
-            this.multipleSelection.push(
-              {
-                type:"dutyPersonType",
-                code:item.code
-              }
-            );
+            this.multipleSelection.push(item.PLAN_ID);
           });
         }else{
           this.multipleSelection=[];
@@ -209,16 +272,7 @@
       //查询
       primary(){
         this.loading=true;
-        setTimeout(()=>{
-          if(this.typeName){
-            this.tableData=this.oldData.filter((tableData)=>{
-              return tableData.name.match(this.typeName)
-            });
-          }else{
-            this.search();
-          }
-          this.loading=false;
-        },1000);
+        this.search();
       },
       /**
        * 导出
@@ -244,7 +298,7 @@
           });
           const list = tableDatas;
           const data = this.formatJson(filterVal, list);
-          export_json_to_excel(tHeader, data, ' 人员类型统计表');
+          export_json_to_excel(tHeader, data, ' 防汛抗旱预案管理统计表');
         })
       },
       formatJson(filterVal, jsonData){
@@ -252,45 +306,51 @@
       },
       //行内编辑
       handleEdit(index, row) {
-        this.title="人员类型修改";
+        this.title="预案管理修改";
         this.dialogVisible=true;
-        this.disabled="disabled";
-        this.ruleForm.code=row.code;
-        this.ruleForm.name=row.name;
+        this.ruleForm.thresholdName=row.THRESHOLD_NAME;
+        this.ruleForm.thresholdValue=row.THRESHOLD_VALUE;
+        this.ruleForm.thresholdValueType=row.THRESHOLD_VALUE_TYPE;
+        this.ruleForm.alarmLevel=row.ALARM_LEVEL;
+        this.ruleForm.alarmLevelColor=row.ALARM_LEVEL_COLOR;
+        this.ruleForm.countermeasures=row.COUNTERMEASURES;
+        this.ruleForm.planId=row.PLAN_ID;
       },
       //行内删除
       handleDelete(index, row) {
         this.multipleSelection=[];
-        this.multipleSelection.push({
-          type:"dutyPersonType",
-          code:row.code
-        });
+        this.multipleSelection.push(row.PLAN_ID);
         this.del();
       },
       //重置
       resetForm() {
         this.$refs['ruleForm'].resetFields();
+        this.fileList=[];
         this.ruleForm={
-          code:"",
-          name:'',
-          type:"dutyPersonType",
+          thresholdName:"",
+          thresholdValue:"",
+          thresholdValueType:"",
+          alarmLevel:"",
+          alarmLevelColor:"red",
+          countermeasures:"",
         };
         this.dialogVisible=false;
       },
       dialogClose(ruleForm){
         this.dialogVisible=false;
         this.$refs[ruleForm].resetFields();
+        this.fileList=[];
         this.ruleForm={
-          code:"",
-          name:'',
-          type:"dutyPersonType",
+          thresholdName:"",
+          thresholdValue:"",
+          thresholdValueType:"",
+          alarmLevel:"",
+          alarmLevelColor:"red",
+          countermeasures:"",
         };
       },
-      /**
-       * 抢险队伍删除
-       */
       del(){
-        this.$http.delete(this.$url.baseUrl+'api/common-api/ht-enum/v0.1/enum',{data:this.multipleSelection}).then((res)=>{
+        this.$http.delete(this.$url.baseUrl+'api/guoYang/auxiliary-decision/v0.1/gy-fxkh-concerned-manage/delete',{data:this.multipleSelection}).then((res)=>{
           if(res.status===200){
             this.$message({
               type:"success",
@@ -308,51 +368,64 @@
       },
       add(){
         this.dialogVisible=true;
-        this.title='新增人员类型';
+        this.title='新增预案管理';
       },
       /**
-       *防汛抗旱责任制新增及修改
+       *预案管理新增及修改
        */
       submitForm() {
         const _this=this;
         _this.$refs['ruleForm'].validate((valid) => {
           if (valid) {
             let url,msg,msg1;
-            if(_this.title==="新增人员类型"){
-              url=_this.$url.baseUrl+'api/common-api/ht-enum/v0.1/enum';
+            if(_this.title==="新增预案管理"){
+              url=_this.$url.baseUrl+'api/guoYang/auxiliary-decision/v0.1/gy-fxkh-concerned-manage/add';
               msg="新增成功";
               msg1="新增失败";
             }else{
-              url=_this.$url.baseUrl+'api/common-api/ht-enum/v0.1/enum/update';
+              url=_this.$url.baseUrl+'api/guoYang/auxiliary-decision/v0.1/gy-fxkh-concerned-manage/update';
               msg="修改成功";
               msg1="修改失败";
             }
-            _this.dialogVisible=false;
             _this.$http.put(url,_this.ruleForm).then((res)=>{
               if(res.status===200){
-                _this.$message({
-                  type:"success",
-                  message:msg
-                });
-                _this.loading=true;
-                _this.multipleSelection=[];
-                _this.search();
-                _this.$refs['ruleForm'].resetFields();
-                this.ruleForm={
-                  code:"",
-                  name:'',
-                  type:"dutyPersonType",
-                };
+                if(_this.fileList.length>0){
+                  _this.fileData.bizId=res.data.result.message;
+                  _this.$refs.upload.submit();
+                }else{
+                  _this.$message({
+                    type:"success",
+                    message:msg
+                  });
+                  _this.dialogVisible=false;
+                  _this.loading=true;
+                  _this.multipleSelection=[];
+                  _this.fileList=[];
+                  _this.search();
+                  _this.$refs['ruleForm'].resetFields();
+                  this.ruleForm={
+                    thresholdName:"",
+                    thresholdValue:"",
+                    thresholdValueType:"",
+                    alarmLevel:"",
+                    alarmLevelColor:"red",
+                    countermeasures:"",
+                  };
+                }
               }else{
                 _this.$message({
                   type:"error",
                   message:msg1
                 });
                 _this.$refs['ruleForm'].resetFields();
+                _this.fileList=[];
                 this.ruleForm={
-                  code:"",
-                  name:'',
-                  type:"dutyPersonType",
+                  thresholdName:"",
+                  thresholdValue:"",
+                  thresholdValueType:"",
+                  alarmLevel:"",
+                  alarmLevelColor:"red",
+                  countermeasures:"",
                 };
               }
             })
@@ -360,6 +433,52 @@
             return false;
           }
         });
+      },
+      /**
+       * 移除文件回调
+       * @param file
+       * @param fileList
+       */
+      handleRemove(file, fileList) {
+
+      },
+      /**
+       * 选择文件后回调
+       * @param file
+       */
+      handleChange(file, fileList) {
+        this.fileList=fileList;
+      },
+      /**
+       * 上传文件之前回调限制大小
+       * @param file
+       * @returns {boolean}
+       */
+      beforeAvatarUpload(file) {
+        const isLt10M = file.size / 1024 / 1024 < 10;
+        if (!isLt10M) {
+          this.$message.error('文件大小不能超过10MB！');
+        }
+        return  isLt10M;
+      },
+      handleAvatarSuccess(res, file){
+        if(res){
+          this.dialogVisible=false;
+          this.loading=true;
+          this.$message({
+            type:"success",
+            message:"添加文件成功"
+          });
+          this.search();
+        }else{
+          this.dialogVisible=false;
+          this.loading=true;
+          this.$message({
+            type:"error",
+            message:"添加文件失败"
+          });
+          this.search();
+        }
       }
     },
     computed:{
@@ -386,54 +505,56 @@
   }
 </script>
 <style scoped>
-  #personnel .box-card{
+  #concerned .box-card{
     height: calc(100vh - 89px);
   }
-  #personnel .footer{
+  #concerned .footer{
     position: absolute;
     bottom: 10px;
 
   }
-  #personnel .el-pagination{
+  #concerned .el-pagination{
     float: left;
   }
-  #personnel .choice{
+  #concerned .choice{
     float: left;
     padding: 2px 5px;
 
   }
-  #personnel .choice span{
+  #concerned .choice span{
     line-height: 28px;
     font-size: 13px;
     color: #606266;
   }
-  #personnel .el-scrollbar__bar{
+  #concerned .el-scrollbar__bar{
     /*display: none;*/
   }
-  #personnel .table-button{
+  #concerned .table-button{
     padding-left: 5px;
     border-top: 1px solid #dddddd;
     border-left: 1px solid #dddddd;
     border-right: 1px solid #dddddd;
     background: linear-gradient(to top, #dbdada 0%,#E5E5E5 10%, #efeeee 100%,#ffffff)
   }
-  #personnel .table-button .add{
+  #concerned .table-button .add{
     color: #333;
     font-size: 14px;
     margin-left: 0;
   }
-  #personnel .table-button .add:hover{
+  #concerned .table-button .add:hover{
     color: #0a95ef;
   }
 </style>
 <style>
-  #personnel .table-button .add span{
+  #concerned .table-button .add span{
     margin-left: 5px!important;
   }
-  #personnel .el-dialog{
+  #concerned .el-dialog{
     width: 50%!important;
   }
-  #personnel .el-dialog .el-dialog__body{
+  #concerned .el-dialog .el-dialog__body{
     padding: 20px!important;
+    height: 350px;
+    overflow-y: auto;
   }
 </style>

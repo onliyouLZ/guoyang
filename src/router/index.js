@@ -12,13 +12,13 @@ import waterMonitoring from '../page/waterMonitoring'
 import floodControl from '../page/Eight/floodControl'
 import PlanManagement from '../page/nine/PlanManagement'
 import dutyManagement from '../page/ten/management'
+import business from '../page/eleven/business'
 import earlyWarning from  '../page/fourMenu/earlyWarning'
 import drought from '../page/fiveMenu/Drought'
 import waterWorks from '../page/sixMenu/waterWorks'
 import management from '../page/sevenMenu/management'
 
 
-import business from '../page/business'
 import essential from '../page/essential'
 import system from '../page/system'
 import error404 from '../page/404'
@@ -39,6 +39,10 @@ import arrange from '../components/dutyManagement/arrange'
 import logbook from '../components/dutyManagement/logbook'
 import personnel from '../components/dutyManagement/personnel'
 import roster from '../components/dutyManagement/roster'
+
+
+import concerned from '../components/business/Concerned'
+import dispatch from '../components/business/dispatch'
 
 
 import gates from '../components/waterWorks/gates'
@@ -231,11 +235,24 @@ export default new Router({
             }
           ]
         },
-        // {
-        //   path: '/business',
-        //   component: business,
-        //   name:"业务管理"
-        // },
+        {
+          path: '/business',
+          component: business,
+          redirect:'/concerned',
+          name:"业务管理",
+          children:[
+            {
+              path:"/concerned",
+              component:concerned,
+              name:"汛前检查"
+            },
+            {
+              path:"/dispatch",
+              component:dispatch,
+              name:"讯后总结"
+            },
+          ]
+        },
         // {
         //   path: '/essential',
         //   component: essential,
