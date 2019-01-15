@@ -141,7 +141,7 @@
           </el-col>
           <el-col :span="24">
             <el-form-item label="内容:">
-              <wangEditor  :catchData="catchData"></wangEditor>
+              <wangEditor  :catchData="catchData" :content="ruleForm.content"></wangEditor>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -232,7 +232,7 @@
         previewVisible: false,
         ruleForm:{
           title:"",
-          reportUserid:"刘波",
+          reportUserid:"管理员",
           summaryType:"",
           summaryYear:new Date(),
           content:""
@@ -258,7 +258,7 @@
         fileData:{
           bizId:"",
           attType:"8"
-        }
+        },
       }
     },
     created(){
@@ -333,7 +333,6 @@
                 });
                 that.tableData=data;
               },500);
-
             }else{
               this.$message({
                 type:"error",
@@ -408,17 +407,25 @@
       },
       //行内编辑
       handleEdit(index, row) {
-        this.title="预案管理修改";
-        this.dialogVisible=true;
-        this.ruleForm.title=row.TITLE;
-        this.ruleForm.reportUserid=row.REALNAME;
-        this.ruleForm.summaryType=row.SUMMARY_TYPE;
-        this.ruleForm.summaryYear=row.SUMMARY_YEAR;
-        this.$http.post(this.$url.baseUrl+'api/guoYang/v0.1/latter-summary/view/summary',{'id':row.ID}).then((res)=>{
-          console.log(res);
+        const _this=this;
+        _this.title="预案管理修改";
+        _this.dialogVisible=true;
+        _this.ruleForm.title=row.TITLE;
+        _this.ruleForm.reportUserid=row.REALNAME;
+        _this.ruleForm.summaryType=row.SUMMARY_TYPE;
+        _this.ruleForm.summaryYear=row.SUMMARY_YEAR;
+        $.each(row.ATTACHMENT,(v,item)=>{
+          item.id=row.ID;
         });
-        // this.ruleForm.content=row.ALARM_LEVEL_COLOR;
-        this.ruleForm.planId=row.PLAN_ID;
+        _this.fileList=row.ATTACHMENT;
+        _this.$http.post(_this.$url.baseUrl+'api/guoYang/v0.1/latter-summary/view/summary',{'id':row.ID}).then((res)=>{
+          if(res.status===200){
+            let data=res.data.result[0];
+            _this.ruleForm.content=data.CONTENT
+          }
+
+        });
+        this.ruleForm.id=row.ID;
       },
       //行内删除
       handleDelete(index, row) {
@@ -441,7 +448,7 @@
         this.fileList=[];
         this.ruleForm={
           title:"",
-          reportUserid:"刘波",
+          reportUserid:"管理员",
           summaryType:"",
           summaryYear:new Date(),
           content:""
@@ -450,7 +457,6 @@
       },
       dialogClose(ruleForm){
         this.dialogVisible=false;
-        this.loading=false;
         this.$refs[ruleForm].resetFields();
         this.fileList=[];
         this.ruleForm={
@@ -506,7 +512,7 @@
             _this.$http.put(url,_this.ruleForm).then((res)=>{
               if(res.status===200){
                 if(_this.fileList.length>0){
-                  _this.loading=true;
+                  // debugger
                   _this.fileData.bizId=res.data.result.message;
                   _this.$refs.upload.submit();
                 }else{
@@ -522,7 +528,7 @@
                   _this.$refs['ruleForm'].resetFields();
                   _this.ruleForm={
                     title:"",
-                    reportUserid:"刘波",
+                    reportUserid:"管理员",
                     summaryType:"",
                     summaryYear:new Date(),
                     content:""
@@ -537,7 +543,7 @@
                 _this.fileList=[];
                 _this.ruleForm={
                   title:"",
-                  reportUserid:"刘波",
+                  reportUserid:"管理员",
                   summaryType:"",
                   summaryYear:new Date(),
                   content:""
@@ -555,7 +561,16 @@
        * @param fileList
        */
       handleRemove(file, fileList) {
-
+        if(file.status==="success"){
+          this.$http.delete(this.$url.baseUrl+'api/attachment/v0.1/attachment',{ids:file.id}).then((res)=>{
+            this.$message({
+              type:'success',
+              message:"删除成功"
+            })
+          })
+        }else{
+          this.fileList.splice(file,1);
+        }
       },
       /**
        * 选择文件后回调
@@ -686,27 +701,5 @@
     padding: 20px!important;
     height: 550px;
     overflow-y: auto;
-  }
-  #dispatch .preview .el-dialog{
-    overflow-y: hidden;
-  }
-  #dispatch .preview .el-dialog__body{
-    padding: 0!important;
-    /*height: 100%;*/
-  }
-  #dispatch .preview .preview-body{
-    /*width: 100%;*/
-    /*height: 100%;*/
-    /*overflow-y: auto;*/
-    /*position: relative;*/
-    /*.preview-header{*/
-      /*width: 100%;*/
-      /*text-align: center;*/
-      /*position: fixed;*/
-      /*z-index: 999;*/
-    /*}*/
-    /*.preview-content{*/
-      /*margin-top: 32px;*/
-    /*}*/
   }
 </style>

@@ -8,7 +8,19 @@
     import E from 'wangeditor'
     export default {
       name: "wang-editor",
-      props:['catchData'],    //接收父组件的方法
+      data(){
+        return{
+          editor:{}
+        }
+      },
+      props:{
+        catchData:{
+          type:Function
+        },
+        content:{
+          type:String
+        }
+      },    //接收父组件的方法
       mounted(){
         this.$nextTick(()=>{
           let editor = new E(this.$refs.editorElem);
@@ -37,8 +49,20 @@
             'undo',  // 撤销
             'redo'  // 重复
           ];
-          editor.create()
+          editor.customConfig.uploadImgShowBase64 = true;   // 使用 base64 保存图片
+          editor.customConfig.uploadFileName = 'myFileName';
+          editor.customConfig.uploadImgMaxSize = 20 * 1024 * 1024;//设置图片大小为20M
+          editor.customConfig.uploadImgTimeout = 1000000; //图片上传超时限制10s
+          editor.create();
+          this.editor=editor;
         })
+      },
+      watch:{
+        content(){
+          this.$nextTick(()=>{
+            this.editor.txt.html(this.content);
+          })
+        }
       }
     }
 </script>
