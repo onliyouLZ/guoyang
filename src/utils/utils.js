@@ -719,7 +719,18 @@ export function download  (url, method, data) {
   }
 };
 
-
+/**
+ *
+ * @param ext
+ * @return {boolean}
+ * 检查文件后缀(.jpg|.gif|.png|.jpeg|.zip|.rar|.doc|.xls|.xlsx|.pdf|.ppt|.pptx)
+ */
+export function checkFileExt (ext) {
+  if (!ext.match(/.jpg|.gif|.png|.jpeg|.zip|.rar|.doc|.xls|.xlsx|.pdf|.ppt|.pptx/i)) {
+    return false;
+  }
+  return true;
+}
 
 
 

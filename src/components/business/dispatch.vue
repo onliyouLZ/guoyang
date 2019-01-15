@@ -12,7 +12,7 @@
           placeholder="选择年">
         </el-date-picker>
         <label>总结类型:</label>
-        <el-select v-model="summaryType" placeholder="请选择" style="width: 150px">
+        <el-select v-model="summaryType"  clearable placeholder="请选择" style="width: 150px">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -60,11 +60,13 @@
           <el-table-column
             v-if="item.data==='ATTACHMENT'"
             :label="item.title"
-            width="250"
+            width="300"
             align="center">
             <template slot-scope="scope">
-              <template v-if="scope.row.ATTACHMENT" v-for="item in scope.row.ATTACHMENT">
-                <a href="javascript:void(0)" class="attachment" @click="preview(item)">{{item.name}}</a>
+              <template v-if="scope.row.ATTACHMENT" v-for="(item,index) in scope.row.ATTACHMENT">
+                <a v-if="item.type==='pdf'" target="_blank" :href="item.pdfurl" class="attachment">{{index+'.'}}{{item.name}}</a>
+                <a v-if="item.type==='file'"  class="attachment" @click="preview(item)">{{item.name}}</a>
+                <a v-if="item.type==='image'" target="_blank" :href="item.pdfurl" class="attachment" @click="preview(item)">{{item.name}}</a>
               </template>
             </template>
           </el-table-column>
@@ -149,7 +151,7 @@
                 ref="upload"
                 multiple
                 :data="fileData"
-                action="http://gyfxkhapi.matian.ml:8008/api-fxkh/api/attachment/v0.1/attachment/upload"
+                :action="upFileUrl"
                 :on-change="handleChange"
                 :on-remove="handleRemove"
                 :on-success="handleAvatarSuccess"
@@ -179,43 +181,24 @@
       :title="previewTitle"
       :visible.sync="previewVisible"
       :modal-append-to-body="bodyFalse"
-      width="30%">
-
-      <div class="preview-header" style="text-align: center;">
-        <div>
-          <el-button type="primary" icon="el-icon-arrow-left" disabled>上一页</el-button>
-          <span>{{page}}/{{numPages}}</span>
-          <el-button type="primary">下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
-        </div>
-        <pdf
-          :src="previewSrc"
-          :page="page"
-          @num-pages="numPages = $event"
-          @progress="loadedRatio = $event"
-        ></pdf>
-      </div>
+      width="50%">
+      <img style="width: 100%" :src="previewSrc" alt="">
     </el-dialog>
-
   </div>
 </template>
 
 <script>
   import wangEditor from '../wangEditor'
-  import pdf from 'vue-pdf'
-  import preview from '../preview'
+  import {checkFileExt,download} from "../../utils/utils";
+
   export default {
     name: "dispatch",
-    components:{wangEditor,preview,pdf},
+    components:{wangEditor},
     data(){
       return{
         pageSize: 20, // 每页大小默认值
         pageIndex: 1, // 默认第一页
         tableData: [],
-        pdfurls:'',
-        isshowpdf:false,
-        loadedRatio:0,
-        page: 1,
-        numPages: 0,
         summaryYear:new Date(),
         options: [
           {
@@ -244,6 +227,7 @@
         ],
         multipleSelection:[],
         loading: true,
+        title:"",
         dialogVisible: false,
         previewVisible: false,
         ruleForm:{
@@ -268,7 +252,6 @@
           ],
         },
         bodyFalse:false,
-        title:"",
         previewTitle:"",
         previewSrc:"",
         screenWidth:document.body.clientWidth,
@@ -299,8 +282,54 @@
                 $.each(data,(v,item)=>{
                   item.CREATE_TIME=new Date(item.CREATE_TIME).formatDate('yyyy-MM-dd');
                   if (item.ATTACHMENT) {
-                    item.ATTACHMENT = JSON.parse(item.ATTACHMENT)
-                  }
+                    item.ATTACHMENT = JSON.parse(item.ATTACHMENT);
+                    $.each(item.ATTACHMENT,(s,items)=>{
+                      switch (items.type){
+                        case "jpg":
+                          items.type="image";
+                              break;
+                        case  "gif":
+                          items.type="image";
+                              break;
+                        case  "png":
+                          items.type="image";
+                          break;
+                        case  "jpeg":
+                          items.type="image";
+                          break;
+                        case  "zip":
+                          items.type="file";
+                          break;
+                        case  "rar":
+                          items.type="file";
+                          break;
+                        case  "xls":
+                          items.type="file";
+                          break;
+                        case  "xlsx":
+                          items.type="file";
+                          break;
+                        case  "doc":
+                          items.type="pdf";
+                          break;
+                        case  "docx":
+                          items.type="pdf";
+                          break;
+                        case  "pdf":
+                          items.type="pdf";
+                          break;
+                        case  "ppt":
+                          items.type="pdf";
+                          break;
+                        case  "pptx":
+                          items.type="pdf";
+                          break;
+                        default:
+                          items.type="";
+                              break
+                      }
+                    });
+                  };
                 });
                 that.tableData=data;
               },500);
@@ -330,7 +359,7 @@
         if(val.length>0){
           this.multipleSelection=[];
           $.each(val,(v,item)=>{
-            this.multipleSelection.push(item.PLAN_ID);
+            this.multipleSelection.push(item.ID);
           });
         }else{
           this.multipleSelection=[];
@@ -342,9 +371,6 @@
           this.$refs.multipleTable.toggleRowSelection(row);
         }
       },
-      // Formatter(scope){
-      //   console.log(scope);
-      // },
       //查询
       primary(){
         this.loading=true;
@@ -384,56 +410,59 @@
       handleEdit(index, row) {
         this.title="预案管理修改";
         this.dialogVisible=true;
-        this.ruleForm.thresholdName=row.THRESHOLD_NAME;
-        this.ruleForm.thresholdValue=row.THRESHOLD_VALUE;
-        this.ruleForm.thresholdValueType=row.THRESHOLD_VALUE_TYPE;
-        this.ruleForm.alarmLevel=row.ALARM_LEVEL;
-        this.ruleForm.alarmLevelColor=row.ALARM_LEVEL_COLOR;
-        this.ruleForm.countermeasures=row.COUNTERMEASURES;
+        this.ruleForm.title=row.TITLE;
+        this.ruleForm.reportUserid=row.REALNAME;
+        this.ruleForm.summaryType=row.SUMMARY_TYPE;
+        this.ruleForm.summaryYear=row.SUMMARY_YEAR;
+        this.$http.post(this.$url.baseUrl+'api/guoYang/v0.1/latter-summary/view/summary',{'id':row.ID}).then((res)=>{
+          console.log(res);
+        });
+        // this.ruleForm.content=row.ALARM_LEVEL_COLOR;
         this.ruleForm.planId=row.PLAN_ID;
       },
       //行内删除
       handleDelete(index, row) {
         this.multipleSelection=[];
-        this.multipleSelection.push(row.PLAN_ID);
+        this.multipleSelection.push(row.ID);
         this.del();
       },
       preview(item){
-        this.previewTitle=item.name;
-
-        this.previewVisible=true;
-        this.previewSrc=item.pdfurl;
-        // attachmentPreview(item.name,item.url,item.type)
+        if(item.type==='file'){
+          download(item.url,'get');
+        }else if(item.type==="image"){
+          this.previewSrc=item.url;
+          this.previewTitle=item.name;
+          this.previewVisible=true;
+        }
       },
       //重置
       resetForm() {
         this.$refs['ruleForm'].resetFields();
         this.fileList=[];
         this.ruleForm={
-          thresholdName:"",
-          thresholdValue:"",
-          thresholdValueType:"",
-          alarmLevel:"",
-          alarmLevelColor:"red",
-          countermeasures:"",
+          title:"",
+          reportUserid:"刘波",
+          summaryType:"",
+          summaryYear:new Date(),
+          content:""
         };
         this.dialogVisible=false;
       },
       dialogClose(ruleForm){
         this.dialogVisible=false;
+        this.loading=false;
         this.$refs[ruleForm].resetFields();
         this.fileList=[];
         this.ruleForm={
-          thresholdName:"",
-          thresholdValue:"",
-          thresholdValueType:"",
-          alarmLevel:"",
-          alarmLevelColor:"red",
-          countermeasures:"",
+          title:"",
+          reportUserid:"刘波",
+          summaryType:"",
+          summaryYear:new Date(),
+          content:""
         };
       },
       del(){
-        this.$http.delete(this.$url.baseUrl+'api/guoYang/auxiliary-decision/v0.1/gy-fxkh-plan-manage/delete',{data:this.multipleSelection}).then((res)=>{
+        this.$http.delete(this.$url.baseUrl+'api/guoYang/v0.1/latter-summary',{data:this.multipleSelection}).then((res)=>{
           if(res.status===200){
             this.$message({
               type:"success",
@@ -491,9 +520,9 @@
                   _this.fileList=[];
                   _this.search();
                   _this.$refs['ruleForm'].resetFields();
-                  this.ruleForm={
+                  _this.ruleForm={
                     title:"",
-                    reportUserid:"3804",
+                    reportUserid:"刘波",
                     summaryType:"",
                     summaryYear:new Date(),
                     content:""
@@ -506,9 +535,9 @@
                 });
                 _this.$refs['ruleForm'].resetFields();
                 _this.fileList=[];
-                this.ruleForm={
+                _this.ruleForm={
                   title:"",
-                  reportUserid:"3804",
+                  reportUserid:"刘波",
                   summaryType:"",
                   summaryYear:new Date(),
                   content:""
@@ -533,7 +562,18 @@
        * @param file
        */
       handleChange(file, fileList) {
+        $.each(fileList,(v,item)=>{
+          let fileExt = item.name.substring(item.name.lastIndexOf("."));
+          if (!checkFileExt(fileExt)) {
+            this.$message({
+              type:"error",
+              message:item.name+"的文件格式不符，请重新选择(格式:.jpg;.png;.jpeg;.gif;.zip;.rar;.doc;.docx;.xls;.xlsx;.pdf;.ppt;.pptx;)"
+            });
+            fileList.splice(v,1);
+          }
+        });
         this.fileList=fileList;
+
       },
       /**
        * 上传文件之前回调限制大小
@@ -541,14 +581,14 @@
        * @returns {boolean}
        */
       beforeAvatarUpload(file) {
-        const isLt10M = file.size / 1024 / 1024 < 10;
+        const isLt10M = file.size / 1024 / 1024 < 100;
         if (!isLt10M) {
-          this.$message.error('文件大小不能超过10MB！');
+          this.$message.error('文件大小不能超过100MB！');
         }
         return  isLt10M;
       },
       handleAvatarSuccess(res, file){
-        if(res){
+        setTimeout(()=>{
           this.dialogVisible=false;
           this.loading=true;
           this.$message({
@@ -556,15 +596,7 @@
             message:"添加文件成功"
           });
           this.search();
-        }else{
-          this.dialogVisible=false;
-          this.loading=true;
-          this.$message({
-            type:"error",
-            message:"添加文件失败"
-          });
-          this.search();
-        }
+        },1000);
       },
       catchData(value){
         this.ruleForm.content=value
@@ -635,11 +667,15 @@
   }
   #dispatch .attachment{
     text-decoration: underline;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
     cursor: pointer;
-    color: #0a95ef
+    color: #0a95ef;
+    display: inline-block;
   }
 </style>
-<style>
+<style lang="less">
   #dispatch .table-button .add span{
     margin-left: 5px!important;
   }
@@ -651,8 +687,26 @@
     height: 550px;
     overflow-y: auto;
   }
+  #dispatch .preview .el-dialog{
+    overflow-y: hidden;
+  }
   #dispatch .preview .el-dialog__body{
     padding: 0!important;
-    overflow-y: hidden;
+    /*height: 100%;*/
+  }
+  #dispatch .preview .preview-body{
+    /*width: 100%;*/
+    /*height: 100%;*/
+    /*overflow-y: auto;*/
+    /*position: relative;*/
+    /*.preview-header{*/
+      /*width: 100%;*/
+      /*text-align: center;*/
+      /*position: fixed;*/
+      /*z-index: 999;*/
+    /*}*/
+    /*.preview-content{*/
+      /*margin-top: 32px;*/
+    /*}*/
   }
 </style>
