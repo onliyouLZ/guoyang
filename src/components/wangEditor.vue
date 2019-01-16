@@ -1,6 +1,6 @@
 <template>
   <div id="wangeditor">
-    <div id="editor" ref="editorElem"></div>
+    <div id="editor"  ref="editorElem"></div>
   </div>
 </template>
 
@@ -67,6 +67,8 @@
     }
 </script>
 
-<style scoped>
-
+<style>
+  .w-e-text-container{
+    height: 150px!important;
+  }
 </style>

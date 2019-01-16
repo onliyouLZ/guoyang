@@ -1,7 +1,7 @@
 <template>
   <div id="dispatch"
        v-loading="loading"
-       element-loading-text="加载中">
+       :element-loading-text="logadingText">
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <label>年 份:</label>
@@ -33,6 +33,7 @@
       <div class="table-button">
         <el-button type="text" icon="fa  fa-plus" class="add" @click="add">新增</el-button>
         <el-button type="text" icon="fa fa-trash-o" class="add" @click="del">删除</el-button>
+        <el-button type="text" icon="fa  fa-download" class="add" @click="del">附件下载</el-button>
       </div>
       <el-table
         :data="tables"
@@ -65,8 +66,8 @@
             <template slot-scope="scope">
               <template v-if="scope.row.ATTACHMENT" v-for="(item,index) in scope.row.ATTACHMENT">
                 <a v-if="item.type==='pdf'" target="_blank" :href="item.pdfurl" class="attachment">{{index+'.'}}{{item.name}}</a>
-                <a v-if="item.type==='file'"  class="attachment" @click="preview(item)">{{item.name}}</a>
-                <a v-if="item.type==='image'" target="_blank" :href="item.pdfurl" class="attachment" @click="preview(item)">{{item.name}}</a>
+                <a v-if="item.type==='file'"  class="attachment" @click="preview(item)">{{index+'.'}}{{item.name}}</a>
+                <a v-if="item.type==='image'"  class="attachment" @click="preview(item)">{{index+'.'}}{{item.name}}</a>
               </template>
             </template>
           </el-table-column>
@@ -145,7 +146,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item>
+            <el-form-item label="上传文件：">
               <el-upload
                 class="upload-demo"
                 ref="upload"
@@ -161,6 +162,23 @@
                 <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
                 <!--<el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>-->
               </el-upload>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="已上传文件列表：">
+              <div class="upFile">
+                <ul style="list-style: none">
+                  <template v-for="(item,index) in upFileList">
+                    <li>
+                      <span style="float: left">{{item.name}} </span>
+                      <span style="float: right;" class="iconHover">
+                        <i class=" el-icon-circle-check "></i>
+                        <i class=" el-icon-close " @click="delFile(item,index)"></i>
+                      </span>
+                    </li>
+                  </template>
+                </ul>
+              </div>
             </el-form-item>
           </el-col>
           <el-col :span="24" style="text-align: right">
@@ -213,6 +231,7 @@
         summarizeName:"",
         currentPage4: 1,
         fileList: [],
+        upFileList:[],
         upFileUrl:this.$url.uploadUrl,
         tableHeader:[
           {data:'',title:'',type:"selection"},
@@ -227,6 +246,7 @@
         ],
         multipleSelection:[],
         loading: true,
+        logadingText:"加载中！",
         title:"",
         dialogVisible: false,
         previewVisible: false,
@@ -234,7 +254,7 @@
           title:"",
           reportUserid:"管理员",
           summaryType:"",
-          summaryYear:new Date(),
+          summaryYear:"",
           content:""
         },
         rules:{
@@ -259,6 +279,7 @@
           bizId:"",
           attType:"8"
         },
+        flag:1,
       }
     },
     created(){
@@ -278,6 +299,8 @@
             if(res.status===200){
               setTimeout(()=>{
                 that.loading=false;
+                that.logadingText="加载中！";
+                that.fileList=[];
                 let data=res.data.result;
                 $.each(data,(v,item)=>{
                   item.CREATE_TIME=new Date(item.CREATE_TIME).formatDate('yyyy-MM-dd');
@@ -414,10 +437,7 @@
         _this.ruleForm.reportUserid=row.REALNAME;
         _this.ruleForm.summaryType=row.SUMMARY_TYPE;
         _this.ruleForm.summaryYear=row.SUMMARY_YEAR;
-        $.each(row.ATTACHMENT,(v,item)=>{
-          item.id=row.ID;
-        });
-        _this.fileList=row.ATTACHMENT;
+        _this.upFileList=row.ATTACHMENT;
         _this.$http.post(_this.$url.baseUrl+'api/guoYang/v0.1/latter-summary/view/summary',{'id':row.ID}).then((res)=>{
           if(res.status===200){
             let data=res.data.result[0];
@@ -445,44 +465,46 @@
       //重置
       resetForm() {
         this.$refs['ruleForm'].resetFields();
-        this.fileList=[];
-        this.ruleForm={
-          title:"",
-          reportUserid:"管理员",
-          summaryType:"",
-          summaryYear:new Date(),
-          content:""
-        };
         this.dialogVisible=false;
       },
+      //关闭弹窗
       dialogClose(ruleForm){
-        this.dialogVisible=false;
         this.$refs[ruleForm].resetFields();
-        this.fileList=[];
+        this.multipleSelection=[];
+        this.upFileList=[];
         this.ruleForm={
           title:"",
           reportUserid:"刘波",
           summaryType:"",
-          summaryYear:new Date(),
+          summaryYear:"",
           content:""
         };
       },
+
       del(){
-        this.$http.delete(this.$url.baseUrl+'api/guoYang/v0.1/latter-summary',{data:this.multipleSelection}).then((res)=>{
-          if(res.status===200){
-            this.$message({
-              type:"success",
-              message:"删除成功！"
-            });
-            this.loading=true;
-            this.search();
-          }else{
-            this.$message({
-              type:"error",
-              message:"删除失败！"
-            })
-          }
-        });
+        if(this.multipleSelection.length>0){
+          this.$http.delete(this.$url.baseUrl+'api/guoYang/v0.1/latter-summary',{data:this.multipleSelection}).then((res)=>{
+            if(res.status===200){
+              this.$message({
+                type:"success",
+                message:"删除成功！"
+              });
+              this.loading=true;
+              this.search();
+            }else{
+              this.$message({
+                type:"error",
+                message:"删除失败！"
+              })
+            }
+          });
+        }else{
+          this.$message({
+            type:"error",
+            message:"请选择需要删除的数据！"
+          })
+        }
+
       },
       add(){
         this.dialogVisible=true;
@@ -500,54 +522,47 @@
               url=_this.$url.baseUrl+'api/guoYang/v0.1/latter-summary/gy';
               msg="新增成功";
               msg1="新增失败";
-              _this.ruleForm.reportUserid='3804';
+              _this.ruleForm.reportUserid='3804'; //人员id写的假数据  需从缓存获取
               _this.ruleForm.summaryYear=new Date(this.ruleForm.summaryYear).getFullYear();
             }else{
-              url=_this.$url.baseUrl+'api/guoYang/v0.1/latter-summary/update';
+              url=_this.$url.baseUrl+'api/guoYang/v0.1/latter-summary/gy/update';
               msg="修改成功";
               msg1="修改失败";
-              _this.ruleForm.reportUserid='3804';
+              _this.ruleForm.reportUserid='3804'; //人员id写的假数据  需从缓存获取
               _this.ruleForm.summaryYear=new Date(this.ruleForm.summaryYear).getFullYear();
             }
+
             _this.$http.put(url,_this.ruleForm).then((res)=>{
               if(res.status===200){
-                if(_this.fileList.length>0){
-                  // debugger
-                  _this.fileData.bizId=res.data.result.message;
-                  _this.$refs.upload.submit();
+                if(res.data.result==="总结标题重复！"){
+                  _this.$message({
+                    type:"error",
+                    message:"总结标题重复！"
+                  });
+                  _this.dialogVisible=false;
                 }else{
+                  _this.dialogVisible=false;
+                  _this.loading=true;
+                  if(_this.fileList.length>0){
+                    _this.fileData.bizId=res.data.result.message;
+                    _this.$refs.upload.submit();
+                    _this.logadingText="文件上传中！"
+                  }else{
+                    this.search();
+                  }
                   _this.$message({
                     type:"success",
                     message:msg
                   });
-                  _this.dialogVisible=false;
-                  _this.loading=true;
-                  _this.multipleSelection=[];
-                  _this.fileList=[];
-                  _this.search();
                   _this.$refs['ruleForm'].resetFields();
-                  _this.ruleForm={
-                    title:"",
-                    reportUserid:"管理员",
-                    summaryType:"",
-                    summaryYear:new Date(),
-                    content:""
-                  };
                 }
               }else{
                 _this.$message({
                   type:"error",
                   message:msg1
                 });
+                _this.dialogVisible=false;
                 _this.$refs['ruleForm'].resetFields();
-                _this.fileList=[];
-                _this.ruleForm={
-                  title:"",
-                  reportUserid:"管理员",
-                  summaryType:"",
-                  summaryYear:new Date(),
-                  content:""
-                };
               }
             })
           } else {
@@ -561,16 +576,7 @@
        * @param fileList
        */
       handleRemove(file, fileList) {
-        if(file.status==="success"){
-          this.$http.delete(this.$url.baseUrl+'api/attachment/v0.1/attachment',{ids:file.id}).then((res)=>{
-            this.$message({
-              type:'success',
-              message:"删除成功"
-            })
-          })
-        }else{
-          this.fileList.splice(file,1);
-        }
+
       },
       /**
        * 选择文件后回调
@@ -588,7 +594,6 @@
           }
         });
         this.fileList=fileList;
-
       },
       /**
        * 上传文件之前回调限制大小
@@ -596,22 +601,38 @@
        * @returns {boolean}
        */
       beforeAvatarUpload(file) {
-        const isLt10M = file.size / 1024 / 1024 < 100;
+        const isLt10M = file.size / 1024 / 1024 < 10;
         if (!isLt10M) {
-          this.$message.error('文件大小不能超过100MB！');
+          this.$message.error('文件大小不能超过10MB！');
         }
         return  isLt10M;
       },
+      /**
+       * 文件上传成功后回调
+       */
       handleAvatarSuccess(res, file){
         setTimeout(()=>{
-          this.dialogVisible=false;
-          this.loading=true;
+          this.$refs.upload.clearFiles();
+          this.search();
           this.$message({
             type:"success",
             message:"添加文件成功"
           });
-          this.search();
-        },1000);
+        },500);
+      },
+      /**
+       * 删除文件
+       */
+      delFile(item){
+        this.$http.delete(this.$url.baseUrl+'api/attachment/v0.1/attachment',{data:{ids:[item.id]}}).then((res)=>{
+          if(res.status===200){
+            this.$message({
+              type:'success',
+              message:"删除成功"
+            });
+            this.upFileList.splice(item,1)
+          }
+        })
       },
       catchData(value){
         this.ruleForm.content=value
@@ -688,6 +709,7 @@
     cursor: pointer;
     color: #0a95ef;
     display: inline-block;
+    width: 100%;
   }
 </style>
 <style lang="less">
@@ -701,5 +723,46 @@
     padding: 20px!important;
     height: 550px;
     overflow-y: auto;
+  }
+  #dispatch .upload-demo{
+    height: 150px;
+    overflow-y: auto;
+  }
+
+
+  #dispatch .upFile{
+    height: 150px;
+    overflow-y: auto;
+    ul{
+      li{
+        line-height: 32px;
+        width: 100%;
+        display: inline-block;
+        .iconHover{
+          .el-icon-circle-check{
+            display: block;
+            color:#67c23a ;
+            line-height: 32px;
+            margin-right: 10px;
+          }
+          .el-icon-close{
+            display: none;
+            color:#666666;
+            cursor: pointer;
+            line-height: 32px;
+            margin-right: 10px;
+          }
+        }
+
+        .iconHover:hover{
+          .el-icon-circle-check{
+            display: none;
+          }
+          .el-icon-close{
+            display: block;
+          }
+        }
+      }
+    }
   }
 </style>

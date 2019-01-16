@@ -158,7 +158,7 @@
               let normalLayer=new ol.layer.Tile({
                 visible: true,
                 source: new ol.source.XYZ({
-                  url: "http://t2.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}"// 底图
+                  url: "http://t2.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}&tk=acdde43f9bf091f2383b721ed1aa581f"// 底图
                 })
               });
               //注记图
@@ -167,7 +167,7 @@
                 name:"TDTzj",
                 TileName : "天地图注记",
                 source: new ol.source.XYZ({
-                  url: "http://t2.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}"// 注记
+                  url: "http://t2.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}&tk=acdde43f9bf091f2383b721ed1aa581f"// 注记
                 })
               });
               //影像图
@@ -176,7 +176,7 @@
                 name:"TDTyg",
                 TileName : "卫星遥感图",
                 source: new ol.source.XYZ({
-                  url: "http://t4.tianditu.com/DataServer?T=img_w&x={x}&y={y}&l={z}"
+                  url: "http://t4.tianditu.com/DataServer?T=img_w&x={x}&y={y}&l={z}&tk=acdde43f9bf091f2383b721ed1aa581f"
                 })
               });
               //初始化地图
