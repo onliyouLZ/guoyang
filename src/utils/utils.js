@@ -685,6 +685,15 @@ let formatString=function () {
 };
 
 /**
+ * 验证url
+ */
+function checkUrl(url) {
+  let RegUrl = new RegExp();
+  RegUrl.compile("((http|ftp|https)://)(([a-zA-Z0-9\._-]+\.[a-zA-Z]{2,6})|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,4})*(/[a-zA-Z0-9\&%_\./-~-]*)?");
+  return RegUrl.test(url);
+}
+
+/**
  * 文件下载
  * @param url       服务地址(完整地址)
  * @param method    请求方法类型:post/get
@@ -717,6 +726,39 @@ export function download  (url, method, data) {
       form.submit();
     }
   }
+};
+
+
+/**
+ * 文件下载2
+ * @param url 地址
+ * @param queryParams 参数
+ */
+export function  downloadFile (url, queryParams) {
+
+  // if (url && !checkUrl(url)) {
+  //   //fileUrl为文件服务器地址
+  //   _url = config.api.fileUrl + url;
+  // } else {
+  //   _url = url;
+  // }
+  let _url=url;
+  let queryP = '';
+  for (let p in queryParams) {
+    if (queryParams[p] !== null && queryParams[p] !== '') {
+      if (typeof queryParams[p] === 'string' || typeof queryParams[p] === 'number') {
+        queryP += 'ids[]' + '=' + queryParams[p] + '&';
+      } else if (typeof queryParams[p] === 'object' && queryParams[p].length > 0) {
+        queryParams[p].forEach(function (item) {
+          queryP += 'ids[]' + item + '&'+queryParams;
+        })
+      }
+    }
+  }
+  // queryP = queryP.substring(0, queryP.length - 1);
+  // location.href = _url + '?' + queryP;
+  let $a = $("<a></a>").attr("href", _url + '?' + queryP);
+  $a[0].click();
 };
 
 /**
