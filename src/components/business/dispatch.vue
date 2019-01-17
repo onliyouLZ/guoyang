@@ -33,7 +33,6 @@
       <div class="table-button">
         <el-button type="text" icon="fa  fa-plus" class="add" @click="add">新增</el-button>
         <el-button type="text" icon="fa fa-trash-o" class="add" @click="del">删除</el-button>
-        <el-button type="text" icon="fa  fa-download" class="add" @click="del">附件下载</el-button>
       </div>
       <el-table
         :data="tables"
@@ -65,9 +64,19 @@
             align="center">
             <template slot-scope="scope">
               <template v-if="scope.row.ATTACHMENT" v-for="(item,index) in scope.row.ATTACHMENT">
-                <a v-if="item.type==='pdf'" target="_blank" :href="item.pdfurl" class="attachment">{{index+'.'}}{{item.name}}</a>
-                <a v-if="item.type==='file'"  class="attachment" @click="preview(item)">{{index+'.'}}{{item.name}}</a>
-                <a v-if="item.type==='image'"  class="attachment" @click="preview(item)">{{index+'.'}}{{item.name}}</a>
+                <p v-if="item.type==='pdf'" style="text-align: right">
+                  <a  target="_blank" :href="item.pdfurl" class="attachment">{{index+'.'}}{{item.name}}</a>
+                  <i style="cursor:pointer" class="fa  fa-download" @click="downFile(item)" title="文件下载"></i>
+                </p>
+                <p v-if="item.type==='file'" style="text-align: right">
+                  <a  class="attachment" @click="preview(item)">{{index+'.'}}{{item.name}}</a>
+                  <i style="cursor:pointer" class="fa  fa-download" @click="downFile(item)" title="文件下载"></i>
+                </p>
+                <p v-if="item.type==='image'" style="text-align: right">
+                  <a  class="attachment" @click="preview(item)">{{index+'.'}}{{item.name}}</a>
+                  <i style="cursor:pointer" class="fa  fa-download" @click="downFile(item)" title="文件下载"></i>
+                </p>
+
               </template>
             </template>
           </el-table-column>
@@ -207,7 +216,7 @@
 
 <script>
   import wangEditor from '../wangEditor'
-  import {checkFileExt,download} from "../../utils/utils";
+  import {checkFileExt,download,downloadFile} from "../../utils/utils";
 
   export default {
     name: "dispatch",
@@ -634,6 +643,9 @@
           }
         })
       },
+      downFile(item){
+        downloadFile(this.$url.baseUrl+'api/attachment/v0.1/attachment/download',[item.id])
+      },
       catchData(value){
         this.ruleForm.content=value
       }
@@ -703,13 +715,14 @@
   }
   #dispatch .attachment{
     text-decoration: underline;
+    float: left;
     overflow: hidden;
     text-overflow:ellipsis;
     white-space: nowrap;
     cursor: pointer;
     color: #0a95ef;
     display: inline-block;
-    width: 100%;
+    /*width: 100%;*/
   }
 </style>
 <style lang="less">
