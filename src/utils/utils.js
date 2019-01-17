@@ -775,6 +775,25 @@ export function checkFileExt (ext) {
 }
 
 
+/**
+ * 按字段升序排序
+ * @param arr
+ * @param item
+ */
+export function sort(arr,item) {
+  for (let j = 0; j < arr.length - 1; j++) {
+    //两两比较，如果前一个比后一个大，则交换位置。
+    for (let i = 0; i < arr.length - 1 - j; i++) {
+      if (arr[i][item] < arr[i + 1][item]) {
+        let temp = arr[i];
+        arr[i] = arr[i + 1];
+        arr[i + 1] = temp;
+      }
+    }
+  }
+}
+
+
 
 //export const baseUrl = 'http://172.16.100.33:8080/nxhzz_2017/api/'; //服务地址
 //export const uploadUrl = 'http://121.42.25.6:8080/fss/api/file/uploadFile.do'; //文件上传地址

@@ -249,7 +249,7 @@ export default new Router({
             {
               path:"/dispatch",
               component:dispatch,
-              name:"讯后总结"
+              name:"汛后总结"
             },
           ]
         },

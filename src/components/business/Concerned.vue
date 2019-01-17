@@ -4,24 +4,8 @@
        :element-loading-text="logadingText">
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <label>年 份:</label>
-        <el-date-picker
-          style="width: 150px"
-          v-model="summaryYear"
-          type="year"
-          placeholder="选择年">
-        </el-date-picker>
-        <label>总结类型:</label>
-        <el-select v-model="summaryType"  clearable placeholder="请选择" style="width: 150px">
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
-        <label>总结名称:</label>
-        <el-input style="width: 150px" v-model="summarizeName" placeholder="请输入总结名称"></el-input>
+        <label>总结标题:</label>
+        <el-input style="width: 150px" v-model="NoticeTitle" placeholder="请输入总结标题"></el-input>
         <el-button type="primary" @click="primary">查询</el-button>
         <el-button type="success" @click="exportExcel(tableData,multipleSelection)">导出</el-button>
       </div>
@@ -58,14 +42,14 @@
             align="center">
           </el-table-column>
           <el-table-column
-            v-if="item.data==='ATTACHMENT'"
+            v-if="item.data==='NOTIFY_ATTS'"
             :label="item.title"
             width="300"
             align="center">
             <template slot-scope="scope">
-              <template v-if="scope.row.ATTACHMENT" v-for="(item,index) in scope.row.ATTACHMENT">
+              <template v-if="scope.row.NOTIFY_ATTS" v-for="(item,index) in scope.row.NOTIFY_ATTS">
                 <p v-if="item.type==='pdf'" style="text-align: right">
-                  <a  target="_blank" :href="item.pdfurl" class="attachment">{{index+'.'}}{{item.name}}</a>
+                  <a  target="_blank" :href="item.PDF_FILE_DOWNLOAD_URL" class="attachment">{{index+'.'}}{{item.name}}</a>
                   <i style="cursor:pointer" class="fa  fa-download" @click="downFile(item)" title="文件下载"></i>
                 </p>
                 <p v-if="item.type==='file'" style="text-align: right">
@@ -121,35 +105,12 @@
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="130px" class="demo-ruleForm">
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item label="汛后总结标题:" prop="title">
-              <el-input v-model="ruleForm.title"  placeholder="请输入汛后总结标题"></el-input>
-            </el-form-item>
-            <el-form-item label="填写人员:" prop="reportUserid">
-              <el-input v-model="ruleForm.reportUserid"  placeholder="请输入填写人员" disabled></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="总结类型:" prop="summaryType">
-              <el-select v-model="ruleForm.summaryType" placeholder="请选择总结类型" style="width: 100%">
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="填写时间:" prop="summaryYear">
-              <el-date-picker
-                style="width: 100%"
-                v-model="ruleForm.summaryYear"
-                type="year"
-                placeholder="选择年">
-              </el-date-picker>
+            <el-form-item label="检查总结标题:" prop="title">
+              <el-input v-model="ruleForm.title"  placeholder="请输入标题"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="24">
-            <el-form-item label="内容:">
+            <el-form-item label="内容:" prop="content">
               <wangEditor  :catchData="catchData" :content="ruleForm.content"></wangEditor>
             </el-form-item>
           </el-col>
@@ -226,31 +187,18 @@
         pageSize: 20, // 每页大小默认值
         pageIndex: 1, // 默认第一页
         tableData: [],
-        summaryYear:new Date(),
-        options: [
-          {
-            value: '1',
-            label: '年中总结'
-          },
-          {
-            value: '2',
-            label: '年终总结'
-          }],
-        summaryType: "",
-        summarizeName:"",
+        NoticeTitle:"",
         currentPage4: 1,
         fileList: [],
         upFileList:[],
         upFileUrl:this.$url.uploadUrl,
         tableHeader:[
           {data:'',title:'',type:"selection"},
-          {data:'TITLE',title:'总结名称',type:"normal"},
-          {data:'SUMMARY_YEAR',title:'总结年份',type:"normal"},
-          {data:'NAME',title:'总结类型',type:"normal"},
-          {data:'REALNAME',title:'填写人员',type:"normal"},
-          {data:'GNAME',title:'填写单位',type:"normal"},
-          {data:'CREATE_TIME',title:'填写时间',type:"normal"},
-          {data:'ATTACHMENT',title:'附件',},
+          {data:'TITLE',title:'检查标题',type:"normal"},
+          {data:'REPORT_ORGNM',title:'执行单位',type:"normal"},
+          {data:'REPORT_USERNAME',title:'执行人',type:"normal"},
+          {data:'MODIFY_TIME',title:'执行时间',type:"normal"},
+          {data:'NOTIFY_ATTS',title:'附件',},
           {data:'caozuo',title:'操作'},
         ],
         multipleSelection:[],
@@ -261,21 +209,15 @@
         previewVisible: false,
         ruleForm:{
           title:"",
+          content:"",
           reportUserid:"管理员",
-          summaryType:"",
-          summaryYear:"",
-          content:""
         },
         rules:{
           title: [
-            { required: true, message: '请输入汛后总结标题', trigger: 'blur' },
-
+            { required: true, message: '请输入标题', trigger: 'blur' },
           ],
-          reportUserid: [
-            { required: true, message: '请输入填写人员', trigger: 'blur' },
-          ],
-          summaryType:[
-            { required: true, message: '请选择总结类型', trigger: 'change' }
+          content:[
+            { required: true, message: '请输入内容', trigger: 'blur' },
           ]
         },
         bodyFalse:false,
@@ -284,7 +226,7 @@
         screenWidth:document.body.clientWidth,
         fileData:{
           bizId:"",
-          attType:"8"
+          attType:"6"
         },
         flag:1,
       }
@@ -297,11 +239,11 @@
       search(){
         const that=this;
         let parms={
-          "summaryYear":new Date(that.summaryYear).getFullYear(),
-          "title":that.summarizeName,
-          "summaryType":that.summaryType,
+          "orgIdList":[],
+          "statusList":[],
+          "title":that.NoticeTitle
         };
-        that.$http.post(that.$url.baseUrl+'api/guoYang/v0.1/latter-summary/gy/list',parms)
+        that.$http.post(that.$url.baseUrl+'api/guoYang/v0.1/pre-ins/gy-inspection/list',parms)
           .then((res)=>{
             if(res.status===200){
               setTimeout(()=>{
@@ -310,10 +252,10 @@
                 that.fileList=[];
                 let data=res.data.result;
                 $.each(data,(v,item)=>{
-                  item.CREATE_TIME=new Date(item.CREATE_TIME).formatDate('yyyy-MM-dd');
-                  if (item.ATTACHMENT) {
-                    item.ATTACHMENT = JSON.parse(item.ATTACHMENT);
-                    $.each(item.ATTACHMENT,(s,items)=>{
+                  // item.CREATE_TIME=new Date(item.CREATE_TIME).formatDate('yyyy-MM-dd');
+                  if (item.NOTIFY_ATTS) {
+                    item.NOTIFY_ATTS = JSON.parse(item.NOTIFY_ATTS);
+                    $.each(item.NOTIFY_ATTS,(s,items)=>{
                       switch (items.type){
                         case "jpg":
                           items.type="image";
@@ -429,7 +371,7 @@
           });
           const list = tableDatas;
           const data = this.formatJson(filterVal, list);
-          export_json_to_excel(tHeader, data, ' 防汛抗旱预案管理统计表');
+          export_json_to_excel(tHeader, data, ' 汛前检查统计表');
         })
       },
       formatJson(filterVal, jsonData){
@@ -438,21 +380,14 @@
       //行内编辑
       handleEdit(index, row) {
         const _this=this;
-        _this.title="预案管理修改";
+        _this.title="修改汛前检查";
         _this.dialogVisible=true;
         _this.ruleForm.title=row.TITLE;
-        _this.ruleForm.reportUserid=row.REALNAME;
-        _this.ruleForm.summaryType=row.SUMMARY_TYPE;
-        _this.ruleForm.summaryYear=row.SUMMARY_YEAR;
-        _this.upFileList=row.ATTACHMENT;
-        _this.$http.post(_this.$url.baseUrl+'api/guoYang/v0.1/latter-summary/view/summary',{'id':row.ID}).then((res)=>{
-          if(res.status===200){
-            let data=res.data.result[0];
-            _this.ruleForm.content=data.CONTENT
-          }
-
-        });
-        this.ruleForm.id=row.ID;
+        _this.upFileList=row.NOTIFY_ATTS;
+         _this.$nextTick(()=>{
+           _this.ruleForm.content=row.CONTENT;
+         })
+        _this.ruleForm.id=row.ID;
       },
       //行内删除
       handleDelete(index, row) {
@@ -481,16 +416,14 @@
         this.upFileList=[];
         this.ruleForm={
           title:"",
-          reportUserid:"刘波",
-          summaryType:"",
-          summaryYear:"",
-          content:""
+          content:"",
+          reportUserid:"管理员",
         };
       },
 
       del(){
         if(this.multipleSelection.length>0){
-          this.$http.delete(this.$url.baseUrl+'api/guoYang/v0.1/latter-summary',{data:this.multipleSelection}).then((res)=>{
+          this.$http.delete(this.$url.baseUrl+'api/guoYang/v0.1/pre-ins/gy-inspection',{data:this.multipleSelection}).then((res)=>{
             if(res.status===200){
               this.$message({
                 type:"success",
@@ -515,7 +448,7 @@
       },
       add(){
         this.dialogVisible=true;
-        this.title='新增汛后总结';
+        this.title='新增汛前检查';
       },
       /**
        *汛后总结新增及修改
@@ -525,18 +458,16 @@
         _this.$refs['ruleForm'].validate((valid) => {
           if (valid) {
             let url,msg,msg1;
-            if(_this.title==="新增汛后总结"){
-              url=_this.$url.baseUrl+'api/guoYang/v0.1/latter-summary/gy';
+            if(_this.title==="新增汛前检查"){
+              url=_this.$url.baseUrl+'api/guoYang/v0.1/pre-ins/gy-inspection';
               msg="新增成功";
               msg1="新增失败";
               _this.ruleForm.reportUserid='3804'; //人员id写的假数据  需从缓存获取
-              _this.ruleForm.summaryYear=new Date(this.ruleForm.summaryYear).getFullYear();
             }else{
-              url=_this.$url.baseUrl+'api/guoYang/v0.1/latter-summary/gy/update';
+              url=_this.$url.baseUrl+'api/guoYang/v0.1/pre-ins/gy-inspection/update';
               msg="修改成功";
               msg1="修改失败";
               _this.ruleForm.reportUserid='3804'; //人员id写的假数据  需从缓存获取
-              _this.ruleForm.summaryYear=new Date(this.ruleForm.summaryYear).getFullYear();
             }
 
             _this.$http.put(url,_this.ruleForm).then((res)=>{

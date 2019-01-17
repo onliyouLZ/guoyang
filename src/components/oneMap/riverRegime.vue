@@ -1,84 +1,59 @@
 <template>
   <div id="riverRegime">
     <el-collapse v-model="activeName">
-      <el-collapse-item  name="1">
-        <template slot="title">
-          <i class="fa fa-user-o" style="margin: 0 10px"></i>河道信息
-        </template>
-        <div>
-          <el-scrollbar
-            style="height: 100%"
-            tag="table">
-            <div style="max-height: 500px">
-              <el-table
-                :data="tableData"
-                stripe
-                size="mini"
-                height="400"
-                style="width: 100%;font-size: 12px"
-                header-cell-class-name="table-dliog-header"
-                cell-class-name="table-dliog-body"
-                @row-dblclick="rowDbClick"
-                @cell-mouse-enter="enterHover"
-                @cell-mouse-leave="leaveHover" >
-                <el-table-column
-                  label=" "
-                  type="index"
-                  width="40">
-                </el-table-column>
-                <el-table-column
-                  prop="STNM"
-                  label="河道名称"
-                  align="center"
-                  width="120">
-                </el-table-column>
-                <el-table-column
-                  prop="Z"
-                  label="水位"
-                  align="center"
-                  width="120">
-                </el-table-column>
-                <el-table-column
-                  prop="TM"
-                  label="时间"
-                  align="center"
-                  min-width="160">
-                </el-table-column>
-                <el-table-column
-                  prop="WRQ"
-                  label="警戒水位"
-                  align="center"
-                  width="120">
-                </el-table-column>
-                <el-table-column
-                  prop="OWRQ"
-                  label="超警戒水位"
-                  align="center"
-                  width="120">
-                </el-table-column>
-                <el-table-column
-                  prop="GRZ"
-                  label="保证水位"
-                  align="center"
-                  width="120">
-                </el-table-column>
-                <el-table-column
-                  prop="OGRZ"
-                  label="超保证水位"
-                  align="center"
-                  width="120">
-                </el-table-column>
-              </el-table>
-            </div>
-          </el-scrollbar>
-        </div>
-      </el-collapse-item>
-    </el-collapse>
+        <el-collapse-item  name="1">
+          <template slot="title">
+            <i class="fa fa-user-o" style="margin: 0 10px"></i>河道信息
+          </template>
+          <div>
+            <el-scrollbar
+              style="height: 100%"
+              tag="table">
+              <div style="max-height: 500px">
+                <el-table
+                  :data="tableData"
+                  stripe
+                  size="mini"
+                  height="400"
+                  style="width: 100%;font-size: 12px"
+                  header-cell-class-name="table-dliog-header"
+                  cell-class-name="table-dliog-body"
+                  :row-class-name="tableRowClassName"
+                  @row-dblclick="rowDbClick"
+                  @cell-mouse-enter="enterHover"
+                  @cell-mouse-leave="leaveHover" >
+                  <el-table-column
+                    label=" "
+                    type="index"
+                    width="40">
+                  </el-table-column>
+                  <template v-for="item in tableHeader">
+                    <el-table-column
+                      v-if="item.type==='normal'"
+                      :prop="item.data"
+                      :label="item.label"
+                      align="center"
+                      width="120">
+                    </el-table-column>
+                    <el-table-column
+                      v-if="item.type==='TM'"
+                      :prop="item.data"
+                      :label="item.label"
+                      align="center"
+                      width="200">
+                    </el-table-column>
+                  </template>
+                </el-table>
+              </div>
+            </el-scrollbar>
+          </div>
+        </el-collapse-item>
+      </el-collapse>
   </div>
 </template>
 
 <script>
-    import {Time} from "../../utils/utils";
+    import {Time,sort} from "../../utils/utils";
     export default {
         name: "riverRegime",
         data(){
@@ -86,6 +61,15 @@
             activeName: ["1"],
             tableData: [ ],
             swiperShow:false,
+            tableHeader:[
+              {data:"STNM",label:"河道名称",type:'normal'},
+              {data:"Z",label:"水位",type:'normal'},
+              {data:"TM",label:"时间",type:'TM'},
+              {data:"WRQ",label:"警戒水位",type:'normal'},
+              {data:"OWRQ",label:"超警戒水位",type:'normal'},
+              {data:"GRZ",label:"保证水位",type:'normal'},
+              {data:"OGRZ",label:"超保证水位",type:'normal'},
+            ]
           }
         },
         props:{
@@ -136,10 +120,19 @@
                     item.TM=new Date(item.TM).formatDate('yyyy-MM-dd HH:mm:ss');
                   }
                 });
+                sort(data,'OWRQ');
                 this.tableData=data
               }
             });
-          }
+          },
+          tableRowClassName({row, rowIndex}){
+            if(row.OWRQ>0){ //超警戒大于0
+              return 'warning-row';
+            }else{
+
+            }
+          },
+
         },
         created(){
 
@@ -154,8 +147,11 @@
 
 <style lang="less">
 
-  .is-scrolling-none::-webkit-scrollbar{
+  #riverRegime .is-scrolling-none::-webkit-scrollbar{
     width: 0;
+  }
+  #riverRegime .el-table .warning-row {
+    color: red;
   }
 </style>
 

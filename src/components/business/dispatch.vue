@@ -431,7 +431,7 @@
           });
           const list = tableDatas;
           const data = this.formatJson(filterVal, list);
-          export_json_to_excel(tHeader, data, ' 防汛抗旱预案管理统计表');
+          export_json_to_excel(tHeader, data, ' 汛后总结统计表');
         })
       },
       formatJson(filterVal, jsonData){
@@ -440,7 +440,7 @@
       //行内编辑
       handleEdit(index, row) {
         const _this=this;
-        _this.title="预案管理修改";
+        _this.title="修改汛后总结";
         _this.dialogVisible=true;
         _this.ruleForm.title=row.TITLE;
         _this.ruleForm.reportUserid=row.REALNAME;
@@ -483,7 +483,7 @@
         this.upFileList=[];
         this.ruleForm={
           title:"",
-          reportUserid:"刘波",
+          reportUserid:"管理员",
           summaryType:"",
           summaryYear:"",
           content:""

@@ -1,5 +1,5 @@
 <template>
-  <div class="oneMap">
+  <div id="oneMap">
     <Breadcrumb :menu="menuArray"></Breadcrumb>
     <div id="map">
       <!--<div class="css_animation"></div>-->
@@ -64,10 +64,9 @@
     </div>
     <div id="mouse-position" style="float: left; position: absolute; bottom: 5px; width: 350px; height: 20px; z-index: 2000;"></div>
     <div id="openDialog">
-      <el-dialog :title="dialogData.STNM"  :visible="dialogVisible"  @close="childClose">
-          <component :is="dialogShow" :dialogDatas="dialogData"></component>
-      </el-dialog>
+
     </div>
+    <river :dialogData="dialogData"  :dialogVisible.sync="dialogVisible" ref="child"></river>
     <!--<lakes :lakesData.sync="lakesData"  :lakesShow.sync="lakesShow" ref="child"></lakes>-->
   </div>
 </template>
@@ -145,7 +144,7 @@
             },
             showComponent:"riverRegime",
             dialogShow:"",
-            dialogData:"",
+            dialogData:{},
             childData:[],
             moveData:{},
             dialogVisible:false,
@@ -320,9 +319,9 @@
             },
             //子组件控制弹窗
             showFormChild(data){
-              this.dialogVisible=data.show;
-              this.dialogShow=data.data.type;
-              this.dialogData=data.data;
+              // this.dialogVisible=data.show;
+              // this.dialogShow=data.data.type;
+              // this.dialogData=data.data;
             },
             //子组件控制鼠标浮动
             moves(data){
@@ -361,12 +360,18 @@
                 if(info){
                   let content ="";
                   let type=info.type;
+                  let classs="";
                   if(type){
                     switch (type) {
                       case 'river':
                         content += '<div class="arrow" ></div>';
                         content += '<p class="p_rsvr_bg">'+info.STNM+'</p>';
-                        content += '<div class="div_bg"><div class="div_top"><div class="div_t_l">';
+                        if(info.OWRQ>0){
+                          classs="div_t_l_warn"
+                        }else{
+                          classs="div_t_l"
+                        }
+                        content += '<div class="div_bg"><div class="div_top"><div class="'+classs+'">';
                         content += '<span style="font-size:12px;display: inline-block">实时水位:</span>';
                         if(info.Z){
                           info.Z=info.Z;
@@ -788,9 +793,7 @@
                   }
                 });
             },
-            childClose(){
-                this.dialogVisible=false;
-            }
+
         },
         created(){
           // const that=this;
@@ -975,7 +978,7 @@
               let data=feature.get('data');
               if(data){
                 that.dialogVisible=true;
-                that.dialogShow=data.type;
+                // that.dialogShow=data.type;
                 that.dialogData=data;
               }
             }
@@ -1024,7 +1027,7 @@
 </script>
 
 <style lang="less" scoped>
-  .oneMap{
+  #oneMap{
     padding: 0;
     margin: 0;
     position: relative;
@@ -1038,7 +1041,7 @@
     height: calc(100vh - 60px);
   }
 
-  .mapBtn{
+  #oneMap .mapBtn{
     width: 100px;
     background-color: #FDFDFC;
     padding: 4px;
@@ -1062,7 +1065,7 @@
     }
   }
   /*左面板*/
-  .leftCheckbox{
+  #oneMap .leftCheckbox{
     z-index: 999;
     position: absolute;
     top: 70px;
@@ -1108,7 +1111,7 @@
     }
   }
   /*右面板*/
-  .rightCard{
+  #oneMap .rightCard{
     z-index: 999;
     position: absolute;
     top: 70px;
@@ -1142,7 +1145,7 @@
     }
   }
   /*右按键*/
-  .right-btn-display{
+  #oneMap .right-btn-display{
     width: 20px;
     height: 55px;
     background-color: #3DAAEF;
@@ -1163,15 +1166,15 @@
   /**
  表格
   */
-  .table-dliog-body{
-    color: red;
+  #oneMap .table-dliog-body{
+    /*color: red;*/
     padding: 0!important;
     font-size: 14px;
   }
-  .el-table__row{
+  #oneMap .el-table__row{
     cursor: pointer;
   }
-  .table-dliog-header{
+  #oneMap .table-dliog-header{
     background-color: #A4D0EF !important;
     border-bottom: 1px solid #bbb!important;
     padding: 0!important;
@@ -1180,7 +1183,7 @@
     font-weight: normal;
     font-size: 14px;
   }
-  .el-table--striped .el-table__body tr.el-table__row--striped td{
+  #oneMap .el-table--striped .el-table__body tr.el-table__row--striped td{
     background-color: #e0eef8!important;
   }
 </style>
