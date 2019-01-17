@@ -1,11 +1,27 @@
 <template>
   <div id="concerned"
        v-loading="loading"
-       element-loading-text="加载中">
+       :element-loading-text="logadingText">
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <label>阀值名称:</label>
-        <el-input style="width: 150px" v-model="thresholdName" placeholder="请输入阀值名称"></el-input>
+        <label>年 份:</label>
+        <el-date-picker
+          style="width: 150px"
+          v-model="summaryYear"
+          type="year"
+          placeholder="选择年">
+        </el-date-picker>
+        <label>总结类型:</label>
+        <el-select v-model="summaryType"  clearable placeholder="请选择" style="width: 150px">
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
+        <label>总结名称:</label>
+        <el-input style="width: 150px" v-model="summarizeName" placeholder="请输入总结名称"></el-input>
         <el-button type="primary" @click="primary">查询</el-button>
         <el-button type="success" @click="exportExcel(tableData,multipleSelection)">导出</el-button>
       </div>
@@ -17,6 +33,7 @@
       <div class="table-button">
         <el-button type="text" icon="fa  fa-plus" class="add" @click="add">新增</el-button>
         <el-button type="text" icon="fa fa-trash-o" class="add" @click="del">删除</el-button>
+        <el-button type="text" icon="fa  fa-download" class="add" @click="del">附件下载</el-button>
       </div>
       <el-table
         :data="tables"
@@ -42,11 +59,17 @@
             align="center">
           </el-table-column>
           <el-table-column
-            v-if="item.data==='PARTICIPATE_MEMBERS'"
-            :prop="item.data"
+            v-if="item.data==='ATTACHMENT'"
             :label="item.title"
-            min-width="150"
+            width="300"
             align="center">
+            <template slot-scope="scope">
+              <template v-if="scope.row.ATTACHMENT" v-for="(item,index) in scope.row.ATTACHMENT">
+                <a v-if="item.type==='pdf'" target="_blank" :href="item.pdfurl" class="attachment">{{index+'.'}}{{item.name}}</a>
+                <a v-if="item.type==='file'"  class="attachment" @click="preview(item)">{{index+'.'}}{{item.name}}</a>
+                <a v-if="item.type==='image'"  class="attachment" @click="preview(item)">{{index+'.'}}{{item.name}}</a>
+              </template>
+            </template>
           </el-table-column>
           <el-table-column
             v-if="item.data==='caozuo'"
@@ -90,36 +113,46 @@
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="130px" class="demo-ruleForm">
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item label="阀值名称:" prop="thresholdName">
-              <el-input v-model="ruleForm.thresholdName"  placeholder="请输入阀值名称"></el-input>
+            <el-form-item label="汛后总结标题:" prop="title">
+              <el-input v-model="ruleForm.title"  placeholder="请输入汛后总结标题"></el-input>
             </el-form-item>
-            <el-form-item label="阀值类型:" prop="thresholdValueType">
-              <el-input v-model="ruleForm.thresholdValueType"  placeholder="请输入阀值类型"></el-input>
-            </el-form-item>
-            <el-form-item label="报警级别颜色:" prop="alarmLevelColor">
-              <el-color-picker style="float: left" v-model="ruleForm.alarmLevelColor"></el-color-picker>
-              <el-input style="width: 190px" v-model="ruleForm.alarmLevelColor" disabled ></el-input>
+            <el-form-item label="填写人员:" prop="reportUserid">
+              <el-input v-model="ruleForm.reportUserid"  placeholder="请输入填写人员" disabled></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="阀值:" prop="thresholdValue">
-              <el-input v-model="ruleForm.thresholdValue"  placeholder="请输入阀值"></el-input>
+            <el-form-item label="总结类型:" prop="summaryType">
+              <el-select v-model="ruleForm.summaryType" placeholder="请选择总结类型" style="width: 100%">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
             </el-form-item>
-            <el-form-item label="报警级别:" prop="alarmLevel">
-              <el-input v-model="ruleForm.alarmLevel"  placeholder="请输入报警级别"></el-input>
+            <el-form-item label="填写时间:" prop="summaryYear">
+              <el-date-picker
+                style="width: 100%"
+                v-model="ruleForm.summaryYear"
+                type="year"
+                placeholder="选择年">
+              </el-date-picker>
             </el-form-item>
-            <el-form-item label="应对措施:" prop="countermeasures">
-              <el-input v-model="ruleForm.countermeasures"  placeholder="请输入应对措施"></el-input>
+          </el-col>
+          <el-col :span="24">
+            <el-form-item label="内容:">
+              <wangEditor  :catchData="catchData" :content="ruleForm.content"></wangEditor>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item>
+            <el-form-item label="上传文件：">
               <el-upload
                 class="upload-demo"
                 ref="upload"
                 multiple
                 :data="fileData"
-                action="http://gyfxkhapi.matian.ml:8008/api-fxkh/api/attachment/v0.1/attachment/upload"
+                :action="upFileUrl"
                 :on-change="handleChange"
                 :on-remove="handleRemove"
                 :on-success="handleAvatarSuccess"
@@ -131,9 +164,26 @@
               </el-upload>
             </el-form-item>
           </el-col>
+          <el-col :span="12">
+            <el-form-item label="已上传文件列表：">
+              <div class="upFile">
+                <ul style="list-style: none">
+                  <template v-for="(item,index) in upFileList">
+                    <li>
+                      <span style="float: left">{{item.name}} </span>
+                      <span style="float: right;" class="iconHover">
+                        <i class=" el-icon-circle-check "></i>
+                        <i class=" el-icon-close " @click="delFile(item,index)"></i>
+                      </span>
+                    </li>
+                  </template>
+                </ul>
+              </div>
+            </el-form-item>
+          </el-col>
           <el-col :span="24" style="text-align: right">
             <el-form-item style="margin-bottom: 0!important;">
-              <el-button type="primary" @click="submitForm" :loading="true">提交</el-button>
+              <el-button type="primary" @click="submitForm" :loading="loading">提交</el-button>
               <el-button @click="resetForm">重置</el-button>
             </el-form-item>
           </el-col>
@@ -144,69 +194,92 @@
       <!--<el-button type="primary" @click="dialogVisible = false">确 定</el-button>-->
       <!--</span>-->
     </el-dialog>
+    <el-dialog
+      class="preview"
+      :title="previewTitle"
+      :visible.sync="previewVisible"
+      :modal-append-to-body="bodyFalse"
+      width="50%">
+      <img style="width: 100%" :src="previewSrc" alt="">
+    </el-dialog>
   </div>
 </template>
 
 <script>
+  import wangEditor from '../wangEditor'
+  import {checkFileExt,download} from "../../utils/utils";
+
   export default {
     name: "concerned",
+    components:{wangEditor},
     data(){
       return{
         pageSize: 20, // 每页大小默认值
         pageIndex: 1, // 默认第一页
         tableData: [],
+        summaryYear:new Date(),
+        options: [
+          {
+            value: '1',
+            label: '年中总结'
+          },
+          {
+            value: '2',
+            label: '年终总结'
+          }],
+        summaryType: "",
+        summarizeName:"",
         currentPage4: 1,
-        thresholdName:"",
         fileList: [],
+        upFileList:[],
         upFileUrl:this.$url.uploadUrl,
         tableHeader:[
           {data:'',title:'',type:"selection"},
-          {data:'THRESHOLD_NAME',title:'阀值名称',type:"normal"},
-          {data:'THRESHOLD_VALUE',title:'阀值',type:"normal"},
-          {data:'THRESHOLD_VALUE_TYPE',title:'阀值类型',type:"normal"},
-          {data:'ALARM_LEVEL',title:'报警级别',type:"normal"},
-          {data:'ALARM_LEVEL_COLOR',title:'报警级别颜色',type:"normal"},
-          {data:'COUNTERMEASURES',title:'应对措施',type:"normal"},
+          {data:'TITLE',title:'总结名称',type:"normal"},
+          {data:'SUMMARY_YEAR',title:'总结年份',type:"normal"},
+          {data:'NAME',title:'总结类型',type:"normal"},
+          {data:'REALNAME',title:'填写人员',type:"normal"},
+          {data:'GNAME',title:'填写单位',type:"normal"},
+          {data:'CREATE_TIME',title:'填写时间',type:"normal"},
+          {data:'ATTACHMENT',title:'附件',},
           {data:'caozuo',title:'操作'},
         ],
         multipleSelection:[],
         loading: true,
+        logadingText:"加载中！",
+        title:"",
         dialogVisible: false,
+        previewVisible: false,
         ruleForm:{
-          thresholdName:"",
-          thresholdValue:"",
-          thresholdValueType:"",
-          alarmLevel:"",
-          alarmLevelColor:"red",
-          countermeasures:"",
+          title:"",
+          reportUserid:"管理员",
+          summaryType:"",
+          summaryYear:"",
+          content:""
         },
         rules:{
-          thresholdName: [
-            { required: true, message: '请输入阀值名称', trigger: 'blur' },
+          title: [
+            { required: true, message: '请输入汛后总结标题', trigger: 'blur' },
           ],
-          thresholdValue: [
-            { required: true, message: '请输入阀值', trigger: 'blur' },
+          reportUserid: [
+            { required: true, message: '请输入填写人员', trigger: 'blur' },
           ],
-          thresholdValueType:[
-            { required: true, message: '请输入阀值类型', trigger: 'blur' }
+          summaryType:[
+            { required: true, message: '请选择总结类型', trigger: 'change' }
           ],
-          alarmLevel:[
-            { required: true, message: '请输入报警级别', trigger: 'blur' }
-          ],
-          alarmLevelColor:[
-            { required: true, message: '请选择报警级别颜色', trigger: 'blur' }
-          ],
-          countermeasures:[
-            { required: true, message: '请输入应对措施', trigger: 'blur' }
+          summaryYear:[
+            { required: true, message: '请选择时间', trigger: 'blur' }
           ],
         },
         bodyFalse:false,
-        title:"",
+        previewTitle:"",
+        previewSrc:"",
         screenWidth:document.body.clientWidth,
         fileData:{
           bizId:"",
-          attType:"21"
-        }
+          attType:"8"
+        },
+        flag:1,
       }
     },
     created(){
@@ -217,21 +290,72 @@
       search(){
         const that=this;
         let parms={
-          "thresholdName":this.thresholdName,
-          "thresholdValueType":"",
-          "alarmLevel":"",
-          "alarmLevelColor":"",
-          "countermeasures":""
+          "summaryYear":new Date(that.summaryYear).getFullYear(),
+          "title":that.summarizeName,
+          "summaryType":that.summaryType,
         };
-        that.$http.post(that.$url.baseUrl+'api/guoYang/auxiliary-decision/v0.1/gy-fxkh-plan-manage/list',parms)
+        that.$http.post(that.$url.baseUrl+'api/guoYang/v0.1/latter-summary/gy/list',parms)
           .then((res)=>{
             if(res.status===200){
               setTimeout(()=>{
                 that.loading=false;
+                that.logadingText="加载中！";
+                that.fileList=[];
                 let data=res.data.result;
+                $.each(data,(v,item)=>{
+                  item.CREATE_TIME=new Date(item.CREATE_TIME).formatDate('yyyy-MM-dd');
+                  if (item.ATTACHMENT) {
+                    item.ATTACHMENT = JSON.parse(item.ATTACHMENT);
+                    $.each(item.ATTACHMENT,(s,items)=>{
+                      switch (items.type){
+                        case "jpg":
+                          items.type="image";
+                          break;
+                        case  "gif":
+                          items.type="image";
+                          break;
+                        case  "png":
+                          items.type="image";
+                          break;
+                        case  "jpeg":
+                          items.type="image";
+                          break;
+                        case  "zip":
+                          items.type="file";
+                          break;
+                        case  "rar":
+                          items.type="file";
+                          break;
+                        case  "xls":
+                          items.type="file";
+                          break;
+                        case  "xlsx":
+                          items.type="file";
+                          break;
+                        case  "doc":
+                          items.type="pdf";
+                          break;
+                        case  "docx":
+                          items.type="pdf";
+                          break;
+                        case  "pdf":
+                          items.type="pdf";
+                          break;
+                        case  "ppt":
+                          items.type="pdf";
+                          break;
+                        case  "pptx":
+                          items.type="pdf";
+                          break;
+                        default:
+                          items.type="";
+                          break
+                      }
+                    });
+                  };
+                });
                 that.tableData=data;
               },500);
-
             }else{
               this.$message({
                 type:"error",
@@ -257,7 +381,7 @@
         if(val.length>0){
           this.multipleSelection=[];
           $.each(val,(v,item)=>{
-            this.multipleSelection.push(item.PLAN_ID);
+            this.multipleSelection.push(item.ID);
           });
         }else{
           this.multipleSelection=[];
@@ -306,127 +430,139 @@
       },
       //行内编辑
       handleEdit(index, row) {
-        this.title="预案管理修改";
-        this.dialogVisible=true;
-        this.ruleForm.thresholdName=row.THRESHOLD_NAME;
-        this.ruleForm.thresholdValue=row.THRESHOLD_VALUE;
-        this.ruleForm.thresholdValueType=row.THRESHOLD_VALUE_TYPE;
-        this.ruleForm.alarmLevel=row.ALARM_LEVEL;
-        this.ruleForm.alarmLevelColor=row.ALARM_LEVEL_COLOR;
-        this.ruleForm.countermeasures=row.COUNTERMEASURES;
-        this.ruleForm.planId=row.PLAN_ID;
+        const _this=this;
+        _this.title="预案管理修改";
+        _this.dialogVisible=true;
+        _this.ruleForm.title=row.TITLE;
+        _this.ruleForm.reportUserid=row.REALNAME;
+        _this.ruleForm.summaryType=row.SUMMARY_TYPE;
+        _this.ruleForm.summaryYear=row.SUMMARY_YEAR;
+        _this.upFileList=row.ATTACHMENT;
+        _this.$http.post(_this.$url.baseUrl+'api/guoYang/v0.1/latter-summary/view/summary',{'id':row.ID}).then((res)=>{
+          if(res.status===200){
+            let data=res.data.result[0];
+            _this.ruleForm.content=data.CONTENT
+          }
+
+        });
+        this.ruleForm.id=row.ID;
       },
       //行内删除
       handleDelete(index, row) {
         this.multipleSelection=[];
-        this.multipleSelection.push(row.PLAN_ID);
+        this.multipleSelection.push(row.ID);
         this.del();
+      },
+      preview(item){
+        if(item.type==='file'){
+          download(item.url,'get');
+        }else if(item.type==="image"){
+          this.previewSrc=item.url;
+          this.previewTitle=item.name;
+          this.previewVisible=true;
+        }
       },
       //重置
       resetForm() {
         this.$refs['ruleForm'].resetFields();
-        this.fileList=[];
-        this.ruleForm={
-          thresholdName:"",
-          thresholdValue:"",
-          thresholdValueType:"",
-          alarmLevel:"",
-          alarmLevelColor:"red",
-          countermeasures:"",
-        };
         this.dialogVisible=false;
       },
+      //关闭弹窗
       dialogClose(ruleForm){
-        this.dialogVisible=false;
         this.$refs[ruleForm].resetFields();
-        this.fileList=[];
+        this.multipleSelection=[];
+        this.upFileList=[];
         this.ruleForm={
-          thresholdName:"",
-          thresholdValue:"",
-          thresholdValueType:"",
-          alarmLevel:"",
-          alarmLevelColor:"red",
-          countermeasures:"",
+          title:"",
+          reportUserid:"刘波",
+          summaryType:"",
+          summaryYear:"",
+          content:""
         };
       },
+
       del(){
-        this.$http.delete(this.$url.baseUrl+'api/guoYang/auxiliary-decision/v0.1/gy-fxkh-concerned-manage/delete',{data:this.multipleSelection}).then((res)=>{
-          if(res.status===200){
-            this.$message({
-              type:"success",
-              message:"删除成功！"
-            });
-            this.loading=true;
-            this.search();
-          }else{
-            this.$message({
-              type:"error",
-              message:"删除失败！"
-            })
-          }
-        });
+        if(this.multipleSelection.length>0){
+          this.$http.delete(this.$url.baseUrl+'api/guoYang/v0.1/latter-summary',{data:this.multipleSelection}).then((res)=>{
+            if(res.status===200){
+              this.$message({
+                type:"success",
+                message:"删除成功！"
+              });
+              this.loading=true;
+              this.search();
+            }else{
+              this.$message({
+                type:"error",
+                message:"删除失败！"
+              })
+            }
+          });
+        }else{
+          this.$message({
+            type:"error",
+            message:"请选择需要删除的数据！"
+          })
+        }
+
       },
       add(){
         this.dialogVisible=true;
-        this.title='新增预案管理';
+        this.title='新增汛后总结';
       },
       /**
-       *预案管理新增及修改
+       *汛后总结新增及修改
        */
       submitForm() {
         const _this=this;
         _this.$refs['ruleForm'].validate((valid) => {
           if (valid) {
             let url,msg,msg1;
-            if(_this.title==="新增预案管理"){
-              url=_this.$url.baseUrl+'api/guoYang/auxiliary-decision/v0.1/gy-fxkh-concerned-manage/add';
+            if(_this.title==="新增汛后总结"){
+              url=_this.$url.baseUrl+'api/guoYang/v0.1/latter-summary/gy';
               msg="新增成功";
               msg1="新增失败";
+              _this.ruleForm.reportUserid='3804'; //人员id写的假数据  需从缓存获取
+              _this.ruleForm.summaryYear=new Date(this.ruleForm.summaryYear).getFullYear();
             }else{
-              url=_this.$url.baseUrl+'api/guoYang/auxiliary-decision/v0.1/gy-fxkh-concerned-manage/update';
+              url=_this.$url.baseUrl+'api/guoYang/v0.1/latter-summary/gy/update';
               msg="修改成功";
               msg1="修改失败";
+              _this.ruleForm.reportUserid='3804'; //人员id写的假数据  需从缓存获取
+              _this.ruleForm.summaryYear=new Date(this.ruleForm.summaryYear).getFullYear();
             }
+
             _this.$http.put(url,_this.ruleForm).then((res)=>{
               if(res.status===200){
-                if(_this.fileList.length>0){
-                  _this.fileData.bizId=res.data.result.message;
-                  _this.$refs.upload.submit();
+                if(res.data.result==="总结标题重复！"){
+                  _this.$message({
+                    type:"error",
+                    message:"总结标题重复！"
+                  });
+                  _this.dialogVisible=false;
                 }else{
+                  _this.dialogVisible=false;
+                  _this.loading=true;
+                  if(_this.fileList.length>0){
+                    _this.fileData.bizId=res.data.result.message;
+                    _this.$refs.upload.submit();
+                    _this.logadingText="文件上传中！"
+                  }else{
+                    this.search();
+                  }
                   _this.$message({
                     type:"success",
                     message:msg
                   });
-                  _this.dialogVisible=false;
-                  _this.loading=true;
-                  _this.multipleSelection=[];
-                  _this.fileList=[];
-                  _this.search();
                   _this.$refs['ruleForm'].resetFields();
-                  this.ruleForm={
-                    thresholdName:"",
-                    thresholdValue:"",
-                    thresholdValueType:"",
-                    alarmLevel:"",
-                    alarmLevelColor:"red",
-                    countermeasures:"",
-                  };
                 }
               }else{
                 _this.$message({
                   type:"error",
                   message:msg1
                 });
+                _this.dialogVisible=false;
                 _this.$refs['ruleForm'].resetFields();
-                _this.fileList=[];
-                this.ruleForm={
-                  thresholdName:"",
-                  thresholdValue:"",
-                  thresholdValueType:"",
-                  alarmLevel:"",
-                  alarmLevelColor:"red",
-                  countermeasures:"",
-                };
               }
             })
           } else {
@@ -447,6 +583,16 @@
        * @param file
        */
       handleChange(file, fileList) {
+        $.each(fileList,(v,item)=>{
+          let fileExt = item.name.substring(item.name.lastIndexOf("."));
+          if (!checkFileExt(fileExt)) {
+            this.$message({
+              type:"error",
+              message:item.name+"的文件格式不符，请重新选择(格式:.jpg;.png;.jpeg;.gif;.zip;.rar;.doc;.docx;.xls;.xlsx;.pdf;.ppt;.pptx;)"
+            });
+            fileList.splice(v,1);
+          }
+        });
         this.fileList=fileList;
       },
       /**
@@ -461,24 +607,35 @@
         }
         return  isLt10M;
       },
+      /**
+       * 文件上传成功后回调
+       */
       handleAvatarSuccess(res, file){
-        if(res){
-          this.dialogVisible=false;
-          this.loading=true;
+        setTimeout(()=>{
+          this.$refs.upload.clearFiles();
+          this.search();
           this.$message({
             type:"success",
             message:"添加文件成功"
           });
-          this.search();
-        }else{
-          this.dialogVisible=false;
-          this.loading=true;
-          this.$message({
-            type:"error",
-            message:"添加文件失败"
-          });
-          this.search();
-        }
+        },500);
+      },
+      /**
+       * 删除文件
+       */
+      delFile(item){
+        this.$http.delete(this.$url.baseUrl+'api/attachment/v0.1/attachment',{data:{ids:[item.id]}}).then((res)=>{
+          if(res.status===200){
+            this.$message({
+              type:'success',
+              message:"删除成功"
+            });
+            this.upFileList.splice(item,1)
+          }
+        })
+      },
+      catchData(value){
+        this.ruleForm.content=value
       }
     },
     computed:{
@@ -544,8 +701,18 @@
   #concerned .table-button .add:hover{
     color: #0a95ef;
   }
+  #concerned .attachment{
+    text-decoration: underline;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    color: #0a95ef;
+    display: inline-block;
+    width: 100%;
+  }
 </style>
-<style>
+<style lang="less">
   #concerned .table-button .add span{
     margin-left: 5px!important;
   }
@@ -554,7 +721,48 @@
   }
   #concerned .el-dialog .el-dialog__body{
     padding: 20px!important;
-    height: 350px;
+    height: 550px;
     overflow-y: auto;
+  }
+  #concerned .upload-demo{
+    height: 150px;
+    overflow-y: auto;
+  }
+
+
+  #concerned .upFile{
+    height: 150px;
+    overflow-y: auto;
+    ul{
+      li{
+        line-height: 32px;
+        width: 100%;
+        display: inline-block;
+        .iconHover{
+          .el-icon-circle-check{
+            display: block;
+            color:#67c23a ;
+            line-height: 32px;
+            margin-right: 10px;
+          }
+          .el-icon-close{
+            display: none;
+            color:#666666;
+            cursor: pointer;
+            line-height: 32px;
+            margin-right: 10px;
+          }
+        }
+
+        .iconHover:hover{
+          .el-icon-circle-check{
+            display: none;
+          }
+          .el-icon-close{
+            display: block;
+          }
+        }
+      }
+    }
   }
 </style>
