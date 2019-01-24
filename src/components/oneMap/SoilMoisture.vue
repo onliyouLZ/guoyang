@@ -9,12 +9,12 @@
           <el-scrollbar
             style="height: 100%"
             tag="table">
-            <div style="max-height: 200px">
+            <div style="max-height: 500px">
               <el-table
                 :data="tableData"
                 stripe
                 size="mini"
-                height="150"
+                height="400"
                 style="width: 100%;font-size: 12px"
                 header-cell-class-name="table-dliog-header"
                 cell-class-name="table-dliog-body"
@@ -114,7 +114,7 @@
                 if(data.length>0){
                   if(res.status===200){
                     $.each(data,(v,item)=>{
-                      item.type='sq';
+                      item.type='soil';
                       if(item.TM){
                         item.TM=new Date(item.TM).formatDate('yyyy-MM-dd HH:mm:ss');
                       }

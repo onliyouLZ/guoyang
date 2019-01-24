@@ -66,7 +66,11 @@
     <div id="openDialog">
 
     </div>
-    <river :dialogData="dialogData"  :dialogVisible.sync="dialogVisible" ref="child"></river>
+    <river :dialogData="riverlogData"  :riverVisible.sync="riverVisible" ref="child"></river>
+    <rain :dialogData="rainlogData" :rainVisible.sync="rainVisible" ref="child"></rain>
+    <soil :dialogData="soillogData" :soilVisible.sync="soilVisible" ref="child"></soil>
+    <videos :dialogData="videologData" :videoVisible.sync="videoVisible" ref="child"></videos>
+    <warehouse :dialogData="warelogData" :wareVisible.sync="wareVisible" ref="child"></warehouse>
     <!--<lakes :lakesData.sync="lakesData"  :lakesShow.sync="lakesShow" ref="child"></lakes>-->
   </div>
 </template>
@@ -88,6 +92,10 @@
      * 弹窗
      */
     import river from '../dilog/oneMapdliog/riverRegime/river' //河道弹窗
+    import rain from '../dilog/oneMapdliog/rainRegime/rain' //雨量弹窗
+    import soil from '../dilog/oneMapdliog/soilRegime/soil' //墒情弹窗
+    import video from '../dilog/oneMapdliog/videoRegime/video' //视频弹窗
+    import warehouse from '../dilog/oneMapdliog/wareRegime/warehouse' //仓库弹窗
 
 
     //标注站点
@@ -101,7 +109,11 @@
           soilMoisture:soilMoisture,
           Precipitation:Precipitation,
           videoSurveillance:videoSurveillance,
-          river:river
+          river:river,
+          rain:rain,
+          soil:soil,
+          videos:video,
+          warehouse:warehouse
         },
         data(){
           return{
@@ -144,10 +156,19 @@
             },
             showComponent:"riverRegime",
             dialogShow:"",
-            dialogData:{},
             childData:[],
             moveData:{},
-            dialogVisible:false,
+
+            riverlogData:{},
+            rainlogData:{},
+            soillogData:{},
+            videologData:{},
+            warelogData:{},
+            riverVisible:false,
+            rainVisible:false,
+            soilVisible:false,
+            videoVisible:false,
+            wareVisible:false,
           }
         },
         methods:{
@@ -166,7 +187,7 @@
                 name:"TDTzj",
                 TileName : "天地图注记",
                 source: new ol.source.XYZ({
-                  url: "http://t2.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}&tk=acdde43f9bf091f2383b721ed1aa581f"// 注记
+                  url: "http://t4.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}&tk=acdde43f9bf091f2383b721ed1aa581f"// 注记
                 })
               });
               //影像图
@@ -187,7 +208,7 @@
                   // center: [114.32, 30.22],
                   center: [116.27, 33.55],
                   //最大显示级数
-                  maxZoom: 18,
+                  maxZoom: 28,
                   //最小显示级数
                   minZoom: 1,
                   //当前显示级数
@@ -319,9 +340,31 @@
             },
             //子组件控制弹窗
             showFormChild(data){
-              // this.dialogVisible=data.show;
-              // this.dialogShow=data.data.type;
-              // this.dialogData=data.data;
+              let type=data.data.type;
+              switch (type){
+                case 'river':
+                  this.riverVisible=true;
+                  this.riverlogData=data.data;
+                  break;
+                case 'rain':
+                  this.rainVisible=true;
+                  this.rainlogData=data.data;
+                  break;
+                case 'soil':
+                  this.soilVisible=true;
+                  this.soillogData=data.data;
+                  break;
+                case 'video':
+                  this.videoVisible=true;
+                  this.videologData=data.data;
+                  break;
+                case 'warehouse':
+                  this.wareVisible=true;
+                  this.warelogData=data.data;
+                  break;
+                default:
+                  break;
+              }
             },
             //子组件控制鼠标浮动
             moves(data){
@@ -399,6 +442,33 @@
                           info.ADNM=" ";
                         }
                         content += '<p class="psvr">地址:'+info.ADNM+'</p>';
+                        content += '</div></div></div>';
+                        return content;
+                        break;
+                      case 'rain':
+                        content += '<div class="arrow" ></div>';
+                        content += '<p class="p_rsvr_bg">'+info.STNM+'</p>';
+                        if(info.OWRQ>0){
+                          classs="div_t_l_warn"
+                        }else{
+                          classs="div_t_l"
+                        }
+                        content += '<div class="div_bg"><div class="div_top"><div class="'+classs+'">';
+                        content += '<span style="font-size:12px;display: inline-block">雨量:</span>';
+                        if(info.drp){
+                          info.drp=info.drp;
+                        }else{
+                          info.drp=" ";
+                        }
+                        content += '<span>'+info.drp+'</span><sub>m</sub></div><div class="div_t_r">';
+                        content += '</div></div><div class="div_lend"></div><div class="div_bottom">';
+                        content += '<p>水系:涡阳水系</p>';
+                        if(info.adnm){
+                          info.adnm=info.adnm;
+                        }else{
+                          info.adnm=" ";
+                        }
+                        content += '<p class="psvr">地址:'+info.adnm+'</p>';
                         content += '</div></div></div>';
                         return content;
                         break;
@@ -508,6 +578,7 @@
                     $.each(data,(v,item)=>{
                       let LGTD=item.LGTD;
                       let LTTD=item.LTTD;
+                      item.type='video';
                       let point=new ol.Feature({
                         data:item,
                         geometry: new ol.geom.Point([LGTD, LTTD])
@@ -584,6 +655,7 @@
                     $.each(data,(v,item)=>{
                       let LGTD=item.LGTD;
                       let LTTD=item.LTTD;
+                      item.type="warehouse";
                       item.STNM=item.WH_NAME;
                       let point=new ol.Feature({
                         data:item,
@@ -659,7 +731,9 @@
                         item.LGTD=item.lgtd;
                         let LTTD=item.lttd;
                         item.LTTD=item.lttd;
+                        item.STCD=item.stcd;
                         item.STNM=item.stnm;
+                        item.type="rain";
                         let point=new ol.Feature({
                           data:item,
                           geometry: new ol.geom.Point([LGTD, LTTD])
@@ -732,6 +806,7 @@
                       $.each(data,(v,item)=>{
                         let LGTD=item.LGTD;
                         let LTTD=item.LTTD;
+                        item.type="soil";
                         let point=new ol.Feature({
                           data:item,
                           geometry: new ol.geom.Point([LGTD, LTTD])
@@ -796,63 +871,12 @@
 
         },
         created(){
-          // const that=this;
-          // that.$nextTick(()=>{
-          //   //边界线处理
-          //   let bjx= require('../../static/sdk/XZQFW');
-          //   let shape=bjx.result.shape;
-          //   let mapJson=bjx.result.json;
-          //   //处理数据的方式
-          //   let format = new ol.format.WKT();
-          //   //处理数据
-          //   let newFeature = format.readFeature(shape, {
-          //     dataProjection: 'EPSG:4326',
-          //     featureProjection: 'EPSG:4326'
-          //   });
-          //   let newFeature1 = format.readFeature(mapJson, {
-          //     dataProjection: 'EPSG:4326',
-          //     featureProjection: 'EPSG:4326'
-          //   });
-          //   let newFeature2 = format.readFeature(shape, {
-          //     dataProjection: 'EPSG:4326',
-          //     featureProjection: 'EPSG:4326'
-          //   });
-          //   //边界线1
-          //   newFeature.setStyle(new ol.style.Style({
-          //     stroke: new ol.style.Stroke({
-          //       color: "#03956b",
-          //       width: 3
-          //     })
-          //   }));
-          //   //遮罩
-          //   newFeature1.setStyle(new ol.style.Style({
-          //     fill: new ol.style.Fill({
-          //       color: 'rgba(255,255,255,1)'
-          //     })
-          //   }));
-          //   //边界线2
-          //   newFeature2.setStyle(new ol.style.Style({
-          //     stroke: new ol.style.Stroke({
-          //       color: "#94ffe0",
-          //       width: 2
-          //     })
-          //   }));
-          //
-          //   //实例化一个矢量图层Vector作为绘制层
-          //   let source = new ol.source.Vector({
-          //     features: [newFeature1,newFeature,newFeature2]
-          //   });
-          //   //创建一个图层
-          //   let vector = new ol.layer.Vector({
-          //     source: source
-          //   });
-          //   //添加图层
-          //   that.map.addLayer(vector);
-          // });
-          this.$http.get('/api/bjx').then((res)=>{
-            let shape=res.data.data.result.shape;
-            let mapJson=res.data.data.result.json;
-
+          const that=this;
+          that.$nextTick(()=>{
+            //边界线处理
+            let bjx= require('../../static/sdk/XZQFW');
+            let shape=bjx.result.shape;
+            let mapJson=bjx.result.json;
             //处理数据的方式
             let format = new ol.format.WKT();
             //处理数据
@@ -898,8 +922,59 @@
               source: source
             });
             //添加图层
-            this.map.addLayer(vector)
+            that.map.addLayer(vector);
           });
+          // this.$http.get('/api/bjx').then((res)=>{
+          //   let shape=res.data.data.result.shape;
+          //   let mapJson=res.data.data.result.json;
+          //
+          //   //处理数据的方式
+          //   let format = new ol.format.WKT();
+          //   //处理数据
+          //   let newFeature = format.readFeature(shape, {
+          //     dataProjection: 'EPSG:4326',
+          //     featureProjection: 'EPSG:4326'
+          //   });
+          //   let newFeature1 = format.readFeature(mapJson, {
+          //     dataProjection: 'EPSG:4326',
+          //     featureProjection: 'EPSG:4326'
+          //   });
+          //   let newFeature2 = format.readFeature(shape, {
+          //     dataProjection: 'EPSG:4326',
+          //     featureProjection: 'EPSG:4326'
+          //   });
+          //   //边界线1
+          //   newFeature.setStyle(new ol.style.Style({
+          //     stroke: new ol.style.Stroke({
+          //       color: "#03956b",
+          //       width: 3
+          //     })
+          //   }));
+          //   //遮罩
+          //   newFeature1.setStyle(new ol.style.Style({
+          //     fill: new ol.style.Fill({
+          //       color: 'rgba(255,255,255,1)'
+          //     })
+          //   }));
+          //   //边界线2
+          //   newFeature2.setStyle(new ol.style.Style({
+          //     stroke: new ol.style.Stroke({
+          //       color: "#94ffe0",
+          //       width: 2
+          //     })
+          //   }));
+          //
+          //   //实例化一个矢量图层Vector作为绘制层
+          //   let source = new ol.source.Vector({
+          //     features: [newFeature1,newFeature,newFeature2]
+          //   });
+          //   //创建一个图层
+          //   let vector = new ol.layer.Vector({
+          //     source: source
+          //   });
+          //   //添加图层
+          //   this.map.addLayer(vector)
+          // });
 
         },
         mounted(){
@@ -977,9 +1052,22 @@
               //获取数据
               let data=feature.get('data');
               if(data){
-                that.dialogVisible=true;
-                // that.dialogShow=data.type;
-                that.dialogData=data;
+                if(data.type==='river'){
+                  that.riverVisible=true;
+                  that.riverlogData=data;
+                }else if(data.type==='rain'){
+                  that.rainVisible=true;
+                  that.rainlogData=data;
+                }else if(data.type==='soil'){
+                  that.soilVisible=true;
+                  that.soillogData=data;
+                }else if(data.type==='video'){
+                  that.videoVisible=true;
+                  that.videologData=data;
+                }else if(data.type==='warehouse'){
+                  that.wareVisible=true;
+                  that.warelogData=data;
+                }
               }
             }
           });

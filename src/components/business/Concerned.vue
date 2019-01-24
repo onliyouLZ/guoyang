@@ -7,7 +7,7 @@
         <label>总结标题:</label>
         <el-input style="width: 150px" v-model="NoticeTitle" placeholder="请输入总结标题"></el-input>
         <el-button type="primary" @click="primary">查询</el-button>
-        <el-button type="success" @click="exportExcel(tableData,multipleSelection)">导出</el-button>
+        <el-button type="success" @click="exportExcel(tableData,exportMulti)">导出</el-button>
       </div>
       <!--<el-scrollbar-->
       <!--style="height: 100%;"-->
@@ -202,6 +202,7 @@
           {data:'caozuo',title:'操作'},
         ],
         multipleSelection:[],
+        exportMulti:[],
         loading: true,
         logadingText:"加载中！",
         title:"",
@@ -329,11 +330,14 @@
       handleSelectionChange(val) {
         if(val.length>0){
           this.multipleSelection=[];
+          this.exportMulti=[];
           $.each(val,(v,item)=>{
             this.multipleSelection.push(item.ID);
+            this.exportMulti.push(item)
           });
         }else{
           this.multipleSelection=[];
+          this.exportMulti=[];
         }
       },
       //点击行选中
@@ -386,7 +390,7 @@
         _this.upFileList=row.NOTIFY_ATTS;
          _this.$nextTick(()=>{
            _this.ruleForm.content=row.CONTENT;
-         })
+         });
         _this.ruleForm.id=row.ID;
       },
       //行内删除
@@ -412,7 +416,8 @@
       //关闭弹窗
       dialogClose(ruleForm){
         this.$refs[ruleForm].resetFields();
-        this.multipleSelection=[];
+        this.$refs.multipleTable.clearSelection();
+        this.exportMulti=[];
         this.upFileList=[];
         this.ruleForm={
           title:"",
@@ -430,6 +435,7 @@
                 message:"删除成功！"
               });
               this.loading=true;
+              this.$refs.multipleTable.clearSelection();
               this.search();
             }else{
               this.$message({

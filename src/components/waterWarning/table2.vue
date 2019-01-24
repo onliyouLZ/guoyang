@@ -191,7 +191,7 @@
             }
             function adList() {
               let parms={
-                adcd: '341621',
+                adcd: '341621', //暂时假数据
                 adcdList: []
               };
               return  that.$http.post(that.$url.baseUrl+'api/commonApi/sl323/v0.1/basic/ad/list',parms)

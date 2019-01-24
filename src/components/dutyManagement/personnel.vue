@@ -7,7 +7,7 @@
         <label>名称:</label>
         <el-input style="width: 150px" v-model="typeName" placeholder="值班人员类型名称"></el-input>
         <el-button type="primary" @click="primary">查询</el-button>
-        <el-button type="success" @click="exportExcel(tableData,multipleSelection)">导出</el-button>
+        <el-button type="success" @click="exportExcel(tableData,exportMulti)">导出</el-button>
       </div>
       <!--<el-scrollbar-->
       <!--style="height: 100%;"-->
@@ -126,6 +126,7 @@
         ],
         disabled:false,
         multipleSelection:[],
+        exportMulti:[],
         loading: true,
         dialogVisible: false,
         ruleForm:{
@@ -188,6 +189,7 @@
       handleSelectionChange(val) {
         if(val.length>0){
           this.multipleSelection=[];
+          this.exportMulti=[];
           $.each(val,(v,item)=>{
             this.multipleSelection.push(
               {
@@ -195,9 +197,11 @@
                 code:item.code
               }
             );
+            this.exportMulti.push(item)
           });
         }else{
           this.multipleSelection=[];
+          this.exportMulti=[];
         }
       },
       //点击行选中
@@ -270,49 +274,49 @@
       //重置
       resetForm() {
         this.$refs['ruleForm'].resetFields();
-        this.ruleForm={
-          code:"",
-          name:'',
-          type:"dutyPersonType",
-        };
         this.dialogVisible=false;
       },
       dialogClose(ruleForm){
         this.dialogVisible=false;
         this.$refs[ruleForm].resetFields();
+        this.$refs.multipleTable.clearSelection();
+        this.exportMulti=[];
         this.ruleForm={
           code:"",
           name:'',
           type:"dutyPersonType",
         };
       },
-      /**
-       * 抢险队伍删除
-       */
       del(){
-        this.$http.delete(this.$url.baseUrl+'api/common-api/ht-enum/v0.1/enum',{data:this.multipleSelection}).then((res)=>{
-          if(res.status===200){
-            this.$message({
-              type:"success",
-              message:"删除成功！"
-            });
-            this.loading=true;
-            this.search();
-          }else{
-            this.$message({
-              type:"error",
-              message:"删除失败！"
-            })
-          }
-        });
+        if(this.multipleSelection.length>0){
+          this.$http.delete(this.$url.baseUrl+'api/common-api/ht-enum/v0.1/enum',{data:this.multipleSelection}).then((res)=>{
+            if(res.status===200){
+              this.$message({
+                type:"success",
+                message:"删除成功！"
+              });
+              this.loading=true;
+              this.$refs.multipleTable.clearSelection();
+              this.search();
+            }else{
+              this.$message({
+                type:"error",
+                message:"删除失败！"
+              })
+            }
+          });
+        }else{
+          this.$message({
+            type:"error",
+            message:"请选择需要删除的数据！"
+          })
+        }
+
       },
       add(){
         this.dialogVisible=true;
         this.title='新增人员类型';
       },
-      /**
-       *防汛抗旱责任制新增及修改
-       */
       submitForm() {
         const _this=this;
         _this.$refs['ruleForm'].validate((valid) => {

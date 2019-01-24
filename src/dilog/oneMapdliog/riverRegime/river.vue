@@ -75,7 +75,7 @@
             </el-date-picker>
             <el-button type="primary" style="margin-left: 10px;" @click="primary">查询</el-button>
           </div>
-          <div id="electric_prod_char" :style="{width:width,height:height}" ></div>
+          <div id="electric_prod_char_river" :style="{width:width,height:height}" ></div>
           <div class="echartTable" :class="{'collosed':isCollapsed===false}">
             <el-table
               :data="tableData"
@@ -137,49 +137,40 @@
                 :value="item.value">
               </el-option>
             </el-select>
-            <el-radio v-model="radio" label="1">水位</el-radio>
-            <el-radio v-model="radio" label="2">流量</el-radio>
-            <el-button type="primary" style="margin-left: 10px;">查询</el-button>
+            <el-radio-group v-model="radio">
+              <el-radio  label="水位">水位</el-radio>
+              <el-radio  label="流量">流量</el-radio>
+            </el-radio-group>
+            <el-button type="primary" style="margin-left: 10px;" @click="historyPrimary">查询</el-button>
           </div>
-          <!--<div v-if="echartShow" id="electric_prod_char1" style="width:100%;height:350px;" ></div>-->
-          <!--<div v-if="tableShow">-->
-            <!--<el-scrollbar-->
-              <!--style="height: 100%"-->
-              <!--tag="table"-->
-              <!--viewStyle="width:100%">-->
-              <!--<div style="max-height:350px;width: 100%">-->
-                <!--<el-table-->
-                  <!--:data="tableData"-->
-                  <!--border-->
-                  <!--size="mini"-->
-                  <!--style="width:100%"-->
-                  <!--height="350"-->
-                  <!--cell-class-name="table-body"-->
-                  <!--header-cell-class-name="table-header">-->
-                  <!--<el-table-column-->
-                    <!--type="index"-->
-                    <!--width="50"-->
-                    <!--label="序号">-->
-                  <!--</el-table-column>-->
-                  <!--<el-table-column-->
-                    <!--prop="date"-->
-                    <!--align="center"-->
-                    <!--label="时间">-->
-                  <!--</el-table-column>-->
-                  <!--<el-table-column-->
-                    <!--prop="value"-->
-                    <!--align="center"-->
-                    <!--label="水位">-->
-                  <!--</el-table-column>-->
-                  <!--<el-table-column-->
-                    <!--prop="address"-->
-                    <!--align="center"-->
-                    <!--label="总过闸流量(m³/s)">-->
-                  <!--</el-table-column>-->
-                <!--</el-table>-->
-              <!--</div>-->
-            <!--</el-scrollbar>-->
-          <!--</div>-->
+          <div id="electric_prod_char_river1" :style="{width:width,height:height}" ></div>
+          <div class="echartTable" :class="{'collosed':isCollapsed===false}">
+            <el-table
+              :data="tableData1"
+              border
+              size="mini"
+              style="width:100%"
+              height="400"
+              cell-class-name="table-body"
+              header-cell-class-name="table-header">
+              <el-table-column
+                type="index"
+                width="50"
+                label="序号"
+                align="center">
+              </el-table-column>
+              <template v-for="item in historyHeader">
+                <el-table-column
+                  :prop="item.data"
+                  align="center"
+                  :label="item.label">
+                </el-table-column>
+              </template>
+            </el-table>
+            <div class="collseBtn"  @click="toggleTable">
+              <span>{{isCollapsed ? collseTitle='显示':collseTitle='隐藏'}}</span>
+            </div>
+          </div>
         </el-tab-pane>
       </el-tabs>
     </el-dialog>
@@ -193,57 +184,26 @@
     name: "riverDliog",
     data(){
       return{
-        visible:this.dialogVisible,
+        visible:this.riverVisible,
         activeName: 'first',
         collseTitle:"显示",
         isCollapsed:true,
         tableData: [],
-        radio:"1",
+        tableData1:[],
+        historyHeader:[],
+        radio:"水位",
         width:"100%",
         height:"350px",
         // firstTime: [new Date().datePro('{%d-1}'), new Date()],
         firstTime: [new Date("2018-12-22 08:00:00"), new Date("2018-12-22 20:00:00")],
         secondTime:[new Date("2018-12-22 08:00:00"), new Date("2018-12-22 20:00:00")],
-        oldYear:["2018"],
-        yearOption: [
-          {
-            value: '2018',
-            label: '2018'
-          },
-          {
-            value: '2017',
-            label: '2017'
-          },
-          {
-            value: '2016',
-            label: '2016'
-          },
-          {
-            value: '2015',
-            label: '2015'
-          },
-          {
-            value: '2014',
-            label: '2014'
-          },
-          {
-            value: '2013',
-            label: '2013'
-          },
-          {
-            value: '2012',
-            label: '2012'
-          },
-          {
-            value: '2011',
-            label: '2011'
-          },],
+        oldYear:["2017"],
+        yearOption: [],
         optionData:"",
-        echartData:[]
       }
     },
     props:{
-      dialogVisible:{
+      riverVisible:{
         type:Boolean,
         default:false
       },
@@ -258,13 +218,15 @@
        */
       handleClick(tab, event){
         if(this.activeName==="first"){
+          this.historyHeader=[];
         }else if(this.activeName==="second"){
           this.$nextTick(()=>{
-            this.getRealtime()
+            this.getRealtime();
+            this.historyHeader=[]
           });
         }else if(this.activeName==="third"){
           this.$nextTick(()=>{
-
+            this.historyHeader.push({data:"TM",label:"时间"});
             this.getHistory()
           });
         }
@@ -305,42 +267,115 @@
               $.each(data,(v,item)=>{
                 item.TM=new Date(item.TM).formatDate('yyyy-MM-dd HH:00');
               });
-              _this.echartData=data;
               _this.initWater(data);
             }
           })
       },
       //获取历史同时期对比
       getHistory(){
+        const _this=this;
         let parms={
           "stcdList":[this.dialogData.STCD],
           "tmList":
             [
-              {"bgtm":new Date(this.secondTime[0]).formatDate('yyyy-MM-dd HH:00'),"endtm":new Date(this.secondTime[1]).formatDate('yyyy-MM-dd HH:00')},
-              // {"bgtm":new Date(),"endtm":"2018-12-31 15:00"},
-              // {"bgtm":"2017-12-30 08:00","endtm":"2017-12-31 15:00"}
+              {"bgtm":new Date(_this.secondTime[0]).formatDate('yyyy-MM-dd HH:00'),"endtm":new Date(_this.secondTime[1]).formatDate('yyyy-MM-dd HH:00')},
             ]
         };
-        $.each(this.oldYear,(v,item)=>{
+        let baseBgMDHMS = parms.tmList[0].bgtm.substr(4);
+        let baseEndMDHMS = parms.tmList[0].endtm.substr(4);
+        let findMaxLength = function (arr) {
+          let maxLength = 0, index;
+          $.each(arr, function (i, item) {
+            if (item.length >= maxLength) {
+              index = i;
+              maxLength = item.length;
+            }
+          });
+          return index;
+        };
+        $.each(_this.oldYear,(v,item)=>{
           let obj={
-            bgtm:new Date(item).formatDate('yyyy-MM-dd HH:00'),endtm:new Date(item).formatDate('yyyy-MM-dd HH:00')
-          }
+            bgtm:item+baseBgMDHMS,endtm:item+baseEndMDHMS
+          };
           parms.tmList.push(obj);
         });
-        console.log(parms);
-        // this.$http.post(this.$url.baseUrl+"api/commonApi/sl323/v0.1/realtime/river/list-by-tms",parms)
-        //   .then((res)=>{
-        //     console.log(res);
-        //   });
+        _this.$http.post(_this.$url.baseUrl+"api/commonApi/sl323/v0.1/realtime/river/list-by-tms",parms)
+          .then((res)=>{
+            if(res.status===200){
+              let data=convertObjectToArray(res.data.result);
+              let yearDataList = [], bgyear =new Date(_this.secondTime[0]).formatDate('yyyy-MM-dd HH:00').substr(0, 4);
+              let years = $.extend(true, [], _this.oldYear);
+              if ($.inArray(bgyear, years) === -1) {
+                years.push(bgyear);
+              };
+              //排序年
+              years.sort(function (a, b) {
+                return parseInt(b) - parseInt(a);
+              });
+              for (let i = 0; i < years.length; i++) {
+                let tempArr = [],obj={};
+                if(this.radio==="水位"){
+                  obj.data=years[i]+'_z';
+                }else{
+                  obj.data=years[i]+'_q';
+                }
+                obj.label=years[i];
+                $.each(data, function (j, item) {
+                  let tempObj = {};
+                  item.DATETM = item.TM.toDate();
+                  item.TM = item.DATETM.formatDate('yyyy-MM-dd HH:mm:ss');
+                  let y = item.TM.substr(0, 4);
+                  if (y === years[i].toString()) {
+                    tempObj.year = y;
+                    tempObj.TM = item.TM.substr(5);
+                    tempObj.Z = item.Z;
+                    tempObj.Q = item.Q;
+                  }
+                  if (tempObj.year) {
+                    tempArr.push(tempObj);
+                  }
+                });
+                if (tempArr.length > 0) {
+                  yearDataList.push(tempArr);
+                };
+                _this.historyHeader.push(obj)
+              }
+              let arr=[];
+              if(yearDataList.length>0){
+                let index = findMaxLength(yearDataList);
+                //组装tableData数据
+                $.each(yearDataList[index], function (i, item) {
+                  let tempObj = {};
+                  tempObj.TM = item.TM;
+                  tempObj.DATETM = item.DATETM;
+                  for (let j = 0; j < yearDataList.length; j++) {
+                    for (let k = 0; k < yearDataList[j].length; k++) {
+                      if (yearDataList[j][k].TM.substr(0, 11) === item.TM.substr(0, 11)) {
+                        tempObj[yearDataList[j][k].year + '_z'] = yearDataList[j][k].Z;
+                        tempObj[yearDataList[j][k].year + '_q'] = yearDataList[j][k].Q;
+                        break;
+                      }
+                    }
+                  }
+                  arr.push(tempObj);
+                });
+               _this.tableData1=arr;
+               _this.initHistory(arr);
+              }else{
+                _this.tableData1=data;
+                _this.initHistory(data);
+              }
+            }
+          });
       },
 
       //初始化水位流量过程线图
       initWater(echartData){
         let data=echartData;
         if(data){//有数据时
-          let electric_prod_chart = $('#electric_prod_char');
+          let electric_prod_chart = $('#electric_prod_char_river');
           if(electric_prod_chart[0]){
-            let electric_prod_chart =  echarts.init(document.getElementById('electric_prod_char'));
+            let electric_prod_chart =  echarts.init(document.getElementById('electric_prod_char_river'));
             // 设置option
             let electric_prod_chart_option = {
               title: {
@@ -391,11 +426,11 @@
               yAxis: [
                 {
                   type: 'value',
-                  name: '水量',
+                  name: '水位(m)',
                 },
                 {
                   type: 'value',
-                  name: '流量',
+                  name: '流量(m³/s)',
                 }
               ],
               series: [
@@ -421,10 +456,11 @@
             // 绘制图表
             electric_prod_chart.setOption(electric_prod_chart_option);
           }
-        }else{//没有数据时
-          let electric_prod_chart = $('#electric_prod_char');
+        }
+        else{//没有数据时
+          let electric_prod_chart = $('#electric_prod_char_river');
           if(electric_prod_chart[0]){
-            let electric_prod_chart =  echarts.init(document.getElementById('electric_prod_char'));
+            let electric_prod_chart =  echarts.init(document.getElementById('electric_prod_char_river'));
             // 设置option
             let electric_prod_chart_option = {
               title: {
@@ -503,25 +539,160 @@
 
       },
       //初始化历史同期对比
-      initHistory(){
-        let electric_prod_chart1 =  echarts.init(document.getElementById('electric_prod_char1'));
-        // 设置option
-        let electric_prod_chart_option1 = {
-          xAxis: {
-            type: 'category',
-            data: ['2012', '2013', '2014', '2015', '2016', '2017', '2018']
-          },
-          yAxis: {
-            type: 'value'
-          },
-          series: [{
-            data: [25, 40, 80, 20, 40, 66, 55],
-            type: 'line',
-            smooth: true
-          }]
-        };
-        // 绘制图表
-        electric_prod_chart1.setOption(electric_prod_chart_option1);
+      initHistory(echartData){
+        let data=echartData;
+        if(data){//有数据时
+          let electric_prod_chart1 = $('#electric_prod_char_river1');
+          if(electric_prod_chart1[0]){
+            let electric_prod_chart1 =  echarts.init(document.getElementById('electric_prod_char_river1'));
+            let series=[],legendData=[];
+            $.each(this.historyHeader,(v,item)=>{
+              let obj={};
+              if(item.data==="TM"){
+                return
+              }else{
+                obj.name=item.label;
+                obj.type='line';
+                obj.data=data.map(function (items) {
+                  return items[item.data];
+                });
+                obj.smooth=true;
+                series.push(obj);
+                legendData.push(item.label);
+              }
+            });
+            // 设置option
+            let electric_prod_chart_option = {
+              title: {
+                text: this.optionData.STNM+'历史同期对比'+this.radio,
+                left: 'center'
+              },
+              tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                  type: "cross",
+                  lineStyle: {
+                    color: "#48b",
+                    width: 2,
+                    type: "solid"
+                  },
+                  crossStyle: {
+                    color: "#1e90ff",
+                    width: 1,
+                    type: "dashed"
+                  },
+                  shadowStyle: {
+                    color: "rgba(150,150,150,0.3)",
+                    width: "auto",
+                    type: "default"
+                  }
+                },
+              },
+              legend: {
+                data:legendData,
+                bottom:0
+              },
+              xAxis: {
+                type: 'category',
+                data:data.map(function (item) {
+                  return item.TM;
+                }),
+                boundaryGap: false,
+                lineWidth: 2.5,
+                splitLine: false,
+                onZero: true,   //x轴的位置
+                nameLocation: 'end',
+                labelFormatter: null,
+                position: 'bottom',
+                show: true,
+                gridIndex: 0
+              },
+              yAxis: [
+                {
+                  type: 'value',
+                  name: this.radio==="水位" ?'水位(m)':'流量(m)',
+                },
+              ],
+              series: series
+            };
+            // 绘制图表
+            electric_prod_chart1.setOption(electric_prod_chart_option);
+        }}
+        else{//没有数据时
+          let electric_prod_chart = $('#electric_prod_char_river1');
+          if(electric_prod_chart[0]){
+            let electric_prod_chart =  echarts.init(document.getElementById('electric_prod_char_river1'));
+            let series=[],legendData=[];
+            $.each(this.historyHeader,(v,item)=>{
+              let obj={};
+              if(item.data==="TM"){
+                return
+              }else{
+                obj.name=item.label;
+                obj.type='line';
+                obj.data=[];
+                obj.smooth=true;
+                series.push(obj);
+                legendData.push(item.label);
+              }
+            });
+            // 设置option
+            let electric_prod_chart_option = {
+              title: {
+                text: this.optionData.STNM+'历史同期对比'+this.radio,
+                left: 'center'
+              },
+              tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                  type: "cross",
+                  lineStyle: {
+                    color: "#48b",
+                    width: 2,
+                    type: "solid"
+                  },
+                  crossStyle: {
+                    color: "#1e90ff",
+                    width: 1,
+                    type: "dashed"
+                  },
+                  shadowStyle: {
+                    color: "rgba(150,150,150,0.3)",
+                    width: "auto",
+                    type: "default"
+                  }
+                },
+              },
+              legend: {
+                data:legendData,
+                bottom:0
+              },
+              xAxis: {
+                type: 'category',
+                data:[],
+                boundaryGap: false,
+                lineWidth: 2.5,
+                splitLine: false,
+                onZero: true,   //x轴的位置
+                nameLocation: 'end',
+                labelFormatter: null,
+                position: 'bottom',
+                show: true,
+                gridIndex: 0
+              },
+
+              yAxis: [
+                {
+                  type: 'value',
+                  name: this.radio==="水位" ?'水位(m)':'流量(m)',
+                },
+              ],
+              series: series
+            };
+            // 绘制图表
+            electric_prod_chart.setOption(electric_prod_chart_option);
+          }
+        }
       },
       toggleTable(){
        this.isCollapsed=!this.isCollapsed
@@ -531,37 +702,44 @@
        * 销毁图表实例下次进入重新渲染
        */
       dispose(){
-        let electric_prod_chart = $('#electric_prod_char');
-        let electric_prod_chart1 = $('#electric_prod_char1');
+        let electric_prod_chart = $('#electric_prod_char_river');
+        let electric_prod_chart1 = $('#electric_prod_char_river1');
         if(electric_prod_chart[0]){
-          let electric_prod_chart =  echarts.init(document.getElementById('electric_prod_char'));
+          let electric_prod_chart =  echarts.init(document.getElementById('electric_prod_char_river'));
           electric_prod_chart.dispose()
         }
         if(electric_prod_chart1[0]){
-          let electric_prod_chart1 =  echarts.init(document.getElementById('electric_prod_char1'));
+          let electric_prod_chart1 =  echarts.init(document.getElementById('electric_prod_char_river1'));
           electric_prod_chart1.dispose()
         }
       },
 
       primary(){
-        // this.dispose();
+        this.dispose();
         this.getRealtime();
+      },
+      historyPrimary(){
+        this.historyHeader=[];
+        this.tableData1=[];
+        this.dispose();
+        this.getHistory();
       },
       childClose(){
         this.tableData=[];
-        this.echartData=[];
+        this.historyHeader=[];
         this.isCollapsed=true;
         this.firstTime=[new Date("2018-12-22 08:00:00"), new Date("2018-12-22 20:00:00")];
+        this.secondTime=[new Date("2018-12-22 08:00:00"), new Date("2018-12-22 20:00:00")];
         this.dispose();
-        this.$emit('update:dialogVisible',false);
+        this.$emit('update:riverVisible',false);
       }
     },
     watch:{
       /**
        * 是否显示弹窗
        */
-      dialogVisible(){
-        this.visible=this.dialogVisible;
+      riverVisible(){
+        this.visible=this.riverVisible;
         if(this.visible){
           this.activeName="first";
           this.getBasic();
@@ -570,21 +748,23 @@
     },
     mounted(){
       this.$nextTick(()=>{
+        let currYear = new Date().getFullYear();
+        for (let i = 0; i < 30; i++) {
+          this.yearOption.push({label: currYear - i, value: '' + (currYear - i)});
+        }
       });
     },
   }
 </script>
 
 <style  scoped>
-  .search{
-    padding:10px 20px;
-  }
+
 
 </style>
 <style>
-  /*#riverDliog .lake-table .el-scrollbar .is-horizontal{*/
-    /*display: none!important;*/
-  /*}*/
+  #riverDliog .search{
+    padding:10px 20px;
+  }
   #riverDliog .collseBtn{
     width: 20px;
     height: 55px;
@@ -601,6 +781,7 @@
   }
   #riverDliog .echartTable{
     height: 400px;
+    z-index: 22;
     width: 0;
     position: absolute;
     top: 0;

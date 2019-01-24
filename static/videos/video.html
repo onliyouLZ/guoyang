@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script type="text/javascript" src="https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/jquery/jquery-1.10.2.min_65682a2.js"></script>
+	<script src="webVideoCtrl.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>
+<div id="divPlugin" class="plugin"></div>
+<div class="htmls"></div>
+
+<button onclick="clickLogin()">开始</button>
+<button onclick="clickStop()">停止</button>
+<button onclick="recording()">开始录像</button>
+<button onclick="recordingStop()">停止录像</button>
+<button onclick="getlocal()">获取本地配置</button>
+<button onclick="clickCapturePic()">抓图</button>
+<a href="WebComponents.exe" download="WebComponents.exe">插件下载</a>
+<!--<button onclick="getWindowSize()">获取播放窗口</button>-->
+<!--<button onclick="setWindow()">设置窗口播放比例</button>-->
+<!--<button onclick="restoreWindow()">还原窗口</button>-->
+<script type="text/javascript">
+    var g_iWndIndex = 0;
+    var szIP =$($(window.parent.document).find("iframe")[0]).attr("playIP");
+    if(szIP){
+        // 检查插件是否已经安装过
+        function intFunction() {
+            if(-1 == WebVideoCtrl.I_CheckPluginInstall()) {
+                alert("您还未安装过插件，双击开发包目录里的WebComponents.exe安装！");
+
+                return;
+            }
+
+            // 初始化插件参数及插入插件
+            WebVideoCtrl.I_InitPlugin(750, 450, {
+                iWndowType: 1,
+                cbSelWnd: function(xmlDoc) {
+                    g_iWndIndex = $(xmlDoc).find("SelectWnd").eq(0).text();
+                    var szInfo = "当前选择的窗口编号：" + g_iWndIndex;
+
+                }
+            });
+            WebVideoCtrl.I_InsertOBJECTPlugin("divPlugin");
+        }
+        intFunction()
+    }else{
+        alert("未获取到IP地址")
+    }
+
+    // 登录
+    function clickLogin() {
+        var szPort = '8888',
+            szUsername = 'admin',
+            szPassword = 'jxqswj888';
+
+        if("" == szIP || "" == szPort) {
+            return;
+        }
+
+        //				 var iRet = WebVideoCtrl.I_Login(szIP, 1, szPort, szUsername, szPassword, {
+        //				     success: function (xmlDoc) {
+        //				         console.log(szIP + " 登录成功！");
+        //				     },
+        //				     error: function (status, xmlDoc) {
+        //				         console.log(szIP + " 登录失败！");
+        //				     }
+        //				 });
+
+        var iRet = WebVideoCtrl.I_Login(szIP, 1, szPort, szUsername, szPassword, {
+            success: function(xmlDoc) {
+                $(".htmls").html(szIP + " 登录成功！");
+                setTimeout(function() {
+                    getChannelInfo();
+                }, 10);
+            },
+            error: function() {
+                $(".htmls").html(szIP + " 登录失败！");
+            }
+        });
+
+        if(-1 == iRet) {
+            $(".htmls").html(szIP + " 已登录过！");
+            clickStartRealPlay();
+        }
+    }
+
+    // 获取通道
+    function getChannelInfo() {
+        nAnalogChannel = 0;
+
+        if("" == szIP) {
+            return;
+        }
+        // 模拟通道
+        WebVideoCtrl.I_GetAnalogChannelInfo(szIP, {
+            async: false,
+            success: function(xmlDoc) {
+                var oChannels = $(xmlDoc).find("VideoInputChannel");
+                console.log(szIP + " 获取模拟通道成功！");
+                $(".htmls").html(szIP + " 获取模拟通道成功！");
+                if(oChannels.length)
+                    clickStartRealPlay();
+            },
+            error: function() {
+                console.log(szIP + " 获取模拟通道失败！");
+                $(".htmls").html(szIP + " 获取模拟通道失败！");
+            }
+        });
+
+        // 数字通道
+//				WebVideoCtrl.I_GetDigitalChannelInfo(szIP, {
+//					async: false,
+//					success: function(xmlDoc) {
+//						var oChannels = $(xmlDoc).find("InputProxyChannelStatus");
+//						$(".htmls").html(szIP + " 获取数字通道成功！");
+//						if(oChannels.length)
+//							clickStartRealPlay();
+//					},
+//					error: function() {
+//						$(".htmls").html(szIP + " 获取数字通道失败！");
+//					}
+//				});
+    }
+
+    // 开始预览
+
+    function clickStartRealPlay() {
+        console.log('当前摄像头位置：' + g_iWndIndex);
+        var iStreamType = 1,
+            iChannelID = 1;
+        var iRet;
+        iRet = WebVideoCtrl.I_StartRealPlay(szIP, {
+            iStreamType: iStreamType,
+            iChannelID: iChannelID,
+            bZeroChannel: false
+        });
+
+        if(0 == iRet) {
+            $(".htmls").html(szIP + " 开始预览成功！");
+        } else {
+            $(".htmls").html(szIP + " 开始预览失败！");
+        }
+    }
+
+    //停止播放
+    function clickStop() {
+        var aa = WebVideoCtrl.I_Stop();
+        if(aa == "0") {
+            $(".htmls").html(szIP + " 停止播放成功！");
+        }
+    }
+
+    //录像
+    function recording() {
+        //				WebVideoCtrl.I_StartRecord("录像1", {
+        //					bDateDir: true, //是否生成日期文件
+        //					success: function() {
+        //						$(".htmls").html(szIP + " 开始录像成功！");
+        //					},
+        //					error: function() {
+        //						$(".htmls").html(szIP + " 开始录像失败！");
+        //					}
+        //				});
+        var oWndInfo = WebVideoCtrl.I_GetWindowStatus(g_iWndIndex);
+
+        if(oWndInfo != null) {
+            var szFileName = oWndInfo.szIP + "_" + "_" + new Date().getTime(),
+                iRet = WebVideoCtrl.I_StartRecord(szFileName);
+            if(0 == iRet) {
+                $(".htmls").html(szIP + " 开始录像成功！");
+            } else {
+                $(".htmls").html(szIP + " 停止录像成功！");
+            }
+        }
+    }
+
+    //停止录像
+    function recordingStop() {
+        //				WebVideoCtrl.I_StopRecord({
+        //					success: function() {
+        //						$(".htmls").html(szIP + " 停止录像成功！");
+        //					},
+        //					error: function() {
+        //						$(".htmls").html(szIP + " 停止录像失败！");
+        //					}
+        //				});
+        var oWndInfo = WebVideoCtrl.I_GetWindowStatus(g_iWndIndex);
+
+        if(oWndInfo != null) {
+            var iRet = WebVideoCtrl.I_StopRecord();
+            if(0 == iRet) {
+                $(".htmls").html(szIP + " 停止录像成功！");
+            } else {
+                $(".htmls").html(szIP + " 停止录像失败！");
+            }
+        }
+    }
+
+    //获取本地配置
+    function getlocal() {
+        var xmlDoc = WebVideoCtrl.I_GetLocalCfg();
+        if(xmlDoc != null) {
+            $(".htmls").html(szIP + " 本地配置获取成功！");
+            $(".htmls").html("录像保存地址:"+$(xmlDoc).find("RecordPath").eq(0).text()+'<br />'+"图片保存地址:"+$(xmlDoc).find("CapturePath").eq(0).text());
+        } else {
+            $(".htmls").html(szIP + " 本地配置获取失败！");
+        }
+    }
+
+    function setWindow() {
+        var nWidth = $(this).width() + $(this).scrollLeft(),
+            nHeight = $(this).height() + $(this).scrollTop();
+        $('embed').css('width', nWidth)
+        $('embed').css('height', nHeight)
+    }
+
+    function restoreWindow() {
+        $('embed').css('width', "750")
+        $('embed').css('height', "500")
+    }
+
+    //抓图
+    function clickCapturePic() {
+        var oWndInfo = WebVideoCtrl.I_GetWindowStatus(g_iWndIndex);
+        if(oWndInfo != null) {
+            szPicName = oWndInfo.szIP + "_"  + "_" + new Date().getTime(),
+                iRet = WebVideoCtrl.I_CapturePic(szPicName);
+            if(0 == iRet) {
+                $(".htmls").html(szIP + " 抓图成功！");
+            } else {
+                $(".htmls").html(szIP + " 抓图失败！");
+            }
+        }
+    }
+</script>
+</body>
+
+</html>

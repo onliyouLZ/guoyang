@@ -134,7 +134,7 @@ let mapFunc = {
         };
 
         let styleFunc = function (feature) {
-            console.log(feature)
+
             let color = feature.get('color');
             // let colors = {//最开始的数据
             //  "0": "255,255,255,0",
@@ -147,7 +147,7 @@ let mapFunc = {
             //  };
 
             let colorsSelect2 = _this.convertObjectToArray(option.color);
-            console.log(colorsSelect2,option.color);
+
             let colors = {};
             if (colorsSelect2.length) {
                 colors["0"] = colorsSelect2[0].colorRgb();
@@ -178,7 +178,7 @@ let mapFunc = {
         option.layer.setSource(vectorSource);
         option.layer.setStyle(styleFunc);
         option.layer.setOpacity(0.5);
-        console.log(option.layer.getStyle())
+
     },
     /**
      * 根据图层名获取图层

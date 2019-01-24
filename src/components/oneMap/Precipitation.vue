@@ -8,12 +8,12 @@
         <el-scrollbar
           style="height: 100%"
           tag="table">
-          <div style="max-height: 200px">
+          <div style="max-height: 500px">
             <el-table
               :data="tableData"
               stripe
               size="mini"
-              height="150"
+              height="400"
               style="width: 100%;font-size: 12px"
               header-cell-class-name="table-dliog-header"
               cell-class-name="table-dliog-body"
@@ -122,6 +122,7 @@
                     let LGTD=item.LGTD;
                     let LTTD=item.LTTD;
                     item.STNM=item.WH_NAME;
+                    item.type='warehouse';
                   });
                   this.tableData=data;
                 }else{

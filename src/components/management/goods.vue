@@ -1267,7 +1267,7 @@
           del(){
             if(this.multipleSelection.length===0){
               this.$message({
-                type:"warning",
+                type:"error",
                 message:"请选择需要删除的数据"
               });
               return false
@@ -1287,6 +1287,7 @@
                       type:"success",
                       message:"删除成功"
                     });
+                    this.$refs.multipleTable.clearSelection();
                     this.primary();
                   }else{
                     this.$message({

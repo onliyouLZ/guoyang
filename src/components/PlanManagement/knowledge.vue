@@ -7,7 +7,7 @@
         <label>标题:</label>
         <el-input style="width: 150px" v-model="kbTitle" placeholder="请输入标题"></el-input>
         <el-button type="primary" @click="primary">查询</el-button>
-        <el-button type="success" @click="exportExcel(tableData,multipleSelection)">导出</el-button>
+        <el-button type="success" @click="exportExcel(tableData,exportMulti)">导出</el-button>
       </div>
       <!--<el-scrollbar-->
       <!--style="height: 100%;"-->
@@ -148,6 +148,7 @@
           {data:'caozuo',title:'操作'},
         ],
         multipleSelection:[],
+        exportMulti:[],
         loading: true,
         dialogVisible: false,
         ruleForm:{
@@ -227,11 +228,14 @@
       handleSelectionChange(val) {
         if(val.length>0){
           this.multipleSelection=[];
+          this.exportMulti=[];
           $.each(val,(v,item)=>{
             this.multipleSelection.push(item.KB_ID);
+            this.exportMulti.push(item);
           });
         }else{
           this.multipleSelection=[];
+          this.exportMulti=[];
         }
       },
       //点击行选中
@@ -294,19 +298,13 @@
       //重置
       resetForm() {
         this.$refs['ruleForm'].resetFields();
-        this.ruleForm={
-          thresholdName:"",
-          thresholdValue:"",
-          thresholdValueType:"",
-          alarmLevel:"",
-          alarmLevelColor:"red",
-          countermeasures:"",
-        };
         this.dialogVisible=false;
       },
       dialogClose(ruleForm){
         this.dialogVisible=false;
         this.$refs[ruleForm].resetFields();
+        this.$refs.multipleTable.clearSelection();
+        this.exportMulti=[];
         this.ruleForm={
           thresholdName:"",
           thresholdValue:"",
@@ -317,21 +315,30 @@
         };
       },
       del(){
-        this.$http.delete(this.$url.baseUrl+'api/guoYang/auxiliary-decision/v0.1/gy-knowledge-base/delete',{data:this.multipleSelection}).then((res)=>{
-          if(res.status===200){
-            this.$message({
-              type:"success",
-              message:"删除成功！"
-            });
-            this.loading=true;
-            this.search();
-          }else{
-            this.$message({
-              type:"error",
-              message:"删除失败！"
-            })
-          }
-        });
+        if(this.multipleSelection.length>0){
+          this.$http.delete(this.$url.baseUrl+'api/guoYang/auxiliary-decision/v0.1/gy-knowledge-base/delete',{data:this.multipleSelection}).then((res)=>{
+            if(res.status===200){
+              this.$message({
+                type:"success",
+                message:"删除成功！"
+              });
+              this.loading=true;
+              this.$refs.multipleTable.clearSelection();
+              this.search();
+            }else{
+              this.$message({
+                type:"error",
+                message:"删除失败！"
+              })
+            }
+          });
+        }else{
+          this.$message({
+            type:"error",
+            message:"请选择需要删除的数据！"
+          })
+        }
+
       },
       add(){
         this.dialogVisible=true;
@@ -352,7 +359,6 @@
               msg="修改成功";
               msg1="修改失败";
             }
-            _this.dialogVisible=false;
             _this.$http.put(url,_this.ruleForm).then((res)=>{
               if(res.status===200){
                 _this.$message({
@@ -363,26 +369,14 @@
                 _this.multipleSelection=[];
                 _this.search();
                 _this.$refs['ruleForm'].resetFields();
-                this.ruleForm={
-                  kbTitle:"",
-                  kbType:"",
-                  kbContent:"",
-                  publishPerson:"",
-                  publishTime:new Date().formatDate('yyyy-MM-dd HH:mm'),
-                };
+                _this.dialogVisible=false;
               }else{
                 _this.$message({
                   type:"error",
                   message:msg1
                 });
                 _this.$refs['ruleForm'].resetFields();
-                this.ruleForm={
-                  kbTitle:"",
-                  kbType:"",
-                  kbContent:"",
-                  publishPerson:"",
-                  publishTime:new Date().formatDate('yyyy-MM-dd HH:mm'),
-                };
+                _this.dialogVisible=false;
               }
             })
           } else {

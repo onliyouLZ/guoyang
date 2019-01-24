@@ -50,11 +50,11 @@
             if(this.ruleForm.username==="admin"){
               let weather=document.getElementById("tp-weather-widget");
               weather.style.display="block";
-              console.log(this.$router);
+
               this.$router.push('/home');
             }
           } else {
-            console.log('error submit!!');
+
             return false;
           }
         });

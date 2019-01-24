@@ -111,7 +111,7 @@
       show(){
         this.visible=this.show;
         this.tableData=this.swiperData.data;
-        console.log();
+
       }
     }
   }

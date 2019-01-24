@@ -103,6 +103,7 @@
                   $.each(data,(v,item)=>{
                     item.LGTD=item.lgtd;
                     item.LTTD=item.lttd;
+                    item.STCD=item.stcd;
                     item.STNM=item.stnm;
                     item.type='rain';
                   });

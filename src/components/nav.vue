@@ -16,19 +16,19 @@
         router
         active-text-color="#ffd04b"
         >
-        <!--<swiper :options="swiperOption" style="width:730px">-->
-          <!--<swiper-slide-->
-            <!--style="box-sizing: border-box"-->
-            <!--v-for="(item,index) in items"-->
-            <!--:key="index">-->
-            <template v-for="(item,index) in items">
-            <el-menu-item :index="item.path" :key="item.path">
-              <!--<i :class="item.icon"></i>-->
-              <span slot="title">{{ item.name }}</span>
-            </el-menu-item>
-            </template>
-          <!--</swiper-slide>-->
-        <!--</swiper>-->
+        <swiper :options="swiperOption" style="width:730px">
+          <swiper-slide
+            style="box-sizing: border-box"
+            v-for="(item,index) in items"
+            :key="index">
+            <!--<template v-for="(item,index) in items">-->
+              <el-menu-item :index="item.path" :key="item.path">
+                <!--<i :class="item.icon"></i>-->
+                <span slot="title">{{ item.name }}</span>
+              </el-menu-item>
+            <!--</template>-->
+          </swiper-slide>
+        </swiper>
       </el-menu>
       <!--<a  class="fa fa-chevron-right" style="float: left;padding:0 5px;line-height: 60px;background-color: #0a95ef;cursor: pointer"></a>-->
       <div class="header-user-con">

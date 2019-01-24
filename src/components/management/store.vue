@@ -7,7 +7,7 @@
         <label>仓库名称:</label>
         <el-input v-model="input" placeholder="请输入仓库名称" style="width: 150px"></el-input>
         <el-button type="primary" @click="primary">查询</el-button>
-        <el-button type="success" @click="exportExcel(tableData,multipleSelection)">导出</el-button>
+        <el-button type="success" @click="exportExcel(tableData,exportMulti)">导出</el-button>
       </div>
       <!--<el-scrollbar-->
       <!--style="height: 100%;"-->
@@ -91,7 +91,7 @@
       :title="title"
       :visible.sync="dialogVisible"
       :modal-append-to-body="bodyFalse"
-      @close="dialogClose"
+      @close="dialogClose('ruleForm')"
       width="30%">
       <!--<el-form  ref="form" :model="form" label-width="80px" :rules="rules">-->
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
@@ -223,6 +223,7 @@
         ],
         input:"",
         multipleSelection:[],
+        exportMulti:[],
         loading: true,
         dialogVisible: false,
         mapDligShow: false,
@@ -329,11 +330,14 @@
       handleSelectionChange(val) {
         if(val.length>0){
           this.multipleSelection=[];
+          this.exportMulti=[];
           $.each(val,(v,item)=>{
             this.multipleSelection.push(item.WH_CD);
+            this.exportMulti.push(item);
           });
         }else{
           this.multipleSelection=[];
+          this.exportMulti=[];
         }
       },
       //点击行选中
@@ -404,18 +408,12 @@
       resetForm(ruleForm) {
         this.dialogVisible=false;
         this.$refs[ruleForm].resetFields();
-        this.ruleForm={
-          whName:"",
-            orgcd:'',
-            lgtd:"",
-            lttd:"",
-            whArea:"",
-            comments:"",
-            manageDutyPerson:""
-        }
       },
-      dialogClose(){
+      dialogClose(ruleForm){
         this.dialogVisible=false;
+        this.$refs[ruleForm].resetFields();
+        this.$refs.multipleTable.clearSelection();
+        this.exportMulti=[];
         this.ruleForm={
           whName:"",
           orgcd:'',
@@ -425,7 +423,6 @@
           comments:"",
           manageDutyPerson:""
         };
-        this.$refs['ruleForm'].resetFields();
       },
       closeMap(data){
         if(data){
@@ -443,21 +440,30 @@
        * 仓库删除
        */
       del(){
-        this.$http.delete(this.$url.baseUrl+'api/guoYang/v0.1/material-manage/warehouse',{data:this.multipleSelection}).then((res)=>{
-          if(res.status===200){
-            this.$message({
-              type:"success",
-              message:"删除成功！"
-            });
-            this.loading=true;
-            this.search();
-          }else{
-            this.$message({
-              type:"error",
-              message:"删除失败！"
-            })
-          }
-        });
+        if(this.multipleSelection.length>0){
+          this.$http.delete(this.$url.baseUrl+'api/guoYang/v0.1/material-manage/warehouse',{data:this.multipleSelection}).then((res)=>{
+            if(res.status===200){
+              this.$message({
+                type:"success",
+                message:"删除成功！"
+              });
+              this.loading=true;
+              this.$refs.multipleTable.clearSelection();
+              this.search();
+            }else{
+              this.$message({
+                type:"error",
+                message:"删除失败！"
+              })
+            }
+          });
+        }else{
+          this.$message({
+            type:"error",
+            message:"请选择需要删除的数据！"
+          })
+        }
+
       },
       /**
        * 仓库新增及修改
@@ -476,41 +482,25 @@
               msg="修改成功";
               msg1="修改失败";
             }
-            _this.dialogVisible=false;
+
             _this.$http.put(url,_this.ruleForm).then((res)=>{
               if(res.status===200){
                 _this.$message({
                   type:"success",
                   message:msg
                 });
+                _this.dialogVisible=false;
                 _this.loading=true;
                 _this.search();
               }
               _this.$refs['ruleForm'].resetFields();
-              this.ruleForm={
-                whName:"",
-                orgcd:'',
-                lgtd:"",
-                lttd:"",
-                whArea:"",
-                comments:"",
-                manageDutyPerson:""
-              }
             }).catch((error)=>{
               _this.$message({
                 type:"success",
                 message:msg1
               });
+              _this.dialogVisible=false;
               _this.$refs['ruleForm'].resetFields();
-              this.ruleForm={
-                whName:"",
-                orgcd:'',
-                lgtd:"",
-                lttd:"",
-                whArea:"",
-                comments:"",
-                manageDutyPerson:""
-              }
             });
           } else {
             return false;

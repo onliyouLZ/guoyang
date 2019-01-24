@@ -21,7 +21,7 @@
             </el-option>
           </el-select>
           <el-button type="primary" @click="primary">查询</el-button>
-          <el-button type="success" @click="exportExcel(tableData,multipleSelection)">导出</el-button>
+          <el-button type="success" @click="exportExcel(tableData,exportMulti)">导出</el-button>
         </div>
         <div class="table-button">
           <el-button type="text" icon="fa  fa-plus" class="add" @click="dialogVisible=true,title='物资名录新增'">新增</el-button>
@@ -84,7 +84,7 @@
         :title="title"
         :visible.sync="dialogVisible"
         :modal-append-to-body="bodyFalse"
-        @close="dialogClose"
+        @close="dialogClose('ruleForm')"
         width="30%">
         <!--<el-form  ref="form" :model="form" label-width="80px" :rules="rules">-->
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
@@ -156,6 +156,7 @@
         ],
         mlName:"",
         multipleSelection:[],
+        exportMulti:[],
         loading: true,
         dialogVisible: false,
         mapDligShow: false,
@@ -180,7 +181,7 @@
           ],
         },
         bodyFalse:false,
-        title:"新增仓库",
+        title:"",
         screenWidth:document.body.clientWidth
       }
     },
@@ -231,11 +232,14 @@
       handleSelectionChange(val) {
         if(val.length>0){
           this.multipleSelection=[];
+          this.exportMulti=[];
           $.each(val,(v,item)=>{
             this.multipleSelection.push(item.ML_CD);
+            this.exportMulti.push(item);
           });
         }else{
           this.multipleSelection=[];
+          this.exportMulti=[];
         }
       },
       //点击行选中
@@ -303,17 +307,13 @@
       resetForm(ruleForm) {
         this.dialogVisible=false;
         this.$refs[ruleForm].resetFields();
-        this.ruleForm={
-          mlName:"",
-          mlType:'',
-          mlMeasureUnit:"",
-          comments:"",
-          mlCd:""
-        }
+
       },
-      dialogClose(){
+      dialogClose(ruleForm){
         this.dialogVisible=false;
-        this.$refs['ruleForm'].resetFields();
+        this.$refs[ruleForm].resetFields();
+        this.$refs.multipleTable.clearSelection();
+        this.exportMulti=[];
         this.ruleForm={
           mlName:"",
           mlType:'',
@@ -326,21 +326,29 @@
        * 物资名录删除
        */
       del(){
-        this.$http.delete(this.$url.baseUrl+'api/guoYang/v0.1/material-manage/material/lists',{data:this.multipleSelection}).then((res)=>{
-          if(res.status===200){
-            this.$message({
-              type:"success",
-              message:"删除成功！"
-            });
-            this.loading=true;
-            this.search();
-          }else{
-            this.$message({
-              type:"error",
-              message:"删除失败！"
-            })
-          }
-        });
+        if(this.multipleSelection.length>0){
+          this.$http.delete(this.$url.baseUrl+'api/guoYang/v0.1/material-manage/material/lists',{data:this.multipleSelection}).then((res)=>{
+            if(res.status===200){
+              this.$message({
+                type:"success",
+                message:"删除成功！"
+              });
+              this.$refs.multipleTable.clearSelection();
+              this.primary();
+            }else{
+              this.$message({
+                type:"error",
+                message:"删除失败！"
+              })
+            }
+          });
+        }else{
+          this.$message({
+            type:"error",
+            message:"请选择需要删除的数据！"
+          })
+        }
+
       },
       /**
        * 物资名录新增及修改
@@ -370,26 +378,14 @@
                 _this.search();
               }
               _this.$refs['ruleForm'].resetFields();
-              _this.ruleForm={
-                mlName:"",
-                  mlType:'',
-                  mlMeasureUnit:"",
-                  comments:"",
-                  mlCd:""
-              }
+              _this.dialogVisible=false;
             }).catch((error)=>{
               _this.$message({
                 type:"error",
                 message:msg1
               });
               _this.$refs['ruleForm'].resetFields();
-              _this.ruleForm={
-                mlName:"",
-                mlType:'',
-                mlMeasureUnit:"",
-                comments:"",
-                mlCd:""
-              }
+              _this.dialogVisible=false;
             });
           } else {
             return false;

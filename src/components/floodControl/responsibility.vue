@@ -7,7 +7,7 @@
         <label>姓名:</label>
         <el-input style="width: 150px" v-model="leaderName" placeholder="请输入负责人姓名"></el-input>
         <el-button type="primary" @click="primary">查询</el-button>
-        <el-button type="success" @click="exportExcel(tableData,multipleSelection)">导出</el-button>
+        <el-button type="success" @click="exportExcel(tableData,exportMulti)">导出</el-button>
       </div>
       <!--<el-scrollbar-->
       <!--style="height: 100%;"-->
@@ -166,6 +166,7 @@
           {data:'caozuo',title:'操作'},
         ],
         multipleSelection:[],
+        exportMulti:[],
         loading: true,
         dialogVisible: false,
         ruleForm:{
@@ -213,7 +214,7 @@
           ],
         },
         bodyFalse:false,
-        title:"新增抢险队伍",
+        title:"",
         screenWidth:document.body.clientWidth,
       }
     },
@@ -272,11 +273,14 @@
       handleSelectionChange(val) {
         if(val.length>0){
           this.multipleSelection=[];
+          this.exportMulti=[];
           $.each(val,(v,item)=>{
             this.multipleSelection.push(item.ZRZ_ID);
+            this.exportMulti.push(item);
           });
         }else{
           this.multipleSelection=[];
+          this.exportMulti=[];
         }
       },
       //点击行选中
@@ -322,7 +326,7 @@
       },
       //行内编辑
       handleEdit(index, row) {
-        this.title="抢险队伍修改";
+        this.title="修改防汛抗旱责任制";
         this.dialogVisible=true;
         this.ruleForm.leaderName=row.LEADER_NAME;
         this.ruleForm.sex=row.SEX;
@@ -345,23 +349,13 @@
       //重置
       resetForm() {
         this.$refs['ruleForm'].resetFields();
-        this.ruleForm={
-          leaderName:"",
-          sex:'0',
-          leaderJob:"",
-          duty:"",
-          assistant:"",
-          participateMembers:"",
-          officePhone:"",
-          mobilePhone:"",
-          fax:"",
-          homePhone:"",
-        };
         this.dialogVisible=false;
       },
       dialogClose(ruleForm){
         this.dialogVisible=false;
         this.$refs[ruleForm].resetFields();
+        this.$refs.multipleTable.clearSelection();
+        this.exportMulti=[];
         this.ruleForm={
           leaderName:"",
           sex:'0',
@@ -379,21 +373,30 @@
        * 抢险队伍删除
        */
       del(){
-        this.$http.delete(this.$url.baseUrl+'api/guoYang/auxiliary-decision/v0.1/gy-fxkhzrz/delete',{data:this.multipleSelection}).then((res)=>{
-          if(res.status===200){
-            this.$message({
-              type:"success",
-              message:"删除成功！"
-            });
-            this.loading=true;
-            this.search();
-          }else{
-            this.$message({
-              type:"error",
-              message:"删除失败！"
-            })
-          }
-        });
+        if(this.multipleSelection.length>0){
+          this.$http.delete(this.$url.baseUrl+'api/guoYang/auxiliary-decision/v0.1/gy-fxkhzrz/delete',{data:this.multipleSelection}).then((res)=>{
+            if(res.status===200){
+              this.$message({
+                type:"success",
+                message:"删除成功！"
+              });
+              this.loading=true;
+              this.$refs.multipleTable.clearSelection();
+              this.search();
+            }else{
+              this.$message({
+                type:"error",
+                message:"删除失败！"
+              })
+            }
+          });
+        }else{
+          this.$message({
+            type:"error",
+            message:"请选择需要删除的数据！"
+          })
+        }
+
       },
       add(){
         this.dialogVisible=true;
@@ -417,7 +420,6 @@
               msg="修改成功";
               msg1="修改失败";
             }
-            _this.dialogVisible=false;
             _this.$http.put(url,_this.ruleForm).then((res)=>{
               if(res.status===200){
                 _this.$message({
@@ -425,39 +427,17 @@
                   message:msg
                 });
                 _this.loading=true;
+                _this.dialogVisible=false;
                 _this.multipleSelection=[];
                 _this.search();
                 _this.$refs['ruleForm'].resetFields();
-                this.ruleForm={
-                  leaderName:"",
-                  sex:'0',
-                  leaderJob:"",
-                  duty:"",
-                  assistant:"",
-                  participateMembers:"",
-                  officePhone:"",
-                  mobilePhone:"",
-                  fax:"",
-                  homePhone:"",
-                };
               }else{
                 _this.$message({
                   type:"error",
                   message:msg1
                 });
                 _this.$refs['ruleForm'].resetFields();
-                this.ruleForm={
-                  leaderName:"",
-                  sex:'0',
-                  leaderJob:"",
-                  duty:"",
-                  assistant:"",
-                  participateMembers:"",
-                  officePhone:"",
-                  mobilePhone:"",
-                  fax:"",
-                  homePhone:"",
-                };
+                _this.dialogVisible=false;
               }
             })
           } else {
