@@ -142,6 +142,7 @@
                 multiple
                 :data="fileData"
                 action="http://gyfxkhapi.matian.ml:8008/api-fxkh/api/attachment/v0.1/attachment/upload"
+                with-credentials
                 :on-change="handleChange"
                 :on-remove="handleRemove"
                 :on-success="handleAvatarSuccess"

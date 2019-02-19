@@ -20,6 +20,7 @@ import Blob from '@/vendor/Blob.js'
 import Export2Excel from '@/vendor/Export2Excel.js'
 import Config from '@/api/config.js'
 // import ol from 'openlayers'
+import {setCookie, getCookie, delCookie} from './utils/cookie'
 
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 
@@ -34,6 +35,9 @@ Vue.use(VueAwesomeSwiper);
 
 
 
+axios.defaults.crossDomain=true; //支持跨域
+axios.defaults.withCredentials=true;//让ajax携带cookie
+
 
 
 
@@ -41,6 +45,9 @@ Vue.prototype.$http = axios;
 Vue.prototype.$echarts = echarts;
 Vue.prototype.$url = Config;
 // Vue.prototype.$ol=ol;
+
+
+
 
 
 
@@ -52,7 +59,7 @@ router.beforeEach((to, from, next) => {
   }else{
     next();
   }
-  // else if(to.meta.permission){
+  // if(to.meta.permission){
   //   // 如果是管理员权限则可进入，这里只是简单的模拟管理员权限而已
   //   role === 'admin' ? next() : next('/403');
   // }

@@ -72,6 +72,7 @@ export default new Router({
       path: '/',
       redirect: '/login'
     },
+
     {
       path: '/home',
       component: Home,
@@ -268,6 +269,10 @@ export default new Router({
     {
       path: '/login',
       component: Login
+    },
+    {
+      path: '/index.html',
+      component:Home
     },
     {
       path: '*',

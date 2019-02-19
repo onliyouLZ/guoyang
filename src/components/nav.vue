@@ -16,42 +16,43 @@
         router
         active-text-color="#ffd04b"
         >
-        <swiper :options="swiperOption" style="width:730px">
-          <swiper-slide
-            style="box-sizing: border-box"
-            v-for="(item,index) in items"
-            :key="index">
-            <!--<template v-for="(item,index) in items">-->
+        <!--<swiper :options="swiperOption" style="width:730px">-->
+          <!--<swiper-slide-->
+            <!--style="box-sizing: border-box"-->
+            <!--v-for="(item,index) in items"-->
+            <!--:key="index">-->
+            <template v-for="(item,index) in items">
               <el-menu-item :index="item.path" :key="item.path">
                 <!--<i :class="item.icon"></i>-->
                 <span slot="title">{{ item.name }}</span>
               </el-menu-item>
-            <!--</template>-->
-          </swiper-slide>
-        </swiper>
+            </template>
+          <!--</swiper-slide>-->
+        <!--</swiper>-->
       </el-menu>
       <!--<a  class="fa fa-chevron-right" style="float: left;padding:0 5px;line-height: 60px;background-color: #0a95ef;cursor: pointer"></a>-->
       <div class="header-user-con">
         <!--消息中心-->
-        <div class="btn-bell">
-          <el-tooltip effect="dark" :content="message?`有${message}条未读消息`:`消息中心`" placement="bottom">
-            <router-link to="/login">
-              <i class="el-icon-bell"></i>
-            </router-link>
-          </el-tooltip>
-          <span class="btn-bell-badge" v-if="message"></span>
-        </div>
+        <!--<div class="btn-bell">-->
+          <!--<el-tooltip effect="dark" :content="message?`有${message}条未读消息`:`消息中心`" placement="bottom">-->
+            <!--<router-link to="/login">-->
+              <!--<i class="el-icon-bell"></i>-->
+            <!--</router-link>-->
+          <!--</el-tooltip>-->
+          <!--<span class="btn-bell-badge" v-if="message"></span>-->
+        <!--</div>-->
         <!--用户头像-->
         <div class="user-avator"><img src="static/img/img.jpg"></div>
+        <div style="margin-left: 10px;font-size: 14px;">{{username}}</div>
         <!-- 用户名下拉菜单 -->
-        <el-dropdown class="user-name" trigger="hover" @command="handleCommand">
-            <span class="el-dropdown-link">
-                {{username}} <i class="el-icon-caret-bottom"></i>
-            </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="loginout">退出登录</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
+        <!--<el-dropdown class="user-name" trigger="hover" @command="handleCommand">-->
+            <!--<span class="el-dropdown-link">-->
+                <!--{{username}} <i class="el-icon-caret-bottom"></i>-->
+            <!--</span>-->
+          <!--<el-dropdown-menu slot="dropdown">-->
+            <!--<el-dropdown-item command="loginout">退出登录</el-dropdown-item>-->
+          <!--</el-dropdown-menu>-->
+        <!--</el-dropdown>-->
       </div>
 
     </div>
@@ -87,7 +88,7 @@
           localStorage.removeItem('ms_username');
           const weather=document.getElementById("tp-weather-widget");
           weather.style.display="none";
-          this.$router.push('/login');
+          // this.$router.push('/login');
         }
       },
     },

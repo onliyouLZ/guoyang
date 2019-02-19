@@ -12,11 +12,12 @@
 
 <script>
     import Nav from '../components/nav'
+
     export default {
         name: "home",
         components:{
           vNav:Nav
-        }
+        },
     }
 </script>
 

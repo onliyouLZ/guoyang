@@ -22,6 +22,7 @@
 </template>
 
 <script>
+  import {setCookie, getCookie, delCookie} from '../utils/cookie'
   export default {
     data: function(){
       return {
@@ -40,19 +41,28 @@
       }
     },
     methods: {
+
       submitForm(formName) {
-
-
-
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            localStorage.setItem('ms_username',this.ruleForm.username);
-            if(this.ruleForm.username==="admin"){
-              let weather=document.getElementById("tp-weather-widget");
-              weather.style.display="block";
-
-              this.$router.push('/home');
-            }
+            this.$http.get(this.$url.baseUrl+'api/user/v0.1/ht/pda-user/pda-user').then((res)=>{
+              if(res.status===200){
+                let data=res.data.result;
+                localStorage.setItem('ms_username',data.USER_NAME);
+                let weather=document.getElementById("tp-weather-widget");
+                weather.style.display="block";
+                this.$router.push('/home');
+                console.info("当前用户ID:%s,用户名:%s,真实姓名",data.USER_ID, data.USER_NAME, data.ACTUAL_NAME)
+              }else{
+                this.$router.push('/404')
+              }
+            });
+            // localStorage.setItem('ms_username',this.ruleForm.username);
+            // if(this.ruleForm.username==="admin"){
+            //   let weather=document.getElementById("tp-weather-widget");
+            //   weather.style.display="block";
+            //   this.$router.push('/home');
+            // }
           } else {
 
             return false;
@@ -63,6 +73,16 @@
     mounted(){
       let weather=document.getElementById("tp-weather-widget");
       weather.style.display="none";
+
+
+      // let start=window.location.href.indexOf("=");
+      // let end=window.location.href.indexOf("&");
+      // let cookie=window.location.href.substring(start+1,end);
+      // if(cookie){
+      //   console.log(1);
+      // }
+      // setCookie("JSESSIONID",cookie);
+      this.submitForm('ruleForm');
     }
 
   }

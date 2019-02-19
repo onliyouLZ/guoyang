@@ -7,7 +7,8 @@ const uploadUrl = baseUrl+'api/attachment/v0.1/attachment/upload'; //文件上�
 const downLoadUrl = 'http://118.26.140.163:8963/fss/api/file/download/'; //文件预览地址
 
 
- export default {
+
+export default {
    baseUrl,
    fileServer,
    uploadUrl,

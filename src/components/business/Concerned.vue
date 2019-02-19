@@ -122,6 +122,7 @@
                 multiple
                 :data="fileData"
                 :action="upFileUrl"
+                with-credentials
                 :on-change="handleChange"
                 :on-remove="handleRemove"
                 :on-success="handleAvatarSuccess"
